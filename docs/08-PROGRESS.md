@@ -44,6 +44,14 @@
 
 ## 🧾 LOG (newest first)
 
+## 2026-10-06 malam — Verifikasi nama brand Top 3 (domain + store + DJKI)
+- **Konteks:** "Weekend Planner" tabrakan (2 app sama persis) + generik (susunan merek susah). Finalis: Pilihin / Mamana / Enaknya.
+- **Hasil cek:** Pilihin (.com judol PRADA888, .id parked, .app startup fotografer ID aktif → GUGUR). Mamana (.com taken, .id + .app AVAILABLE, tapi tabrakan app pregnancy Mamana di Play Store + App Store ID → RISIKO). Enaknya (.com for-sale premium, .id AVAILABLE, App Store 0 hasil, Play Store no direct hit → PALING BERSIH).
+- **DJKI:** belum bisa otomatis (PDKI butuh JS, browser server mati) — wajib cek manual pdki-indonesia.dgip.go.id menu Merek, kelas 9/35/42 sebelum lock.
+- **Rekomendasi:** Enaknya (atau Mamana kalau terima risiko pregnancy-app). Pilihin JANGAN dipakai.
+- **File diubah:** `docs/08-PROGRESS.md`.
+- **Next:** Agesta lock 1 nama → cek DJKI manual → amankan domain .id.
+
 ## 2026-10-06 malam — Patch ADR v2.1 + Addendum v1.2 (✅ BERES, 8 patch)
 - **Fase:** Dokumentasi. Brainstorming terakhir (split quiz, NULL tri-state, staging scrape, LLM hemat) belum masuk docs formal.
 - **Dikerjain:**
