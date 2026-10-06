@@ -44,6 +44,16 @@
 
 ## 🧾 LOG (newest first)
 
+## 2026-10-06 malam — 7 kandidat Inggris + verifikasi (domain + store + web)
+- **Kandidat:** Wikendo / Planit / Outly / Whereto / Spotly / Dayoff / Roamly.
+- **✅ BERSIH (1):** Wikendo (.id AVAILABLE + App Store 0 + Play 0 hasil + web no brand; .com taken tapi cuma parkir Hostinger, bisa ditawar).
+- **❌ GUGUR (6):** Planit (.id+.com taken + 50 Play + 9 iOS, crowded); Outly (.com = startup food outly.world + app com.outly.africa exact + tool Paris useoutly.com); Whereto (.com = produk WhereTo aktif + com.wheretoapp exact + 8 iOS travel); Spotly (10 iOS + 12 Play exact matches); Dayoff (.id+.com taken + app KPop DAY OFF + dayoffcompany travel Korea); Roamly (.com = insurtech US aktif + banyak app travel/eSIM Roamly).
+- **Insight:** nama Inggris 1/7 lolos vs Indonesia 5/15 — namespace Inggris jauh lebih crowded global. Finalis EN cuma Wikendo.
+- **DJKI:** tetap wajib cek manual PDKI kelas 9/35/42 sebelum lock.
+- **Rekomendasi:** Wikendo (EN) vs Wikenin/Enaknya (ID) — putusan di rekomendasi chat.
+- **File diubah:** `docs/08-PROGRESS.md`.
+- **Next:** Agesta lock 1 nama (ID vs EN) → cek DJKI manual → amankan .id.
+
 ## 2026-10-06 malam — Verifikasi nama brand 15/15 (domain + store + web)
 - **Konteks:** "Weekend Planner" tabrakan + generik. Cek penuh 15 kandidat: .id via RDAP PANDI, .com via RDAP Verisign+DNS, App Store ID via iTunes API, Play Store via scraping, web via search.
 - **❌ GUGUR (6):** Pilihin (.com judol PRADA888 + .id parked + .app startup foto aktif); Dolan (dolan.id = AI trip planner kompetitor + app Dolan Travel di App Store + com.dolan.id di Play); Liburin (app Liburin Travel di App Store, kategori sama persis); Jalanin (PT Djalanin Wisata Jaya aktif 2021 + djalanin.com + jalanin.org); Kemana (.id+.com taken + generik); Pelesir (.id+.com taken + kata generik Traveloka/Tiket).
