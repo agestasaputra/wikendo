@@ -1,9 +1,9 @@
 # Architecture Decision Record (ADR)
 # Weekend Planner MVP
 
-**Version:** 2.0 (Final)  
-**Date:** October 5, 2026  
-**Status:** Approved for Implementation  
+**Version:** 2.1 Amended (6 Okt 2026 malam)
+**Date:** October 5, 2026 (asli) + amendment 6 Okt 2026
+**Status:** Approved for Implementation + 3 amendment tercatat di log bawah
 **Authors:** Agesta (Founder) + AI Development Team
 
 ---
@@ -94,7 +94,12 @@ Solo founder building first startup, AI-assisted development, limited budget, gr
 
 ## 2. Frontend Stack
 
-### Decision: Nuxt 3 (Vue 3) + TypeScript + Tailwind CSS
+### Decision: Nuxt 4.5.2 (Vue 3) + TypeScript + Tailwind CSS
+
+> **Amendment 6 Okt 2026:** scaffold real pakai **Nuxt 4.5.2** (bukan 3.x seperti rencana awal). Struktur folder real:
+> `app/pages/`, `app/server/api/`, `app/server/utils/`, `app/types/`, `app/utils/`.
+> Folder `app/components/`, `app/composables/`, `app/layouts/`, `app/middleware/` BELUM dibuat (UI masih inline di pages).
+> Prettier TIDAK dipakai — cukup ESLint biar 1 tool.
 
 **Rationale:**
 - **Nuxt 3 benefits:**

@@ -1,16 +1,68 @@
-# 08-PROGRESS.md — Log Eksekusi Weekend Planner
+# 08-PROGRESS.md — Board + Log Eksekusi Weekend Planner
 
-> **Sumber tunggal jawaban "kita udah sampai mana?".**
-> Aturan main (SOP permanen):
-> 1. Tiap sesi dev → tambah 1 entry BARU di paling atas (newest first).
-> 2. Tiap brainstorming yang mengubah plan → update 3 tempat: `02-ADR.md`/`07-Addendum` (KENAPA berubah) + `06-MVP-Checklist.md` (APA yang berubah) + file ini (KAPAN dieksekusi).
-> 3. Tiap entry wajib ada: file diubah + hasil verifikasi (test/lint/build) + next step.
-> 4. Jangan tulis rencana di sini — rencana adanya di `01-PRD.md` + `06-MVP-Checklist.md`. File ini cuma catat yang SUDAH kejadian.
+> **Sumber tunggal jawaban "kita udah sampai mana?". File ini = board + log.**
+> Aturan main (SOP permanen, dikunci 6 Okt 2026):
+> 1. **BOARD (atas)** = posisi SEKARANG: NOW / NEXT / BACKLOG / DONE ringkas. Update tiap eksekusi (pindah kartu).
+> 2. **LOG (bawah)** = jejak eksekusi, newest first. Tiap sesi dev tambah 1 entry: fase → kenapa → file diubah → verifikasi → next.
+> 3. Tiap brainstorming yang mengubah plan → update 3 tempat: `02-ADR.md`/`07-Addendum` (KENAPA) + `06-MVP-Checklist.md` (APA) + file ini (KAPAN).
+> 4. Tiap eksekusi → file ini WAJIB diupdate + dikirim ke Agesta via Telegram.
+> 5. Rencana adanya di `01-PRD.md` + `06-MVP-Checklist.md`. File ini catat status + yang SUDAH kejadian. PLAN.md ditolak (duplikat).
 >
-> Kenapa namanya PROGRESS bukan PLAN? Karena PLAN sudah ada (PRD + Checklist + Addendum).
-> Yang hilang selama ini bukan rencana, tapi jejak eksekusi. PLAN.md baru = duplikat = konflik sumber kebenaran.
+> Kenapa 1 file, bukan Trello/Notion? Solo founder + semua di git + AI bisa update otomatis tiap kerjaan.
+> Kalau nanti ada engineer pembantu, board pindah ke GitHub Projects, file ini tetap jadi memori.
 
 ---
+
+## 📌 BOARD — posisi per 6 Okt 2026 malam
+
+### 🔥 NOW (lagi dikerjain)
+- [~] Patch `02-ADR.md` v2.0 → v2.1 (6 titik: header, Nuxt 4, endpoint split, flow makan, DB tri-state, amendment log) — 2/6 beres
+- [ ] Patch `07-Addendum` Section 5 (skema `data_source`/`verified_at`/`needs_survey` + `raw_scrape`) — antri tepat setelah ADR
+
+### ⏳ NEXT (antrian dekat)
+- [ ] Push repo ke GitHub + bikin Projects board (15 mnt)
+- [ ] Run migration + seed ke Supabase beneran (butuh dashboard user)
+- [ ] 8.4 E2E (butuh DB seeded dulu)
+- [ ] Auth: login/register/callback/middleware (0 file = blocker quota login + Simpan/history)
+
+### 📦 BACKLOG (nanti)
+- [ ] `components/`/`composables/`/`layouts/` + `GET /api/health` (UI masih inline)
+- [ ] Vote/report tenant P1 (`POST /api/vote`, `POST /api/report-tenant`)
+- [ ] Sisa Phase 4-7 yang belum dicentang rapi (sinkron lanjutan checklist)
+- [ ] Scraper `raw_scrape` → parser per-mall (post-PMF)
+
+### ✅ DONE (ringkas — detail di LOG bawah)
+- [x] Docs awal 5 Okt (PRD+ADR+Journey+API+Checklist v1.0+Addendum v1.1+CSV 200)
+- [x] Scaffold + 3-in-1 (Nuxt 4.5.2, TDD 12/12, AGENTS.md, README 458 baris)
+- [x] Phase 8.1 Backend Mall (migration 4 tabel + seed 205 INSERT, pytest 8/8)
+- [x] Patch NULL tri-state + AUDIT (Vitest 12/12, pytest 10/10, lint clean, build 3.15 MB)
+- [x] Sinkron checklist v1.1 + git init (commit `2015d19` + `2648be9`, secrets bersih)
+- [x] PROGRESS.md v1 → v2 board (file ini, feedback Agesta 6 Okt malam)
+
+---
+
+## 🧾 LOG (newest first)
+
+## 2026-10-06 malam — PROGRESS.md jadi board (✅ BERES, SOP baru)
+- **Fase:** Dokumentasi. Feedback Agesta: "PROGRESS.md = kanban/board kita".
+- **Keputusan CTO:** SETUJU dengan modifikasi — 1 file, 2 section (BOARD atas + LOG bawah). Murni log = susah lihat "lagi dimana". Tool terpisah (Trello/Notion) = ditolak (tool ke-3, mati dalam seminggu buat solo founder).
+- **Dikerjain:**
+  - `docs/08-PROGRESS.md` v1 → v2: tambah BOARD (NOW/NEXT/BACKLOG/DONE) + SOP kirim file tiap eksekusi.
+  - Kunci SOP di memory: tiap eksekusi wajib update + kirim PROGRESS.md.
+- **File diubah:** `docs/08-PROGRESS.md`.
+- **Verifikasi:** docs only, no code change.
+- **Next:** Lanjut patch ADR sisa (4/6) + Addendum, tiap patch update BOARD + kirim file.
+
+## 2026-10-06 malam — Patch ADR v2.1 + Addendum (🔥 IN PROGRESS, 2/6)
+- **Fase:** Dokumentasi. Brainstorming terakhir ngasilin keputusan yang belum masuk docs formal.
+- **Kenapa:** ADR masih bilang Nuxt 3 + `/api/generate` tunggal, belum ada NULL tri-state + `raw_scrape`. Addendum Section 5 belum ada kolom metadata baru.
+- **Dikerjain (parsial):**
+  - `02-ADR.md` header v2.0 → v2.1 Amended + amendment Nuxt 4.5.2 (struktur folder real + Prettier ditolak).
+  - Sisa: endpoint split, flow makan, DB tri-state, amendment log.
+  - `07-Addendum` Section 5: BELUM (antri).
+- **File diubah:** `docs/02-ADR.md` (2 patch), `docs/07-PRD-Addendum-Mall-F&B.md` (0).
+- **Verifikasi:** docs only, no code change.
+- **Next:** Selesaikan 4 patch sisa → update BOARD → kirim file.
 
 ## 2026-10-06 — Sinkron checklist v1.1 + git init (✅ BERES)
 - **Fase:** Dokumentasi (bukan fitur). Checklist v1.0 → v1.1.
@@ -18,7 +70,7 @@
 - **Dikerjain:**
   - `docs/06-MVP-Checklist.md` → v1.1: status real (8.1 ✅, 8.2/8.3 code-complete, 1.1/1.3/2.3/3.x sebagian, auth 0%).
   - `.gitignore` root (1 file ngecover `app/`, `supabase/`, `.env`, `__pycache__`).
-  - `docs/08-PROGRESS.md` (file ini) dibuat — ganti usulan PLAN.md (ditolak: rencana sudah ada 3 file, yang hilang itu jejak eksekusi).
+  - `docs/08-PROGRESS.md` v1 dibuat — ganti usulan PLAN.md (ditolak: rencana sudah ada 3 file, yang hilang itu jejak eksekusi).
   - `git init` + `branch -m main` + commit awal `2015d19` (51 files, secrets scan bersih, `node_modules`/`.env` ke-exclude).
 - **File diubah:** `docs/06-MVP-Checklist.md`, `.gitignore`, `docs/08-PROGRESS.md`.
 - **Verifikasi:** docs + git only, no code change. Scan secrets bersih (cuma placeholder `sk-...` + hash npm).
