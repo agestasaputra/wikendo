@@ -44,11 +44,13 @@
 
 ## 🧾 LOG (newest first)
 
-## 2026-10-06 malam — Verifikasi nama brand Top 3 (domain + store + DJKI)
-- **Konteks:** "Weekend Planner" tabrakan (2 app sama persis) + generik (susunan merek susah). Finalis: Pilihin / Mamana / Enaknya.
-- **Hasil cek:** Pilihin (.com judol PRADA888, .id parked, .app startup fotografer ID aktif → GUGUR). Mamana (.com taken, .id + .app AVAILABLE, tapi tabrakan app pregnancy Mamana di Play Store + App Store ID → RISIKO). Enaknya (.com for-sale premium, .id AVAILABLE, App Store 0 hasil, Play Store no direct hit → PALING BERSIH).
-- **DJKI:** belum bisa otomatis (PDKI butuh JS, browser server mati) — wajib cek manual pdki-indonesia.dgip.go.id menu Merek, kelas 9/35/42 sebelum lock.
-- **Rekomendasi:** Enaknya (atau Mamana kalau terima risiko pregnancy-app). Pilihin JANGAN dipakai.
+## 2026-10-06 malam — Verifikasi nama brand 15/15 (domain + store + web)
+- **Konteks:** "Weekend Planner" tabrakan + generik. Cek penuh 15 kandidat: .id via RDAP PANDI, .com via RDAP Verisign+DNS, App Store ID via iTunes API, Play Store via scraping, web via search.
+- **❌ GUGUR (6):** Pilihin (.com judol PRADA888 + .id parked + .app startup foto aktif); Dolan (dolan.id = AI trip planner kompetitor + app Dolan Travel di App Store + com.dolan.id di Play); Liburin (app Liburin Travel di App Store, kategori sama persis); Jalanin (PT Djalanin Wisata Jaya aktif 2021 + djalanin.com + jalanin.org); Kemana (.id+.com taken + generik); Pelesir (.id+.com taken + kata generik Traveloka/Tiket).
+- **⚠️ RISIKO (4):** Mamana (.id+.app free tapi tabrakan app pregnancy di Play+App Store); Mampir (MAMPIR route-optimizer + Yuk Mampir kuliner di Play); Nongki (startup Makassar + Bandung + nongkee.com, nongki.com dijual HugeDomains); Gaskuy (Gaskuy.ID itinerary 1000startup + gaskuy.co.id tour organizer + crowded "kuy").
+- **✅ BERSIH (5):** Wikenin (.id+.com AVAILABLE + App Store 0 + Play 0 hasil — paling bersih); Kulinin (.id+.com AVAILABLE + store bersih, catatan: mirip Kulina F&B); Enaknya (.id AVAILABLE + store bersih, .com premium $1,888 skip); Piknikin (.id free + store bersih); Healingin (.id free + store bersih, trend-risk + 9 huruf).
+- **DJKI:** belum bisa otomatis (PDKI butuh JS, browser server mati) — wajib cek manual pdki-indonesia.dgip.go.id menu Merek kelas 9/35/42 untuk finalis sebelum lock.
+- **Rekomendasi:** Wikenin (data terbersih) atau Enaknya (brand terkuat, bunyi paling nempel). Kulinin opsi tengah (domain double + makan-kuat).
 - **File diubah:** `docs/08-PROGRESS.md`.
 - **Next:** Agesta lock 1 nama → cek DJKI manual → amankan domain .id.
 
