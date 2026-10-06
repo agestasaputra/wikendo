@@ -16,7 +16,7 @@
 ## 📌 BOARD — posisi per 7 Okt 2026 dini hari (deploy preview)
 
 ### 🔥 NOW (lagi dikerjain)
-- [ ] Deploy preview Vercel: fix pnpm + Node 22 + ESLint 10 → redeploy (catatan: DB kosong + LLM localhost = UI preview dulu, bukan E2E penuh)
+- [ ] Redeploy Vercel (commit 481f82c sudah ter-push, nunggu build hijau di Vercel)
 - [ ] Auth slice: login/register/callback/middleware (0 file = blocker quota login + Simpan/history)
 
 ### ⏳ NEXT (antrian dekat)
@@ -30,6 +30,7 @@
 - [ ] Scraper `raw_scrape` → parser per-mall (post-PMF)
 
 ### ✅ DONE (ringkas — detail di LOG bawah)
+- [x] Migrasi npm → pnpm + fix build Vercel (lockfile tencentyun ENOTFOUND, Node 22, ESLint 10) → commit `481f82c`, push main ✅
 - [x] Push repo ke GitHub public `agestasaputra/wikendo-web-app` (SSH key `hermes-wikendo-deploy`, 12 commit, remote origin main ✅)
 - [x] Rename repo `weekend-planner` → `wikendo-web-app` + lock brand Wikendo (folder mv, 13 file patch, git mv 2 artefak, verify test 12/12 + lint + pytest 10/10 + build 3.15MB ✅, commit rename)
 - [x] Docs awal 5 Okt (PRD+ADR+Journey+API+Checklist v1.0+Addendum v1.1+CSV 200)
