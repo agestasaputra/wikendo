@@ -38,10 +38,20 @@
 - [x] Patch NULL tri-state + AUDIT (Vitest 12/12, pytest 10/10, lint clean, build 3.15 MB)
 - [x] Sinkron checklist v1.1 + git init (commit `2015d19` + `2648be9`, secrets bersih)
 - [x] PROGRESS.md v1 → v2 board (file ini, feedback Agesta 6 Okt malam)
+- [x] Workflow permanen dikunci di skill `agesta-app-workflow` (7 section, auto-apply project baru)
 
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-06 malam — Workflow permanen dikunci (✅ BERES)
+- **Fase:** SOP. Request Agesta: "simpan semua workflow, pasti dipakai buat project lain".
+- **Dikerjain:**
+  - Skill baru `agesta-app-workflow` (7 section: alur dokumen solo vs company, struktur docs, format PROGRESS, scaffold+TDD, git+secrets, gaya kerja, checklist project baru).
+  - Memory diringkas → pointer ke skill (hemat 194 chars, 54% → 45%).
+- **File diubah:** skill `agesta-app-workflow` (di `~/.hermes/skills/`), memory.
+- **Verifikasi:** `skill_view` reload penuh ✅, siap auto-apply tiap project baru.
+- **Next:** Project app baru = skill ini + checklist 6 langkah di section 7.
 
 ## 2026-10-06 malam — PROGRESS.md jadi board (✅ BERES, SOP baru)
 - **Fase:** Dokumentasi. Feedback Agesta: "PROGRESS.md = kanban/board kita".
