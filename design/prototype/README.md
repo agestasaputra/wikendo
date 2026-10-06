@@ -3,14 +3,14 @@
 ## 📱 Cara Test di HP Android
 
 ### Method 1: Via File Manager (Recommended)
-1. Download file `weekend-planner-prototype.tar.gz`
+1. Download file `wikendo-prototype.tar.gz`
 2. Extract menggunakan file manager (RAR, ZArchiver, dll)
 3. Buka `index.html` dengan browser (Chrome/Firefox)
 4. Test flow: Landing → Quiz → Result
 
 ### Method 2: Via Python Server (Jika punya laptop)
 ```bash
-cd weekend-planner-prototype
+cd wikendo-prototype
 python3 -m http.server 8000
 ```
 Akses dari HP: `http://[IP-laptop]:8000`
@@ -23,7 +23,7 @@ Upload ke Netlify/Vercel/GitHub Pages untuk testing via URL
 ## 📄 File Structure
 
 ```
-weekend-planner-prototype/
+wikendo-prototype/
 ├── index.html          # Landing page + login/register modal
 ├── quiz.html           # Interactive quiz (5-6 questions)
 ├── result.html         # Recommendation results (5 cards)

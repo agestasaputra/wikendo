@@ -1,4 +1,4 @@
-# 08-PROGRESS.md — Board + Log Eksekusi Weekend Planner
+# 08-PROGRESS.md — Board + Log Eksekusi Wikendo (`wikendo-web-app`)
 
 > **Sumber tunggal jawaban "kita udah sampai mana?". File ini = board + log.**
 > Aturan main (SOP permanen, dikunci 6 Okt 2026):
@@ -30,6 +30,7 @@
 - [ ] Scraper `raw_scrape` → parser per-mall (post-PMF)
 
 ### ✅ DONE (ringkas — detail di LOG bawah)
+- [x] Rename repo `weekend-planner` → `wikendo-web-app` + lock brand Wikendo (folder mv, 13 file patch, git mv 2 artefak, verify test 12/12 + lint + pytest 10/10 + build 3.15MB ✅, commit rename)
 - [x] Docs awal 5 Okt (PRD+ADR+Journey+API+Checklist v1.0+Addendum v1.1+CSV 200)
 - [x] Scaffold + 3-in-1 (Nuxt 4.5.2, TDD 12/12, AGENTS.md, README 458 baris)
 - [x] Phase 8.1 Backend Mall (migration 4 tabel + seed 205 INSERT, pytest 8/8)
@@ -44,10 +45,17 @@
 
 ## 🧾 LOG (newest first)
 
+## 2026-10-07 dini hari — Rename repo `weekend-planner` → `wikendo-web-app` + lock brand Wikendo ✅ BERES
+- **Kenapa:** Agesta lock brand Wikendo (verifikasi verdict AMAN) + minta repo jadi `wikendo-web-app`. Timing perfect: remote GitHub masih kosong + belum deploy Vercel → rename sekarang gratis, nanti mahal.
+- **Eksekusi:** `mv weekend-planner → wikendo-web-app` + patch 13 file (package.json/lock UI title+footer app.vue 2x AGENTS.md README app 3x README root 7x API-spec 4 URL schema.md backup prototype README 3x PROGRESS next-line) + `git mv` 2 artefak (wireframes.md + complete-docs.pdf) + ganti sebutan "Weekend Planner" → "Wikendo" di judul/docs/UI.
+- **Files TIDAK diubah (sengaja, alasan):** `01-PRD.md` Final Locked (sebutan internal, nggak ngaruh runtime), `.gitignore` (pattern generik), `data/*.csv`, `supabase/*`, `design/prototype/*.html` (konten prototype, bukan brand live).
+- **Verifikasi:** test 12/12 ✅, lint EXIT:0 ✅, pytest 10/10 ✅, build 3.15 MB ✅ — rename 100% aman, logic nol berubah.
+- **Next:** push ke GitHub (`wikendo-web-app`, private) — butuh URL repo dari Agesta.
+
 ## 2026-10-06 malam — Verifikasi final Wikendo (lock candidate Agesta)
 - **Status:** Agesta suka Wikendo. Verifikasi fresh 2026-10-06: wikendo.id RDAP 404 = AVAILABLE, wikendo.com = parkir Hostinger (bukan bisnis aktif), App Store ID 0 hasil, Play Store 0 app, web search no brand/perusahaan/startup (hasil cuma linguistik "wikendo" + generik).
 - **Verdict:** AMAN untuk di-lock sebagai brand (dengan 2 catatan: DJKI manual + .com parked).
-- **Next:** 1) cek DJKI manual PDKI kelas 9/35/42, 2) amankan wikendo.id, 3) kunci handle IG/TikTok @wikendo, 4) repo tetap weekend-planner.
+- **Next:** 1) cek DJKI manual PDKI kelas 9/35/42, 2) amankan wikendo.id, 3) kunci handle IG/TikTok @wikendo, 4) rename repo → `wikendo-web-app` (DONE, lihat LOG rename di bawah).
 - **File diubah:** `docs/08-PROGRESS.md`.
 
 ## 2026-10-06 malam — Riset 38 nama EN Tier S/A/B (domain + store + bisnis)

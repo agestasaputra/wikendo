@@ -1,4 +1,4 @@
-# 🗓️ Weekend Planner — Dokumentasi Project Nuxt
+# 🗓️ Wikendo — Dokumentasi Project Nuxt
 
 > Quiz 30 detik → 5 rekomendasi weekend Jabodetabek + Quiz makan 20 detik → 5 tenant mall.
 > Stack: **Nuxt 4 + Vue 3 + TypeScript + Tailwind + Supabase + Hermes-combo (LLM)** — hosting **Vercel, cost $0/bulan**.
@@ -36,7 +36,7 @@ Ditulis buat **pemula**: tiap bagian menjelaskan **apa itu, kenapa ada, dan gima
 
 ## 1. Gambaran Besar
 
-**Weekend Planner** menjawab satu masalah: *decision fatigue* — bingung mau ngapain tiap weekend.
+**Wikendo** menjawab satu masalah: *decision fatigue* — bingung mau ngapain tiap weekend.
 
 Ada **2 mode yang dipisah total** (hasilnya tidak pernah dicampur):
 
@@ -76,7 +76,7 @@ Backend = Nuxt Server Routes + Supabase. Tidak ada repo backend terpisah karena 
 
 ## 3. Struktur Folder
 
-Lokasi project Nuxt: **`weekend-planner/app/`** (bukan root repo — root dipakai buat `docs/`, `data/`, `design/`).
+Lokasi project Nuxt: **`wikendo-web-app/app/`** (bukan root repo — root dipakai buat `docs/`, `data/`, `design/`).
 
 ```text
 app/
@@ -127,7 +127,7 @@ Langkah dari nol sampai jalan di laptop (5–10 menit):
 
 ```bash
 # 1. Masuk folder app
-cd weekend-planner/app
+cd wikendo-web-app/app
 
 # 2. Install dependencies (sekali aja, ~3 menit)
 npm install
@@ -440,7 +440,7 @@ render 5 kartu tenant + tombol Maps
 ## 16. FAQ
 
 **Q: Project Nuxt-nya ada di mana?**
-A: Di `weekend-planner/app/`. Root repo (`docs/`, `data/`, `design/`) sengaja di luar biar dokumentasi, seed CSV, dan prototype tidak kecampur kode.
+A: Di `wikendo-web-app/app/`. Root repo (`docs/`, `data/`, `design/`) sengaja di luar biar dokumentasi, seed CSV, dan prototype tidak kecampur kode.
 
 **Q: Kenapa tidak ada backend terpisah (mis. Express/FastAPI)?**
 A: Keputusan sadar (ADR): Supabase sudah jadi backend (DB+Auth), server Nuxt cuma lapisan tipis (secret, quota, LLM). Bikin repo backend sendiri = +8–12 jam tanpa nilai user. Split hanya kalau ada trigger: client ke-2 non-web, >10rb req/hari, atau tim >3 orang.

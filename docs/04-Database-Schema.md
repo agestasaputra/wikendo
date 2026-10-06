@@ -704,13 +704,13 @@ pg_dump -h db.xxx.supabase.co \
   -U postgres \
   -d postgres \
   -F c \
-  -f weekend-planner-backup-$(date +%Y%m%d).dump
+  -f wikendo-backup-$(date +%Y%m%d).dump
 
 # Restore
 pg_restore -h db.xxx.supabase.co \
   -U postgres \
   -d postgres \
-  weekend-planner-backup-20261005.dump
+  wikendo-backup-20261005.dump
 ```
 
 ### Vacuum & Analyze (Automatic)

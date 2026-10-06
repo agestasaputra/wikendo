@@ -1,4 +1,4 @@
-# AGENTS.md — Weekend Planner (Nuxt App)
+# AGENTS.md — Wikendo (Nuxt App)
 
 > File ini buat **AI assistant** (Cursor, Copilot, Claude, Hermes) yang bantu develop.
 > Baca file ini dulu sebelum ubah kode apa pun. Bahasa: Indonesia santai, instruksi tegas.
@@ -7,7 +7,7 @@
 
 ## 1. Project Ini Apa
 
-**Weekend Planner** — quiz → rekomendasi weekend Jabodetabek. Lokasi kode: `weekend-planner/app/`
+**Wikendo** — quiz → rekomendasi weekend Jabodetabek. Lokasi kode: `wikendo-web-app/app/`
 (root repo ada `docs/`, `data/`, `design/` — jangan taruh kode Nuxt di sana).
 
 **2 mode yang DIPISAH TOTAL (hasil tidak pernah dicampur):**

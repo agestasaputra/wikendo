@@ -2,7 +2,7 @@
 
 **Version:** 1.0  
 **Date:** October 5, 2026  
-**Base URL:** `https://weekend-planner.vercel.app` (Production)  
+**Base URL:** `https://wikendo-web-app.vercel.app` (Production)  
 **Status:** Final for MVP Development
 
 ---
@@ -801,7 +801,7 @@ export interface QuotaStatus {
 
 **Generate Recommendation (Anonymous):**
 ```bash
-curl -X POST https://weekend-planner.vercel.app/api/generate \
+curl -X POST https://wikendo-web-app.vercel.app/api/generate \
   -H "Content-Type: application/json" \
   -d '{
     "mood": "santai",
@@ -814,12 +814,12 @@ curl -X POST https://weekend-planner.vercel.app/api/generate \
 
 **Check Quota:**
 ```bash
-curl https://weekend-planner.vercel.app/api/quota
+curl https://wikendo-web-app.vercel.app/api/quota
 ```
 
 **Register:**
 ```bash
-curl -X POST https://weekend-planner.vercel.app/api/auth/register \
+curl -X POST https://wikendo-web-app.vercel.app/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "email": "test@example.com",

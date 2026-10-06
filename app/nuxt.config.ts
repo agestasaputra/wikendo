@@ -21,7 +21,7 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: 'Weekend Planner — Bingung Weekend Mau Kemana?',
+      title: 'Wikendo — Bingung Weekend Mau Kemana?',
       meta: [
         { name: 'description', content: 'Quiz 30 detik → 5 rekomendasi weekend Jabodetabek. Quiz makan 20 detik → 5 tenant mall. Gratis, tanpa ribet.' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' }

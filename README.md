@@ -1,4 +1,4 @@
-# Weekend Planner - Project Repository
+# Wikendo — Project Repository (`wikendo-web-app`)
 
 **Status:** Planning & Design Phase  
 **Started:** 2026-10-05  
@@ -10,7 +10,7 @@
 ## 📁 Project Structure
 
 ```
-weekend-planner/
+wikendo-web-app/
 ├── docs/                           # Complete documentation
 │   ├── 01-PRD.md                  # Product Requirements Document
 │   ├── 02-ADR.md                  # Architecture Decision Record
@@ -18,10 +18,10 @@ weekend-planner/
 │   ├── 04-Database-Schema.md      # PostgreSQL schema + RLS
 │   ├── 05-API-Specification.md    # 9 endpoints with types
 │   ├── 06-MVP-Checklist.md        # Task breakdown (64h P0)
-│   └── weekend-planner-complete-docs.pdf  # All docs in PDF (161KB)
+│   └── wikendo-complete-docs.pdf  # All docs in PDF (161KB)
 │
 ├── design/                         # UI/UX design assets
-│   ├── weekend-planner-wireframes.md      # Text wireframes (26KB)
+│   ├── wikendo-wireframes.md      # Text wireframes (26KB)
 │   └── prototype/                         # Interactive HTML prototype
 │       ├── index.html             # Landing page + modals
 │       ├── quiz.html              # Interactive quiz flow
@@ -231,9 +231,9 @@ Full spec: `docs/05-API-Specification.md`
 | Database Schema | ✅ Done | `docs/04-Database-Schema.md` |
 | API Specification | ✅ Done | `docs/05-API-Specification.md` |
 | MVP Checklist | ✅ Done | `docs/06-MVP-Checklist.md` |
-| UI Wireframes | ✅ Done | `design/weekend-planner-wireframes.md` |
+| UI Wireframes | ✅ Done | `design/wikendo-wireframes.md` |
 | HTML Prototype | ✅ Done | `design/prototype/` |
-| Complete PDF | ✅ Done | `docs/weekend-planner-complete-docs.pdf` |
+| Complete PDF | ✅ Done | `docs/wikendo-complete-docs.pdf` |
 
 ---
 
@@ -253,7 +253,7 @@ Full spec: `docs/05-API-Specification.md`
 
 **Project Owner:** Agesta  
 **Tech Stack:** Nuxt 3 + Supabase + Hermes-combo  
-**Repository:** `/home/ubuntu/weekend-planner/`
+**Repository:** `/home/ubuntu/wikendo-web-app/` (GitHub: `wikendo-web-app`, private)
 
 ---
 
