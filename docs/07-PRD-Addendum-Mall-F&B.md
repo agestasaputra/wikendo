@@ -1,11 +1,11 @@
 # PRD Addendum — Mall F&B Directory (Split Quiz)
 
-**Version:** 1.1 Revised (Split Quiz per feedback Agesta)
+**Version:** 1.2 Amended (6 Okt 2026 malam — sinkron patch NULL tri-state)
 **Date:** 6 Okt 2026
-**Status:** Approved by Agesta (6 Okt 2026) — LOCKED, lanjut patch downstream + UI
-**Merujuk ke:** `docs/01-PRD.md v2.0 Final` + `docs/02-ADR.md v2.0 Approved`
+**Status:** Approved by Agesta (6 Okt 2026) — LOCKED, patch downstream ✅, UI ✅
+**Merujuk ke:** `docs/01-PRD.md v2.0 Final` + `docs/02-ADR.md v2.1 Amended`
 **Owner:** Agesta
-**Perubahan vs v1.0:** Result TIDAK dicampur. Quiz Tempat dan Quiz Makan dipisah total (beda entry, beda quiz, beda result).
+**Perubahan vs v1.1:** Section 5 sinkron skema real: kolom metadata `data_source`/`verified_at`/`needs_survey` + tabel staging `raw_scrape` + aturan NULL tri-state (patch 6 Okt, sudah live di migration + seed + API + UI).
 
 ---
 
@@ -114,14 +114,18 @@ CREATE TABLE tenants (
   name TEXT NOT NULL,
   category TEXT NOT NULL,
   lantai TEXT NOT NULL,
-  halal BOOLEAN DEFAULT true,
+  halal BOOLEAN DEFAULT NULL,          -- NULL = belum survey (tri-state, patch 6 Okt)
   budget_tier TEXT NOT NULL,
   price_range TEXT,
-  kids_friendly BOOLEAN DEFAULT false,
+  kids_friendly BOOLEAN DEFAULT NULL,  -- NULL = belum survey
   mission TEXT[] DEFAULT '{}',
-  hype_tiktok BOOLEAN DEFAULT false,
+  hype_tiktok BOOLEAN DEFAULT NULL,    -- NULL = belum survey
   is_open BOOLEAN DEFAULT true,
   maps_url TEXT,
+  -- Metadata kualitas data (patch 6 Okt 2026, wajib):
+  data_source TEXT DEFAULT 'curated',  -- 'curated' | 'scrape' | 'survey'
+  verified_at TIMESTAMPTZ DEFAULT NULL,
+  needs_survey BOOLEAN DEFAULT false,  -- TRUE kalau halal/kids/hype masih NULL
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -132,6 +136,16 @@ ALTER TABLE tenants ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Public read malls" ON malls FOR SELECT USING (true);
 CREATE POLICY "Public read tenants" ON tenants FOR SELECT USING (true);
 ```
+
+**Staging scrape (patch 6 Okt 2026):** hasil scraper TIDAK langsung ke `tenants`.
+Wajib lewat `raw_scrape` (RLS closed, no public-read) + gate Jabodetabek 2 lapis
+(allowlist target + kolom city reject non-Jabodetabek) + parser per-mall.
+Mall tanpa tenant = `is_active=false` otomatis hidden.
+
+**Aturan NULL tri-state (patch 6 Okt 2026, wajib):** field belum riset = `NULL`,
+bukan `FALSE`/`""`. Filter safety: `.eq('halal', true)` auto-exclude NULL saat halal-only.
+UI badge ketiga: ❓ Belum terverifikasi + 📋 Perlu survey. Audit: `supabase/AUDIT.md`
+(halal 194/200 mustahil, is_open 200/200 mustahil — wajib survey lapangan P1).
 
 CSV `data/tenants-seed.csv` 200 rows tetap dipakai (5 mall x 40). Tidak perlu ubah.
 

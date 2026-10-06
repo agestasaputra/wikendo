@@ -39,10 +39,13 @@ Solo founder building first startup, AI-assisted development, limited budget, gr
 
 ### High-Level Architecture
 
+> **Amendment 6 Okt 2026:** endpoint tunggal `/api/generate` di-split total per Addendum v1.1
+> (Two Entry, Two Quiz). Tidak ada endpoint campur tempat+makan.
+
 ```
 ┌─────────────────────────────────────────────────┐
 │                   Client                         │
-│         (Nuxt 3 SSR/CSR, Mobile-First)          │
+│         (Nuxt 4 SSR/CSR, Mobile-First)          │
 └─────────────────┬───────────────────────────────┘
                   │ HTTPS
 ┌─────────────────▼───────────────────────────────┐
@@ -51,10 +54,12 @@ Solo founder building first startup, AI-assisted development, limited budget, gr
 │   │   Nuxt Server Routes (Serverless)   │       │
 │   │  ┌──────────┐    ┌───────────────┐  │       │
 │   │  │ /api/    │    │ SSR Pages     │  │       │
-│   │  │ generate │    │ (Landing)     │  │       │
-│   │  │ auth     │    └───────────────┘  │       │
-│   │  │ quota    │                        │       │
-│   │  └────┬─────┘                        │       │
+│   │  │ tempat/  │    │ (Landing)     │  │       │
+│   │  │ makan/   │    └───────────────┘  │       │
+│   │  │ malls/   │                       │       │
+│   │  │ auth     │                       │       │
+│   │  │ quota    │                       │       │
+│   │  └────┬─────┘                       │       │
 │   └───────┼──────────────────────────────┘       │
 └───────────┼──────────────────────────────────────┘
             │
@@ -70,15 +75,25 @@ Solo founder building first startup, AI-assisted development, limited budget, gr
 
 ### Request Flow Examples
 
-**Anonymous user generates recommendation:**
+**Anonymous user generates recommendation (Tempat):**
 ```
 1. User → Nuxt page (/quiz) → Submit quiz
-2. Client → POST /api/generate → Nuxt server route
-3. Server checks quota (Supabase) → Allow if <1 used
+2. Client → POST /api/tempat/recommend → Nuxt server route
+3. Server checks quota tempat (Supabase) → Allow if <1 used
 4. Server → 9router API (Hermes-combo) → Get recommendations
-5. Server saves to DB → Increments quota
+5. Server saves to DB → Increments quota tempat
 6. Server → Client (JSON response)
 7. Client renders 5 recommendation cards
+```
+
+**Anonymous user generates recommendation (Makan) — Amendment 6 Okt 2026:**
+```
+1. User → /makan → pilih mall (wajib 1) → misi → budget → rombongan
+2. Client → POST /api/makan/recommend → Nuxt server route
+3. Server filter Supabase (tenants WHERE mall + budget + halal, GRATIS, tanpa LLM)
+4. Server → 9router API (Hermes-combo) → ranking Top 5 + alasan 1 kalimat (~400 token)
+5. Server saves to DB → Increments quota makan (TERPISAH dari quota tempat)
+6. Client renders 5 tenant cards (lantai + halal + budget + misi)
 ```
 
 **Registered user logs in:**
@@ -157,23 +172,27 @@ Solo founder building first startup, AI-assisted development, limited budget, gr
 - No complex business logic requiring separate service
 - Reduces operational complexity (one deployment)
 
-**Directory Structure:**
+**Directory Structure (real, Amendment 6 Okt 2026):**
 ```
-server/
+app/server/
 ├── api/
-│   ├── generate.post.ts       # POST /api/generate
-│   ├── quota.get.ts           # GET /api/quota
-│   └── auth/
-│       ├── register.post.ts
-│       └── callback.get.ts
-├── middleware/
-│   ├── auth.ts                # Verify JWT
-│   └── rate-limit.ts          # Additional rate limiting
-└── utils/
-    ├── llm.ts                 # Hermes-combo client
-    ├── db.ts                  # Supabase client
-    └── prompt.ts              # System prompt templates
+│   ├── tempat/
+│   │   └── recommend.post.ts  # POST /api/tempat/recommend
+│   ├── makan/
+│   │   └── recommend.post.ts  # POST /api/makan/recommend
+│   ├── malls/
+│   │   ├── index.get.ts       # GET /api/malls
+│   │   └── [slug]/
+│   │       └── tenants.get.ts # GET /api/malls/:slug/tenants
+│   ├── quota.get.ts           # GET /api/quota (BELUM — auth 0 file)
+│   └── auth/                  # BELUM ADA SAMA SEKALI (blocker)
+├── utils/
+│   ├── llm.ts                 # Hermes-combo client ✅
+│   └── db.ts                  # Supabase client ✅
+└── middleware/                # BELUM ADA
 ```
+Quota split: `user_quota` + `mall_search_quota(user_id, date, used)` atau kolom `quota_type`.
+Tempat 2/hari, Makan 5/hari, TERPISAH. Anonymous: cookie terpisah per tipe.
 
 **When to Split Backend:**
 - Admin dashboard with complex operations
@@ -292,6 +311,19 @@ $$ LANGUAGE plpgsql;
 - ✅ Easy to migrate data out (standard PostgreSQL)
 - ⚠️ Free tier limits (500MB, need monitoring)
 - ❌ Vendor dependency (but migration path exists)
+
+### Amendment 6 Okt 2026 — Tabel Mall/F&B + NULL Tri-State + Staging
+
+**Keputusan:** field yang belum ada hasil riset = `NULL` (bukan `FALSE`/`""`).
+Alasan: `""`→`FALSE` itu overclaim bahaya (contoh: `halal=FALSE` padahal belum survey = fitnah ke tenant).
+`NULL` = antrian survey + auto-exclude dari filter `.eq(true)` + badge UI ❓.
+
+Kolom metadata wajib di `tenants`: `data_source TEXT` (`curated`/`scrape`/`survey`),
+`verified_at TIMESTAMPTZ NULL`, `needs_survey BOOLEAN` (TRUE kalau halal/kids/hype NULL).
+
+**Keputusan:** scrape TIDAK langsung ke `tenants` produksi. Wajib lewat staging `raw_scrape`
+(RLS closed, no public-read) + gate Jabodetabek 2 lapis (allowlist target + kolom city reject non-Jabodetabek).
+Mall tanpa tenant = `is_active=false` otomatis hidden. Detail: `docs/04-Database-Schema.md` + `supabase/AUDIT.md`.
 
 ---
 
@@ -424,6 +456,15 @@ await supabase.from('llm_logs').insert({
 - ✅ Cost potentially lower (depends on 9router pricing)
 - ⚠️ Dependency on 9router availability
 - ❌ Need to confirm 9router pricing model
+
+### Amendment 6 Okt 2026 — Pola LLM Makan (hemat, filter-dulu)
+
+**Keputusan:** untuk quiz makan, LLM TIDAK cari tenant. Alur: filter Supabase dulu
+(`WHERE mall + budget + halal`, GRATIS, tanpa token) → LLM cuma ranking Top 5 + alasan
+1 kalimat dari kandidat yang sudah difilter (~400 token/call, via Cloudflare workers AI gratis).
+Alasan: list tenant statis dari DB (gratis), LLM halu tidak boleh ngarang tenant
+(metrics: tenant halu complaint = 0). System prompt terpisah: `MAKAN_SYSTEM` di `app/server/utils/llm.ts`.
+Quota makan 5/hari TERPISAH dari quota tempat 2/hari (behaviour beda: makan bisa 2-3x sehari).
 
 ---
 
@@ -1033,7 +1074,7 @@ export default defineNuxtConfig({
 
 | Decision Area | Choice | Runner-up | Reason |
 |---------------|--------|-----------|--------|
-| Frontend | Nuxt 3 | Next.js | Founder prefers Vue, simpler |
+| Frontend | Nuxt 4.5.2 | Next.js | Founder prefers Vue, simpler |
 | Backend | Nuxt server routes | Express | No separate backend needed |
 | Database | Supabase | Firebase | Free tier, built-in auth, PostgreSQL |
 | LLM | Hermes-combo | OpenAI GPT-4o-mini | Already available, high quality |
@@ -1045,7 +1086,13 @@ export default defineNuxtConfig({
 
 ---
 
-**Document Status:** APPROVED  
-**Next Action:** Proceed to implementation (Project Init)
+**Document Status:** APPROVED + Amended v2.1 (6 Okt 2026)
+**Next Action:** Push GitHub → Auth slice → Seed Supabase → E2E 8.4
 
 **Review Schedule:** After soft launch (30 users), review and update based on real data
+
+---
+
+**Change Log:**
+- v2.1 (6 Okt 2026 malam): 6 amendment — (1) Nuxt 3→4.5.2 + struktur folder real, (2) endpoint `/api/generate` → split tempat/makan/malls, (3) flow makan filter-dulu + LLM ranking, (4) struktur direktori backend real + quota split 2/5, (5) NULL tri-state + metadata + staging `raw_scrape`, (6) pola LLM makan hemat. Trigger: brainstorming split quiz + audit data AI-dummy.
+- v2.0 (5 Okt 2026): Initial approved (monolit Nuxt+Supabase, quota dual via Addendum 07 v1.1).

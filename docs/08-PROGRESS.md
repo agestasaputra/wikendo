@@ -16,14 +16,12 @@
 ## 📌 BOARD — posisi per 6 Okt 2026 malam
 
 ### 🔥 NOW (lagi dikerjain)
-- [~] Patch `02-ADR.md` v2.0 → v2.1 (6 titik: header, Nuxt 4, endpoint split, flow makan, DB tri-state, amendment log) — 2/6 beres
-- [ ] Patch `07-Addendum` Section 5 (skema `data_source`/`verified_at`/`needs_survey` + `raw_scrape`) — antri tepat setelah ADR
+- [ ] Push repo ke GitHub + bikin Projects board (15 mnt, butuh URL repo dari Agesta)
 
 ### ⏳ NEXT (antrian dekat)
-- [ ] Push repo ke GitHub + bikin Projects board (15 mnt)
+- [ ] Auth slice: login/register/callback/middleware (0 file = blocker quota login + Simpan/history)
 - [ ] Run migration + seed ke Supabase beneran (butuh dashboard user)
 - [ ] 8.4 E2E (butuh DB seeded dulu)
-- [ ] Auth: login/register/callback/middleware (0 file = blocker quota login + Simpan/history)
 
 ### 📦 BACKLOG (nanti)
 - [ ] `components/`/`composables/`/`layouts/` + `GET /api/health` (UI masih inline)
@@ -39,10 +37,21 @@
 - [x] Sinkron checklist v1.1 + git init (commit `2015d19` + `2648be9`, secrets bersih)
 - [x] PROGRESS.md v1 → v2 board (file ini, feedback Agesta 6 Okt malam)
 - [x] Workflow permanen dikunci di skill `agesta-app-workflow` (7 section, auto-apply project baru)
+- [x] Patch ADR v2.0 → v2.1 (6/6: Nuxt 4, endpoint split, flow makan, struktur real, NULL tri-state, LLM hemat, change log)
+- [x] Patch Addendum v1.1 → v1.2 (Section 5: skema metadata + `raw_scrape` + aturan NULL)
 
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-06 malam — Patch ADR v2.1 + Addendum v1.2 (✅ BERES, 8 patch)
+- **Fase:** Dokumentasi. Brainstorming terakhir (split quiz, NULL tri-state, staging scrape, LLM hemat) belum masuk docs formal.
+- **Dikerjain:**
+  - `02-ADR.md` v2.0 → v2.1: header amended + Nuxt 4.5.2 + arsitektur split + flow tempat/makan + struktur backend real + quota split 2/5 + NULL tri-state + staging `raw_scrape` + pola LLM makan + tabel + status + change log (8 patch).
+  - `07-Addendum` v1.1 → v1.2: header + skema `tenants` (halal/kids/hype DEFAULT NULL + metadata) + staging `raw_scrape` + aturan NULL + referensi AUDIT (3 patch).
+- **File diubah:** `docs/02-ADR.md`, `docs/07-PRD-Addendum-Mall-F&B.md`, `docs/08-PROGRESS.md`.
+- **Verifikasi:** docs only, no code change. PRD utama TIDAK diubah (Final & Locked, sesuai aturan Addendum).
+- **Next:** Push GitHub (butuh URL repo dari Agesta) → Auth slice.
 
 ## 2026-10-06 malam — Workflow permanen dikunci (✅ BERES)
 - **Fase:** SOP. Request Agesta: "simpan semua workflow, pasti dipakai buat project lain".
