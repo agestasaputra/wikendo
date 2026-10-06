@@ -44,6 +44,12 @@
 
 ## 🧾 LOG (newest first)
 
+## 2026-10-06 malam — Verifikasi final Wikendo (lock candidate Agesta)
+- **Status:** Agesta suka Wikendo. Verifikasi fresh 2026-10-06: wikendo.id RDAP 404 = AVAILABLE, wikendo.com = parkir Hostinger (bukan bisnis aktif), App Store ID 0 hasil, Play Store 0 app, web search no brand/perusahaan/startup (hasil cuma linguistik "wikendo" + generik).
+- **Verdict:** AMAN untuk di-lock sebagai brand (dengan 2 catatan: DJKI manual + .com parked).
+- **Next:** 1) cek DJKI manual PDKI kelas 9/35/42, 2) amankan wikendo.id, 3) kunci handle IG/TikTok @wikendo, 4) repo tetap weekend-planner.
+- **File diubah:** `docs/08-PROGRESS.md`.
+
 ## 2026-10-06 malam — Riset 38 nama EN Tier S/A/B (domain + store + bisnis)
 - **Scope:** Tier S 8 + Tier A 14 + Tier B 16 = 38 nama. Cek: .id RDAP PANDI, .com RDAP Verisign+DNS+landing title, App Store ID iTunes API, Play Store scraping + pkg-match, web search finalis bersih.
 - **.id AVAILABLE (24):** pickly, scouty, treatly, sunyay, res momentseto, sparky, nomly, slurpo, feasto, bruncho, brewo, outgo, dally, amblo, strolly, detouro, joyrio, waygo, gemly, alleyo, hearty, savy, mainly, hoodly. TAKEN (14): hoppin, hideout, hangry, cuppa, mello, toasty, fizzy, bubbly, zesty, sippo, mappin, porto, pitstop, metime.
