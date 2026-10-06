@@ -12,16 +12,16 @@
 
 ---
 
-## 2026-10-06 — Sinkron checklist v1.1 + git init (IN PROGRESS)
+## 2026-10-06 — Sinkron checklist v1.1 + git init (✅ BERES)
 - **Fase:** Dokumentasi (bukan fitur). Checklist v1.0 → v1.1.
 - **Kenapa:** Checklist tertinggal dari kode (8.1 beres tak tercatat, kode 8.2/8.3 tak dicentang, Phase 8 nyelip sebelum Phase 4). User ngerasa "kurang terdokumentasi" — valid.
 - **Dikerjain:**
   - `docs/06-MVP-Checklist.md` → v1.1: status real (8.1 ✅, 8.2/8.3 code-complete, 1.1/1.3/2.3/3.x sebagian, auth 0%).
   - `.gitignore` root (1 file ngecover `app/`, `supabase/`, `.env`, `__pycache__`).
-  - `docs/08-PROGRESS.md` (file ini) dibuat.
-  - `git init` + commit awal.
+  - `docs/08-PROGRESS.md` (file ini) dibuat — ganti usulan PLAN.md (ditolak: rencana sudah ada 3 file, yang hilang itu jejak eksekusi).
+  - `git init` + `branch -m main` + commit awal `2015d19` (51 files, secrets scan bersih, `node_modules`/`.env` ke-exclude).
 - **File diubah:** `docs/06-MVP-Checklist.md`, `.gitignore`, `docs/08-PROGRESS.md`.
-- **Verifikasi:** belum (docs only, no code change).
+- **Verifikasi:** docs + git only, no code change. Scan secrets bersih (cuma placeholder `sk-...` + hash npm).
 - **Next:** Push ke GitHub + bikin Projects board → lanjut 8.4 testing E2E.
 
 ## 2026-10-06 — Patch NULL tri-state + AUDIT (✅ BERES, full hijau)
