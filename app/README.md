@@ -8,7 +8,7 @@ Ditulis buat **pemula**: tiap bagian menjelaskan **apa itu, kenapa ada, dan gima
 
 > **Buat AI assistant** (Cursor, Copilot, dsb) yang bantu develop: baca **`AGENTS.md`**
 > (instruksi tegas: konvensi kode, pola nambah fitur, larangan) — bukan README ini.
-> **Buat unit testing**: `npm run test` (Vitest, `tests/quiz-logic.test.ts`, 12 test buat
+> **Buat unit testing**: `pnpm test` (Vitest, `tests/quiz-logic.test.ts`, 12 test buat
 > fungsi pure di `utils/quiz-logic.ts`). Logic baru yang pure → taruh di sana + tambah test.
 
 ---
@@ -60,17 +60,17 @@ Backend = Nuxt Server Routes + Supabase. Tidak ada repo backend terpisah karena 
 
 | Lapisan | Teknologi | Versi | Fungsi |
 |---------|-----------|-------|--------|
-| Framework | **Nuxt** | ^4.5.2 (stable) | SSR + routing + server API dalam 1 framework |
+| Framework | **Nuxt** | ^4.6.0 (stable) | SSR + routing + server API dalam 1 framework |
 | UI | **Vue** + **Vue Router** | ^3.5 / ^4.5 | Komponen reaktif + navigasi halaman |
 | Bahasa | **TypeScript** | ^5.6 | Type safety — salah ketik field ketahuan sebelum runtime |
 | Styling | **Tailwind CSS** via `@nuxtjs/tailwindcss` | 6.14.0 | Utility-first CSS, tanpa tulis CSS manual |
 | Database + Auth | **Supabase** (`@supabase/supabase-js`) | 2.117.2 | Postgres + Auth + Row Level Security |
 | LLM | **Hermes-combo via 9Router** | — | Ranking Top 5 + alasan 1 kalimat (lihat `server/utils/llm.ts`) |
-| Lint | **ESLint 9** + `@nuxt/eslint` | ^9 / 1.17.0 | Jaga konsistensi kode (`npm run lint`) |
+| Lint | **ESLint 10** + `@nuxt/eslint` | ^10 / 1.17.0 | Jaga konsistensi kode (`pnpm lint`) |
 | Hosting | **Vercel Hobby** | — | 1 project = frontend + serverless backend |
 | Analytics | **GA4** | — | Event: quiz_started, quiz_completed, quota_exhausted, dll |
 
-**Prasyarat di laptop:** Node.js ≥ 18 (cek: `node -v; npm -v`).
+**Prasyarat di laptop:** Node.js 22.x (cek: `node -v; pnpm -v`).
 
 ---
 
@@ -130,14 +130,14 @@ Langkah dari nol sampai jalan di laptop (5–10 menit):
 cd wikendo-web-app/app
 
 # 2. Install dependencies (sekali aja, ~3 menit)
-npm install
+pnpm install
 
 # 3. Siapkan environment
 cp .env.example .env
 # → lalu isi nilai asli di .env (lihat Bab 5)
 
 # 4. Jalankan dev server
-npm run dev
+pnpm dev
 # → buka http://localhost:3000
 ```
 
@@ -332,8 +332,8 @@ File: `types/index.ts` — **satu-satunya sumber kebenaran bentuk data**. Kalau 
 - Perintah:
 
 ```bash
-npm run lint       # cek saja (dipakai di CI)
-npm run lint:fix   # cek + perbaiki otomatis yang bisa (urutan atribut Vue, dst)
+pnpm lint       # cek saja (dipakai di CI)
+pnpm lint:fix   # cek + perbaiki otomatis yang bisa (urutan atribut Vue, dst)
 ```
 
 - Aturan yang pernah kena di project ini (biar tidak diulang):
@@ -347,15 +347,15 @@ npm run lint:fix   # cek + perbaiki otomatis yang bisa (urutan atribut Vue, dst)
 
 | Perintah | Fungsi | Kapan dipakai |
 |----------|--------|---------------|
-| `npm install` | Install dependencies | Sekali di awal / tiap pull yang ubah `package.json` |
-| `npm run dev` | Dev server + hot reload | Kerja harian → `http://localhost:3000` |
-| `npm run build` | Build production | Sebelum deploy / verifikasi tidak ada error |
-| `npm run preview` | Jalankan hasil build lokal | Cek hasil `build` persis seperti di server |
-| `npm run generate` | Pre-render statis | Kalau butuh output statis (jarang dipakai di MVP ini) |
-| `npm run lint` | Cek ESLint | Sebelum commit |
-| `npm run lint:fix` | Perbaiki lint otomatis | Kalau `lint` merah yang bisa auto-fix |
-| `npm run test` | Jalankan unit test (Vitest, 12 test) | **Wajib hijau** sebelum klaim beres |
-| `npm run test:watch` | Test watch mode (jalan ulang tiap save) | Saat nulis kode + test bareng |
+| `pnpm install` | Install dependencies | Sekali di awal / tiap pull yang ubah `package.json` |
+| `pnpm dev` | Dev server + hot reload | Kerja harian → `http://localhost:3000` |
+| `pnpm build` | Build production | Sebelum deploy / verifikasi tidak ada error |
+| `pnpm preview` | Jalankan hasil build lokal | Cek hasil `build` persis seperti di server |
+| `pnpm generate` | Pre-render statis | Kalau butuh output statis (jarang dipakai di MVP ini) |
+| `pnpm lint` | Cek ESLint | Sebelum commit |
+| `pnpm lint:fix` | Perbaiki lint otomatis | Kalau `lint` merah yang bisa auto-fix |
+| `pnpm test` | Jalankan unit test (Vitest, 12 test) | **Wajib hijau** sebelum klaim beres |
+| `pnpm test:watch` | Test watch mode (jalan ulang tiap save) | Saat nulis kode + test bareng |
 | `npx nuxi --version` | Cek versi Nuxt | Diagnosa (`nuxi` = CLI resmi Nuxt) |
 
 ---
@@ -427,13 +427,13 @@ render 5 kartu tenant + tombol Maps
 
 | Gejala | Penyebab paling mungkin | Cara cek / fix |
 |--------|------------------------|----------------|
-| `npm run dev` error `ECONNREFUSED` / halaman result 500 | `HERMES_API_URL` salah / 9Router tidak jalan | `curl http://127.0.0.1:20128/v1/models` — harus balas JSON, bukan refused |
+| `pnpm dev` error `ECONNREFUSED` / halaman result 500 | `HERMES_API_URL` salah / 9Router tidak jalan | `curl http://127.0.0.1:20128/v1/models` — harus balas JSON, bukan refused |
 | Result 403 `LOGIN_REQUIRED` / `MAKAN_QUOTA_EXCEEDED` | Quota cookie habis (normal, bukan bug) | Buka incognito / hapus cookie / login untuk jatah lebih |
 | Direktori `/mall/...` kosong | Tabel `malls`/`tenants` di Supabase belum di-seed | Import `data/tenants-seed.csv` (200 rows) ke Supabase |
 | `useFetch` 404 di `/mall/:slug` | Slug salah (cek: `grand-indonesia`, `central-park`, `kota-kasablanka`, `pondok-indah-mall`, `aeon-bsd`) | Samakan dengan kolom `slug` di tabel `malls` |
-| `npm run lint` merah `no-explicit-any` | Ada tipe `any` di kode baru | Ganti dengan interface dari `types/index.ts` |
+| `pnpm lint` merah `no-explicit-any` | Ada tipe `any` di kode baru | Ganti dengan interface dari `types/index.ts` |
 | Build lolos tapi page blank | `NUXT_PUBLIC_*` belum diisi di `.env` / Vercel env | Cek `runtimeConfig.public` di `nuxt.config.ts` vs env yang ada |
-| `nuxt prepare` / TS error setelah pull | `node_modules` basi | `rm -rf node_modules .nuxt && npm install` |
+| `nuxt prepare` / TS error setelah pull | `node_modules` basi | `rm -rf node_modules .nuxt && pnpm install` |
 
 ---
 
@@ -462,4 +462,4 @@ A: Bikin file di `server/api/...` ikut pola nama (`*.get.ts` / `*.post.ts`), pak
 
 ---
 
-*Terakhir diverifikasi: Nuxt 4.5.2 · `npm run lint` clean · `npm run build` EXIT:0. Kalau ada yang tidak sesuai dengan kode, kode yang menang — lalu update dokumen ini.*
+*Terakhir diverifikasi: Nuxt 4.6.0 · ESLint 10 · pnpm 9.15.4 · `pnpm lint` clean · `pnpm build` EXIT:0. Kalau ada yang tidak sesuai dengan kode, kode yang menang — lalu update dokumen ini.*

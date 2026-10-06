@@ -24,19 +24,19 @@ Keputusan arsitektur lengkap: `../docs/02-ADR.md`. User journey: `../docs/03-Use
 
 ## 2. Stack (jangan ganti tanpa diskusi)
 
-Nuxt **4.5.2** + Vue 3.5 + TS 5.6 + Tailwind 6.14 + supabase-js 2.117.2 + ESLint 9 + Vitest 5 + happy-dom.
-Node ≥ 18. Deploy: Vercel (root directory = `app/`).
+Nuxt **4.6.0** + Vue 3.5 + TS 5.6 + Tailwind 6.14 + supabase-js 2.117.2 + ESLint 10 + Vitest 5 + happy-dom.
+Node 22.x (lihat `engines` di package.json). Deploy: Vercel (root directory = `app/`).
 
 ---
 
 ## 3. Perintah
 
 ```bash
-npm run dev        # kerja harian → http://localhost:3000
-npm run test       # vitest run (WAJIB hijau sebelum klaim beres)
-npm run lint       # eslint (WAJIB clean, 0 error)
-npm run lint:fix   # auto-fix yang bisa
-npm run build      # verifikasi production (WAJIB EXIT:0 sebelum PR)
+pnpm dev        # kerja harian → http://localhost:3000
+pnpm test       # vitest run (WAJIB hijau sebelum klaim beres)
+pnpm lint       # eslint (WAJIB clean, 0 error)
+pnpm lint:fix   # auto-fix yang bisa
+pnpm build      # verifikasi production (WAJIB EXIT:0 sebelum PR)
 ```
 
 Urutan verifikasi setiap ubah kode: `test` → `lint` → `build`.
@@ -110,7 +110,7 @@ ada di `app.vue` — jangan duplikat di tiap page.
 dalam `pages/mall/[slug].vue`. Tidak perlu endpoint baru.
 
 **Fungsi pure baru:** tulis test di `tests/` DULU (tonton MERAH) → implement di
-`utils/quiz-logic.ts` (tonton HIJAU) → pakai di pages/server → `npm run test && npm run lint`.
+`utils/quiz-logic.ts` (tonton HIJAU) → pakai di pages/server → `pnpm test && pnpm lint`.
 
 ---
 

@@ -13,9 +13,10 @@
 
 ---
 
-## 📌 BOARD — posisi per 7 Okt 2026 dini hari
+## 📌 BOARD — posisi per 7 Okt 2026 dini hari (deploy preview)
 
 ### 🔥 NOW (lagi dikerjain)
+- [ ] Deploy preview Vercel: fix pnpm + Node 22 + ESLint 10 → redeploy (catatan: DB kosong + LLM localhost = UI preview dulu, bukan E2E penuh)
 - [ ] Auth slice: login/register/callback/middleware (0 file = blocker quota login + Simpan/history)
 
 ### ⏳ NEXT (antrian dekat)
@@ -44,6 +45,19 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-07 dini hari — Migrasi npm → pnpm + fix build Vercel ✅ BERES
+- **Kenapa:** Build Vercel fail `ENOTFOUND mirrors.tencentyun.com` — `package-lock.json` kekunci ke mirror Tencent (bawaan server dev), DNS-nya unreachable dari server Vercel `iad1`. Agesta juga request sekalian pindah ke pnpm + beresin warning.
+- **Dikerjain:**
+  - Install pnpm 9.15.4 (via `npm i -g`, corepack kepentok EACCES symlink /usr/bin) + kunci `packageManager: pnpm@9.15.4`.
+  - Buang `package-lock.json` (tercemar 1068 refs tencentyun) + `.npmrc` mirror → `pnpm install` fresh dari registry resmi → `pnpm-lock.yaml` 337KB, scan `tencentyun` = 0 BERSIH.
+  - `engines.node`: `>=18.0.0` → `22.x` (hilangkan warning auto-upgrade Vercel + pin runtime prod).
+  - ESLint 9.39.5 → 10.12.0 (warning peer `unmet peer eslint@^10` dari `@nuxt/eslint 1.17.0` hilang permanen; `@eslint/js 10.0.1` + `eslint-plugin-unicorn 73` sekarang puas).
+  - Nuxt ikut naik 4.5.2 → 4.6.0 (minor, otomatis via `^`).
+  - Sync docs: `AGENTS.md` (stack + perintah pnpm), `README.md` (tabel versi + semua perintah + troubleshooting), `eslint.config.mjs` (komentar v10).
+- **Verifikasi:** `pnpm test` 12/12 ✅, `pnpm lint` EXIT:0 bersih ✅, `pnpm build` EXIT:0 3.23MB (792kB gzip) ✅. WARN `Unsupported engine` di lokal harmless (lokal Node 26, prod Vercel 22).
+- **Files:** `app/package.json`, `app/pnpm-lock.yaml` (baru), `app/package-lock.json` (hapus), `app/.npmrc` (hapus), `app/AGENTS.md`, `app/README.md`, `app/eslint.config.mjs`, `docs/08-PROGRESS.md`.
+- **Next:** push → Vercel redeploy (Root Directory tetap `app`, pnpm auto-detect via lockfile) → cek URL preview. Catatan: DB kosong + LLM localhost = UI preview dulu, bukan E2E penuh.
 
 ## 2026-10-07 dini hari — Push repo ke GitHub public ✅ BERES
 - **Kenapa:** backup cloud + siap deploy Vercel + repo public sesuai putusan Agesta. Remote awal kosong (repo GitHub baru, tanpa README) → push mulus tanpa conflict.
