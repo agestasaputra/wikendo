@@ -13,13 +13,12 @@
 
 ---
 
-## 📌 BOARD — posisi per 6 Okt 2026 malam
+## 📌 BOARD — posisi per 7 Okt 2026 dini hari
 
 ### 🔥 NOW (lagi dikerjain)
-- [ ] Push repo ke GitHub + bikin Projects board (15 mnt, butuh URL repo dari Agesta)
+- [ ] Auth slice: login/register/callback/middleware (0 file = blocker quota login + Simpan/history)
 
 ### ⏳ NEXT (antrian dekat)
-- [ ] Auth slice: login/register/callback/middleware (0 file = blocker quota login + Simpan/history)
 - [ ] Run migration + seed ke Supabase beneran (butuh dashboard user)
 - [ ] 8.4 E2E (butuh DB seeded dulu)
 
@@ -30,6 +29,7 @@
 - [ ] Scraper `raw_scrape` → parser per-mall (post-PMF)
 
 ### ✅ DONE (ringkas — detail di LOG bawah)
+- [x] Push repo ke GitHub public `agestasaputra/wikendo-web-app` (SSH key `hermes-wikendo-deploy`, 12 commit, remote origin main ✅)
 - [x] Rename repo `weekend-planner` → `wikendo-web-app` + lock brand Wikendo (folder mv, 13 file patch, git mv 2 artefak, verify test 12/12 + lint + pytest 10/10 + build 3.15MB ✅, commit rename)
 - [x] Docs awal 5 Okt (PRD+ADR+Journey+API+Checklist v1.0+Addendum v1.1+CSV 200)
 - [x] Scaffold + 3-in-1 (Nuxt 4.5.2, TDD 12/12, AGENTS.md, README 458 baris)
@@ -44,6 +44,13 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-07 dini hari — Push repo ke GitHub public ✅ BERES
+- **Kenapa:** backup cloud + siap deploy Vercel + repo public sesuai putusan Agesta. Remote awal kosong (repo GitHub baru, tanpa README) → push mulus tanpa conflict.
+- **Eksekusi:** SSH key baru `hermes-wikendo-deploy` (ed25519, `~/.ssh/id_ed25519_github`), daftar di github.com/settings/keys oleh Agesta → `git remote add origin git@github.com:agestasaputra/wikendo-web-app.git` → `git push -u origin main` (12 commit, new branch main → main).
+- **Verifikasi:** `git push` EXIT:0, branch main track origin/main. Secrets scan: `.env` tidak ter-track, `.gitignore` nutupin env/build/node_modules ✅. 1 hit `queue-microtask` di package-lock = false positive (URL mirror npm, bukan secret).
+- **Files:** `docs/08-PROGRESS.md` (BOARD NOW=auth slice, DONE+push).
+- **Next:** Auth slice (blocker quota login) → seed Supabase → E2E → deploy Vercel.
 
 ## 2026-10-07 dini hari — Rename repo `weekend-planner` → `wikendo-web-app` + lock brand Wikendo ✅ BERES
 - **Kenapa:** Agesta lock brand Wikendo (verifikasi verdict AMAN) + minta repo jadi `wikendo-web-app`. Timing perfect: remote GitHub masih kosong + belum deploy Vercel → rename sekarang gratis, nanti mahal.
