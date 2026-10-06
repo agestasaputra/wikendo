@@ -1,0 +1,31 @@
+// nuxt.config.ts — Konfigurasi Nuxt: modules, runtimeConfig (secret vs public), SEO head.
+// runtimeConfig.X (hermesApiKey, supabaseServiceKey) = SERVER ONLY, jangan dibaca dari pages/.
+// runtimeConfig.public.* (supabaseUrl, supabaseAnonKey, gaId) = boleh dibaca browser.
+// Nilai diambil dari env (.env lokal / Vercel env prod). Lihat .env.example.
+// https://nuxt.com/docs/api/configuration/nuxt-config
+export default defineNuxtConfig({
+  devtools: { enabled: true },
+  modules: ['@nuxtjs/tailwindcss', '@nuxt/eslint'],
+  runtimeConfig: {
+    hermesApiUrl: process.env.HERMES_API_URL || 'http://127.0.0.1:20128',
+    hermesApiKey: process.env.HERMES_API_KEY || '',
+    supabaseServiceKey: process.env.SUPABASE_SERVICE_KEY || '',
+    public: {
+      supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL || '',
+      supabaseAnonKey: process.env.NUXT_PUBLIC_SUPABASE_ANON_KEY || '',
+      gaId: process.env.NUXT_PUBLIC_GA_ID || ''
+    }
+  },
+  tailwindcss: {
+    configPath: 'tailwind.config'
+  },
+  app: {
+    head: {
+      title: 'Weekend Planner — Bingung Weekend Mau Kemana?',
+      meta: [
+        { name: 'description', content: 'Quiz 30 detik → 5 rekomendasi weekend Jabodetabek. Quiz makan 20 detik → 5 tenant mall. Gratis, tanpa ribet.' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+      ]
+    }
+  }
+})

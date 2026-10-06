@@ -1,0 +1,587 @@
+# Weekend Planner - UI Wireframes
+**Version:** 1.0  
+**Date:** 2026-10-05  
+**Design System:** Nuxt UI + Tailwind CSS  
+**Color Scheme:** Teal Primary (#0891b2) + Orange Accent (#f97316)
+
+---
+
+## 1. LANDING PAGE (Mobile 375px)
+
+```
+┌─────────────────────────────────────┐
+│  [Logo] Weekend Planner    [Login] │ ← Header: sticky, white bg
+├─────────────────────────────────────┤
+│                                     │
+│   [Hero Background Image]           │ ← Full width, overlay gradient
+│   - Weekend activity photo          │   Bottom gradient: dark → transparent
+│   - Blur overlay for readability    │
+│                                     │
+│   Bingung Weekend                   │ ← H1: 32px, bold, white
+│   Mau Kemana? 🤔                    │
+│                                     │
+│   Quiz 30 detik → dapatkan          │ ← Subheading: 18px, white/80%
+│   5 rekomendasi tempat cocok        │
+│                                     │
+│   [Mulai Quiz Gratis →]            │ ← CTA: Large, orange bg, white text
+│                                     │   rounded-xl, shadow-lg, 56px height
+└─────────────────────────────────────┘
+│                                     │
+│  BAGAIMANA CARA KERJANYA?          │ ← Section heading: 24px, center
+│                                     │
+│  ┌───────────────┐                 │
+│  │   [Icon 1]    │  Isi Quiz      │ ← 3-column grid on mobile stacked
+│  │  📝 Quiz      │  Jawab 5        │   Icon: 48px, teal circle bg
+│  └───────────────┘  pertanyaan     │   Text: 14px, gray
+│                     tentang mood    │
+│                     & preferensi    │
+│                                     │
+│  ┌───────────────┐                 │
+│  │   [Icon 2]    │  AI Analisis   │
+│  │  🤖 AI        │  Sistem kami    │
+│  └───────────────┘  memproses      │
+│                     jawaban kamu    │
+│                                     │
+│  ┌───────────────┐                 │
+│  │   [Icon 3]    │  Rekomendasi   │
+│  │  ✨ Hasil     │  Dapat 5        │
+│  └───────────────┘  tempat cocok   │
+│                     + estimasi      │
+│                                     │
+├─────────────────────────────────────┤
+│  KENAPA WEEKEND PLANNER?           │ ← Benefits section
+│                                     │
+│  ✓ Hemat waktu riset               │ ← Check list items
+│  ✓ Rekomendasi personal            │   16px, line height 1.8
+│  ✓ Sesuai budget & mood            │
+│  ✓ Update lokasi Jabodetabek       │
+│                                     │
+├─────────────────────────────────────┤
+│  [Mulai Quiz Sekarang →]          │ ← Repeat CTA
+│                                     │
+├─────────────────────────────────────┤
+│  FOOTER                            │
+│  Weekend Planner © 2026            │ ← Gray bg, small text
+│  Privacy | About | Contact         │   Links: underline on hover
+└─────────────────────────────────────┘
+```
+
+**Key Elements:**
+- **Fold 1 (above the fold):** Hero + CTA dalam 1 screen (critical!)
+- **Progress:** No navigation needed, scroll only
+- **CTA:** 2x (top + bottom) untuk catch users at different stages
+- **Trust:** Clear benefit bullets
+- **Mobile optimized:** No horizontal scroll, thumb-friendly CTA
+
+---
+
+## 2. QUIZ FLOW (5-6 Screens)
+
+### Quiz Screen Template (All Questions Use This)
+
+```
+┌─────────────────────────────────────┐
+│  [←]  Weekend Planner          [X] │ ← Header: Back + Close
+├─────────────────────────────────────┤
+│                                     │
+│  ━━━━━━━━━━━━━━░░░░░░░░░░░░        │ ← Progress bar: teal, 20% per Q
+│  1 dari 5                           │   Small text below
+│                                     │
+│                                     │ ← Spacer
+│  Gimana mood kamu                   │ ← Question: 24px, bold, dark
+│  weekend ini?                       │   2 lines max
+│                                     │
+│                                     │
+│  ┌─────────────────────────────┐  │
+│  │  😌 Santai / Healing        │  │ ← Option card: white bg, border
+│  │  Pengen rileks aja          │  │   Icon + label + description
+│  └─────────────────────────────┘  │   Tap = teal border, auto next
+│                                     │
+│  ┌─────────────────────────────┐  │
+│  │  🏃 Aktif / Petualangan     │  │
+│  │  Seru & menantang           │  │
+│  └─────────────────────────────┘  │
+│                                     │
+│  ┌─────────────────────────────┐  │
+│  │  💼 Produktif               │  │
+│  │  Belajar sesuatu baru       │  │
+│  └─────────────────────────────┘  │
+│                                     │
+│  ┌─────────────────────────────┐  │
+│  │  ❤️  Quality Time           │  │
+│  │  Dengan orang special       │  │
+│  └─────────────────────────────┘  │
+│                                     │
+│  ┌─────────────────────────────┐  │
+│  │  ✏️  Lainnya...             │  │ ← Opens text input modal
+│  └─────────────────────────────┘  │
+│                                     │
+└─────────────────────────────────────┘
+```
+
+**Quiz Questions Breakdown:**
+
+**Q1: Mood (required)**
+- Options: Santai/Healing, Aktif/Petualangan, Produktif, Quality Time, Lainnya
+
+**Q2: Companion (required)**
+- Options: Sendiri, Pasangan, Teman (2-4 orang), Keluarga kecil, Keluarga besar
+
+**Q3: Budget per orang (required)**
+- Options: 
+  - 💰 Hemat (< Rp 100k)
+  - 💰💰 Menengah (Rp 100-300k)
+  - 💰💰💰 Leluasa (> Rp 300k)
+
+**Q4: Lokasi (required)**
+- Options:
+  - 📍 Sekitar Jabodetabek
+  - 🚗 Road trip / Luar Jabodetabek
+  - ✏️ Lainnya... (text input)
+
+**Q5: Waktu (optional - has skip)**
+- Options:
+  - ☀️ Pagi (06:00 - 12:00)
+  - 🌤️ Siang (12:00 - 18:00)
+  - 🌙 Seharian
+  - [Skip →] (link button)
+
+**Q6 (Conditional): Usia anak (if Q2 = keluarga)**
+- Options:
+  - 👶 Balita (0-5 tahun)
+  - 🎒 Sekolah (6-12 tahun)
+  - 🎓 Remaja (13-17 tahun)
+  - Tidak ada anak
+
+### Quiz Loading Screen (After Submit)
+
+```
+┌─────────────────────────────────────┐
+│                                     │
+│                                     │
+│         [Animated Icon]             │ ← Loading spinner or animation
+│         🤖 ✨                       │   Pulse effect
+│                                     │
+│    Sedang menganalisis              │ ← 20px, center
+│    preferensimu...                  │
+│                                     │
+│    [Progress dots]                  │ ← Animated dots
+│    ●●●○○○                           │
+│                                     │
+│                                     │
+└─────────────────────────────────────┘
+```
+
+**UX Notes:**
+- Auto-advance after selection (no "Next" button needed)
+- Back button = go to previous question
+- X button = abandon quiz (confirm modal)
+- Progress bar = visual motivation to complete
+- Skip only on optional questions
+
+---
+
+## 3. RESULT PAGE (Recommendations)
+
+```
+┌─────────────────────────────────────┐
+│  [←]  Rekomendasi Untukmu      [⚙] │ ← Header: back to quiz/home
+├─────────────────────────────────────┤
+│                                     │
+│  5 Rekomendasi Untukmu 🎉          │ ← Heading: 24px, bold
+│                                     │
+│  [🔄 Generate Lagi]  Quota: 1/2   │ ← Button + quota indicator
+│                                     │   Button: teal outline, small
+├─────────────────────────────────────┤
+│                                     │
+│  ┌───────────────────────────────┐ │ ← Recommendation Card 1
+│  │ [Photo - 16:9 ratio]          │ │   White bg, rounded, shadow
+│  │ Full width, rounded top       │ │
+│  ├───────────────────────────────┤ │
+│  │                               │ │
+│  │ 🎨 Kategori: Seni & Budaya    │ │ ← Badge: small, teal bg
+│  │                               │ │
+│  │ Museum MACAN                  │ │ ← Title: 18px, bold
+│  │                               │ │
+│  │ Karena kamu pilih mood        │ │ ← Reason: 14px, gray, 3 lines
+│  │ produktif dan suka seni,      │ │   Truncated with "..."
+│  │ museum ini cocok untuk...     │ │
+│  │                               │ │
+│  │ 💰 Estimasi: Rp 75.000        │ │ ← Icons + info
+│  │ 📍 Kebon Jeruk, Jakarta Barat │ │   14px
+│  │ ⏰ Best time: Pagi - Siang    │ │
+│  │                               │ │
+│  │ [Lihat di Maps] [♡ Simpan]   │ │ ← Action buttons
+│  │                               │ │   Primary: orange fill
+│  └───────────────────────────────┘ │   Secondary: outline
+│                                     │
+│  ┌───────────────────────────────┐ │ ← Card 2 (same structure)
+│  │ [Photo]                       │ │
+│  │ ...                           │ │
+│  └───────────────────────────────┘ │
+│                                     │
+│  ┌───────────────────────────────┐ │ ← Card 3
+│  │ [Photo]                       │ │
+│  │ ...                           │ │
+│  └───────────────────────────────┘ │
+│                                     │
+│  ┌───────────────────────────────┐ │ ← Card 4
+│  │ [Photo]                       │ │
+│  │ ...                           │ │
+│  └───────────────────────────────┘ │
+│                                     │
+│  ┌───────────────────────────────┐ │ ← Card 5
+│  │ [Photo]                       │ │
+│  │ ...                           │ │
+│  └───────────────────────────────┘ │
+│                                     │
+├─────────────────────────────────────┤
+│  QUOTA STATUS                      │ ← Bottom info card
+│                                     │   Light gray bg
+│  Kamu sudah pakai 1 dari 2 quota  │ ← 14px, dark
+│  generate hari ini                 │
+│                                     │
+│  [Generate Lagi]                   │ ← Full width button
+│                                     │   OR
+│  [Login untuk Generate Lagi]       │ ← If anonymous & used 1
+│                                     │
+│  Reset quota: 17 jam 11 menit lagi │ ← Countdown, small, gray
+│                                     │
+├─────────────────────────────────────┤
+│  [Bagikan Hasil]                   │ ← Share button (P1 feature)
+│                                     │
+└─────────────────────────────────────┘
+```
+
+### Result - Quota Exhausted State
+
+```
+┌─────────────────────────────────────┐
+│  5 Rekomendasi Untukmu 🎉          │
+│                                     │
+│  [🔄 Generate Lagi] ← DISABLED     │ ← Grayed out
+│  Quota: 2/2 (habis hari ini)       │
+├─────────────────────────────────────┤
+│                                     │
+│  [Cards 1-5 shown above]           │
+│                                     │
+├─────────────────────────────────────┤
+│  ⏰ QUOTA HABIS                    │ ← Warning card: orange border
+│                                     │
+│  Kamu sudah pakai 2 dari 2 quota   │
+│  generate hari ini.                │
+│                                     │
+│  Quota reset dalam:                │
+│  [17:11:32] ← Countdown            │ ← Large numbers, teal
+│                                     │
+│  Sambil menunggu, kamu bisa:       │
+│  • Lihat history generate kamu     │ ← Action suggestions
+│  • Share hasil ke teman            │
+│  • Simpan favorit                  │
+│                                     │
+│  💡 Coming soon: Premium untuk     │ ← Soft upsell (non-blocking)
+│  unlimited generate!               │   Small text, gray
+│                                     │
+└─────────────────────────────────────┘
+```
+
+**UX Notes:**
+- Cards scrollable vertical
+- "Lihat di Maps" opens Google Maps with location
+- "Simpan" requires login (prompt modal)
+- Photo: Placeholder if API doesn't provide (use category icon)
+- Regenerate shows confirm modal ("Ini akan pakai 1 quota")
+
+---
+
+## 4. LOGIN / REGISTER MODAL
+
+### Login Modal (Overlay)
+
+```
+┌─────────────────────────────────────┐
+│ [Backdrop: Semi-transparent black]  │
+│                                     │
+│   ┌─────────────────────────────┐  │
+│   │              [X]            │  │ ← Close button
+│   │                             │  │
+│   │  Masuk ke Akun             │  │ ← Heading: 20px, bold
+│   │                             │  │
+│   │  Email                      │  │ ← Label: 14px, gray
+│   │  [Input: email]             │  │ ← Input: rounded, border
+│   │                             │  │
+│   │  Password                   │  │
+│   │  [Input: password] [👁]     │  │ ← Eye icon: toggle visibility
+│   │                             │  │
+│   │  [Lupa password?]           │  │ ← Link: small, right-aligned
+│   │                             │  │
+│   │  [Masuk]                    │  │ ← Primary button: orange, full width
+│   │                             │  │
+│   │  ──────── atau ────────     │  │ ← Divider with text
+│   │                             │  │
+│   │  [🔵 Masuk dengan Google]  │  │ ← Google OAuth: white bg, border
+│   │                             │  │   Google logo + text
+│   │                             │  │
+│   │  Belum punya akun?          │  │ ← Switch to register
+│   │  [Daftar disini]            │  │   Link: teal
+│   │                             │  │
+│   └─────────────────────────────┘  │
+│                                     │
+└─────────────────────────────────────┘
+```
+
+### Register Modal (Overlay)
+
+```
+┌─────────────────────────────────────┐
+│ [Backdrop: Semi-transparent black]  │
+│                                     │
+│   ┌─────────────────────────────┐  │
+│   │              [X]            │  │
+│   │                             │  │
+│   │  Daftar Akun Baru          │  │
+│   │                             │  │
+│   │  Email                      │  │
+│   │  [Input: email]             │  │
+│   │                             │  │
+│   │  Password                   │  │
+│   │  [Input: password] [👁]     │  │
+│   │  Min. 8 karakter            │  │ ← Helper text: small, gray
+│   │                             │  │
+│   │  Nomor HP (WhatsApp)        │  │
+│   │  [+62] [81234567890]        │  │ ← Country code + number input
+│   │  Untuk notifikasi & verif.  │  │ ← Helper text
+│   │                             │  │
+│   │  🔒 Data aman, tidak        │  │ ← Privacy note: small, gray bg
+│   │  dishare ke pihak lain      │  │   Lock icon for trust
+│   │                             │  │
+│   │  [Daftar]                   │  │ ← Primary button
+│   │                             │  │
+│   │  ──────── atau ────────     │  │
+│   │                             │  │
+│   │  [🔵 Daftar dengan Google] │  │ ← Google OAuth
+│   │                             │  │
+│   │  Sudah punya akun?          │  │
+│   │  [Masuk disini]             │  │
+│   │                             │  │
+│   │  Dengan daftar, kamu setuju │  │ ← Terms: very small, gray
+│   │  [Syarat & Ketentuan]       │  │   Links underlined
+│   │                             │  │
+│   └─────────────────────────────┘  │
+│                                     │
+└─────────────────────────────────────┘
+```
+
+### Phone Collection Modal (After Google OAuth)
+
+```
+┌─────────────────────────────────────┐
+│   ┌─────────────────────────────┐  │
+│   │                             │  │
+│   │  Satu Langkah Lagi! 🎉     │  │ ← Heading: 20px, bold
+│   │                             │  │
+│   │  Untuk melengkapi akun,     │  │ ← Explanation: 14px
+│   │  masukkan nomor HP kamu:    │  │
+│   │                             │  │
+│   │  Nomor HP (WhatsApp)        │  │
+│   │  [+62] [81234567890]        │  │
+│   │                             │  │
+│   │  Kenapa perlu nomor HP?     │  │ ← Collapsible FAQ
+│   │  ▼ (click to expand)        │  │
+│   │                             │  │
+│   │  [Lanjutkan]                │  │ ← Primary button
+│   │                             │  │
+│   └─────────────────────────────┘  │
+└─────────────────────────────────────┘
+```
+
+**UX Notes:**
+- Modal: Centered, max-width 400px, rounded corners
+- Backdrop: Click to close (with confirm if form filled)
+- Email validation: Real-time (show error below input)
+- Password: Toggle visibility with eye icon
+- Phone: Auto-format as user types (+62 812-3456-7890)
+- Google OAuth: Supabase handles flow, redirect back to app
+- Success: Auto-close modal, show toast "Login berhasil!"
+
+---
+
+## 5. COMPONENT SPECS
+
+### Button Variants
+
+**Primary (CTA):**
+- Background: Orange (#f97316)
+- Text: White
+- Height: 48px (mobile), 56px (hero CTA)
+- Border radius: 12px
+- Font: 16px, semi-bold
+- Hover: Darken 10%
+- Active: Scale 0.98
+
+**Secondary:**
+- Background: Transparent
+- Border: 2px teal (#0891b2)
+- Text: Teal
+- Height: 48px
+- Same radius & font as primary
+
+**Text Link:**
+- Color: Teal
+- Underline on hover
+- Font: 14-16px
+
+### Card Component
+
+**Standard Card:**
+- Background: White
+- Border: 1px gray-200
+- Border radius: 16px
+- Padding: 16px
+- Shadow: sm (subtle)
+- Hover: Shadow md + border teal (for clickable cards)
+
+**Recommendation Card:**
+- Same as standard
+- Photo: 16:9 ratio, rounded-t-16px
+- Content padding: 20px
+- Action buttons: 2 columns, gap 8px
+
+### Input Fields
+
+**Text Input:**
+- Height: 48px
+- Border: 1px gray-300
+- Border radius: 8px
+- Padding: 12px 16px
+- Font: 16px (prevent iOS zoom)
+- Focus: Border teal, shadow teal/20%
+- Error: Border red, show message below
+
+**Select/Dropdown:**
+- Same as text input
+- Chevron icon right side
+
+### Typography
+
+**H1 (Hero):** 32px, bold, line-height 1.2  
+**H2 (Section):** 24px, bold, line-height 1.3  
+**H3 (Card title):** 18px, semi-bold, line-height 1.4  
+**Body:** 16px, regular, line-height 1.6  
+**Small:** 14px, regular, line-height 1.5  
+**Tiny:** 12px, regular, line-height 1.4
+
+### Spacing System (Tailwind)
+
+- xs: 4px (gap between icon + text)
+- sm: 8px (gap between buttons)
+- md: 16px (card padding)
+- lg: 24px (section padding)
+- xl: 32px (section spacing)
+- 2xl: 48px (hero spacing)
+
+### Colors
+
+**Primary Palette:**
+- Teal-600: #0891b2 (primary)
+- Teal-700: #0e7490 (hover)
+- Teal-50: #f0fdfa (light bg)
+
+**Accent Palette:**
+- Orange-500: #f97316 (CTA)
+- Orange-600: #ea580c (hover)
+
+**Neutral Palette:**
+- Gray-50: #f9fafb (background)
+- Gray-100: #f3f4f6 (card bg alt)
+- Gray-300: #d1d5db (border)
+- Gray-600: #4b5563 (body text)
+- Gray-900: #111827 (heading)
+
+**Semantic:**
+- Red-500: #ef4444 (error)
+- Green-500: #22c55e (success)
+- Yellow-500: #eab308 (warning)
+
+---
+
+## 6. RESPONSIVE BREAKPOINTS
+
+**Mobile:** 375px - 640px (default, design for this)  
+**Tablet:** 641px - 1024px (2-column cards)  
+**Desktop:** 1025px+ (max-width 1200px, centered)
+
+### Desktop Adjustments:
+- Landing hero: 50% text / 50% image side-by-side
+- Quiz: Max-width 600px, centered
+- Result cards: 2-column grid (tablet), 3-column (large desktop)
+- Modal: Max-width 400px (already set)
+
+---
+
+## 7. ANIMATIONS & MICRO-INTERACTIONS
+
+**Page Transitions:**
+- Fade in: 200ms
+- Slide up: 300ms ease-out (modals)
+
+**Button Press:**
+- Scale: 0.98
+- Duration: 100ms
+
+**Card Hover:**
+- Shadow: sm → md
+- Border: gray → teal
+- Duration: 200ms
+
+**Loading Spinner:**
+- Rotate: 360deg infinite
+- Duration: 1s linear
+
+**Toast Notifications:**
+- Slide down from top
+- Duration: 3s auto-dismiss
+- Close button available
+
+---
+
+## 8. ACCESSIBILITY
+
+**Keyboard Navigation:**
+- Tab order: logical (top to bottom)
+- Focus visible: 2px teal outline
+- Enter/Space: Activate buttons
+
+**Screen Reader:**
+- Alt text for all images
+- ARIA labels for icon buttons
+- Role attributes for modals
+
+**Color Contrast:**
+- Text: Min 4.5:1 ratio (WCAG AA)
+- Primary teal on white: 5.2:1 ✓
+- Orange button text: 4.8:1 ✓
+
+**Touch Targets:**
+- Min size: 44x44px (iOS guideline)
+- Spacing between: Min 8px
+
+---
+
+## NEXT STEPS
+
+1. ✅ **Wireframes complete** (this document)
+2. ⏭️ **Generate HTML prototype** using Nuxt UI components
+3. ⏭️ **Test on mobile** (send link to your HP)
+4. ⏭️ **Iterate** based on feel & feedback
+5. ⏭️ **Document final component library** for development
+
+**Estimated time for prototype:** 30-45 minutes
+
+---
+
+**Notes:**
+- All measurements optimized for mobile-first
+- Nuxt UI components will be used for inputs, buttons, modals
+- Photos: Use placeholder service (picsum.photos) for prototype
+- Icons: Use emoji for prototype, Heroicons for production

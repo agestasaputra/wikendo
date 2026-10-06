@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Direktori Kuliner Grand Indonesia — 40 Tenant | Weekend Planner</title>
+<meta name="description" content="Daftar 40 tenant makanan & minuman Grand Indonesia Thamrin: kopi, ramen, resto keluarga. Filter halal, budget, lantai. Males scroll? Quiz 20 detik cariin yang cocok.">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#0891b2',accent:'#f97316'}}}}</script>
+<style>body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}</style>
+</head>
+<body class="bg-gray-50">
+<header class="bg-white sticky top-0 z-40 shadow-sm">
+<div class="container mx-auto px-4 py-3 flex justify-between items-center max-w-4xl">
+<a href="index.html" class="font-bold">🗓️ Weekend Planner</a>
+<div class="flex gap-3 text-sm font-semibold">
+<a href="makan.html?mall=grand-indonesia" class="text-accent">🍜 Makan</a>
+<a href="index.html" class="text-gray-600">Home</a>
+</div></div>
+</header>
+<div class="container mx-auto px-4 py-6 max-w-4xl">
+<nav class="text-xs text-gray-500 mb-2">Home / Mall / Grand Indonesia</nav>
+<h1 class="text-2xl md:text-3xl font-bold">🏬 Direktori Kuliner Grand Indonesia</h1>
+<p class="text-gray-600 text-sm mt-1">40 tenant curated • Thamrin, Jakpus • <a class="text-primary underline" target="_blank" href="https://www.google.com/maps/search/Grand+Indonesia+Jakarta">📍 Maps Mall</a></p>
+<div class="bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-2xl p-5 mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+<div><div class="font-bold text-lg">Males scroll 40 tenant?</div><div class="text-white/90 text-sm">Quiz 20 detik → 5 tenant yang cocok buat misi + budget lu.</div></div>
+<a href="makan.html?mall=grand-indonesia" class="bg-white text-gray-900 font-bold px-5 py-3 rounded-xl text-sm whitespace-nowrap">🍜 Cariin yang cocok →</a>
+</div>
+<div class="bg-white rounded-2xl border p-4 mt-4 space-y-3">
+<input id="q" oninput="render()" placeholder="🔍 Cari tenant... mis. kopi, ramen, sushi" class="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:border-accent">
+<div class="flex flex-wrap gap-2 text-xs">
+<button onclick="setF('halal',null)" id="f-halal-all" class="px-3 py-1.5 rounded-full border">Semua</button>
+<button onclick="setF('halal',true)" id="f-halal-true" class="px-3 py-1.5 rounded-full border">✅ Halal</button>
+<button onclick="setB('hemat')" id="f-b-hemat" class="px-3 py-1.5 rounded-full border">💰 Hemat</button>
+<button onclick="setB('menengah')" id="f-b-menengah" class="px-3 py-1.5 rounded-full border">💰💰 Menengah</button>
+<button onclick="setB('leluasa')" id="f-b-leluasa" class="px-3 py-1.5 rounded-full border">💰💰💰 Leluasa</button>
+<button onclick="setF('kids',true)" id="f-kids-true" class="px-3 py-1.5 rounded-full border">👨‍👩‍👧 Kids</button>
+<button onclick="setF('hype',true)" id="f-hype-true" class="px-3 py-1.5 rounded-full border">🔥 Hype</button>
+<button onclick="resetF()" class="px-3 py-1.5 rounded-full border text-gray-400">Reset</button>
+</div>
+<p id="count" class="text-xs text-gray-500"></p>
+</div>
+<div id="list" class="grid sm:grid-cols-2 gap-3 mt-4"></div>
+<p class="text-xs text-gray-400 mt-6 text-center">Data curated V1 • freshness &gt; completeness • ketemu info salah? <button onclick="toast('Makasih! Tim review laporan lu 🙏')" class="underline">Lapor tutup/buka</button> • Tanpa login • Tanpa quota • Tanpa LLM</p>
+</div>
+<div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-sm px-4 py-2 rounded-full hidden z-50"></div>
+<script>
+const TENANTS = [{"mall_slug": "grand-indonesia", "name": "HokBen", "cat": "japanese", "lantai": "3A", "halal": true, "budget": "hemat", "price": "Rp 30-80rb", "kids": true, "mission": ["makan_cepat", "keluarga"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "Marugame Udon", "cat": "japanese", "lantai": "3A", "halal": true, "budget": "hemat", "price": "Rp 30-70rb", "kids": true, "mission": ["makan_cepat"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "Sushi Tei", "cat": "japanese", "lantai": "3A", "halal": true, "budget": "menengah", "price": "Rp 100-200rb", "kids": true, "mission": ["keluarga"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "Genki Sushi", "cat": "japanese", "lantai": "LG", "halal": true, "budget": "menengah", "price": "Rp 80-150rb", "kids": true, "mission": ["makan_cepat"], "hype": true}, {"mall_slug": "grand-indonesia", "name": "IPPUDO", "cat": "japanese", "lantai": "3A", "halal": false, "budget": "menengah", "price": "Rp 80-150rb", "kids": false, "mission": ["nongkrong_lama"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "Coco Ichibanya", "cat": "japanese", "lantai": "3A", "halal": true, "budget": "menengah", "price": "Rp 60-120rb", "kids": true, "mission": ["makan_cepat"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "Shaburi & Kintan Buffet", "cat": "japanese", "lantai": "5", "halal": true, "budget": "leluasa", "price": "Rp 200-350rb", "kids": true, "mission": ["keluarga"], "hype": true}, {"mall_slug": "grand-indonesia", "name": "Haidilao", "cat": "chinese", "lantai": "3A", "halal": true, "budget": "leluasa", "price": "Rp 200-350rb", "kids": true, "mission": ["keluarga", "healing"], "hype": true}, {"mall_slug": "grand-indonesia", "name": "Din Tai Fung", "cat": "chinese", "lantai": "3A", "halal": true, "budget": "leluasa", "price": "Rp 150-300rb", "kids": true, "mission": ["keluarga"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "Ta Wan", "cat": "chinese", "lantai": "3A", "halal": true, "budget": "menengah", "price": "Rp 60-120rb", "kids": true, "mission": ["keluarga"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "Bakmi GM", "cat": "indonesia", "lantai": "3A", "halal": true, "budget": "hemat", "price": "Rp 30-70rb", "kids": true, "mission": ["makan_cepat", "keluarga"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "Sate Khas Senayan", "cat": "indonesia", "lantai": "3A", "halal": true, "budget": "menengah", "price": "Rp 60-150rb", "kids": true, "mission": ["keluarga"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "Dapur Solo", "cat": "indonesia", "lantai": "LG", "halal": true, "budget": "hemat", "price": "Rp 30-80rb", "kids": true, "mission": ["keluarga"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "Solaria", "cat": "indonesia", "lantai": "LG", "halal": true, "budget": "hemat", "price": "Rp 30-70rb", "kids": true, "mission": ["keluarga"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "Abuba Steak", "cat": "western", "lantai": "3A", "halal": true, "budget": "menengah", "price": "Rp 80-150rb", "kids": true, "mission": ["keluarga"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "Holycow Steak", "cat": "western", "lantai": "LG", "halal": true, "budget": "menengah", "price": "Rp 80-180rb", "kids": false, "mission": ["nongkrong_lama"], "hype": true}, {"mall_slug": "grand-indonesia", "name": "AW Kitchen", "cat": "western", "lantai": "1", "halal": true, "budget": "leluasa", "price": "Rp 150-300rb", "kids": false, "mission": ["healing"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "Paul Bakery", "cat": "bakery", "lantai": "1", "halal": false, "budget": "leluasa", "price": "Rp 100-250rb", "kids": false, "mission": ["nongkrong_lama", "healing"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "Union", "cat": "western", "lantai": "1", "halal": true, "budget": "leluasa", "price": "Rp 150-300rb", "kids": false, "mission": ["nongkrong_lama"], "hype": true}, {"mall_slug": "grand-indonesia", "name": "Burgreens", "cat": "healthy", "lantai": "LG", "halal": true, "budget": "menengah", "price": "Rp 60-120rb", "kids": false, "mission": ["healing"], "hype": true}, {"mall_slug": "grand-indonesia", "name": "Starbucks Reserve", "cat": "kopi", "lantai": "1", "halal": true, "budget": "menengah", "price": "Rp 50-100rb", "kids": false, "mission": ["nongkrong_lama"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "% Arabica", "cat": "kopi", "lantai": "LG", "halal": true, "budget": "menengah", "price": "Rp 50-90rb", "kids": false, "mission": ["nongkrong_lama"], "hype": true}, {"mall_slug": "grand-indonesia", "name": "Fore Coffee", "cat": "kopi", "lantai": "LG", "halal": true, "budget": "hemat", "price": "Rp 25-50rb", "kids": false, "mission": ["nongkrong_lama"], "hype": true}, {"mall_slug": "grand-indonesia", "name": "Kopi Kenangan", "cat": "kopi", "lantai": "LG", "halal": true, "budget": "hemat", "price": "Rp 20-45rb", "kids": false, "mission": ["nongkrong_lama"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "J.CO Donuts", "cat": "dessert", "lantai": "LG", "halal": true, "budget": "hemat", "price": "Rp 30-80rb", "kids": true, "mission": ["keluarga"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "BreadTalk", "cat": "bakery", "lantai": "LG", "halal": true, "budget": "hemat", "price": "Rp 20-60rb", "kids": true, "mission": ["makan_cepat"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "The Harvest", "cat": "dessert", "lantai": "LG", "halal": true, "budget": "menengah", "price": "Rp 50-150rb", "kids": true, "mission": ["keluarga"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "Xing Fu Tang", "cat": "minuman", "lantai": "LG", "halal": true, "budget": "hemat", "price": "Rp 25-50rb", "kids": false, "mission": ["nongkrong_lama"], "hype": true}, {"mall_slug": "grand-indonesia", "name": "Chatime", "cat": "minuman", "lantai": "LG", "halal": true, "budget": "hemat", "price": "Rp 25-45rb", "kids": false, "mission": ["makan_cepat"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "Koi The", "cat": "minuman", "lantai": "LG", "halal": true, "budget": "hemat", "price": "Rp 25-50rb", "kids": false, "mission": ["makan_cepat"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "Yoshinoya", "cat": "fastfood", "lantai": "LG", "halal": true, "budget": "hemat", "price": "Rp 30-70rb", "kids": true, "mission": ["makan_cepat"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "KFC", "cat": "fastfood", "lantai": "LG", "halal": true, "budget": "hemat", "price": "Rp 30-70rb", "kids": true, "mission": ["keluarga"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "McDonald's", "cat": "fastfood", "lantai": "LG", "halal": true, "budget": "hemat", "price": "Rp 30-70rb", "kids": true, "mission": ["keluarga"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "Gion Sushi", "cat": "japanese", "lantai": "Foodprint", "halal": true, "budget": "hemat", "price": "Rp 30-80rb", "kids": true, "mission": ["makan_cepat"], "hype": true}, {"mall_slug": "grand-indonesia", "name": "Cafe Kissa", "cat": "kopi", "lantai": "G", "halal": true, "budget": "menengah", "price": "Rp 50-100rb", "kids": false, "mission": ["nongkrong_lama", "healing"], "hype": true}, {"mall_slug": "grand-indonesia", "name": "Ramen SeiRock-Ya", "cat": "japanese", "lantai": "3A", "halal": false, "budget": "menengah", "price": "Rp 70-130rb", "kids": false, "mission": ["makan_cepat"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "Sushi Go!", "cat": "japanese", "lantai": "LG", "halal": true, "budget": "hemat", "price": "Rp 30-80rb", "kids": true, "mission": ["makan_cepat"], "hype": true}, {"mall_slug": "grand-indonesia", "name": "D'Crepes", "cat": "dessert", "lantai": "LG", "halal": true, "budget": "hemat", "price": "Rp 25-50rb", "kids": true, "mission": ["makan_cepat"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "Roti'O", "cat": "bakery", "lantai": "LG", "halal": true, "budget": "hemat", "price": "Rp 15-30rb", "kids": false, "mission": ["makan_cepat"], "hype": false}, {"mall_slug": "grand-indonesia", "name": "A&W", "cat": "fastfood", "lantai": "LG", "halal": true, "budget": "hemat", "price": "Rp 30-80rb", "kids": true, "mission": ["keluarga"], "hype": false}];
+let F = { halal:null, budget:null, kids:false, hype:false };
+function setF(k,v){ F[k]= (F[k]===v?null:v); if(k==='kids')F.kids=!F.kids; if(k==='hype')F.hype=!F.hype; if(k==='halal'&&v===null){F.halal=null;} paint(); render(); }
+function setB(b){ F.budget=(F.budget===b?null:b); paint(); render(); }
+function resetF(){ F={halal:null,budget:null,kids:false,hype:false}; document.getElementById('q').value=''; paint(); render(); }
+function paint(){
+  const on='bg-gray-900 text-white border-gray-900', off='bg-white text-gray-700 border-gray-200';
+  const set=(id,active)=>{document.getElementById(id).className='px-3 py-1.5 rounded-full border '+(active?on:off);};
+  set('f-halal-all',F.halal===null&&!F.budget&&!F.kids&&!F.hype);
+  set('f-halal-true',F.halal===true);
+  set('f-b-hemat',F.budget==='hemat'); set('f-b-menengah',F.budget==='menengah'); set('f-b-leluasa',F.budget==='leluasa');
+  set('f-kids-true',F.kids); set('f-hype-true',F.hype);
+}
+function render(){
+  const kw=(document.getElementById('q').value||'').toLowerCase();
+  let pool=TENANTS.filter(t=>{
+    if(F.halal && !t.halal) return false;
+    if(F.budget && t.budget!==F.budget) return false;
+    if(F.kids && !t.kids) return false;
+    if(F.hype && !t.hype) return false;
+    if(kw && !(t.name.toLowerCase().includes(kw)||t.cat.toLowerCase().includes(kw))) return false;
+    return true;
+  });
+  document.getElementById('count').textContent=`Menampilkan ${pool.length} dari ${TENANTS.length} tenant • tanpa login/quota/LLM`;
+  document.getElementById('list').innerHTML=pool.map(t=>{
+    const maps='https://www.google.com/maps/search/'+encodeURIComponent(t.name+' Grand Indonesia');
+    return `<div class="bg-white rounded-2xl border p-4">
+      <div class="flex justify-between items-start mb-1">
+        <h3 class="font-bold">${t.name}</h3>
+        ${t.hype?'<span class="bg-pink-100 text-pink-700 text-[11px] px-2 py-0.5 rounded-full">🔥 Hype</span>':''}
+      </div>
+      <p class="text-xs text-gray-500 mb-2">[${t.cat} • GI Lt.${t.lantai}] • 💰 ${t.price} ${t.halal?'• ✅ Halal':'• ⚠️ Non-halal'} ${t.kids?'• 👨‍👩‍👧':''}</p>
+      <p class="text-xs text-gray-500 mb-3">Cocok: ${t.mission.join(', ').replaceAll('_',' ')}</p>
+      <div class="flex gap-2">
+        <a href="${maps}" target="_blank" class="flex-1 text-center bg-gray-900 text-white text-xs font-semibold py-2 rounded-lg">📍 Maps</a>
+        <a href="makan.html?mall=grand-indonesia" class="flex-1 text-center border border-accent text-accent text-xs font-semibold py-2 rounded-lg">🍜 Quiz cocok</a>
+      </div></div>`;
+  }).join('') || '<p class="text-sm text-gray-500 col-span-2 text-center py-8">Nggak ketemu — coba reset filter / kata kunci lain.</p>';
+}
+function toast(m){ const t=document.getElementById('toast'); t.textContent=m; t.classList.remove('hidden'); setTimeout(()=>t.classList.add('hidden'),2600); }
+paint(); render();
+</script>
+</body>
+</html>

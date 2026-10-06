@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cari Makan di Mall - Weekend Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { primary: '#0891b2', accent: '#f97316' } } } }
+    </script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        .option-card { transition: all 0.2s; }
+        .option-card:active { transform: scale(0.98); }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <header class="bg-white sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <button onclick="goBack()" class="text-gray-600 hover:text-gray-900">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+            <span class="font-bold text-gray-900">🍜 Cari Makan di Mall</span>
+            <a href="index.html" class="text-gray-400 hover:text-gray-600 text-sm">Batal</a>
+        </div>
+    </header>
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-3">
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div id="progressBar" class="bg-accent h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+            <p id="progressText" class="text-sm text-gray-600 mt-2">Pertanyaan 1 dari 4 • ~20 detik</p>
+        </div>
+    </div>
+    <div class="container mx-auto px-4 py-8 max-w-2xl">
+        <div id="quizContent" class="space-y-6"></div>
+    </div>
+    <div id="loadingModal" class="fixed inset-0 bg-white hidden items-center justify-center z-50">
+        <div class="text-center px-6">
+            <div class="text-6xl mb-6 animate-pulse">🍜✨</div>
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">Lagi cariin tenant yang cocok...</h2>
+            <p class="text-gray-500 text-sm" id="loadingSub">Filter 40 tenant Grand Indonesia...</p>
+            <div class="flex justify-center gap-2 mt-4">
+                <div class="w-3 h-3 bg-accent rounded-full animate-bounce" style="animation-delay: 0ms"></div>
+                <div class="w-3 h-3 bg-accent rounded-full animate-bounce" style="animation-delay: 150ms"></div>
+                <div class="w-3 h-3 bg-accent rounded-full animate-bounce" style="animation-delay: 300ms"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const MALLS = [
+            { slug: 'grand-indonesia', name: 'Grand Indonesia', area: 'Thamrin, Jakpus', icon: '🏬' },
+            { slug: 'central-park', name: 'Central Park', area: 'Grogol, Jakbar', icon: '🏬' },
+            { slug: 'kota-kasablanka', name: 'Kota Kasablanka', area: 'Tebet, Jaksel', icon: '🏬' },
+            { slug: 'pondok-indah-mall', name: 'Pondok Indah Mall', area: 'PIM, Jaksel', icon: '🏬' },
+            { slug: 'aeon-bsd', name: 'Aeon BSD', area: 'BSD, Tangerang', icon: '🏬' }
+        ];
+        const quizData = [
+            { id: 'mall_slug', question: 'Mau makan di mall mana?', options: MALLS.map(m => ({ icon: m.icon, label: m.name, desc: m.area, value: m.slug })), required: true },
+            { id: 'mission', question: 'Misi makan kali ini?', options: [
+                { icon: '⚡', label: 'Makan Cepat', desc: 'Laper, langsung makan', value: 'makan_cepat' },
+                { icon: '☕', label: 'Nongkrong Lama', desc: 'Ngobrol, kerja, kopi', value: 'nongkrong_lama' },
+                { icon: '👨‍👩‍👧', label: 'Keluarga', desc: 'Ajak anak / rame', value: 'keluarga' },
+                { icon: '🧘', label: 'Healing', desc: 'Me time, santai', value: 'healing' }
+            ], required: true },
+            { id: 'budget_tier', question: 'Budget per orang?', options: [
+                { icon: '💰', label: 'Hemat', desc: '< Rp 50.000', value: 'hemat' },
+                { icon: '💰💰', label: 'Menengah', desc: 'Rp 50-150rb', value: 'menengah' },
+                { icon: '💰💰💰', label: 'Leluasa', desc: '> Rp 150.000', value: 'leluasa' }
+            ], required: true },
+            { id: 'companion', question: 'Rombongan + pantangan?', options: [
+                { icon: '🧘', label: 'Sendiri', desc: 'Me time', value: 'sendiri' },
+                { icon: '💑', label: 'Berdua', desc: 'Pasangan / teman', value: 'berdua' },
+                { icon: '👥', label: 'Rame-rame', desc: '3+ orang', value: 'rame' }
+            ], required: true, toggles: true }
+        ];
+        let currentQuestion = 0, answers = { halal_only: false, kids_friendly: false };
+        const qs = new URLSearchParams(window.location.search);
+        if (qs.get('mall')) answers['mall_slug'] = qs.get('mall');
+        if (answers['mall_slug']) currentQuestion = 1;
+        function renderQuestion() {
+            const q = quizData[currentQuestion];
+            const progress = ((currentQuestion + 1) / quizData.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `Pertanyaan ${currentQuestion + 1} dari ${quizData.length} • ~20 detik`;
+            let togglesHtml = '';
+            if (q.toggles) {
+                togglesHtml = `<div class="flex gap-3 mt-4">
+                    <button onclick="togglePref('halal_only')" id="tglHalal" class="flex-1 border-2 ${answers.halal_only ? 'border-green-600 bg-green-50' : 'border-gray-200'} rounded-xl py-3 font-semibold text-sm">✅ Halal only: ${answers.halal_only ? 'ON' : 'OFF'}</button>
+                    <button onclick="togglePref('kids_friendly')" id="tglKids" class="flex-1 border-2 ${answers.kids_friendly ? 'border-primary bg-cyan-50' : 'border-gray-200'} rounded-xl py-3 font-semibold text-sm">👨‍👩‍👧 Kids: ${answers.kids_friendly ? 'ON' : 'OFF'}</button>
+                </div><p class="text-xs text-gray-500 mt-2">Toggle opsional — bisa langsung pilih rombongan.</p>`;
+            }
+            document.getElementById('quizContent').innerHTML = `<div>
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">${q.question}</h2>
+                <div class="space-y-3">${q.options.map(o => `
+                    <button onclick="selectOption('${o.value}')" class="option-card w-full bg-white border-2 ${answers[q.id] === o.value ? 'border-accent bg-orange-50' : 'border-gray-200'} rounded-xl p-4 text-left hover:border-accent">
+                        <div class="flex items-center gap-4"><span class="text-3xl">${o.icon}</span>
+                        <div class="flex-1"><div class="font-semibold text-gray-900">${o.label}</div><div class="text-sm text-gray-600">${o.desc}</div></div></div>
+                    </button>`).join('')}</div>${togglesHtml}
+                ${currentQuestion > 0 ? `<button onclick="goBackQ()" class="mt-4 text-gray-500 text-sm">← Kembali</button>` : ''}</div>`;
+        }
+        function togglePref(k) { answers[k] = !answers[k]; renderQuestion(); }
+        function selectOption(v) { answers[quizData[currentQuestion].id] = v; nextQuestion(); }
+        function goBackQ() { if (currentQuestion > 0) { currentQuestion--; renderQuestion(); } }
+        function goBack() { if (currentQuestion > 0) { currentQuestion--; renderQuestion(); } else window.location.href = 'index.html'; }
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < quizData.length) renderQuestion();
+            else { showLoading(); setTimeout(() => { window.location.href = 'result-makan.html?' + new URLSearchParams(answers).toString(); }, 1500); }
+        }
+        function showLoading() {
+            const m = document.getElementById('loadingModal'); m.classList.remove('hidden'); m.classList.add('flex');
+            const mallName = (MALLS.find(m => m.slug === answers['mall_slug']) || {}).name || '';
+            document.getElementById('loadingSub').textContent = `Filter tenant ${mallName} halal • ${answers['budget_tier']} • ${answers['mission']}...`;
+        }
+        renderQuestion();
+    </script>
+</body>
+</html>

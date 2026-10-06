@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rekomendasi - Weekend Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0891b2',
+                        accent: '#f97316',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        .recommendation-card {
+            transition: all 0.2s;
+        }
+        .recommendation-card:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <button onclick="window.location.href='quiz.html'" class="text-gray-600 hover:text-gray-900">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </button>
+            <span class="font-bold text-gray-900">Rekomendasi Untukmu</span>
+            <button class="text-gray-400">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Title & Regenerate -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-6 max-w-4xl">
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                5 Rekomendasi Untukmu 🎉
+            </h1>
+            <div class="flex items-center justify-between">
+                <button onclick="regenerate()" class="flex items-center gap-2 px-4 py-2 border-2 border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition font-semibold">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                    </svg>
+                    Generate Lagi
+                </button>
+                <div class="text-sm">
+                    <span class="text-gray-600">Quota:</span>
+                    <span id="quotaStatus" class="font-bold text-primary">1/2</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recommendations -->
+    <div class="container mx-auto px-4 py-6 max-w-4xl space-y-4">
+        <!-- Card 1 -->
+        <div class="recommendation-card bg-white rounded-2xl shadow-md overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=800&h=450&fit=crop" alt="Museum MACAN" class="w-full h-48 object-cover">
+            <div class="p-5">
+                <div class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full mb-3">
+                    🎨 Seni & Budaya
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Museum MACAN</h3>
+                <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                    Karena kamu pilih mood produktif dan suka belajar sesuatu baru, museum seni kontemporer ini cocok untuk eksplorasi karya seni modern Indonesia dan internasional.
+                </p>
+                <div class="space-y-2 mb-4">
+                    <div class="flex items-center gap-2 text-sm text-gray-700">
+                        <span>💰</span>
+                        <span>Estimasi: <strong>Rp 75.000 - 100.000</strong></span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-700">
+                        <span>📍</span>
+                        <span>Kebon Jeruk, Jakarta Barat</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-700">
+                        <span>⏰</span>
+                        <span>Best time: Pagi - Siang (10:00 - 15:00)</span>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="openMaps('Museum MACAN Jakarta')" class="flex-1 bg-accent hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition">
+                        Lihat di Maps
+                    </button>
+                    <button onclick="toggleFavorite(1)" class="px-4 py-3 border-2 border-gray-300 hover:border-accent hover:text-accent rounded-lg transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="recommendation-card bg-white rounded-2xl shadow-md overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1481671703460-040cb8a2d909?w=800&h=450&fit=crop" alt="Perpustakaan Jakarta" class="w-full h-48 object-cover">
+            <div class="p-5">
+                <div class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full mb-3">
+                    📚 Edukasi
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Perpustakaan Jakarta (Cikini)</h3>
+                <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                    Tempat nyaman untuk belajar atau baca buku dengan suasana tenang. Cocok untuk mood produktif dan budget hemat. Ada cafe di dalamnya untuk break time.
+                </p>
+                <div class="space-y-2 mb-4">
+                    <div class="flex items-center gap-2 text-sm text-gray-700">
+                        <span>💰</span>
+                        <span>Estimasi: <strong>Gratis - Rp 50.000</strong></span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-700">
+                        <span>📍</span>
+                        <span>Cikini, Jakarta Pusat</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-700">
+                        <span>⏰</span>
+                        <span>Best time: Pagi - Sore (09:00 - 17:00)</span>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="openMaps('Perpustakaan Jakarta Cikini')" class="flex-1 bg-accent hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition">
+                        Lihat di Maps
+                    </button>
+                    <button onclick="toggleFavorite(2)" class="px-4 py-3 border-2 border-gray-300 hover:border-accent hover:text-accent rounded-lg transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="recommendation-card bg-white rounded-2xl shadow-md overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&h=450&fit=crop" alt="Cooking Class" class="w-full h-48 object-cover">
+            <div class="p-5">
+                <div class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full mb-3">
+                    🍳 Kuliner & Workshop
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Cooking Class di Dapur Cokelat</h3>
+                <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                    Belajar masak sambil produktif! Workshop ini cocok untuk yang pengen belajar skill baru dengan cara fun. Hasilnya bisa dibawa pulang.
+                </p>
+                <div class="space-y-2 mb-4">
+                    <div class="flex items-center gap-2 text-sm text-gray-700">
+                        <span>💰</span>
+                        <span>Estimasi: <strong>Rp 150.000 - 250.000</strong></span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-700">
+                        <span>📍</span>
+                        <span>Kemang, Jakarta Selatan</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-700">
+                        <span>⏰</span>
+                        <span>Best time: Pagi (09:00 - 12:00)</span>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="openMaps('Dapur Cokelat Kemang')" class="flex-1 bg-accent hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition">
+                        Lihat di Maps
+                    </button>
+                    <button onclick="toggleFavorite(3)" class="px-4 py-3 border-2 border-gray-300 hover:border-accent hover:text-accent rounded-lg transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="recommendation-card bg-white rounded-2xl shadow-md overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?w=800&h=450&fit=crop" alt="Taman Suropati" class="w-full h-48 object-cover">
+            <div class="p-5">
+                <div class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full mb-3">
+                    🌳 Alam & Outdoor
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Taman Suropati + Cafe Hopping</h3>
+                <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                    Taman hijau di tengah kota dengan banyak cafe sekitarnya. Bisa jogging pagi, duduk santai baca buku, atau nyoba berbagai cafe di Menteng area.
+                </p>
+                <div class="space-y-2 mb-4">
+                    <div class="flex items-center gap-2 text-sm text-gray-700">
+                        <span>💰</span>
+                        <span>Estimasi: <strong>Gratis - Rp 100.000</strong></span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-700">
+                        <span>📍</span>
+                        <span>Menteng, Jakarta Pusat</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-700">
+                        <span>⏰</span>
+                        <span>Best time: Pagi (06:00 - 10:00)</span>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="openMaps('Taman Suropati Jakarta')" class="flex-1 bg-accent hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition">
+                        Lihat di Maps
+                    </button>
+                    <button onclick="toggleFavorite(4)" class="px-4 py-3 border-2 border-gray-300 hover:border-accent hover:text-accent rounded-lg transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="recommendation-card bg-white rounded-2xl shadow-md overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&h=450&fit=crop" alt="Coworking Space" class="w-full h-48 object-cover">
+            <div class="p-5">
+                <div class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full mb-3">
+                    💼 Produktif
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Coworking Space (GoWork / WeWork)</h3>
+                <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                    Tempat nyaman untuk belajar atau kerja project pribadi dengan fasilitas lengkap. Bisa networking juga dengan komunitas kreatif.
+                </p>
+                <div class="space-y-2 mb-4">
+                    <div class="flex items-center gap-2 text-sm text-gray-700">
+                        <span>💰</span>
+                        <span>Estimasi: <strong>Rp 50.000 - 150.000</strong></span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-700">
+                        <span>📍</span>
+                        <span>Berbagai lokasi Jabodetabek</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-700">
+                        <span>⏰</span>
+                        <span>Best time: Pagi - Sore (08:00 - 17:00)</span>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="openMaps('GoWork Jakarta')" class="flex-1 bg-accent hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition">
+                        Lihat di Maps
+                    </button>
+                    <button onclick="toggleFavorite(5)" class="px-4 py-3 border-2 border-gray-300 hover:border-accent hover:text-accent rounded-lg transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quota Status Card -->
+    <div class="container mx-auto px-4 py-6 max-w-4xl">
+        <div id="quotaCard" class="bg-white border-2 border-gray-200 rounded-2xl p-6">
+            <h3 class="font-bold text-gray-900 mb-2">Quota Harian</h3>
+            <p class="text-gray-700 mb-4">
+                Kamu sudah pakai <strong>1 dari 2</strong> quota generate hari ini
+            </p>
+            <button onclick="regenerate()" class="w-full bg-primary hover:bg-cyan-700 text-white font-semibold py-3 rounded-lg transition mb-3">
+                Generate Lagi (1 quota tersisa)
+            </button>
+            <p class="text-sm text-gray-500 text-center">
+                Reset quota: <span id="countdown" class="font-semibold">17 jam 11 menit</span> lagi
+            </p>
+        </div>
+    </div>
+
+    <!-- Share Button -->
+    <div class="container mx-auto px-4 pb-8 max-w-4xl">
+        <button onclick="share()" class="w-full border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold py-3 rounded-lg transition">
+            📤 Bagikan Hasil
+        </button>
+    </div>
+
+    <script>
+        function openMaps(query) {
+            const encodedQuery = encodeURIComponent(query);
+            window.open(`https://www.google.com/maps/search/?api=1&query=${encodedQuery}`, '_blank');
+        }
+
+        function toggleFavorite(id) {
+            alert('Login diperlukan untuk menyimpan favorit!\n\nDaftar sekarang untuk:\n✓ Simpan rekomendasi favorit\n✓ Lihat history\n✓ 2x quota generate per hari');
+        }
+
+        function regenerate() {
+            if (confirm('Generate ulang akan menggunakan 1 quota. Lanjutkan?')) {
+                window.location.href = 'quiz.html';
+            }
+        }
+
+        function share() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Rekomendasi Weekend - Weekend Planner',
+                    text: 'Cek rekomendasi tempat weekend aku dari Weekend Planner!',
+                    url: window.location.href
+                });
+            } else {
+                alert('Link berhasil dicopy!\n\n' + window.location.href);
+            }
+        }
+
+        // Countdown timer simulation
+        function updateCountdown() {
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            
+            const diff = tomorrow - now;
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            
+            document.getElementById('countdown').textContent = `${hours} jam ${minutes} menit`;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 60000);
+    </script>
+</body>
+</html>
