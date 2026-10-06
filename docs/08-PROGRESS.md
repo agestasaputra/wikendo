@@ -44,6 +44,19 @@
 
 ## 🧾 LOG (newest first)
 
+## 2026-10-06 malam — Riset 38 nama EN Tier S/A/B (domain + store + bisnis)
+- **Scope:** Tier S 8 + Tier A 14 + Tier B 16 = 38 nama. Cek: .id RDAP PANDI, .com RDAP Verisign+DNS+landing title, App Store ID iTunes API, Play Store scraping + pkg-match, web search finalis bersih.
+- **.id AVAILABLE (24):** pickly, scouty, treatly, sunyay, res momentseto, sparky, nomly, slurpo, feasto, bruncho, brewo, outgo, dally, amblo, strolly, detouro, joyrio, waygo, gemly, alleyo, hearty, savy, mainly, hoodly. TAKEN (14): hoppin, hideout, hangry, cuppa, mello, toasty, fizzy, bubbly, zesty, sippo, mappin, porto, pitstop, metime.
+- **.com HANYA 1 AVAILABLE:** res momentseto. Sisanya TAKEN (beberapa mati/parkir: pickly, sunyay, treatly, sparky, dally, mainly, hoodly, bruncho = registered tapi no-site, bisa ditawar; joyrio/detouro/alleyo/hearty = parking 114B; brewo = perusahaan lem Polandia aktif; scouty = scouty.com aktif; outgo = DAT Outgo; waygo = Waygo translator; savy = savy.com aktif; slurpo = dijual BrandBucket premium).
+- **App Store 0 hasil (7, paling bersih):** sunyay, res momentseto, bruncho, brewo, amblo, joyrio, alleyo. Near-clean: slurpo, sippo, detouro. Danger exact lokal: hangry (HANGRY! PT Modular Kuliner Indonesia), porto (Porto HRIS PT Porto Indonesia), feasto (Feasto POS F&B), hoodly (Hoodly foodtech), strolly (Strolly Baby-Friendly Places travel).
+- **Play Store 0 hasil (1):** joyrio (TOTAL 0 app). Bersih pkgmatch kosong: sunyay, slurpo, bruncho, brewo, amblo, detouro, alleyo, treatly, mainly, res momentseto, hoppin (no exact pkg).
+- **Verdict bersih total (6):** joyrio (terbersih: .id free + Play 0 + iOS 0 + web no-brand; .com parked), sunyay (.id free + iOS 0 + Play bersih; .com registered-mati), amblo (.id free + iOS 0 + Play bersih; .com fwd bitoil), detouro (.id free + Play bersih; .com parked), alleyo (.id free + iOS 0 + Play bersih; .com parked), res momentseto (SATU-SATUNYA double .id+.com AVAILABLE + iOS 0 + Play bersih).
+- **Gugur keras:** hangry, porto, feasto, hoodly (tabrakan lokal/F&B), waygo, outgo, scouty, savy, brewo (bisnis global aktif), mello/fizzy/zesty/bubbly/nomly/sparky/mappin/metime/pitstop (crowded exact dua store).
+- **DJKI:** tetap manual PDKI kelas 9/35/42 (server tidak bisa JS).
+- **Rekomendasi:** Res momentseto (aset double domain) vs Joyrio (terbersih non-res momentseto) vs Sunyay (ceria, brandable). Detail + ranking di chat.
+- **File diubah:** `docs/08-PROGRESS.md`.
+- **Next:** Agesta pilih 1-2 finalis → cek DJKI manual → amankan .id.
+
 ## 2026-10-06 malam — 7 kandidat Inggris + verifikasi (domain + store + web)
 - **Kandidat:** Wikendo / Planit / Outly / Whereto / Spotly / Dayoff / Roamly.
 - **✅ BERSIH (1):** Wikendo (.id AVAILABLE + App Store 0 + Play 0 hasil + web no brand; .com taken tapi cuma parkir Hostinger, bisa ditawar).
