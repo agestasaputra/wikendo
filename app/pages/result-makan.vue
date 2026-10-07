@@ -39,10 +39,10 @@
           <p class="text-[11.5px] text-gray-500 mt-2 text-center"><u>Lapor tutup/buka</u> • <u>Share ke temen</u> • Quota makan {{ quotaLabel }} tersisa</p>
         </div>
       </div>
-      <div class="flex gap-2 mt-3">
-        <div v-for="(r, i) in minis" :key="i" class="flex-1 bg-white border border-gray-200 rounded-[14px] p-2.5 text-center text-xs font-bold text-gray-600">{{ r }}</div>
-        <div class="flex-1 rounded-[14px] p-2.5 text-center text-xs font-extrabold text-white cursor-pointer" style="background:#ee2c4b" @click="next()">Lainnya →</div>
-      </div>
+      <div class="flex gap-2.5 mt-3">
+              <div v-for="(r, i) in minis" :key="i" class="flex-1 bg-white border border-gray-200 rounded-[14px] p-2.5 text-center text-xs font-bold text-gray-600">{{ r }}</div>
+              <div class="flex-1 rounded-[14px] p-2.5 text-center text-xs font-extrabold text-white cursor-pointer" style="background:#A3E635" @click="next()">Lainnya →</div>
+            </div>
       <div class="flex flex-col gap-2 mt-3">
         <div v-for="(r, i) in list" :key="i" class="bg-white rounded-2xl border p-4 text-sm">
           <b>#{{ i + 1 }} {{ r.name }}</b> <span class="text-gray-500">[{{ r.category }} • Lt.{{ r.lantai }}]</span>
