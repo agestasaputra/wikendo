@@ -16,6 +16,7 @@
 ## 📌 BOARD — posisi per 8 Okt 2026 (Supabase + quota real + button merah DONE ✅, next slice auth)
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Revisi pick Q2 M3 R3 F1 S2 DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/revamp-options-v5.html` — Q2b+M3b segmen blok di ink header (5/4 blok, on ember/rose) + S2b infinity 10/page (skeleton + sticky count + spec API limit/offset backward-compat) + R3/F1 lock 3 lapis (hero+minis+full list 5). Jawab question: result = item list isi 5 (recommendations[5]) — next: nunggu "gas Q2b+M3b+R3+F1+S2b"
 - [x] Board 20 opsi Revamp Pages Non-Index DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/revamp-options-v4.html` — audit existing 6 page vs rule V2 (vonis: semua langgar token lama) → 20 opsi komparasi apple-to-apple: Quiz Tempat 4 (Q1-Q4) + Quiz Makan 4 (M1-M4) + Result Tempat 4 (R1-R4) + Result Makan 4 (F1-F4) + Mall 2+2 (D1-D2+S1-S2), semua ikut V2 Ember P1 (paper/ink/lime/ember/rose, kartu 24px, tombol 56px, strip 5px, hero netral, cyan mati), filter 5 keluarga + shortlist `wikendo-pages20-pick`, Top sistem Q1+M1+R1+F1+D1+S1 — nunggu "Gua suka Xx" / "gas sistem"
 - [x] Board I17 border sweep + palet diperluas APPROVED V2 ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/i17-border-sweep.html` — Agesta VERBATIM "Gua suka dan approve v2 ember p1" — lock strip hero = Ember `#EA580C` (token P1) + palet skala 60-30-10 — next: tunggu "gas" eksplisit buat eksekusi ke `app/`
 - [x] Board 20 opsi Revamp Index Full-Page DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/revamp-options-v3.html` — 1 halaman index UTUH per opsi (header avatar + hero + dual CTA + quick 4 + hype/list/assistant + riwayat), skeleton Insurance transplant, warna ikut P1/P9/P12, filter 5 keluarga + shortlist `wikendo-index20-pick`, Top3 I1 > I8 > I17 — nunggu "Gua suka Ix" / "gas Ix (+ Px)"
@@ -64,6 +65,12 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-08 — Revisi pick Q2 M3 R3 F1 S2 DONE ✅ (segmen blok + infinity, design-only)
+- **Kenapa:** Agesta VERBATIM "Gua suka Q2, M3, R3, F1, S2. Untuk Q2 dan M3 tolong implemen segmen blok. Untuk S2 tolong dibuatkan infinity scroll (pagination feature). Question: untuk result tempat dan result makanan, dia bentuknya item list bukan sih, ketika itemnya lebih dari satu?"
+- **Dikerjain:** `design/revamp-options-v5.html` 5 kartu revisi — Q2b (ink + 5 segmen blok ember) + M3b (ink + 4 segmen blok rose + toggle ink) + R3 lock (hero foto + minis + full list 5) + F1 lock (hero klaim rose + minis + full list 5 tenant) + S2b (foto + infinity 10/page + skeleton + sticky count 10/40 + spec API `?limit=&offset=` backward-compat + CTA sticky). Jawab question: IYA, dua result = item list isi 5 (`recommendations[5]`, LLM Top 5, quota 1x/generate), pola 3 lapis hero+minis+full list dipertahankan. Verifikasi node COUNT=5 + SHORTLIST + SEG + INF ✅.
+- **Files:** `design/revamp-options-v5.html` (baru), `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** nunggu "gas Q2b+M3b+R3+F1+S2b" → eksekusi TDD (segmen render count + pagination limit/offset + token layout).
 
 ## 2026-10-08 — Board 20 opsi Revamp Pages Non-Index DONE ✅ (audit + komparasi, design-only)
 - **Kenapa:** Agesta VERBATIM "btw sebelum bikin design.md. Tolong review page lain selain index page. Jika design existing tidak mengikuti rule atau preferensi dari design v2 ember p1, tolong revamp dan ikuti rule nya" + "eeh tolong buat 20 opsi design yaaa, biar ada komparasi".

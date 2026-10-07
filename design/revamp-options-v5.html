@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wikendo — Revisi Pick Q2 M3 R3 F1 S2 (segmen blok + infinity scroll)</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#f5f1e8;color:#18181b;padding:24px 16px 140px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto}
+.hero{background:#0C0A09;color:#fff;border-radius:24px;padding:28px 24px;border-left:5px solid #EA580C}
+.hero h1{font-size:23px;font-weight:800}.hero h1 .dot{color:#A3E635}
+.hero p{color:#d6d3d1;font-size:13px;margin-top:8px;max-width:940px}.hero p b{color:#fff}
+.hero code{background:rgba(255,255,255,.14);padding:1px 7px;border-radius:6px;font-size:11.5px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.badge{font-size:11.5px;font-weight:800;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2)}
+.badge.ok{background:#A3E635;border-color:#A3E635;color:#0C0A09}
+.qa{background:rgba(163,230,53,.08);border:1px solid rgba(163,230,53,.4);border-radius:16px;padding:14px 16px;margin-top:14px;font-size:12.5px;color:#e7e5e4}
+.qa b{color:#D9F99D}.qa li{margin:4px 0 4px 18px}.qa code{background:rgba(255,255,255,.14);padding:1px 7px;border-radius:6px;font-size:11px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.filters button{border:1.5px solid rgba(255,255,255,.35);background:transparent;color:#fff;border-radius:999px;padding:8px 16px;font-weight:800;font-size:12.5px;cursor:pointer;font-family:inherit}
+.filters button.on{background:#EA580C;border-color:#EA580C}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.gcard{background:#fff;border:1.5px solid #ece7dd;border-radius:20px;overflow:hidden}
+.gcard.picked{border-color:#EA580C;box-shadow:0 0 0 2px #EA580C}
+.gprev{padding:14px;background:#e9e2d3;overflow:hidden}
+.mini{max-width:300px;margin:0 auto;border-radius:18px;padding:12px 14px 14px;min-height:560px;color:#18181b;background:#F5F5F4}
+.m-top{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:800}
+.m-crumb{font-size:10.5px;font-weight:700;color:#A8A29E;margin-top:8px}
+.m-inkhead{background:#0C0A09;color:#fff;border-radius:14px;padding:10px 12px;margin-top:10px}
+.m-inkhead .lbl{font-size:10px;font-weight:800;opacity:.7;letter-spacing:.5px}
+.m-inkhead .n{font-size:19px;font-weight:800;color:#D9F99D;line-height:1.25}
+.m-seg{display:flex;gap:5px;margin-top:10px}
+.m-seg i{flex:1;height:8px;border-radius:99px;background:rgba(255,255,255,.22)}
+.m-seg i.on-t{background:#EA580C}.m-seg i.on-m{background:#E11D48}
+.m-seg-lime{display:flex;gap:5px;margin-top:10px}
+.m-seg-lime i{flex:1;height:8px;border-radius:99px;background:#E7E5E4}
+.m-opt{background:#fff;border-radius:16px;padding:11px 12px;font-size:11.5px;font-weight:800;display:flex;gap:8px;align-items:center;margin-top:7px;border:2px solid #E7E5E4}
+.m-opt small{display:block;font-weight:700;color:#78716c;font-size:10px}
+.m-opt.sel-t{border-color:#EA580C;background:#FFF7ED}
+.m-opt.sel-m{border-color:#E11D48;background:#FFE4E6}
+.m-opt .em{font-size:20px;flex:none}
+.m-tog{display:flex;gap:6px;margin-top:8px}
+.m-tog span{flex:1;border-radius:99px;padding:8px 4px;text-align:center;font-size:10px;font-weight:800;background:#fff;border:1.5px solid #E7E5E4}
+.m-tog span.on{background:#0C0A09;color:#fff;border-color:#0C0A09}
+.m-hero{background:#fff;border-radius:18px;padding:12px;margin-top:10px;box-shadow:0 6px 16px -8px rgba(0,0,0,.2);border-left:5px solid #EA580C}
+.m-hero .lbl{font-size:10px;font-weight:800;letter-spacing:.5px;opacity:.7}
+.m-hero .nm{font-size:15px;font-weight:800;margin-top:2px;line-height:1.3}
+.m-hero .rs{font-size:11px;font-weight:700;opacity:.75;margin-top:3px}
+.m-hero .meta{font-size:10.5px;font-weight:700;opacity:.8;margin-top:3px}
+.m-pill{display:inline-block;font-size:10px;font-weight:800;padding:4px 10px;border-radius:99px;margin:6px 4px 0 0}
+.m-cta{display:flex;gap:6px;margin-top:10px}
+.m-cta span{flex:1;border-radius:12px;padding:11px 4px;text-align:center;font-size:10.5px;font-weight:800}
+.m-cta .p-ink{background:#0C0A09;color:#fff}
+.m-cta .g{background:#fff;border:2px solid #E7E5E4;color:#0C0A09}
+.m-claim{background:#E11D48;color:#fff;border-radius:12px;padding:12px;text-align:center;font-size:11.5px;font-weight:800;margin-top:10px}
+.m-minis{display:flex;gap:6px;margin-top:8px}
+.m-minis span{flex:1;border-radius:10px;padding:8px 4px;text-align:center;font-size:9.5px;font-weight:800;background:#fff;border:1px solid #E7E5E4}
+.m-list{margin-top:8px;border-radius:12px;padding:8px;background:#fff;box-shadow:0 4px 12px -6px rgba(0,0,0,.15)}
+.m-list .lr{font-size:10.5px;font-weight:800;padding:7px 8px;border-radius:9px;background:#FAFAF9;margin-top:5px}
+.m-list .lr small{display:block;font-weight:700;opacity:.6;font-size:9.5px}
+.m-photo{height:110px;border-radius:14px 14px 0 0;margin:-12px -12px 8px;display:flex;align-items:flex-end;justify-content:flex-start;font-size:44px;background:linear-gradient(140deg,#1C1917,#44403C);padding:8px}
+.m-photo span{font-size:10px;font-weight:800;background:rgba(0,0,0,.55);color:#fff;border-radius:99px;padding:4px 10px}
+.m-foot{margin-top:8px;font-size:9.5px;font-weight:700;opacity:.55;text-align:center}
+.m-back{margin-top:10px;font-size:11px;font-weight:700;color:#A8A29E;text-align:center}
+.m-srch{background:#fff;border-radius:11px;padding:9px 11px;font-size:11px;font-weight:700;color:#A8A29E;margin-top:10px;border:1px solid #E7E5E4}
+.m-ten{display:flex;gap:8px;align-items:center;background:#fff;border:1px solid #E7E5E4;border-radius:14px;padding:8px;margin-top:7px}
+.m-ten .th{width:46px;height:46px;flex:none;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff}
+.m-ten b{font-size:11px}.m-ten p{font-size:9.5px;color:#78716c;font-weight:700}
+.m-skel{background:#fff;border:1px solid #E7E5E4;border-radius:14px;padding:8px;margin-top:7px;display:flex;gap:8px;align-items:center}
+.m-skel .a{width:46px;height:46px;border-radius:11px;background:linear-gradient(90deg,#E7E5E4,#F5F5F4,#E7E5E4);flex:none}
+.m-skel .b{flex:1}.m-skel .b i{display:block;height:9px;border-radius:99px;background:#E7E5E4;margin:5px 0}
+.m-more{margin-top:8px;text-align:center;font-size:10.5px;font-weight:800;color:#0C0A09;background:#fff;border:2px dashed #0C0A09;border-radius:12px;padding:10px}
+.m-count{position:sticky;top:0;font-size:10px;font-weight:800;background:#0C0A09;color:#fff;border-radius:99px;padding:5px 10px;display:inline-block;margin-top:8px}
+.gbody{padding:14px 16px 16px}.gbody h3{font-size:15px;font-weight:800}
+.gnum{display:inline-block;background:#0C0A09;color:#fff;font-size:11px;font-weight:800;border-radius:8px;padding:2px 9px;margin-right:6px}
+.tag{display:inline-block;font-size:10.5px;font-weight:800;padding:3px 10px;border-radius:999px;margin:6px 4px 0 0}
+.gbody p{font-size:12.5px;color:#44403c;margin-top:6px}
+.pro{font-size:12px;color:#166534;margin-top:6px}.con{font-size:12px;color:#991b1b;margin-top:2px}
+.spec{font-size:12px;background:#faf7f0;border:1px solid #ece7dd;border-radius:10px;padding:9px 11px;margin-top:8px}
+.spec b{color:#0C0A09}.hexes{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.hex{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;background:#f5f1e8;border:1px solid #e7e0d2;border-radius:8px;padding:3px 9px}
+.cssbox{font-family:'JetBrains Mono',monospace;font-size:10.5px;background:#0C0A09;color:#D9F99D;border-radius:10px;padding:9px 11px;margin-top:8px;overflow-x:auto;white-space:nowrap}
+.rowbtns{display:flex;gap:8px;margin-top:10px}
+.rowbtns button{flex:1;border-radius:11px;padding:10px;font-weight:800;font-size:12.5px;cursor:pointer;font-family:inherit;border:1.5px solid #0C0A09}
+.btn-copy{background:#fff;color:#0C0A09}.btn-pick{background:#0C0A09;color:#fff}
+.gcard.picked .btn-pick{background:#EA580C;border-color:#EA580C}
+.sec{background:#fff;border:1px solid #ece7dd;border-radius:20px;padding:22px;margin-top:18px}
+.sec h2{font-size:18px;font-weight:800;margin-bottom:4px}.sec .sub{font-size:13px;color:#78716c;margin-bottom:12px}
+.sec p,.sec li{font-size:13px;color:#44403c}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:10px}
+th,td{border:1px solid #ece7dd;padding:9px 10px;text-align:left;vertical-align:top}
+th{background:#faf7f0;font-size:11.5px}td.win{background:#ecfdf5;font-weight:700}td.lose{background:#fef2f2}
+.bar{position:fixed;bottom:0;left:0;right:0;background:rgba(12,10,9,.97);color:#fff;padding:13px 16px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;z-index:50;font-size:13px}
+.bar button{border:none;border-radius:12px;padding:12px 18px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit}
+.btnGo{background:#A3E635;color:#0C0A09}.btnGhost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hero">
+<h1>Revisi pick lu: Q2 M3 R3 F1 S2 <span class="dot">.</span></h1>
+<p>Pick LOCK: <b>Q2 + M3 + R3 + F1 + S2</b>. Revisi di board ini <b>(design-only, <code>app/</code> NOL diubah)</b>: <b>Q2 &amp; M3</b> sekarang pakai <b>segmen blok</b> di dalam ink header (1 blok = 1 tanya, bukan bar halus) · <b>S2</b> sekarang ada <b>infinity scroll + pagination spec</b> (10/page dari 40 tenant) · R3 &amp; F1 dikunci tanpa ubahan struktur. Token tetap V2: <code>#F5F5F4 / #0C0A09 / #EA580C / #E11D48 / #A3E635</code>.</p>
+<div class="badges"><span class="badge ok">⭐ LOCK Q2b + M3b + R3 + F1 + S2b</span><span class="badge">Q2b segmen 5 blok</span><span class="badge">M3b segmen 4 blok</span><span class="badge">S2b infinity 10/page</span></div>
+<div class="qa"><b>Jawaban question lu — result itu item list atau bukan?</b>
+<li><b>IYA, dua-duanya item list isi 5.</b> <code>result.vue</code> = <code>POST /api/tempat/recommend → recommendations[5]</code> · <code>result-makan.vue</code> = <code>POST /api/makan/recommend → recommendations[5]</code> (LLM ranking Top 5, quota kepotong 1x per generate).</li>
+<li>Pola render SEKARANG (existing, 3 lapis): <code>① hero deck (#1 BEST, idx state)</code> + <code>② minis + Lainnya → (next() geser idx tanpa fetch ulang)</code> + <code>③ full list v-for 5 item (lihat semua ↓)</code>. Jadi bukan 1 item — 5 item, cuma lapis-1 yang di-highlight.</li>
+<li>R3 &amp; F1 di board ini <b>mempertahankan 3 lapis itu</b> — yang diganti cuma baju V2 (hero netral + strip ember + CTA peran). Full list tetap ada di bawah hero biar pembanding 5 tenant 1 tatap tetap bisa.</li>
+<li>Split tetap: result TEMPAT 0 tenant · result MAKAN 0 tempat wisata (lock PRD).</li>
+</div>
+<div class="filters" id="filters"><button class="on" data-f="all">Semua 5</button><button data-f="quiz">🎲 Quiz</button><button data-f="result">🗺️🎟️ Result</button><button data-f="mall">🏬 Direktori</button></div>
+</div>
+<div class="grid" id="grid"></div>
+<div class="sec"><h2>⚔️ Apa yang berubah vs v4?</h2><p class="sub">North Star tetap: completion &gt;70% · CTR Maps &gt;50% · voucher claim · SEO.</p>
+<table><tr><th>ID</th><th>v4</th><th>v5 (revisi ini)</th><th>Effort / Risiko</th></tr>
+<tr><td><b>Q2b</b></td><td class="lose">Ink header + bar halus ember</td><td class="win">Ink header + <b>5 segmen blok</b> (ember on, putih-transparan off) + angka lime 1/5</td><td class="win">S · 3 jam / Rendah</td></tr>
+<tr><td><b>M3b</b></td><td class="lose">Ink header + bar halus rose</td><td class="win">Ink header + <b>4 segmen blok</b> (rose on) + toggle halal/kids on-state ink</td><td class="win">S · 3 jam / Rendah</td></tr>
+<tr><td><b>R3</b></td><td>Photo band, list generik</td><td class="win">LOCK — tegaskan 3 lapis: hero foto + minis + full list 5</td><td>M · 5-6 jam / Sedang (foto)</td></tr>
+<tr><td><b>F1</b></td><td>White + Klaim rose</td><td class="win">LOCK — tegaskan 3 lapis: hero klaim + minis + full list 5 tenant</td><td>S · 3 jam / Rendah</td></tr>
+<tr><td><b>S2b</b></td><td class="lose">Foto tenant, load 40 sekaligus</td><td class="win">Foto + <b>infinity scroll 10/page</b> + skeleton + sticky count + CTA quiz tetap di atas</td><td class="win">M · 5-6 jam / Sedang (perlu API limit/offset)</td></tr>
+</table>
+<p style="margin-top:10px"><b>Rekomendasi tunggal gue: gas Q2b + M3b + R3 + F1 + S2b apa adanya.</b> Q2b/M3b segmen = progres konkret (user tau sisa berapa, completion naik, Gen-Z game-like). S2b infinity = direktori 40 tenant nggak berat di HP kentang + SEO tetap (SSR page-1, lanjut client). R3 butuh foto asli — kalau foto belum ada, fallback emoji 62px existing jalan dulu, upgrade foto pas survey.</p></div>
+<div class="sec"><h2>🔧 Spec eksekusi (nanti, setelah gas — bukan sekarang)</h2>
+<li><b>Q2b/M3b:</b> ganti <code>.m-bar</code> → <code>.m-seg (flex 5/4 blok)</code> di <code>quiz.vue / makan.vue</code>, warna on ember/rose, off transparan; <code>progressPercent()</code> tetap (logic tak berubah, cuma render).</li>
+<li><b>S2b infinity:</b> <code>GET /api/malls/[slug]/tenants?limit=10&amp;offset=0</code> (API SEKARANG belum ada limit/offset — harus tambah, backward-compatible: tanpa param = semua 40 seperti sekarang); client <code>IntersectionObserver</code> sentinel + skeleton 2 row + <code>filtered = keyword(client) + page(server)</code>; CTA quiz + search + chips STICKY di atas biar nggak kelempar scroll; SSR page-1 tetap buat SEO.</li>
+<li><b>R3/F1 list:</b> tak ada ubah data — <code>list (5)</code> + <code>idx</code> + <code>next()</code> existing dipakai ulang; revamp cuma token + strip + CTA.</li>
+<li><b>TDD:</b> quiz segmen (render count 5/4 + on-state per step) → direktori pagination (limit/offset pure + sentinel append, filter reset page) → token layout → test hijau → lint → build → deploy. <code>app/</code> tetap NOL sampai lu balas <b>gas</b>.</li>
+</div>
+<div class="sec"><h2>✅ Cara putusin</h2><p>Tap <b>+ Shortlist</b> kalau masih mau bandingin, atau langsung balas: <code>"gas Q2b+M3b+R3+F1+S2b"</code> → gue eksekusi ke <code>app/pages/*.vue</code> via TDD. Tanpa gas = <code>app/</code> NOL sentuh.</p></div>
+</div>
+<div class="bar"><span id="pickLabel">👆 Shortlist: 0</span><button class="btnGo" onclick="copyPick()">📋 Salin pilihan</button><button class="btnGhost" onclick="clearPick()">Reset</button></div>
+<script>
+var TOK='--pg:#F5F5F4;--card:#fff;--ink:#0C0A09;--ember:#EA580C;--rose:#E11D48;--lime:#A3E635;';
+var DATA=[
+["Q2b","Quiz Tempat · Ink + Segmen 5 ⭐","quiz","Ink + Segmen","Header ink + angka lime + 5 SEGMEN BLOK ember (1 blok = 1 tanya). Feedback lu, udah diimplemen di mock.","#0C0A09 · #D9F99D · #EA580C","seg:5×[on:#EA580C/off:rgba(255,255,255,.22)];num:#D9F99D","S · 3 jam","Rendah","Progres konkret → completion naik; seragam M3b","Nol — ini lock Q"],
+["M3b","Quiz Makan · Ink + Segmen 4 ⭐","quiz","Ink + Segmen","Cermin Q2b buat Makan: header ink + 4 SEGMEN BLOK rose + toggle halal/kids ink. Split terjaga.","#0C0A09 · #E11D48","seg:4×[on:#E11D48/off:rgba(255,255,255,.22)];tog:#0C0A09","S · 3 jam","Rendah","Seragam Q2b; pantangan dihargai","Nol — ini lock M"],
+["R3","Result Tempat · Photo Band ⭐","result","Foto + List 5","Band foto + kartu overlap + strip ember + minis + FULL LIST 5. Yang jualan = tempat beneran.","#1C1917 · #fff · #EA580C","band:foto110px;strip:#EA580C;nav:#0C0A09;list:5","M · 5-6 jam","Sedang","Foto = CTR Maps; list 5 = pembanding","Butuh foto asli (fallback emoji jalan)"],
+["F1","Result Makan · White + Klaim Rose ⭐","result","Voucher + List 5","Hero putih strip ember + Klaim ROSE + Maps ink + minis + FULL LIST 5 tenant. Rose cuma di aksi makan.","#fff · #EA580C · #E11D48","strip:#EA580C;claim:#E11D48;maps:#0C0A09;list:5","S · 3 jam","Rendah","Klaim satu-satunya yg merah → CTR voucher","Nol — kunci voucher"],
+["S2b","Direktori · Foto + Infinity ⭐","mall","Foto + Paging","Thumb foto + promo rose + infinity 10/page + skeleton + sticky count 10/40. Feedback lu, udah diimplemen di mock.","foto · #E11D48 · #0C0A09","page:limit10/offset;skel:2row;cta-sticky","M · 5-6 jam","Sedang","40 tenant ringan; SEO SSR page-1 aman","Perlu API limit/offset (backward-compat)"]
+];
+function topHTML(page){
+if(page=='quiz')return '<div class="m-top"><span>← 🎲/🍜 Quiz</span><span style="color:#A8A29E">step · ⏱</span></div>';
+if(page=='result')return '<div class="m-top"><span>← Hasil 🎉/📍</span><span style="color:#A8A29E">5 rekomendasi</span></div>';
+return '<div class="m-crumb">Home / Mall / GI</div><div class="m-top"><span style="font-size:16px">🏬 Grand Indonesia</span><span style="color:#A8A29E;font-size:11px">40 tenant</span></div>';
+}
+function bodyHTML(id){
+var O='<div class="m-opt"><span class="em">🧘</span><span>Santai / Healing<small>Slow living, recharge</small></span></div><div class="m-opt SEL"><span class="em">🎉</span><span>Seru / Hype<small>Ramai, FOMO, viral</small></span></div><div class="m-opt"><span class="em">🍜</span><span>Kulineran<small>Makan enak</small></span></div>';
+if(id=='Q2b')return '<div class="m-inkhead"><div class="lbl">QUIZ TEMPAT · <span style="color:#D9F99D">1/5</span> · ⏱ 30 dtk</div><div class="n">Weekend ini pengen yang gimana?</div><div class="m-seg"><i class="on-t"></i><i></i><i></i><i></i><i></i></div></div>'+O.split('SEL').join('sel-t')+'<div class="m-back">Segmen 1/5 nyala ember · tap opsi = next · ← Kembali</div>';
+if(id=='M3b')return '<div class="m-inkhead"><div class="lbl">QUIZ MAKAN · GI 📍 · <span style="color:#D9F99D">2/4</span></div><div class="n">Misi makan kali ini?</div><div class="m-seg"><i class="on-m"></i><i class="on-m"></i><i></i><i></i></div></div>'+O.split('SEL').join('sel-m').split('🧘</span><span>Santai').join('⚡</span><span>Makan Cepat').split('🎉</span><span>Seru / Hype').join('☕</span><span>Nongkrong Lama')+'<div class="m-tog"><span class="on">✅ Halal only</span><span>👶 Kids</span></div><div class="m-back">Segmen 2/4 nyala rose · ← Kembali</div>';
+if(id=='R3')return '<div class="m-hero" style="padding-top:0;overflow:hidden"><div class="m-photo">🌇<span>★ #1 BEST · JAKSEL · 4.8★</span></div><div class="lbl">ROOFTOP SENAYAN — SENAYAN</div><div class="nm">Sunset + live music, cocok vibe seru</div><div class="meta">💰 50-150rb · 📍 Jaksel · ⏰ best malam</div><div class="m-cta"><span class="p-ink">📍 Navigasi →</span><span class="g">💾</span><span class="g">⤴</span></div></div><div class="m-minis"><span>Kopi K…</span><span>Taman…</span><span style="background:#0C0A09;color:#fff">Lainnya →</span></div><div class="m-list"><div class="lr">#1 Rooftop Senayan<small>Tempat · Jaksel · sunset + live music</small></div><div class="lr">#2 Kopi Kekinian<small>Kafe · Jaksel · colokan + WiFi</small></div><div class="lr">#3 Taman Kota<small>Outdoor · gratis · healing</small></div></div><div class="m-foot">Item list 5 (hero #1 + list #1-5) · generate ulang = quota habis</div>';
+if(id=='F1')return '<div class="m-hero"><div><span class="m-pill" style="background:#E11D48;color:#fff">★ BEST MATCH</span><span class="m-pill" style="background:#ECFDF5;color:#047857">✅ Halal</span></div><div class="nm">🍜 Kopi Kekinian — GI L2</div><div class="rs">Kenapa: kopi susu + colokan, cocok nongkrong lama</div><div class="meta">💰 50-100rb · 👶 kids · 📍 L2</div><div class="m-claim">🎟️ Klaim voucher → tunjukin ke kasir</div><div class="m-cta"><span class="p-ink">📍 Maps tenant →</span><span class="g">💾</span></div></div><div class="m-minis"><span>Ramen…</span><span>Seblak…</span><span style="background:#E11D48;color:#fff">Lainnya →</span></div><div class="m-list"><div class="lr">#1 Kopi Kekinian<small>Halal · L2 · −20% · kopi susu + colokan</small></div><div class="lr">#2 Ramen Juara<small>Halal · L3 · voucher · kuah juara</small></div><div class="lr">#3 Seblak Nampol<small>Non-halal · L1 · pedas nampol</small></div></div><div class="m-foot">Item list 5 tenant (hero #1 + list #1-5) · klaim WAJIB login</div>';
+if(id=='S2b')return '<div class="m-srch">🔍 Cari tenant… mis. kopi, ramen</div><div class="m-tog"><span class="on">✅ Halal</span><span>💰 50–100rb</span><span>☕ Nongkrong</span></div><div class="m-claim">✨ Cariin yang cocok → (quiz 20 dtk)</div><div><span class="m-count">10/40 tenant · scroll untuk 10 berikutnya ↓</span></div><div class="m-ten"><div class="th" style="background:linear-gradient(140deg,#3F1D1D,#9D174D)">☕</div><div><b>Kopi Kekinian L2 <span class="m-pill" style="background:#E11D48;color:#fff">−20%</span></b><p>4.9★ · L2 · ✅ Halal</p></div></div><div class="m-ten"><div class="th" style="background:linear-gradient(140deg,#1C1917,#44403C)">🍜</div><div><b>Ramen Juara L3</b><p>4.8★ · L3 · ✅ Halal</p></div></div><div class="m-ten"><div class="th" style="background:linear-gradient(140deg,#3F6212,#65A30D)">🥗</div><div><b>Salad Bar L1</b><p>4.7★ · L1 · ✅ Halal</p></div></div><div class="m-skel"><div class="a"></div><div class="b"><i style="width:60%"></i><i style="width:40%"></i></div></div><div class="m-more">↓ Scroll → muat 10 berikutnya (11–20/40) · API ?limit=10&amp;offset=10</div>';
+return '';
+}
+function card(d){
+var id=d[0],name=d[1],fam=d[2],use=d[3],desc=d[4],hex=d[5],css=d[6],eff=d[7],risk=d[8],pro=d[9],con=d[10];
+var pk=picks.indexOf(id)>=0?' picked':'';
+var famLabel={quiz:'🎲 Quiz',result:'🗺️ Result',mall:'🏬 Mall'}[fam];
+return '<div class="gcard'+pk+'" data-f="'+fam+'"><div class="gprev"><div class="mini">'+topHTML(fam)+bodyHTML(id)+'</div></div><div class="gbody"><h3><span class="gnum">'+id+'</span>'+name+'</h3><span class="tag" style="background:#f5f1e8;color:#57534e">'+famLabel+'</span><span class="tag" style="background:#f5f1e8;color:#57534e">'+use+'</span><span class="tag" style="background:#0C0A09;color:#fff">'+eff+'</span><span class="tag" style="background:#FFF7ED;color:#9a3412">risk: '+risk+'</span><p>'+desc+'</p><p class="pro">✅ '+pro+'</p><p class="con">⚠️ '+con+'</p><div class="hexes">'+hex.split(' · ').map(function(h){return '<span class="hex">'+h+'</span>';}).join('')+'</div><div class="cssbox">'+css.replace(/</g,'&lt;')+'</div><div class="rowbtns"><button class="btn-copy" onclick="copyCss(\''+id+'\')">📋 Copy CSS</button><button class="btn-pick" onclick="toggle(\''+id+'\')">'+(picks.indexOf(id)>=0?'✅ Shortlisted':'＋ Shortlist')+'</button></div></div></div>';
+}
+var picks=[];
+try{picks=JSON.parse(localStorage.getItem('wikendo-pages25-pick')||'[]');}catch(e){picks=[];}
+function render(){document.getElementById('grid').innerHTML=DATA.map(card).join('');label();}
+function label(){document.getElementById('pickLabel').textContent=picks.length?('👆 Shortlist ('+picks.length+'): '+picks.join(', ')+' — balas "Gua suka '+picks.join(', ')+'" atau "gas '+picks.join('+')+'"'):'👆 Shortlist: 0 — tap + Shortlist, atau balas "gas Q2b+M3b+R3+F1+S2b"';}
+function save(){try{localStorage.setItem('wikendo-pages25-pick',JSON.stringify(picks));}catch(e){}}
+function toggle(id){var i=picks.indexOf(id);if(i>=0)picks.splice(i,1);else picks.push(id);save();render();}
+function clearPick(){picks=[];save();render();}
+function copyCss(id){var d=null;DATA.forEach(function(x){if(x[0]==id)d=x;});var t=d[6]+' /* '+TOK+' */';if(navigator.clipboard)navigator.clipboard.writeText(t);else{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}ta.remove();}}
+function copyPick(){var t=picks.length?('Gua suka '+picks.join(', ')):('gas Q2b+M3b+R3+F1+S2b');if(navigator.clipboard)navigator.clipboard.writeText(t);document.getElementById('pickLabel').textContent='📋 Tersalin: "'+t+'" — paste di chat!';}
+document.getElementById('filters').addEventListener('click',function(e){if(e.target.tagName!='BUTTON')return;var f=e.target.getAttribute('data-f');var bs=this.querySelectorAll('button');for(var i=0;i<bs.length;i++)bs[i].classList.remove('on');e.target.classList.add('on');var cs=document.querySelectorAll('.gcard');for(var j=0;j<cs.length;j++){cs[j].style.display=(f=='all'||cs[j].getAttribute('data-f')==f)?'':'none';}});
+render();
+</script>
+</body>
+</html>
