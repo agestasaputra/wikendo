@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wikendo — I17 Border-Left Sweep + Expanded Palette</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#f5f1e8;color:#18181b;padding:24px 16px 140px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto}
+.hero{background:#18181b;color:#fff;border-radius:24px;padding:28px 24px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.13) 1.3px,transparent 1.4px);background-size:22px 22px;pointer-events:none}
+.hero h1{font-size:23px;font-weight:800;position:relative;z-index:1}
+.hero h1 .dot{color:#A3E635}
+.hero p{position:relative;z-index:1;color:#d6d3d1;font-size:13px;margin-top:8px;max-width:880px}
+.hero p b{color:#fff}
+.hero code{background:rgba(255,255,255,.14);padding:1px 7px;border-radius:6px;font-size:11.5px}
+.badges{position:relative;z-index:1;display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.badge{font-size:11.5px;font-weight:800;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2)}
+.badge.ok{background:#A3E635;border-color:#A3E635;color:#0C0A09}
+.verdict{position:relative;z-index:1;background:rgba(163,230,53,.1);border:1px solid rgba(163,230,53,.4);border-radius:16px;padding:14px 16px;margin-top:14px;font-size:12.5px;color:#e7e5e4}
+.verdict b{color:#D9F99D}
+.verdict li{margin:4px 0 4px 18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.gcard{background:#fff;border:1.5px solid #ece7dd;border-radius:20px;overflow:hidden}
+.gcard.picked{border-color:#EA580C;box-shadow:0 0 0 2px #EA580C}
+.gprev{padding:14px;background:#e9e2d3;overflow:hidden}
+.mini{max-width:300px;margin:0 auto;border-radius:18px;padding:12px 14px 14px;min-height:560px;color:#18181b;position:relative;background:#F5F5F4}
+.mini .m-head{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:800}
+.mini .m-head .av{display:flex;align-items:center;gap:7px}
+.mini .m-head .ava{width:26px;height:26px;border-radius:50%;background:#0C0A09;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;flex:none}
+.mini .m-head .bell{width:26px;height:26px;border-radius:50%;background:#EEF2FF;display:flex;align-items:center;justify-content:center;font-size:13px;flex:none}
+.hh{margin-top:8px;border-radius:16px;padding:12px;position:relative;overflow:hidden;min-height:128px;background:#0C0A09;color:#fff}
+.hh .h-label{font-size:10px;font-weight:800;letter-spacing:.6px;opacity:.75}
+.hh .h-num{font-size:24px;font-weight:800;line-height:1.1;margin-top:2px;color:#D9F99D}
+.hh .h-sub{font-size:11px;font-weight:700;opacity:.8;margin-top:1px}
+.hh .h-chips{display:flex;gap:6px;margin-top:8px}
+.hh .h-chips span{flex:1;border-radius:9px;padding:6px 4px;text-align:center;font-size:10px;font-weight:800;background:rgba(255,255,255,.12);color:#fff}
+.hh .h-pill{display:inline-block;margin-top:9px;border-radius:999px;padding:7px 14px;font-size:11px;font-weight:800;background:#A3E635;color:#0C0A09}
+.hh .h-illus{position:absolute;right:-8px;top:50%;transform:translateY(-50%);font-size:70px;opacity:.22;pointer-events:none}
+.v0 .hh{border-left:none}
+.v1 .hh{border-left:5px solid #F97316}
+.v2 .hh{border-left:5px solid #EA580C}
+.v3 .hh{border-left:5px solid #A3E635}
+.v4 .hh{border-left:5px solid #F59E0B}
+.v5 .hh{border-left:5px solid #E11D48}
+.m-cta2{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.m-cta2 span{border-radius:12px;padding:10px 4px;text-align:center;font-size:10.5px;font-weight:800;color:#fff;background:#0C0A09}
+.m-qk{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
+.m-qk span{text-align:center;font-size:9.5px;font-weight:800;opacity:.9}
+.m-qk i{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;margin:0 auto 3px;font-style:normal;font-size:16px;background:#fff;box-shadow:0 4px 12px -6px rgba(0,0,0,.2)}
+.m-list{margin-top:8px;border-radius:12px;padding:10px 11px;background:#fff;box-shadow:0 4px 12px -6px rgba(0,0,0,.15)}
+.m-list .lh{display:flex;justify-content:space-between;font-size:11px;font-weight:800;margin-bottom:6px}
+.m-list .lh small{opacity:.55;font-weight:700}
+.m-list .lr{display:flex;justify-content:space-between;align-items:center;font-size:10.5px;font-weight:800;padding:7px 8px;border-radius:9px;background:#FAFAF9;margin-top:5px}
+.m-list .lr small{display:block;font-weight:700;opacity:.6;font-size:9.5px}
+.m-list .lr b.tag2{font-size:9px;background:#ECFDF5;color:#047857;border-radius:99px;padding:2px 8px}
+.m-asst{display:flex;gap:8px;align-items:center;margin-top:8px;border-radius:14px;padding:10px;background:#fff;box-shadow:0 6px 16px -8px rgba(0,0,0,.25)}
+.m-asst .aa{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex:none;background:#0C0A09;color:#fff}
+.m-asst .at{flex:1;font-size:10.5px;font-weight:800}
+.m-asst .at small{display:block;font-weight:700;opacity:.65;font-size:9.5px}
+.m-asst .go{font-size:14px;font-weight:800}
+.m-hist{margin-top:8px;border-radius:12px;padding:10px 11px;background:#fff;box-shadow:0 4px 12px -6px rgba(0,0,0,.15);font-size:10.5px}
+.m-hist b{font-size:11px}
+.m-hist p{opacity:.65;font-size:10px;font-weight:700;margin-top:2px}
+.m-foot{margin-top:8px;font-size:9.5px;font-weight:700;opacity:.55;text-align:center}
+.gbody{padding:14px 16px 16px}
+.gbody h3{font-size:15px;font-weight:800}
+.gnum{display:inline-block;background:#0C0A09;color:#fff;font-size:11px;font-weight:800;border-radius:8px;padding:2px 9px;margin-right:6px}
+.tag{display:inline-block;font-size:10.5px;font-weight:800;padding:3px 10px;border-radius:999px;margin:6px 4px 0 0}
+.gbody p{font-size:12.5px;color:#44403c;margin-top:6px}
+.hexes{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.hex{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;background:#f5f1e8;border:1px solid #e7e0d2;border-radius:8px;padding:3px 9px}
+.cssbox{font-family:'JetBrains Mono',monospace;font-size:10.5px;background:#0C0A09;color:#D9F99D;border-radius:10px;padding:9px 11px;margin-top:8px;overflow-x:auto;white-space:nowrap}
+.rowbtns{display:flex;gap:8px;margin-top:10px}
+.rowbtns button{flex:1;border-radius:11px;padding:10px;font-weight:800;font-size:12.5px;cursor:pointer;font-family:inherit;border:1.5px solid #0C0A09}
+.btn-copy{background:#fff;color:#0C0A09}
+.btn-pick{background:#0C0A09;color:#fff}
+.gcard.picked .btn-pick{background:#EA580C;border-color:#EA580C}
+.sec{background:#fff;border:1px solid #ece7dd;border-radius:20px;padding:22px;margin-top:18px}
+.sec h2{font-size:18px;font-weight:800;margin-bottom:4px}
+.sec .sub{font-size:13px;color:#78716c;margin-bottom:12px}
+.sec p,.sec li{font-size:13px;color:#44403c}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:10px}
+th,td{border:1px solid #ece7dd;padding:9px 10px;text-align:left;vertical-align:top}
+th{background:#faf7f0;font-size:11.5px}
+td.win{background:#ecfdf5;font-weight:700}
+td.lose{background:#fef2f2}
+.swatch{display:inline-block;width:14px;height:14px;border-radius:5px;vertical-align:-2px;margin-right:6px;border:1px solid rgba(0,0,0,.15)}
+.ratio{display:flex;height:26px;border-radius:13px;overflow:hidden;margin-top:10px;font-size:10px;font-weight:800}
+.ratio div{display:flex;align-items:center;justify-content:center;color:#fff}
+.bar{position:fixed;bottom:0;left:0;right:0;background:rgba(12,10,9,.97);color:#fff;padding:13px 16px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;z-index:50;font-size:13px}
+.bar button{border:none;border-radius:12px;padding:12px 18px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit}
+.btnGo{background:#A3E635;color:#0C0A09}.btnGhost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <h1>I17 + border-left sweep <span class="dot">.</span></h1>
+  <p>Lu suka <b>I17 Lime Banking</b> + minta <b>strip kiri kayak I2</b>. Gue bikinin 6 varian <b>satu halaman index UTUH per opsi</b> — yang beda cuma warna strip, sisanya I17 murni. Plus <b>palet Wikendo yang diperluas</b> (I17 cuma hitam-putih-lime, kurang darah brand). <b>Design-only — <code>app/</code> NOL diubah sampai lu balas gas.</b></p>
+  <div class="badges"><span class="badge ok">⭐ Rekomendasi gue: V2 Ember #EA580C</span><span class="badge">Runner-up: V3 Lime mono-aksen</span><span class="badge">Baseline: V0 tanpa strip</span></div>
+  <div class="verdict"><b>Kenapa ember, bukan orange I2 (#F97316)?</b>
+    <li>Di strip 5px mata manusia nggak bedain keduanya — tapi <code>#EA580C</code> = token <b>P1 Arang Ember yang udah di-lock</b>, jadi sistem menang atas ad-hoc.</li>
+    <li>Pembagian kerja jelas: <b>lime = uang/nilai</b> (angka + pill), <b>ember = brand/aksi</b> (strip + CTA Tempat). Dua aksen boleh hidup karena strip &lt;1% luas layar — aturan 60-30-10 selamat.</li>
+    <li>Hangat vs dingin (ember vs lime) bikin hero <i>pop</i>; strip lime-on-lime (V3) malah tenggelam karena buta konteks.</li>
+  </div>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="sec">
+  <h2>🎨 Palet Wikendo diperluas (basis I17)</h2>
+  <p class="sub">I17 cuma bawa 3 warna — halaman beneran butuh skala. Ini palet lengkapnya, 60-30-10 tetap dijaga: base netral 60 · ink 30 · aksen 10.</p>
+  <table>
+    <tr><th>Peran</th><th>Token</th><th>Pakai di</th></tr>
+    <tr><td><b>Paper (base 60)</b></td><td><span class="swatch" style="background:#F5F5F4"></span><code>#F5F5F4</code> page greige · <span class="swatch" style="background:#fff"></span><code>#FFFFFF</code> kartu · <span class="swatch" style="background:#E7E5E4"></span><code>#E7E5E4</code> hairline</td><td>Background <code>max-w-md</code>, kartu list/assistant/riwayat, garis pemisah</td></tr>
+    <tr><td><b>Ink (30)</b></td><td><span class="swatch" style="background:#0C0A09"></span><code>#0C0A09</code> hero+CTA · <span class="swatch" style="background:#1C1917"></span><code>#1C1917</code> surface gelap · <span class="swatch" style="background:#44403C"></span><code>#44403C</code> teks · <span class="swatch" style="background:#A8A29E"></span><code>#A8A29E</code> muted</td><td>Hero, tombol, avatar, teks body, timestamp</td></tr>
+    <tr class="win"><td><b>Lime = nilai (aksen)</b></td><td><span class="swatch" style="background:#A3E635"></span><code>#A3E635</code> pill/CTA-lime · <span class="swatch" style="background:#D9F99D"></span><code>#D9F99D</code> angka-di-gelap · <span class="swatch" style="background:#3F6212"></span><code>#3F6212</code> teks-di-atas-lime</td><td>Angka quota, pill Mulai Quiz, angka hero. Jangan dipakai buat body text.</td></tr>
+    <tr class="win"><td><b>Ember = brand (strip + tempat)</b></td><td><span class="swatch" style="background:#EA580C"></span><code>#EA580C</code> strip + CTA Tempat · <span class="swatch" style="background:#FB923C"></span><code>#FB923C</code> varian muda (duo)</td><td>Border-left hero (V2 ⭐), tombol Cari Tempat, badge −20%</td></tr>
+    <tr><td><b>Rose = makan SAJA</b></td><td><span class="swatch" style="background:#E11D48"></span><code>#E11D48</code> CTA Makan + tag voucher</td><td>Tombol Cari Makan + chip makan. Dosis kecil, tak pernah campur blok tempat.</td></tr>
+  </table>
+  <div class="ratio"><div style="flex:60;background:#E7E5E4;color:#57534e">60 base</div><div style="flex:30;background:#0C0A09">30 ink</div><div style="flex:8;background:#A3E635;color:#0C0A09">lime</div><div style="flex:2;background:#EA580C">e</div></div>
+  <div class="cssbox">:root{--pg:#F5F5F4;--card:#fff;--line:#E7E5E4;--ink:#0C0A09;--ink2:#1C1917;--txt:#44403C;--mut:#A8A29E;--lime:#A3E635;--lime-num:#D9F99D;--lime-tx:#3F6212;--ember:#EA580C;--ember-lt:#FB923C;--rose:#E11D48;}</div>
+  <p style="margin-top:10px"><b>Aturan disiplin (biar nggak balik ke 4-warna-teriak):</b> lime cuma untuk angka + pill; ember cuma strip + Tempat; rose cuma Makan; foto tenant yang bawa warna-warni (kuliner!), chrome tetap netral.</p>
+</div>
+
+<div class="sec">
+  <h2>⚔️ Head-to-head strip</h2>
+  <table>
+    <tr><th>Varian</th><th>Kesan</th><th>Risiko</th></tr>
+    <tr><td>V0 tanpa strip (baseline)</td><td>Bersih, Banking murni</td><td>Hero kurang "tanda tangan" Wikendo</td></tr>
+    <tr><td>V1 orange I2 <code>#F97316</code> (sesuai request)</td><td>Persis I2, familiar</td><td>Token ad-hoc, nabrak P1 yang udah lock</td></tr>
+    <tr class="win"><td><b>V2 ember <code>#EA580C</code> ⭐</b></td><td class="win">Sama di mata, tapi token P1 lock + 1 step lebih matang di atas hitam</td><td class="win">Terendah (sistem)</td></tr>
+    <tr><td>V3 lime <code>#A3E635</code> (mono-aksen)</td><td>Paling kohesif, 1 aksen murni</td><td>Strip tenggelam lawan angka lime; "semua nyala = tak ada sinyal"</td></tr>
+    <tr><td>V4 gold <code>#F59E0B</code></td><td>Premium eksekutif</td><td>Bahasa baru (emas = harga?), tak nyambung token lain</td></tr>
+    <tr><td>V5 rose <code>#E11D48</code></td><td>Ngenalin Makan sejak hero</td><td class="lose">Bocorin split! Hero = netral/quota, Makan punya panggung sendiri di CTA</td></tr>
+  </table>
+  <p style="margin-top:10px"><b>Rekomendasi tunggal: V2.</b> Cadangan jujur: V3 kalau lu mau disiplin 1-aksen absolut; V0 kalau ternyata strip apa pun terasa berisik setelah dilihat seminggu.</p>
+</div>
+
+<div class="sec">
+  <h2>✅ Cara putusin</h2>
+  <p>Tap <b>+ Shortlist</b> → balas misal <code>"gas V2"</code> → gue eksekusi ke <code>app/pages/index.vue</code> via TDD (token → hero strip → test wallet tetap hijau → lint → build → deploy). Tanpa balasan = <code>app/</code> NOL sentuh.</p>
+</div>
+
+</div>
+<div class="bar" id="bar">
+  <span id="pickLabel">👆 Shortlist: 0 — tap + Shortlist di varian favorit lu</span>
+  <button class="btnGo" onclick="copyPick()">📋 Salin pilihan</button>
+  <button class="btnGhost" onclick="clearPick()">Reset</button>
+</div>
+<script>
+var DATA=[
+["V0","Tanpa strip (baseline)","label","Netral 100%: I17 murni tanpa strip. Pembanding — strip apa pun harus ngalahin ini dulu.","none","border-left:none;"],
+["V1","Orange I2 #F97316","request","Persis request lu: strip I2 ditempel ke hero I17. Familiar, tapi token ad-hoc di luar P1.","#F97316","border-left:5px solid #F97316;"],
+["V2","Ember P1 #EA580C ⭐","rekomendasi","Rekomendasi #1 ✅. Sama di mata vs V1, tapi token P1 Arang Ember yang udah lock. 1 step lebih matang di atas hitam.","#EA580C","border-left:5px solid #EA580C;"],
+["V3","Lime mono-aksen","runner-up","Runner-up. 1 aksen absolut paling kohesif — tapi strip tenggelam lawan angka + pill lime.","#A3E635","border-left:5px solid #A3E635;"],
+["V4","Gold eksekutif","opsi","Premium & tenang, tapi bahasa baru: emas tak nyambung token lain (harga? voucher?).","#F59E0B","border-left:5px solid #F59E0B;"],
+["V5","Rose makan","opsi","Ngenalin Makan sejak hero — DITOLAK secara aturan: hero = quota netral, Makan punya panggung di CTA.","#E11D48","border-left:5px solid #E11D48;"]
+];
+function headerHTML(){return '<div class="m-head"><span class="av"><span class="ava">👦</span><span>Halo, teman Wikendo</span></span><span class="bell">🔔</span></div>';}
+function heroHTML(){return '<div class="hh"><div class="h-label">QUOTA HARI INI · reset 00.00</div><div class="h-num">1 tempat • 2 makan</div><div class="h-sub">Gratis hari ini — login buka 2 + 5</div><div class="h-chips"><span>🎲 1/1 tempat</span><span>🍜 2/2 makan</span></div><span class="h-pill">Mulai Quiz →</span><span class="h-illus">🎲</span></div>';}
+function restHTML(){return '<div class="m-cta2"><span>🗺️<br>Cari Tempat<br><small style="font-weight:400">quiz 30 dtk</small></span><span>🍜<br>Cari Makan<br><small style="font-weight:400">quiz 20 dtk</small></span></div>'
++'<div class="m-qk"><span><i>🎡</i>Event</span><span><i>🎁</i>Promo</span><span><i>❤️</i>Wishlist</span><span><i>🕘</i>Riwayat</span></div>'
++'<div class="m-list"><div class="lh">Rekomendasi buatmu <small>Lihat Semua →</small></div><div class="lr"><span>🗺️ Rooftop Senayan<small>Senayan · 4.8 ★</small></span><b class="tag2">−20%</b></div><div class="lr"><span>🍜 Kopi Kekinian<small>GI · 4.9 ★</small></span><b class="tag2">Voucher</b></div></div>'
++'<div class="m-asst"><span class="aa">🤖</span><span class="at">Wikendo AI<small>Ceritain mood → rekomendasi instan</small></span><span class="go" style="color:#3F6212">→</span></div>'
++'<div class="m-hist"><b>Terakhir dilihat 👀</b><p>Belum ada riwayat — mulai quiz pertamamu →</p></div><div class="m-foot">Result tidak dicampur: tempat ya tempat, makan ya makan.</div>';}
+function card(d){
+  var id=d[0],name=d[1],use=d[2],desc=d[3],hex=d[4],css=d[5];
+  var pk=picks.indexOf(id)>=0?' picked':'';
+  return '<div class="gcard'+pk+'">'
+  +'<div class="gprev"><div class="mini '+id.toLowerCase()+'">'+headerHTML()+heroHTML()+restHTML()+'</div></div>'
+  +'<div class="gbody"><h3><span class="gnum">'+id+'</span>'+name+'</h3>'
+  +'<span class="tag" style="background:#f5f1e8;color:#57534e">'+use+'</span>'
+  +'<p>'+desc+'</p><div class="hexes"><span class="hex">strip: '+hex+'</span><span class="hex">hero #0C0A09</span><span class="hex">lime #A3E635</span></div>'
+  +'<div class="cssbox">.hh{'+css.replace(/</g,'&lt;')+'}</div>'
+  +'<div class="rowbtns"><button class="btn-copy" onclick="copyCss(\''+id+'\')">📋 Copy CSS</button><button class="btn-pick" onclick="toggle(\''+id+'\')">'+(picks.indexOf(id)>=0?'✅ Shortlisted':'＋ Shortlist')+'</button></div>'
+  +'</div></div>';
+}
+var picks=[];
+try{picks=JSON.parse(localStorage.getItem('wikendo-i17-pick')||'[]');}catch(e){picks=[];}
+function render(){document.getElementById('grid').innerHTML=DATA.map(card).join('');label();}
+function label(){document.getElementById('pickLabel').textContent=picks.length?('👆 Shortlist ('+picks.length+'): '+picks.join(', ')+' — balas di chat "gas '+picks.join(', ')+'"'):'👆 Shortlist: 0 — tap + Shortlist di varian favorit lu';}
+function save(){try{localStorage.setItem('wikendo-i17-pick',JSON.stringify(picks));}catch(e){}}
+function toggle(id){var i=picks.indexOf(id);if(i>=0)picks.splice(i,1);else picks.push(id);save();render();}
+function clearPick(){picks=[];save();render();}
+function copyCss(id){var d=null;DATA.forEach(function(x){if(x[0]==id)d=x;});var t='.hh{'+d[5]+'}';if(navigator.clipboard)navigator.clipboard.writeText(t);else{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}ta.remove();}}
+function copyPick(){var t=picks.length?('gas '+picks.join(', ')):'(belum ada shortlist)';if(navigator.clipboard)navigator.clipboard.writeText(t);document.getElementById('pickLabel').textContent='📋 Tersalin: "'+t+'" — paste di chat!';}
+render();
+</script>
+</body>
+</html>

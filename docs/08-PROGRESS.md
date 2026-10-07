@@ -16,6 +16,7 @@
 ## 📌 BOARD — posisi per 8 Okt 2026 (Supabase + quota real + button merah DONE ✅, next slice auth)
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Board I17 border sweep + palet diperluas DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/i17-border-sweep.html` — 6 varian full-page I17 (V0 baseline … V5 rose), Top pick V2 Ember `#EA580C` + palet skala lengkap 60-30-10 — nunggu "gas Vx"
 - [x] Board 20 opsi Revamp Index Full-Page DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/revamp-options-v3.html` — 1 halaman index UTUH per opsi (header avatar + hero + dual CTA + quick 4 + hype/list/assistant + riwayat), skeleton Insurance transplant, warna ikut P1/P9/P12, filter 5 keluarga + shortlist `wikendo-index20-pick`, Top3 I1 > I8 > I17 — nunggu "Gua suka Ix" / "gas Ix (+ Px)"
 - [x] Board 20 opsi Hero Card DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/hero-cards-20.html` — transplant skeleton Insurance hero (label + angka hero + sub + 2 chip + pill CTA + watermark 🎲) ke wallet quota, tiap kartu konteks home SAMA yang beda cuma HERO, warna ikut P1/P9/P12, filter 5 keluarga + shortlist `wikendo-hero20-pick`, Top3 H1 > H8 > H17 — nunggu "Gua suka Hx" / "gas Hx"
 - [x] Board 15 opsi color palette DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/color-palette-15.html` — tiap palet render home SAMA di simulasi `div.max-w-md`, P0 = palet sekarang (pembanding, tak bisa dipilih), filter 4 keluarga + shortlist + Copy CSS, Top3 P1 > P9 > P12 — nunggu pick Agesta
@@ -62,6 +63,13 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-08 — Board I17 border sweep + palet diperluas DONE ✅ (design-only)
+- **Kenapa:** Agesta VERBATIM "Gua suka i17 … tambahkan border left orange di hero card (seperti i2). Menurut lu warna apa border left yang cocok? Sekaligus untuk menambah color pallete wikendo, karena di design i17 hanya ada: hitam, putih, lime".
+- **Dikerjain:** `design/i17-border-sweep.html` — 6 varian full-page I17 (V0 baseline tanpa strip, V1 orange I2 `#F97316` sesuai request, V2 ember P1 `#EA580C` ⭐, V3 lime mono-aksen runner-up, V4 gold, V5 rose ditolak karena bocorin split). Rekomendasi tunggal V2: sama di mata vs V1 tapi token P1 lock + pembagian kerja lime=nilai / ember=brand. Palet diperluas 60-30-10: paper `#F5F5F4`/`#fff`/`#E7E5E4`, ink `#0C0A09`/`#1C1917`/`#44403C`/`#A8A29E`, lime `#A3E635`/`#D9F99D`/`#3F6212`, ember `#EA580C`/`#FB923C`, rose `#E11D48` makan-saja + aturan disiplin.
+- **Verifikasi:** node COUNT=6 (V0-V5 unik) ✅ + CSS v0-v5 ✅ + shortlist `wikendo-i17-pick` ✅. `git status` cuma file board baru, `app/` NOL sentuh ✅.
+- **Files:** `design/i17-border-sweep.html` (baru), `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** nunggu "gas Vx" → eksekusi ke `app/pages/index.vue` via TDD.
 
 ## 2026-10-08 — Board 20 opsi Revamp Index Full-Page DONE ✅ (Insurance transplant, design-only)
 - **Kenapa:** Agesta VERBATIM "Eeh lu revamp hero cards doang? Langsung satu halaman index aja lu revamp". Bedah `app/pages/index.vue` 72 baris (wallet teal + 2 CTA + grid emoji + hype + riwayat) → tiap opsi render 1 halaman UTUH (bukan hero doang).
