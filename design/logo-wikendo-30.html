@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wikendo — 30 Opsi Logo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --base:#fffdf9; --tempat:#f97316; --makan:#ee2c4b; --wallet:#0e7490; --ink:#18181b;
+    --mut:#71717a; --line:#e4e4e7; --card:#ffffff; --sun:#fbbf24;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--base);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+  .wrap{max-width:1180px;margin:0 auto;padding:24px 20px 80px}
+  header.hero{border:2px solid var(--ink);border-radius:24px;background:var(--card);padding:28px;position:relative;overflow:hidden}
+  header.hero::after{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle at center,var(--sun) 0 34%,transparent 35%),conic-gradient(var(--tempat) 0 25%,var(--makan) 0 50%,var(--wallet) 0 75%,var(--tempat) 0);opacity:.14}
+  h1{margin:0;font-size:30px;font-weight:800;letter-spacing:-.5px}
+  h1 .dot{color:var(--tempat)}
+  .sub{color:var(--mut);font-size:14px;margin:8px 0 0;max-width:760px;line-height:1.6}
+  .tokens{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  .tok{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;border:1.5px solid var(--line);border-radius:999px;padding:5px 12px 5px 6px;background:#fff}
+  .tok i{width:18px;height:18px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.12)}
+  .bar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--base) 88%,transparent);backdrop-filter:blur(8px);padding:12px 0;margin:18px 0 6px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit}
+  .chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .short{margin-left:auto;font-size:13px;font-weight:700;display:flex;gap:8px;align-items:center}
+  .short button{border:1.5px solid var(--ink);background:var(--wallet);color:#fff;border-radius:12px;padding:8px 14px;font-weight:800;cursor:pointer;font-family:inherit;font-size:12.5px}
+  .fam{margin:30px 0 6px}
+  .fam h2{font-size:17px;margin:0;font-weight:800}
+  .fam p{margin:4px 0 12px;color:var(--mut);font-size:13px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+  .card{background:var(--card);border:1.5px solid var(--line);border-radius:20px;padding:14px;position:relative;display:flex;flex-direction:column;gap:8px;transition:transform .15s,box-shadow .15s}
+  .card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(24,24,27,.10)}
+  .card .num{position:absolute;top:10px;left:10px;font-size:11px;font-weight:800;background:var(--ink);color:#fff;border-radius:8px;padding:2px 8px}
+  .star{position:absolute;top:8px;right:8px;border:1.5px solid var(--line);background:#fff;border-radius:10px;width:32px;height:32px;cursor:pointer;font-size:15px;line-height:1}
+  .star.on{background:var(--sun);border-color:var(--ink)}
+  .mark{background:var(--base);border:1px dashed var(--line);border-radius:14px;height:132px;display:flex;align-items:center;justify-content:center;cursor:zoom-in}
+  .mark svg{width:104px;height:104px}
+  .card h3{margin:0;font-size:14px;font-weight:800}
+  .card .why{margin:0;font-size:12px;color:var(--mut);line-height:1.55;flex:1}
+  .tags{display:flex;gap:6px;flex-wrap:wrap}
+  .tags span{font-size:10.5px;font-weight:700;background:#f4f4f5;border-radius:999px;padding:3px 9px;color:#3f3f46}
+  .tags span.hot{background:#fff7ed;color:#c2410c}
+  .reco{margin-top:36px;border:2px solid var(--ink);border-radius:24px;background:var(--ink);color:#fff;padding:26px}
+  .reco h2{margin:0 0 4px;font-size:20px}
+  .reco p.sub2{margin:0 0 16px;color:#d4d4d8;font-size:13px}
+  .podium{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+  .pod{background:#27272a;border-radius:16px;padding:14px;font-size:12.5px;line-height:1.6}
+  .pod b{font-size:13.5px}
+  .pod .rank{font-size:11px;font-weight:800;background:var(--tempat);border-radius:8px;padding:2px 8px;margin-right:6px}
+  .check{margin-top:14px;font-size:12.5px;color:#d4d4d8;line-height:1.7}
+  .modal{position:fixed;inset:0;background:rgba(24,24,27,.6);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+  .modal.open{display:flex}
+  .sheet{background:#fff;border-radius:24px;max-width:640px;width:100%;padding:24px;max-height:88vh;overflow:auto}
+  .sheet .views{display:flex;gap:10px;margin:14px 0}
+  .sheet .v{flex:1;border-radius:16px;height:170px;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--line)}
+  .sheet .v svg{width:120px;height:120px}
+  .sheet h3{margin:0}
+  .sheet p{font-size:13px;color:var(--mut);line-height:1.6}
+  .x{float:right;border:1.5px solid var(--line);background:#fff;border-radius:10px;width:34px;height:34px;cursor:pointer;font-weight:800}
+  @media (prefers-reduced-motion:reduce){.card:hover{transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>wikendo<span class="dot">.</span> — 30 opsi logo</h1>
+    <p class="sub"><b>Brief:</b> decision engine weekend (tempat nongkrong + makanan di mall), audiens Gen-Z/milenial Indonesia. Logo harus hidup di 4 tempat: <b>app icon</b>, <b>favicon 16px</b>, <b>header web</b>, <b>struk voucher 1-warna</b>. Klik ⭐ buat shortlist, klik gambar buat preview besar (terang/gelap/mono).</p>
+    <div class="tokens">
+      <span class="tok"><i style="background:#fffdf9"></i>base #fffdf9</span>
+      <span class="tok"><i style="background:#f97316"></i>tempat #f97316</span>
+      <span class="tok"><i style="background:#ee2c4b"></i>makan #ee2c4b</span>
+      <span class="tok"><i style="background:#0e7490"></i>wallet #0e7490</span>
+      <span class="tok"><i style="background:#18181b"></i>ink #18181b</span>
+    </div>
+  </header>
+
+  <div class="bar" id="bar">
+    <button class="chip on" data-f="all">Semua (30)</button>
+    <button class="chip" data-f="word">Wordmark</button>
+    <button class="chip" data-f="mono">Monogram W</button>
+    <button class="chip" data-f="time">Weekend/Time</button>
+    <button class="chip" data-f="decide">Lokasi/Keputusan</button>
+    <button class="chip" data-f="food">Mall/Kuliner</button>
+    <button class="chip" data-f="maskot">Maskot</button>
+    <div class="short">⭐ <span id="count">0</span> shortlist <button id="copy">Salin shortlist</button></div>
+  </div>
+
+  <div id="board"><!-- ============ FAMILY A · WORDMARK ============ -->
+  <div class="fam" data-fam="word"><h2>A · Wordmark — nama sebagai logo</h2><p>Termurah dicetak, paling bersih di header web &amp; struk. Kelemahan: butuh mark pendamping buat app icon.</p><div class="grid">
+
+    <div class="card" data-fam="word" data-name="01 · Titik Nongkrong">
+      <span class="num">01</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 120 60"><text x="60" y="42" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="30" font-weight="800" fill="#18181b">wikendo<tspan fill="#f97316">.</tspan></text></svg></div>
+      <h3>Titik Nongkrong</h3><p class="why">Lowercase ramah + titik oranye = pin lokasi. Paling aman &amp; timeless.</p>
+      <div class="tags"><span class="hot">header web</span><span>1-warna OK</span></div>
+    </div>
+
+    <div class="card" data-fam="word" data-name="02 · Gas Weekend">
+      <span class="num">02</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 120 60"><text x="60" y="30" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="21" font-weight="800" letter-spacing="3" fill="#18181b">WIKENDO</text><path d="M18 42 Q60 34 102 42" stroke="#0e7490" stroke-width="5" fill="none" stroke-linecap="round"/></svg></div>
+      <h3>Gas Weekend</h3><p class="why">Caps percaya diri + garis swipe teal = "dipilih, bukan dicari".</p>
+      <div class="tags"><span>bold</span><span>1-warna OK</span></div>
+    </div>
+
+    <div class="card" data-fam="word" data-name="03 · O-Jadi-Pin">
+      <span class="num">03</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 120 60"><text x="38" y="42" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="29" font-weight="800" fill="#18181b">wikend</text><g transform="translate(88,14)"><path d="M0 0 a11 11 0 1 0 0.1 0 M-7 8 L0 22 L7 8" fill="#f97316"/><circle cx="0" cy="0" r="11" fill="#f97316"/><circle cx="0" cy="-1" r="4.5" fill="#fffdf9"/></g></svg></div>
+      <h3>O-Jadi-Pin</h3><p class="why">Huruf "o" diganti pin lokasi — nama &amp; job-to-be-done dalam 1 kata.</p>
+      <div class="tags"><span class="hot">cerdas</span><span>1-warna OK</span></div>
+    </div>
+
+    <div class="card" data-fam="word" data-name="04 · WKN.">
+      <span class="num">04</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 120 60"><rect x="14" y="10" width="92" height="40" rx="12" fill="#18181b"/><text x="60" y="39" text-anchor="middle" font-family="monospace" font-size="24" font-weight="700" fill="#fffdf9">wkn<tspan fill="#f97316">.</tspan></text></svg></div>
+      <h3>WKN.</h3><p class="why">Singkatan ala chat anak Jaksel. Kompak buat favicon &amp; handle sosmed.</p>
+      <div class="tags"><span>gen-z</span><span>favicon ready</span></div>
+    </div>
+
+    <div class="card" data-fam="word" data-name="05 · Bubble Wikendo">
+      <span class="num">05</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 120 60"><g><rect x="10" y="8" width="100" height="36" rx="18" fill="#18181b"/><path d="M34 44 l-3 10 l11 -10 z" fill="#18181b"/><text x="60" y="33" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="20" font-weight="800" fill="#fffdf9">wikendo</text></g></svg></div>
+      <h3>Bubble Wikendo</h3><p class="why">Nama di dalam chat bubble — Wikendo sebagai "temen yang ditanya".</p>
+      <div class="tags"><span>buddy</span><span>1-warna OK</span></div>
+    </div>
+  </div></div>
+
+  <!-- ============ FAMILY B · MONOGRAM W ============ -->
+  <div class="fam" data-fam="mono"><h2>B · Monogram W — 1 huruf, sejuta tempat</h2><p>Kandidat app icon terkuat: terbaca di 16px, gampang di-stamp ke voucher &amp; stiker tenant.</p><div class="grid">
+
+    <div class="card" data-fam="mono" data-name="06 · W Matahari">
+      <span class="num">06</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><circle cx="48" cy="18" r="9" fill="#f97316"/><path d="M22 44 L36 74 L48 52 L60 74 L74 44" stroke="#18181b" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>W Matahari</h3><p class="why">W tebal + matahari terbit = weekend dimulai. Bersih di ukuran kecil.</p>
+      <div class="tags"><span class="hot">app-icon ready</span><span>1-warna OK</span></div>
+    </div>
+
+    <div class="card" data-fam="mono" data-name="07 · W Dua Pin">
+      <span class="num">07</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><path d="M24 40 L37 72 L48 50 L59 72 L72 40" stroke="#18181b" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="30" r="9" fill="#f97316"/><circle cx="72" cy="30" r="9" fill="#ee2c4b"/></svg></div>
+      <h3>W Dua Pin</h3><p class="why">Dua ujung W = pin tempat (oranye) + pin makan (merah). Split quiz terwakili.</p>
+      <div class="tags"><span class="hot">split quiz</span><span>app-icon ready</span></div>
+    </div>
+
+    <div class="card" data-fam="mono" data-name="08 · Ikon Gradient">
+      <span class="num">08</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><defs><linearGradient id="g8" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f97316"/><stop offset="1" stop-color="#ee2c4b"/></linearGradient></defs><rect x="12" y="12" width="72" height="72" rx="22" fill="url(#g8)"/><text x="48" y="66" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="44" font-weight="800" fill="#fff">W</text></svg></div>
+      <h3>Ikon Gradient</h3><p class="why">Versi paling "store-ready": oranye→merah = tempat→makan. Aman, tapi generik.</p>
+      <div class="tags"><span class="hot">store-listing</span><span>butuh mark unik</span></div>
+    </div>
+
+    <div class="card" data-fam="mono" data-name="09 · Peta Lipat W">
+      <span class="num">09</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><path d="M14 26 L38 18 L58 26 L82 18 L82 70 L58 78 L38 70 L14 78 Z" fill="#fffdf9" stroke="#18181b" stroke-width="5" stroke-linejoin="round"/><path d="M38 18 L38 70 M58 26 L58 78" stroke="#18181b" stroke-width="4"/><path d="M24 44 L32 60 L40 48 L48 60 L56 44" stroke="#f97316" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>Peta Lipat W</h3><p class="why">W digambar di atas peta lipat — eksplisit "planner", bukan sekadar direktori.</p>
+      <div class="tags"><span>planner</span><span>detail &gt; 24px</span></div>
+    </div>
+
+    <div class="card" data-fam="mono" data-name="10 · W Senyum">
+      <span class="num">10</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><text x="48" y="58" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="46" font-weight="800" fill="#18181b">W</text><path d="M28 66 Q48 82 68 66" stroke="#f97316" stroke-width="6" fill="none" stroke-linecap="round"/></svg></div>
+      <h3>W Senyum</h3><p class="why">Lengkung senyum di bawah W = "weekend beres, senyum". Paling murah dicetak.</p>
+      <div class="tags"><span>1-warna OK</span><span>friendly</span></div>
+    </div>
+  </div></div>
+
+  <!-- ============ FAMILY C · WEEKEND/TIME ============ -->
+  <div class="fam" data-fam="time"><h2>C · Weekend/Time — milik Sab-Ming</h2><p>Own momen weekend secara visual. Risiko: mirip ikon kalender generik — harus ada twist W.</p><div class="grid">
+
+    <div class="card" data-fam="time" data-name="11 · Kalender WE">
+      <span class="num">11</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><rect x="20" y="24" width="56" height="52" rx="12" fill="#fff" stroke="#18181b" stroke-width="5"/><rect x="20" y="24" width="56" height="16" rx="8" fill="#f97316"/><path d="M32 16 v10 M64 16 v10" stroke="#18181b" stroke-width="5" stroke-linecap="round"/><text x="48" y="66" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="26" font-weight="800" fill="#18181b">WE</text></svg></div>
+      <h3>Kalender WE</h3><p class="why">Kalender + "WE" ganda (we/weekend). Langsung kebaca "acara akhir pekan".</p>
+      <div class="tags"><span>jelas</span><span>kalender pasaran</span></div>
+    </div>
+
+    <div class="card" data-fam="time" data-name="12 · Matahari S-S">
+      <span class="num">12</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><g stroke="#f97316" stroke-width="5" stroke-linecap="round"><path d="M48 8 v10 M48 78 v10 M8 48 h10 M78 48 h10 M20 20 l7 7 M69 69 l7 7 M76 20 l-7 7 M27 69 l-7 7"/></g><circle cx="48" cy="48" r="20" fill="#fbbf24" stroke="#18181b" stroke-width="4"/><text x="48" y="56" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="19" font-weight="800" fill="#18181b">S·S</text></svg></div>
+      <h3>Matahari S-S</h3><p class="why">Sabtu-Minggu sebagai matahari. Optimis, cocok buat stiker tenant.</p>
+      <div class="tags"><span>ceria</span><span>stiker</span></div>
+    </div>
+
+    <div class="card" data-fam="time" data-name="13 · Jam 5 Sore">
+      <span class="num">13</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><circle cx="48" cy="50" r="30" fill="#fff" stroke="#18181b" stroke-width="5"/><path d="M48 50 L48 30 M48 50 L63 57" stroke="#18181b" stroke-width="5" stroke-linecap="round"/><circle cx="48" cy="50" r="4" fill="#ee2c4b"/><text x="48" y="16" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="13" font-weight="800" fill="#ee2c4b">FRI 5PM</text></svg></div>
+      <h3>Jam 5 Sore</h3><p class="why">Jam pulang Jumat = jam Wikendo dimulai. Inside joke pekerja yang nempel.</p>
+      <div class="tags"><span class="hot">relatable</span><span>1-warna OK</span></div>
+    </div>
+
+    <div class="card" data-fam="time" data-name="14 · Tiket WKND">
+      <span class="num">14</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><g transform="rotate(-8 48 48)"><rect x="12" y="30" width="72" height="36" rx="8" fill="#ee2c4b"/><path d="M34 30 v36" stroke="#fffdf9" stroke-width="3" stroke-dasharray="4 4"/><text x="58" y="55" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="17" font-weight="800" fill="#fff">WKND</text></g></svg></div>
+      <h3>Tiket WKND</h3><p class="why">Tiket = weekend + voucher tenant. Satu mark dua cerita bisnis (B2C+B2B).</p>
+      <div class="tags"><span class="hot">voucher story</span><span>B2B</span></div>
+    </div>
+
+    <div class="card" data-fam="time" data-name="15 · Sun-Moon">
+      <span class="num">15</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><circle cx="48" cy="48" r="28" fill="#fbbf24"/><path d="M48 20 a28 28 0 0 1 0 56 a22 22 0 0 0 0 -56" fill="#18181b"/><circle cx="59" cy="38" r="3" fill="#fffdf9"/><circle cx="64" cy="48" r="2.2" fill="#fffdf9"/></svg></div>
+      <h3>Sun-Moon</h3><p class="why">Siang nongkrong → malam kuliner. Premium &amp; minimal, tapi W-nya hilang.</p>
+      <div class="tags"><span>premium</span><span>tanpa W</span></div>
+    </div>
+  </div></div>
+
+  <!-- ============ FAMILY D · LOKASI/KEPUTUSAN ============ -->
+  <div class="fam" data-fam="decide"><h2>D · Lokasi/Keputusan — anti-bingung 30 detik</h2><p>Keluarga paling jujur sama value prop: user bingung → Wikendo mutusin. Favorit gue ada di sini.</p><div class="grid">
+
+    <div class="card" data-fam="decide" data-name="16 · Pin W">
+      <span class="num">16</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><path d="M48 8 C28 8 16 23 16 41 C16 63 48 88 48 88 C48 88 80 63 80 41 C80 23 68 8 48 8 Z" fill="#f97316"/><circle cx="48" cy="40" r="17" fill="#fffdf9"/><text x="48" y="49" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="22" font-weight="800" fill="#18181b">W</text></svg></div>
+      <h3>Pin W</h3><p class="why">Pin + W: "tempatnya di sini, udah dipilihin". App-icon &amp; Maps-marker natural.</p>
+      <div class="tags"><span class="hot">jagoan #1</span><span>app-icon ready</span></div>
+    </div>
+
+    <div class="card" data-fam="decide" data-name="17 · Kompas W">
+      <span class="num">17</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><circle cx="48" cy="48" r="32" fill="#fff" stroke="#18181b" stroke-width="5"/><path d="M48 22 L56 48 L48 74 L40 48 Z" fill="#ee2c4b"/><path d="M22 48 L48 40 L74 48 L48 56 Z" fill="#18181b" opacity=".85"/><text x="48" y="16" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="13" font-weight="800" fill="#18181b">W</text></svg></div>
+      <h3>Kompas W</h3><p class="why">Utara kompas diganti W — "ikutin Wikendo aja". Kuat buat brand planner.</p>
+      <div class="tags"><span>planner</span><span>detail &gt; 24px</span></div>
+    </div>
+
+    <div class="card" data-fam="decide" data-name="18 · Dadu W">
+      <span class="num">18</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><g transform="rotate(-8 48 48)"><rect x="18" y="18" width="60" height="60" rx="16" fill="#18181b"/><text x="48" y="60" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="30" font-weight="800" fill="#fffdf9">W</text><circle cx="28" cy="28" r="3.5" fill="#f97316"/><circle cx="68" cy="68" r="3.5" fill="#ee2c4b"/></g></svg></div>
+      <h3>Dadu W</h3><p class="why">Decision engine sebagai dadu — "cap-cip-cup biar AI yang mikir". Playful brutal.</p>
+      <div class="tags"><span class="hot">decision engine</span><span>gen-z</span></div>
+    </div>
+
+    <div class="card" data-fam="decide" data-name="19 · Spark Pilihan">
+      <span class="num">19</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><path d="M48 6 C50 34 62 46 90 48 C62 50 50 62 48 90 C46 62 34 50 6 48 C34 46 46 34 48 6 Z" fill="#f97316"/><text x="48" y="58" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="24" font-weight="800" fill="#fff">W</text></svg></div>
+      <h3>Spark Pilihan</h3><p class="why">Spark AI + W: rekomendasi "ajaib" 30 detik. Modern, tapi tren AI generik.</p>
+      <div class="tags"><span>AI vibes</span><span>pasaran AI</span></div>
+    </div>
+
+    <div class="card" data-fam="decide" data-name="20 · Deck Swipe">
+      <span class="num">20</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><rect x="18" y="26" width="44" height="52" rx="10" fill="#fff" stroke="#18181b" stroke-width="4" transform="rotate(-8 40 52)"/><rect x="36" y="20" width="44" height="52" rx="10" fill="#f97316" transform="rotate(6 58 46)"/><text x="58" y="54" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="24" font-weight="800" fill="#fff" transform="rotate(6 58 54)">W</text><path d="M30 82 h38" stroke="#0e7490" stroke-width="5" stroke-linecap="round"/></svg></div>
+      <h3>Deck Swipe</h3><p class="why">Kartu deck quiz swipe = tulang punggung produk (kombo 5). Meta &amp; jujur.</p>
+      <div class="tags"><span>meta produk</span><span>detail &gt; 24px</span></div>
+    </div>
+  </div></div>
+
+  <!-- ============ FAMILY E · MALL/KULINER ============ -->
+  <div class="fam" data-fam="food"><h2>E · Mall/Kuliner — jangkar tenant &amp; voucher</h2><p>Bikin tenant ngerasa "ini app gue juga". Kunci buat jualan B2B &amp; stiker "Tunjukin ke kasir".</p><div class="grid">
+
+    <div class="card" data-fam="food" data-name="21 · Ruko W">
+      <span class="num">21</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><path d="M14 34 h68 l-6 12 H20 Z" fill="#ee2c4b"/><path d="M14 34 h68 l-6 12 H20 Z" fill="#fffdf9" opacity=".25"/><rect x="22" y="46" width="52" height="30" rx="6" fill="#18181b"/><text x="48" y="69" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="24" font-weight="800" fill="#fffdf9">W</text><path d="M22 34 v-6 M36 34 v-6 M50 34 v-6 M64 34 v-6" stroke="#18181b" stroke-width="4"/></svg></div>
+      <h3>Ruko W</h3><p class="why">Awning tenant + papan W. Paling gampang jadi stiker kaca tenant.</p>
+      <div class="tags"><span class="hot">stiker tenant</span><span>B2B</span></div>
+    </div>
+
+    <div class="card" data-fam="food" data-name="22 · Mangkok W">
+      <span class="num">22</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><path d="M28 22 L68 58 M40 18 L76 50" stroke="#18181b" stroke-width="5" stroke-linecap="round"/><path d="M36 34 Q42 46 38 54 Q46 44 44 32 Q52 44 48 56" stroke="#71717a" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M16 58 h64 a0 0 0 0 1 0 0 c0 14 -14 24 -32 24 c-18 0 -32 -10 -32 -24" fill="#ee2c4b"/><rect x="28" y="80" width="40" height="6" rx="3" fill="#18181b"/></svg></div>
+      <h3>Mangkok W</h3><p class="why">Mangkok + sumpit + uap. Emosi "laper" paling instan. Beda dari kompetitor travel.</p>
+      <div class="tags"><span class="hot">F&amp;B banget</span><span>app-icon ready</span></div>
+    </div>
+
+    <div class="card" data-fam="food" data-name="23 · Kopi W">
+      <span class="num">23</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><path d="M26 34 h40 v24 a18 18 0 0 1 -18 18 h-4 a18 18 0 0 1 -18 -18 Z" fill="#fff" stroke="#18181b" stroke-width="5"/><path d="M66 40 h6 a8 8 0 0 1 0 16 h-8" fill="none" stroke="#18181b" stroke-width="5"/><text x="46" y="62" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="22" font-weight="800" fill="#f97316">W</text><path d="M60 78 h-28" stroke="#18181b" stroke-width="5" stroke-linecap="round"/></svg></div>
+      <h3>Kopi W</h3><p class="why">Cangkir + latte-art W = nongkrong. Anak kopi langsung ngerasa disapa.</p>
+      <div class="tags"><span>nongkrong</span><span>kafe</span></div>
+    </div>
+
+    <div class="card" data-fam="food" data-name="24 · Tas Mall W">
+      <span class="num">24</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><path d="M24 32 h48 l-4 50 a8 8 0 0 1 -8 8 H36 a8 8 0 0 1 -8 -8 Z" fill="#0e7490"/><path d="M36 32 a12 12 0 0 1 24 0" fill="none" stroke="#18181b" stroke-width="5" stroke-linecap="round"/><text x="48" y="68" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="26" font-weight="800" fill="#fff">W</text></svg></div>
+      <h3>Tas Mall W</h3><p class="why">Shopping bag teal = direktori mall. Paling "mall directory" dari semua opsi.</p>
+      <div class="tags"><span>direktori</span><span>wallet teal</span></div>
+    </div>
+
+    <div class="card" data-fam="food" data-name="25 · Voucher Gunting">
+      <span class="num">25</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><rect x="14" y="28" width="68" height="40" rx="10" fill="#fff" stroke="#18181b" stroke-width="4"/><path d="M48 28 v40" stroke="#18181b" stroke-width="3" stroke-dasharray="5 4"/><text x="31" y="55" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="21" font-weight="800" fill="#ee2c4b">W</text><circle cx="66" cy="44" r="5" fill="none" stroke="#0e7490" stroke-width="3.5"/><circle cx="66" cy="58" r="5" fill="none" stroke="#0e7490" stroke-width="3.5"/><path d="M70 48 L80 58 M70 56 L80 46" stroke="#0e7490" stroke-width="3.5" stroke-linecap="round"/></svg></div>
+      <h3>Voucher Gunting</h3><p class="why">Kupon + gunting = "WIK-XXXXX tunjukin ke kasir". Umpan B2B paling literal.</p>
+      <div class="tags"><span class="hot">klaim voucher</span><span>B2B</span></div>
+    </div>
+  </div></div>
+
+  <!-- ============ FAMILY F · MASKOT ============ -->
+  <div class="fam" data-fam="maskot"><h2>F · Maskot — temen weekend yang bisa disayang</h2><p>Mahal di awal (butuh konsistensi), murah di engagement: maskot = stiker WA, merch, konten TikTok.</p><div class="grid">
+
+    <div class="card" data-fam="maskot" data-name="26 · Blob Weken">
+      <span class="num">26</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><path d="M48 12 C70 12 84 28 82 50 C80 72 66 86 48 86 C30 86 16 72 14 50 C12 28 26 12 48 12 Z" fill="#f97316"/><circle cx="39" cy="46" r="6" fill="#18181b"/><circle cx="57" cy="46" r="6" fill="#18181b"/><circle cx="41" cy="44" r="2" fill="#fff"/><circle cx="59" cy="44" r="2" fill="#fff"/><path d="M39 60 Q48 68 57 60" stroke="#18181b" stroke-width="4" fill="none" stroke-linecap="round"/></svg></div>
+      <h3>Blob Weken</h3><p class="why">Gumpalan oranye ceria. Fleksibel: bisa pegang pin, mangkok, tiket di versi lanjutan.</p>
+      <div class="tags"><span>merch</span><span>butuh sistem</span></div>
+    </div>
+
+    <div class="card" data-fam="maskot" data-name="27 · Matahari Gaul">
+      <span class="num">27</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><g stroke="#f97316" stroke-width="5" stroke-linecap="round"><path d="M48 10 v9 M48 77 v9 M10 48 h9 M77 48 h9 M21 21 l6 6 M69 69 l6 6 M75 21 l-6 6 M27 69 l-6 6"/></g><circle cx="48" cy="48" r="21" fill="#fbbf24" stroke="#18181b" stroke-width="4"/><rect x="30" y="41" width="36" height="12" rx="6" fill="#18181b"/><path d="M34 47 h7 M55 47 h7" stroke="#fbbf24" stroke-width="3" stroke-linecap="round"/><path d="M41 63 Q48 68 55 63" stroke="#18181b" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg></div>
+      <h3>Matahari Gaul</h3><p class="why">Matahari berkacamata = "weekend mode ON". Konten-ready banget.</p>
+      <div class="tags"><span class="hot">konten TikTok</span><span>stiker WA</span></div>
+    </div>
+
+    <div class="card" data-fam="maskot" data-name="28 · Pin Senyum">
+      <span class="num">28</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><path d="M48 8 C28 8 16 23 16 41 C16 63 48 88 48 88 C48 88 80 63 80 41 C80 23 68 8 48 8 Z" fill="#0e7490"/><circle cx="40" cy="38" r="5" fill="#fffdf9"/><circle cx="56" cy="38" r="5" fill="#fffdf9"/><circle cx="40" cy="38" r="2.2" fill="#18181b"/><circle cx="56" cy="38" r="2.2" fill="#18181b"/><path d="M39 50 Q48 58 57 50" stroke="#fffdf9" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg></div>
+      <h3>Pin Senyum</h3><p class="why">Pin teal berwajah — gabungan jagoan #16 + nyawa maskot. Evolusi aman.</p>
+      <div class="tags"><span class="hot">evolusi #16</span><span>friendly</span></div>
+    </div>
+
+    <div class="card" data-fam="maskot" data-name="29 · Mangkok Sedot">
+      <span class="num">29</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><path d="M40 8 C40 22 56 22 50 36 C46 45 52 48 48 56" stroke="#f97316" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M16 58 h64 c0 14 -14 24 -32 24 c-18 0 -32 -10 -32 -24" fill="#ee2c4b"/><circle cx="40" cy="64" r="4.5" fill="#fff"/><circle cx="56" cy="64" r="4.5" fill="#fff"/><circle cx="40" cy="64" r="2" fill="#18181b"/><circle cx="56" cy="64" r="2" fill="#18181b"/><rect x="28" y="80" width="40" height="6" rx="3" fill="#18181b"/></svg></div>
+      <h3>Mangkok Sedot</h3><p class="why">Mangkok nyeruput mie-nya sendiri. Absurd dikit = diingat Gen-Z.</p>
+      <div class="tags"><span>absurd+</span><span>F&amp;B</span></div>
+    </div>
+
+    <div class="card" data-fam="maskot" data-name="30 · Buddy Kepo">
+      <span class="num">30</span><button class="star">☆</button>
+      <div class="mark"><svg viewBox="0 0 96 96"><path d="M14 16 h68 a8 8 0 0 1 8 8 v34 a8 8 0 0 1 -8 8 H44 l-12 12 v-12 h-18 a8 8 0 0 1 -8 -8 V24 a8 8 0 0 1 8 -8" fill="#18181b"/><path d="M38 40 l4 8 6 -12" stroke="#f97316" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="60" cy="44" r="3" fill="#ee2c4b"/><circle cx="60" cy="54" r="3" fill="#0e7490"/></svg></div>
+      <h3>Buddy Kepo</h3><p class="why">Chat bubble + loading dots = quiz yang nanya dulu baru mutusin. Meta produk.</p>
+      <div class="tags"><span>quiz meta</span><span>gelap dominan</span></div>
+    </div>
+  </div></div>
+  </div><!-- /board -->
+
+  <section class="reco">
+    <h2>🏆 Rekomendasi gue (kacamata bisnis)</h2>
+    <p class="sub2">30 opsi di atas buat eksplorasi. Kalau disuruh kunci hari ini, sistemnya: <b>1 master mark + 1 wordmark</b>. Ini podiumnya:</p>
+    <div class="podium">
+      <div class="pod"><span class="rank">#1</span><b>16 · Pin W</b><br>Master mark. Jujur sama job (cari tempat), jadi marker Maps natural, app-icon ready, 1-warna OK buat stamp voucher. Paling kecil risikonya, paling besar gunanya.</div>
+      <div class="pod"><span class="rank">#2</span><b>01 · Titik Nongkrong</b><br>Wordmark pendamping #16. Bersih di header web &amp; struk kasir, titik oranye nyambung ke pin. Lockup: Pin W + "wikendo." sebelahnya.</div>
+      <div class="pod"><span class="rank">#3</span><b>22 · Mangkok W</b><br>Amunisi modul makan/B2B. Dipakai di halaman makan, stiker tenant kuliner, dan konten F&amp;B — tanpa ngotorin master mark.</div>
+      <div class="pod"><span class="rank">#4</span><b>14 · Tiket WKND</b><br>Bahasa visual voucher "WIK-XXXXX tunjukin ke kasir". Dipakai di kartu voucher &amp; materi jualan ke tenant.</div>
+      <div class="pod"><span class="rank">#5</span><b>28 · Pin Senyum</b><br>Evolusi #16 kalau nanti butuh maskot (stiker WA, merch). Jangan dipakai sekarang — kunci yang serius dulu, maskot belakangan.</div>
+    </div>
+    <div class="check">✅ <b>Tes wajib sebelum kunci:</b> 1) kecilin ke 16px — masih kebaca? 2) print hitam-putih — masih hidup? 3) taruh sebelah logo kompetitor — masih beda? 4) cek PDKI manual (kelas 9/35/42) + tabrakan nama di store — brand "Wikendo" sendiri udah BERSIH, logo tinggal hindari kemiripan visual.<br>👉 <b>Next:</b> shortlist Top 3–5 versi lu (klik ⭐), gue finalin jadi lockup resmi + pasang ke header web &amp; favicon.</div>
+  </section>
+
+</div>
+
+<div class="modal" id="modal"><div class="sheet">
+  <button class="x" id="close">✕</button>
+  <h3 id="mTitle"></h3>
+  <p id="mWhy"></p>
+  <div class="views">
+    <div class="v" id="vLight" style="background:#fffdf9"></div>
+    <div class="v" id="vDark" style="background:#18181b"></div>
+    <div class="v" id="vMono" style="background:#fff"></div>
+  </div>
+  <p style="font-size:12px">Kiri: base terang · Tengah: ink gelap · Kanan: versi 1-warna (tes struk/fotokopi). Kalau kanan masih kebaca = lolos.</p>
+</div></div>
+
+<script>
+const chips=[...document.querySelectorAll('.chip')];
+const cards=[...document.querySelectorAll('.card')];
+const fams=[...document.querySelectorAll('.fam')];
+chips.forEach(c=>c.onclick=()=>{
+  chips.forEach(x=>x.classList.remove('on'));c.classList.add('on');
+  const f=c.dataset.f;
+  fams.forEach(fm=>fm.style.display=(f==='all'||fm.dataset.fam===f)?'':'none');
+});
+const KEY='wikendo-logo-shortlist';
+let short=new Set(JSON.parse(localStorage.getItem(KEY)||'[]'));
+const count=document.getElementById('count');
+function paint(){count.textContent=short.size;
+  document.querySelectorAll('.star').forEach(s=>{
+    const n=s.closest('.card').dataset.name;
+    const on=short.has(n);s.classList.toggle('on',on);s.textContent=on?'★':'☆';
+  });
+  localStorage.setItem(KEY,JSON.stringify([...short]));
+}
+document.querySelectorAll('.star').forEach(s=>s.onclick=e=>{e.stopPropagation();
+  const n=s.closest('.card').dataset.name;
+  short.has(n)?short.delete(n):short.add(n);paint();
+});
+document.getElementById('copy').onclick=()=>{
+  const t=[...short].join('\n')||'(shortlist masih kosong — klik ☆ di kartu favorit)';
+  navigator.clipboard.writeText('Shortlist logo Wikendo:\n'+t).then(()=>alert('Shortlist disalin ✅'));
+};
+paint();
+// Modal preview
+const modal=document.getElementById('modal');
+document.querySelectorAll('.mark').forEach(m=>m.onclick=()=>{
+  const card=m.closest('.card');
+  const svg=m.querySelector('svg').outerHTML;
+  document.getElementById('mTitle').textContent=card.dataset.name+' · '+card.querySelector('h3').textContent;
+  document.getElementById('mWhy').textContent=card.querySelector('.why').textContent;
+  document.getElementById('vLight').innerHTML=svg;
+  document.getElementById('vDark').innerHTML=svg;
+  const mono=svg.replaceAll('#f97316','#18181b').replaceAll('#ee2c4b','#18181b').replaceAll('#0e7490','#18181b').replaceAll('#fbbf24','#18181b').replaceAll('#fffdf9','#fff').replaceAll('#fff','#fff');
+  document.getElementById('vMono').innerHTML=mono;
+  modal.classList.add('open');
+});
+document.getElementById('close').onclick=()=>modal.classList.remove('open');
+modal.onclick=e=>{if(e.target===modal)modal.classList.remove('open')};
+</script>
+</body>
+</html>

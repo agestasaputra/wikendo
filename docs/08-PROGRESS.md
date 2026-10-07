@@ -16,10 +16,9 @@
 ## 📌 BOARD — posisi per 7 Okt 2026 sore (auth slice TDD jalan)
 
 ### 🔥 NOW (lagi dikerjain)
-- [x] UI kombo slice-1 (DONE ✅): Home Superapp `index.vue` + token + layout `app.vue` + font Plus Jakarta Sans (wallet 2-state + 2 CTA + grid8, base #fffdf9)
-- [x] UI kombo slice-2 (DONE ✅): `quiz.vue` + `makan.vue` swipe 56px (Orange tempat / Merah makan, Q1 mall chip + toggle halal/kids)
-- [x] UI kombo slice-3 (DONE ✅): `result.vue` + `result-makan.vue` deck hero + voucher klaim wall + quota note
-- [x] UI kombo slice-4 (DONE ✅): `mall/[slug].vue` direktori SEO + filter chip + CTA pre-filled quiz
+- [x] UI kombo slice-1→4 (DONE ✅ 7 Okt): Home wallet + quiz swipe + result deck/voucher + direktori SEO (`e12be1b` live, prod 200 `QUOTA HARI INI` ✅)
+- [x] Logo board 30 opsi (DONE ✅ 7 Okt malam): `design/logo-wikendo-30.html` 6 family + shortlist ⭐ + preview terang/gelap/mono, nunggu Top 3-5 Agesta
+- [ ] NEXT: finalin lockup resmi (master mark + wordmark) + pasang ke header web & favicon + stamp voucher 1-warna
 - [ ] NEXT: wire quota real `GET /api/quota` → wallet 2-state + `POST /api/voucher/claim` klaim beneran
 - [x] Patch 5 docs downstream Addendum v1.3 (ADR v2.2 ✅ + Schema v1.1 ✅ + API v1.1 ✅ + Journey v2.1 ✅ + Checklist v1.2 ✅) — `app/` NOL diubah ✅ 5/5 GENAP
 - [x] Push + Deploy Vercel AUTO via main (kombo `e12be1b` live, prod 200 `QUOTA HARI INI` ✅ 7 Okt malam)
@@ -54,6 +53,13 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-07 malam — Logo board 30 opsi (✅ DONE, nunggu shortlist Top 3-5 Agesta)
+- **Kenapa:** request Agesta "kita belum punya logo wikendo, generate 30 rekomendasi". Logo harus nempel ke bisnis: decision engine weekend (tempat + makan di mall), hidup di 4 tempat (app icon, favicon 16px, header web, struk voucher 1-warna).
+- **Dikerjain:** `design/logo-wikendo-30.html` (self-contained, Plus Jakarta Sans, token kombo) — 6 family x 5 opsi: A wordmark (01-05) + B monogram W (06-10) + C weekend/time (11-15) + D lokasi/keputusan (16-20) + E mall/kuliner (21-25) + F maskot (26-30). Fitur: filter family chip + shortlist ⭐ (localStorage + salin) + klik mark → preview terang/gelap/mono (tes struk 1-warna). Rekomendasi bisnis: #1 = 16 Pin W (master mark), #2 = 01 Titik Nongkrong (wordmark), #3 = 22 Mangkok W (modul makan/B2B), #4 = 14 Tiket WKND (bahasa voucher), #5 = 28 Pin Senyum (evolusi maskot, nanti).
+- **Verifikasi:** file exists 35KB ✅, no linter HTML (skip) ✅, `app/` NOL diubah ✅ (design-only, no deploy UI impact).
+- **Files:** `design/logo-wikendo-30.html` (baru), `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** Agesta shortlist Top 3-5 → finalin lockup resmi + pasang header web & favicon + stamp voucher.
 
 ## 2026-10-07 sore — UI kombo 5+10+15 SLICING (✅ 6 halaman, test 56/56 + lint + build 8.93s)
 - **Kenapa:** approval kombo dikunci Agesta ("gas slicing eksekusi ui nya di repo" + "kan udah gua approve tadi terkait design kombo revamp"). Prod live tapi masih UI lama (0 file .vue diubah di 3 commit terakhir) — design kombo masih statis di `design/revamp-combo-5-10-15.html` yang nggak ikut deploy (Vercel Root = `app/`).
