@@ -13,18 +13,15 @@
 
 ---
 
-## 📌 BOARD — posisi per 8 Okt 2026 (integrasi Supabase NOW, gradasi BACKLOG)
+## 📌 BOARD — posisi per 8 Okt 2026 (Supabase DONE ✅, next quota real)
 
 ### 🔥 NOW (lagi dikerjain)
-- [ ] Integrasi Supabase DB (NOW ⏳ 8 Okt): wire project → run migration + seed → env lokal + Vercel → verifikasi endpoint baca DB beneran
+- [ ] NEXT: wire quota real `GET /api/quota` → wallet 2-state + `POST /api/voucher/claim` klaim beneran (DB sudah live, tinggal wiring kuota)
 - [ ] NEXT: finalin lockup resmi (master mark + wordmark) + pasang ke header web & favicon + stamp voucher 1-warna
 - [x] UI kombo slice-1→4 (DONE ✅ 7 Okt): Home wallet + quiz swipe + result deck/voucher + direktori SEO (`e12be1b` live, prod 200 `QUOTA HARI INI` ✅)
 - [x] Logo board v1 30 opsi (DONE ✅ 7 Okt malam): `design/logo-wikendo-30.html` — campur wordmark, KURANG cocok (Agesta: prefer icon-first app icon)
 - [ ] Logo board v2 icon-first 30 opsi (DONE ✅ 7 Okt malam): `design/logo-wikendo-icon-30.html` — SEMUA icon-first app-icon ready + varian logo saja / logo+wordmark bawah
 - [x] D16 P3 FINAL LOCK (DONE ✅ 8 Okt): Agesta "Eeh sorry ubah ke p3 aja, kali ini final lock" → 5 SVG master + `logo-d16-full-version.html` (16 inline) + board highlight P4→P3 semua direvisi P4(60)→P3(56: x20/y20/w56/h56/rx15 W29). Nunggu "gas pasang D16" (H-LOCK + favicon ke `app/`, butuh approval karena nyentuh `app/`)
-- [ ] NEXT: finalin lockup resmi (master mark + wordmark) + pasang ke header web & favicon + stamp voucher 1-warna
-- [ ] NEXT: wire quota real `GET /api/quota` → wallet 2-state + `POST /api/voucher/claim` klaim beneran
-- [x] Patch 5 docs downstream Addendum v1.3 (ADR v2.2 ✅ + Schema v1.1 ✅ + API v1.1 ✅ + Journey v2.1 ✅ + Checklist v1.2 ✅) — `app/` NOL diubah ✅ 5/5 GENAP
 - [x] Push + Deploy Vercel AUTO via main (kombo `e12be1b` live, prod 200 `QUOTA HARI INI` ✅ 7 Okt malam)
 
 ### ⏳ NEXT (antrian dekat)
@@ -38,6 +35,7 @@
 - [ ] Scraper `raw_scrape` → parser per-mall (post-PMF)
 
 ### ✅ DONE (ringkas — detail di LOG bawah)
+- [x] Integrasi Supabase DB (DONE ✅ 8 Okt): project `wikendo-production` → run base + migration + seed 5×40 verified → `.env` lokal ✅ → 3 env Vercel Production ✅ → prod `/api/malls` 200 (5 mall) + `/api/malls/grand-indonesia/tenants` 200 (40 tenant) ✅
 - [x] Addendum v1.3 Revamp+Auth APPROVED by Agesta 7 Okt 2026 — LOCKED (`docs/09-PRD-Addendum-Revamp-Combo-Auth.md` DRAFT → Approved) ✅
 - [x] Revamp kombo 5+10+15 (`design/revamp-combo-5-10-15.html`) — 1 alur utuh Home→Quiz→Result→Makan→Voucher→Direktori, visual disatuin, nunggu approval Agesta ✅
 - [x] Revamp option board Vol.1 (Opsi 1–5, `design/revamp-options-v1.html`) + Vol.2 (Opsi 6–15, `design/revamp-options-v2.html`) — proposal visual only, 0 ubah `app/`, nunggu approval Agesta ✅
@@ -57,6 +55,14 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-08 — Integrasi Supabase DONE ✅ (DB live, prod baca DB beneran)
+- **Kenapa:** lanjut todolist Agesta VERBATIM "Gua mau integrate database dengan supabase".
+- **Dikerjain (Agesta):** bikin org + project `wikendo-production` → run `migration-base.sql` (6 COUNT ✅) → `migration.sql` → `seed.sql` → verifikasi 5×40 ✅ → pasang 3 env Vercel Production (URL=Config, anon=Config, service_role=Secret) + redeploy tanpa build cache.
+- **Dikerjain (Hermes):** `supabase/migration-base.sql` (baru, 6 tabel + RLS + 4 functions, idempotent) + `app/.env` lokal (di-ignore git ✅) + diagnosis 500 prod = env belum kepickup (bukan bug kode — lokal `/api/malls` 200 5 mall ✅).
+- **Verifikasi:** prod `GET /api/malls` → 200 (5 mall, semua `total_tenant: 40`) ✅ + prod `GET /api/malls/grand-indonesia/tenants` → 200 (40 tenant: % Arabica, A&W, Abuba…) ✅. Vitest 56/56 ✅ (tidak tersentuh DB).
+- **Files:** `supabase/migration-base.sql`, `app/.env` (lokal SAJA, tidak commit), `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** wire quota real `GET /api/quota` → wallet 2-state + `POST /api/voucher/claim` klaim beneran.
 
 ## 2026-10-08 — Integrasi Supabase START (Agesta: skip gradasi → fokus DB)
 - **Kenapa:** Agesta VERBATIM "okee jadikan ini sebagai todolist kita. kita skip ke next step aja. Gua mau integrate database dengan supabase". Board 20 gradasi → BACKLOG SKIP ⏸️.
