@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-import { filterTenantsByKeyword } from '~/utils/quiz-logic'
+import { filterTenantsByKeyword, getMallName } from '~/utils/quiz-logic'
 interface TenantItem {
   name: string
   cat?: string
@@ -65,7 +65,7 @@ interface TenantItem {
 
 const route = useRoute()
 const slug = route.params.slug as string
-const mallName = computed(() => ({ 'grand-indonesia': 'Grand Indonesia', 'central-park': 'Central Park', 'kota-kasablanka': 'Kota Kasablanka', 'pondok-indah-mall': 'Pondok Indah Mall', 'aeon-bsd': 'Aeon BSD' } as Record<string, string>)[slug] || slug)
+const mallName = computed(() => getMallName(slug))
 const keyword = ref('')
 const fHalal = ref(false)
 const fBudget = ref(false)

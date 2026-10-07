@@ -173,3 +173,36 @@ export function getLoaderMeta(variant: LoaderVariant): LoaderMeta {
   }
   return { accent: '#0e7490', title: 'Lagi muat tenant…', hint: 'Direktori mall • tanpa LLM, bentar doang' }
 }
+
+/* ── Nama mall (direktori + quiz makan) ────────────────────────────
+ * KENAPA di sini (pure): mapping slug→nama dipakai 3 tempat
+ * (mall/index.vue, mall/[slug].vue, result-makan.vue) → 1 sumber
+ * kebenaran. Mall ke-6 = tambah 1 entry di 2 map ini. Tanpa baca route/DB.
+ * Contoh: getMallShortLabel('grand-indonesia') → 'GI'.
+ */
+
+const MALL_NAMES: Record<string, string> = {
+  'grand-indonesia': 'Grand Indonesia',
+  'central-park': 'Central Park',
+  'kota-kasablanka': 'Kota Kasablanka',
+  'pondok-indah-mall': 'Pondok Indah Mall',
+  'aeon-bsd': 'Aeon BSD'
+}
+
+const MALL_SHORT_LABELS: Record<string, string> = {
+  'grand-indonesia': 'GI',
+  'central-park': 'CP',
+  'kota-kasablanka': 'Kokas',
+  'pondok-indah-mall': 'PIM',
+  'aeon-bsd': 'Aeon'
+}
+
+/** Slug → nama lengkap. Slug ngaco = fallback slug as-is (tidak crash). */
+export function getMallName(slug: string): string {
+  return MALL_NAMES[slug] || slug
+}
+
+/** Slug → label pendek chip (GI, CP, Kokas, PIM, Aeon). Ngaco = fallback slug. */
+export function getMallShortLabel(slug: string): string {
+  return MALL_SHORT_LABELS[slug] || slug
+}

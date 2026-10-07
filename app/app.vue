@@ -10,7 +10,7 @@
         <nav class="flex gap-4 text-sm font-bold">
           <NuxtLink to="/quiz" class="text-tempat">🗺️ Tempat</NuxtLink>
           <NuxtLink to="/makan" class="text-makan">🍜 Makan</NuxtLink>
-          <NuxtLink to="/mall/grand-indonesia" class="text-gray-500 hidden sm:inline">🏬 Mall</NuxtLink>
+          <NuxtLink to="/mall" class="text-gray-500 hidden sm:inline">🏬 Mall</NuxtLink>
         </nav>
       </div>
     </header>

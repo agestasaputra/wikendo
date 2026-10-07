@@ -16,6 +16,7 @@
 ## 📌 BOARD — posisi per 8 Okt 2026 (Supabase DONE ✅, next quota real)
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Halaman index direktori `/mall` (DONE ✅ 8 Okt): nav header "🏬 Mall" tadinya hardcode GI → sekarang hub 5 mall (Lihat Tenant / Cariin yang cocok per kartu) + helper `getMallName/getMallShortLabel` hapus duplikat mapping di 2 files
 - [x] Loader/spinner fetching API (DONE ✅ 8 Okt): komponen `AppLoader` (variant tempat/makan/mall) + helper `getLoaderMeta` tested → pasang ke `result.vue` + `result-makan.vue` + `mall/[slug].vue` (sebelumnya direktori NOL loader pas ganti filter)
 - [ ] NEXT: wire quota real `GET /api/quota` → wallet 2-state + `POST /api/voucher/claim` klaim beneran (DB sudah live, tinggal wiring kuota)
 - [ ] NEXT: finalin lockup resmi (master mark + wordmark) + pasang ke header web & favicon + stamp voucher 1-warna
@@ -56,6 +57,13 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-08 — Halaman index direktori `/mall` DONE ✅ (fix hardcode GI)
+- **Kenapa:** temuan Agesta "klik button mall di header, redirect ke mall/grand-indonesia? seharusnya ga langsung auto select" — benar, link header hardcode GI sisa slicing (dulu DB kosong). User non-GI ngerasa "cuma GI doang" → cabut.
+- **Dikerjain (TDD RED→GREEN):** `tests/mall.test.ts` 4 test (MERAH 4 FAIL by design → HIJAU 4/4) → helper `getMallName/getMallShortLabel` di `utils/quiz-logic.ts` → refactor `mall/[slug].vue` + `result-makan.vue` hapus mapping inline duplikat → baru `pages/mall/index.vue` (fetch `GET /api/malls` + AppLoader + 5 kartu: Lihat Tenant → `/mall/:slug`, Cariin yang cocok → `/makan?mall=:slug` Q1 ke-skip) → header `/mall/grand-indonesia` → `/mall`.
+- **Verifikasi:** test 64/64 (5 files) ✅ + lint 0 error ✅ + build 8.82s ✅. `AGENTS.md` §4 + §6 (mall ke-6 cukup edit 1 map) + §7 diupdate.
+- **Files:** `app/tests/mall.test.ts` (baru), `app/utils/quiz-logic.ts`, `app/pages/mall/index.vue` (baru), `app/pages/mall/[slug].vue`, `app/pages/result-makan.vue`, `app/app.vue`, `app/AGENTS.md`, `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** commit + push + deploy Vercel → verify prod `/mall` + 5 leaf.
 
 ## 2026-10-08 — Loader/spinner fetching API DONE ✅ (AppLoader 3 pages)
 - **Kenapa:** request Agesta VERBATIM "tolong tambahin loader atau spinner ketika melakukan fetching data dari api" — temuan audit: `result` + `result-makan` cuma emoji pulse, `mall/[slug]` NOL loader pas ganti filter (user kira hang).

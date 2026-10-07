@@ -53,7 +53,8 @@ app/
 │   ├── result.vue          # /result — useFetch POST /api/tempat/recommend, 3 state pending/error/data
 │   ├── makan.vue           # /makan (4Q + toggle halal/kids + pre-fill ?mall=)
 │   ├── result-makan.vue    # /result-makan — kartu tenant + tombol Maps
-│   └── mall/[slug].vue     # /mall/:slug — direktori, search client-side
+│   ├── mall/[slug].vue     # /mall/:slug — direktori, search client-side
+│   ├── mall/index.vue        # /mall — INDEX direktori (hub SEO 5 mall, fetch GET /api/malls)
 ├── server/api/             # BACKEND — secret & quota HANYA di sini, tidak pernah ke browser
 │   ├── tempat/recommend.post.ts   # *.post.ts = POST only (405 otomatis kalau salah method)
 │   ├── makan/recommend.post.ts
@@ -63,7 +64,8 @@ app/
 │   └── llm.ts              # callLLM() + generateTempat() + rankTenants() — timeout 15 dtk
 ├── utils/
 │   └── quiz-logic.ts       # FUNGSI PURE (progressPercent, isLastStep, getMakanStartStep,
-│                           # filterTenantsByKeyword, buildMapsUrl, getLoaderMeta) — dipakai pages + server,
+│                           # filterTenantsByKeyword, buildMapsUrl, getLoaderMeta,
+│                           # getMallName, getMallShortLabel) — dipakai pages + server,
 │                           # di-test di tests/. Nambah logic baru? Taruh sini kalau pure.
 ├── components/
 │   └── AppLoader.vue       # SPINNER fetching API (variant tempat/makan/mall, warna aksen
@@ -109,8 +111,9 @@ ada di `app.vue` — jangan duplikat di tiap page.
 `defineEventHandler` + `readBody`/`getQuery` + `supabaseAdmin()` + `createError({statusCode})`.
 
 **Mall ke-6:** (1) row baru di tabel `malls`; (2) tenants ke `data/tenants-seed.csv` + import;
-(3) 1 option di `questions[0]` dalam `pages/makan.vue`; (4) 1 entry di `mallName`
-dalam `pages/mall/[slug].vue`. Tidak perlu endpoint baru.
+(3) 1 option di `questions[0]` dalam `pages/makan.vue`; (4) 1 entry di `MALL_NAMES` +
+`MALL_SHORT_LABELS` dalam `utils/quiz-logic.ts` (otomatis kepakai `mall/index.vue`,
+`mall/[slug].vue`, `result-makan.vue`). Tidak perlu endpoint baru, tidak perlu edit pages.
 
 **Fungsi pure baru:** tulis test di `tests/` DULU (tonton MERAH) → implement di
 `utils/quiz-logic.ts` (tonton HIJAU) → pakai di pages/server → `pnpm test && pnpm lint`.
@@ -120,8 +123,8 @@ dalam `pages/mall/[slug].vue`. Tidak perlu endpoint baru.
 ## 7. Testing
 
 - Runner: **Vitest 5** + happy-dom. Config: `vitest.config.ts` (`tests/**/*.test.ts`).
-- Yang di-test sekarang: fungsi pure di `utils/quiz-logic.ts` (60 test, 4 files: quiz-logic,
-  quota-auth, auth-gate, loader 4 variant tempat/makan/mall/fallback).
+- Yang di-test sekarang: fungsi pure di `utils/quiz-logic.ts` (64 test, 5 files: quiz-logic,
+  quota-auth, auth-gate, loader 4 variant, mall 4 nama/label).
 - API routes & pages BELUM ada test (butuh mock `useRuntimeConfig`/`$fetch`/Supabase) —
   jangan klaim coverage penuh. Kalau nambah: mock di level `callLLM`, bukan HTTP sungguhan.
 - TDD: test gagal dulu (MERAH) → kode minimal (HIJAU) → refactor. Satu perilaku per test.

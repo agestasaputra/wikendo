@@ -52,6 +52,7 @@
 
 <script setup lang="ts">
 import type { TenantRecommendation } from '~/types'
+import { getMallShortLabel } from '~/utils/quiz-logic'
 const route = useRoute()
 const { data, pending, error, refresh } = await useFetch<{ recommendations: TenantRecommendation[] }>('/api/makan/recommend', {
   method: 'POST',
@@ -66,7 +67,7 @@ const errorMessage = computed(() => String(errMsg.value))
 const isWall = computed(() => /login/i.test(errorMessage.value) || (error.value as unknown as { statusCode?: number })?.statusCode === 403)
 const quotaLabel = computed(() => isWall.value ? '0/2 habis 🔒' : '4/5')
 const mallSlug = computed(() => String(route.query.mall_slug || route.query.mall || ''))
-const mallLabel = computed(() => ({ 'grand-indonesia': 'GI', 'central-park': 'CP', 'kota-kasablanka': 'Kokas', 'pondok-indah-mall': 'PIM', 'aeon-bsd': 'Aeon BSD' } as Record<string, string>)[mallSlug.value] || 'Mall')
+const mallLabel = computed(() => (mallSlug.value ? getMallShortLabel(mallSlug.value) : 'Mall'))
 const hero = computed(() => {
   const r = list.value[idx.value] || ({} as TenantRecommendation)
   return { name: r.name || '—', reason: r.reason || '—', price: r.price_range || '—', floor: (r as { lantai?: string }).lantai || '?', halal: (r as { halal?: boolean | null }).halal ?? null, kids: (r as { kids_friendly?: boolean }).kids_friendly ? '👶 kids' : '—', maps: r.maps_url || '#' }
