@@ -1,9 +1,9 @@
 # Architecture Decision Record (ADR)
 # Weekend Planner MVP
 
-**Version:** 2.1 Amended (6 Okt 2026 malam)
-**Date:** October 5, 2026 (asli) + amendment 6 Okt 2026
-**Status:** Approved for Implementation + 3 amendment tercatat di log bawah
+**Version:** 2.2 Amended (7 Okt 2026)
+**Date:** October 5, 2026 (asli) + amendment 6 Okt 2026 + amendment 7 Okt 2026 (Addendum 09 v1.3)
+**Status:** Approved for Implementation + amendments tercatat di change log bawah
 **Authors:** Agesta (Founder) + AI Development Team
 
 ---
@@ -470,7 +470,13 @@ Quota makan 5/hari TERPISAH dari quota tempat 2/hari (behaviour beda: makan bisa
 
 ## 6. Authentication
 
-### Decision: Supabase Auth (Email/Password + Google OAuth)
+### Decision: Supabase Auth (Email/Password + Google OAuth 1-tap primary)
+
+**Amendment Addendum 09 v1.3 (7 Okt 2026 — LOCKED):** Auth PROGRESIF, bukan mandatory login.
+Anon bisa pakai quiz tempat 1x/hari + makan 2x/hari (full result + Maps boleh).
+Login wall cuma di 4 momen high-intent: generate ke-2 tempat / ke-3 makan, tap Simpan/Klaim voucher,
+buka Wishlist/Riwayat, quota habis + countdown. Klaim voucher WAJIB login (anti-farming).
+Google OAuth 1-tap = primary (friksi nol). Email+password = secondary.
 
 **Rationale:**
 - Built into Supabase (no separate auth service)
@@ -520,12 +526,12 @@ const { data, error } = await supabase.auth.signInWithOAuth({
   }
 })
 
-// After OAuth callback, collect phone if first time
+// After OAuth callback: NO phone modal (Addendum 09 v1.3 — friksi nol).
+// Profile auto-created with phone=NULL via initialize_new_user trigger.
 if (isFirstLogin) {
-  // Show modal to collect phone
   await supabase.from('user_profiles').insert({
     user_id: user.id,
-    phone: phone
+    phone: null // optional, user bisa isi nanti di settings (Phase 2 broadcast)
   })
 }
 ```
@@ -535,11 +541,12 @@ if (isFirstLogin) {
 - Auto-refresh before expiry
 - Logout clears session from client + server
 
-**Phone Number Requirement:**
-- Required field on registration
-- Format validation: +62 (Indonesia)
+**Phone Number Requirement (Addendum 09 v1.3, 7 Okt 2026 — LOCKED):**
+- OPTIONAL field, NULL-able (DROP mandatory — bunuh conversion + SMS cost)
+- Format validation +62 HANYA kalau diisi; kosong = valid
 - Not verified in MVP (SMS verification post-MVP)
-- Purpose: User accountability, future SMS notifications
+- Purpose Phase 2: broadcast promo (optional), bukan accountability
+- Google OAuth TANPA modal "Masukkan nomor HP" (friksi nol, 1-tap langsung masuk)
 
 **Email Verification:**
 - **Decision: Optional for MVP** (reduce friction)
@@ -555,20 +562,24 @@ if (isFirstLogin) {
 - ✅ Battle-tested auth system
 - ✅ Multiple providers (easy to add more)
 - ✅ Zero setup cost
-- ⚠️ Phone collection may reduce signup conversion
+- ✅ Phone optional → signup conversion NAIK (asumsi lama "phone doesn't hurt" TERBUKTI salah, di-drop 7 Okt 2026)
 - ❌ Supabase dependency
 
 ---
 
 ## 7. Quota System
 
-### Decision: Dual Quota — Tempat 2/hari + Makan 5/hari, Daily Reset, DB-Enforced (Addendum 07 v1.1 Approved 6 Okt 2026)
+### Decision: Dual Quota — Tempat 2/hari + Makan 5/hari, Daily Reset, DB-Enforced (Addendum 07 v1.1 Approved 6 Okt 2026; progresif anon Addendum 09 v1.3 Approved 7 Okt 2026)
 
 **Rules (Split Quiz — tidak dicampur):**
-- Quiz Tempat (`/quiz` → `/result`): **2 quota/hari** (tetap PRD v2.0). Anonymous 1x, login 2x.
+- Quiz Tempat (`/quiz` → `/result`): **2 quota/hari** (tetap PRD v2.0). Anonymous 1x (cookie `quota_used`), login 2x.
 - Quiz Makan (`/makan` → `/result-makan`): **5 quota/hari terpisah** (tidak makan quota tempat). Anonymous 2x (cookie `makan_quota_used`), login 5x.
 - Each generate: **5 recommendations** (tempat murni / tenant murni, tidak campur 3+2 — dihapus per feedback Agesta).
 - Reset: Every day at **00:00 WIB** (UTC+7). Table `user_quota` + `mall_search_quota(user_id, date, used)`.
+- **Login wall 4 momen (Addendum 09 v1.3):** generate ke-2 tempat / ke-3 makan → 403 `LOGIN_REQUIRED`; tap Simpan/Klaim voucher → bottom sheet login; buka Wishlist/Riwayat anon → login prompt; quota register habis → countdown reset 00.00 + tombol login.
+- **Klaim voucher makan WAJIB login** (anti-farming): endpoint voucher return 401 kalau anon.
+- **Anon locked:** Simpan/Wishlist/Riwayat. **Anon boleh:** full result + Maps + Lapor tutup/buka + Vote + share read-only link.
+- Abuse (clear storage = reset quota anon) DITERIMA saat soft launch 30-50 users — growth > strict; kerasin (fingerprint/IP tracking) kalau spike.
 
 **Implementation:**
 
@@ -751,8 +762,12 @@ gtag('event', 'recommendation_clicked', {
 })
 
 gtag('event', 'login_prompted', {
-  reason: 'quota_limit' // or 'save_favorite'
+  reason: 'quota_limit' // atau 'save_favorite' | 'claim_voucher' | 'open_wishlist' | 'open_history' (Addendum 09 v1.3: 4 momen wall)
 })
+
+gtag('event', 'anon_quota_exhausted', { type: 'tempat' | 'makan' }) // Addendum 09 v1.3
+
+gtag('event', 'voucher_claimed', { tenant_id, mall_slug }) // Addendum 09 v1.3 (wajib login)
 
 gtag('event', 'user_registered', {
   method: 'email' // or 'google'
@@ -1078,7 +1093,7 @@ export default defineNuxtConfig({
 | Backend | Nuxt server routes | Express | No separate backend needed |
 | Database | Supabase | Firebase | Free tier, built-in auth, PostgreSQL |
 | LLM | Hermes-combo | OpenAI GPT-4o-mini | Already available, high quality |
-| Auth | Supabase Auth | NextAuth | Built-in, zero setup |
+| Auth | Supabase Auth (Google 1-tap primary, phone optional) | NextAuth | Built-in, zero setup; progresif anon 1+2 (Addendum 09 v1.3) |
 | Quota | Dual: tempat 2/hari + makan 5/hari (Addendum 07 v1.1) | Lifetime quota | Retention > monetization; makan behaviour 2-3x/hari, cost tetap $0 |
 | Analytics | Google Analytics 4 | Posthog | Free unlimited, standard tool |
 | Hosting | Vercel | Netlify | Best Nuxt integration |
@@ -1086,13 +1101,14 @@ export default defineNuxtConfig({
 
 ---
 
-**Document Status:** APPROVED + Amended v2.1 (6 Okt 2026)
-**Next Action:** Push GitHub → Auth slice → Seed Supabase → E2E 8.4
+**Document Status:** APPROVED + Amended v2.2 (7 Okt 2026)
+**Next Action:** Eksekusi Nuxt TDD — auth slice + wallet 2-state + login wall 4 momen + voucher gate (Addendum 09 v1.3 effort ~5-6 jam)
 
 **Review Schedule:** After soft launch (30 users), review and update based on real data
 
 ---
 
 **Change Log:**
+- v2.2 (7 Okt 2026): amendment Addendum 09 v1.3 — (1) auth progresif anon tempat 1x + makan 2x, voucher WAJIB login, 4 momen login wall, (2) phone DROP mandatory → optional NULL-able + Google OAuth tanpa modal HP, (3) analytics baru `anon_quota_exhausted` + `voucher_claimed` + `login_prompted{reason}` 4 momen. Trigger: approve Agesta "gas kombo 5+10+15 + kejar user sebanyak-banyaknya".
 - v2.1 (6 Okt 2026 malam): 6 amendment — (1) Nuxt 3→4.5.2 + struktur folder real, (2) endpoint `/api/generate` → split tempat/makan/malls, (3) flow makan filter-dulu + LLM ranking, (4) struktur direktori backend real + quota split 2/5, (5) NULL tri-state + metadata + staging `raw_scrape`, (6) pola LLM makan hemat. Trigger: brainstorming split quiz + audit data AI-dummy.
 - v2.0 (5 Okt 2026): Initial approved (monolit Nuxt+Supabase, quota dual via Addendum 07 v1.1).

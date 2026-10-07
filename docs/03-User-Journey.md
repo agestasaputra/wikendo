@@ -1,8 +1,8 @@
 # User Journey - Weekend Planner MVP
 
-**Version:** 2.0 (Updated for final quota system)  
-**Date:** October 5, 2026  
-**Status:** Final
+**Version:** 2.1 (7 Okt 2026 — patch Addendum 09 v1.3: auth progresif + kombo 5+10+15 + voucher)
+**Date:** October 5, 2026 (asli) + patch 7 Okt 2026
+**Status:** Final + patch v1.3 LOCKED
 
 ---
 
@@ -12,11 +12,14 @@ Weekend Planner has 2 main user types with distinct journeys:
 1. **Anonymous Users** (first-time visitors, no account)
 2. **Registered Users** (logged-in)
 
-**Quota Rules:**
-- All users: **2 quota per day** (reset 00:00 WIB)
-- Anonymous: Can use **1 quota** (must login for 2nd)
-- Each generate: **5 recommendations**
-- No free regenerates (each counts)
+**Quota Rules (patch Addendum 09 v1.3 — split + progresif, LOCKED):**
+- **Tempat** (`/quiz`→`/result`): 2/hari (anon 1x cookie `quota_used`, login 2x)
+- **Makan** (`/makan`→`/result-makan`): 5/hari TERPISAH (anon 2x cookie `makan_quota_used`, login 5x, tidak makan quota tempat)
+- **Klaim voucher makan WAJIB login** (1 user 1 tenant/hari, anti-farming)
+- **Anon locked:** Simpan/Wishlist/Riwayat. **Anon boleh:** full result + Maps + Lapor tutup/buka + Vote + share read-only
+- **Login wall 4 momen:** generate ke-2 tempat / ke-3 makan → 403 LOGIN_REQUIRED; tap Simpan/Klaim voucher → bottom sheet login; buka Wishlist/Riwayat anon → prompt; quota habis → countdown 00.00 + tombol login
+- Each generate: **5 recommendations** (tidak campur tempat+makan)
+- Reset 00:00 WIB | LLM fail → quota tidak kepotong | Abuse clear-storage diterima soft launch (growth > strict)
 
 ---
 
@@ -238,31 +241,31 @@ Actions:
 - "Login" button → Supabase Auth
 - "Login dengan Google" button → OAuth flow
 
-**Option B: Register (`/register`)**
+**Option B: Register (`/register`)** (patch Addendum 09 v1.3: phone OPTIONAL)
 
 Form:
 - Email (validation, check duplicate)
-- Phone number (+62 format, validation)
 - Password (min 8 chars, strength indicator)
 - Confirm password
+- Phone (+62, OPTIONAL — field collapsible "Tambah HP (opsional, buat info promo)" — kosong = valid)
 - Checkbox: "Setuju dengan [Syarat] dan [Privasi]"
 
 Actions:
-- "Daftar" button → Supabase signup + create profile
-- "Daftar dengan Google" button → OAuth + collect phone
+- "Daftar" button → Supabase signup + create profile (phone=NULL kalau skip)
+- "Daftar dengan Google" button → OAuth langsung masuk, TANPA modal HP (friksi nol)
 
-**Google OAuth Flow:**
+**Google OAuth Flow (patch v1.3):**
 ```
-1. Click "Login dengan Google"
+1. Click "Login dengan Google" (primary button, 1-tap)
 2. Redirect to Google consent screen
 3. User approves
 4. Redirect to /auth/callback
-5. If first time:
-   → Show modal: "Masukkan nomor HP"
-   → Save to user_profiles
-6. Initialize quota (2/day)
+5. Profile auto-created phone=NULL via initialize_new_user trigger (TANPA modal "Masukkan nomor HP")
+6. Initialize quota tempat 2 + makan 5 hari ini
 7. Redirect back to /quiz or previous page
 ```
+
+**Kenapa phone optional?** Setiap field tambahan = drop-off. HP cuma dipakai Phase 2 broadcast (belum ada) — minta sekarang = bayar cost tanpa benefit. Google 1-tap tanpa modal = conversion tertinggi.
 
 **Success:**
 - Set session cookie (httpOnly)
@@ -322,12 +325,26 @@ gtag('event', 'user_logged_in', { method: 'email' | 'google' })
 
 3. **Generate Again**
    - Click "Generate Lagi" → Back to quiz
-   - Complete new quiz → Generate (quota: 0/2)
-   - After 2nd generate: **Quota exhausted**
+   - Complete new quiz → Generate (tempat quota: 0/2) + makan quota TERPISAH 5/hari (tidak kepotong)
+   - After 2nd generate tempat: **Quota tempat exhausted** → countdown 00.00, makan masih bisa jalan
 
 ---
 
-### Step 8: Quota Exhausted (2/2 Used)
+### Step 8: Quota Exhausted — wallet 2-state (patch Addendum 09 v1.3)
+
+**Anon (login wall + countdown):**
+```
+┌────────────────────────────────────────┐
+│  Jatah gratis hari ini habis 🎁        │
+│  Login gratis → buka 2 tempat +        │
+│  5 makan/hari. Besok reset 00:00 WIB   │
+│  ⏰ 8 jam 23 menit lagi                │
+│  [Login 10 detik (Google 1-tap)]       │
+│  [Lihat Wishlist] → login juga         │
+└────────────────────────────────────────┘
+```
+
+**Registered (countdown only, tetap bisa lihat history/save/share):**
 
 **Modal/Screen:**
 ```
@@ -532,8 +549,10 @@ gtag('event', 'recommendation_clicked', {
   category 
 })
 
-// Auth
-gtag('event', 'login_prompted', { reason })
+// Auth (patch Addendum 09 v1.3: 4 momen wall)
+gtag('event', 'login_prompted', { reason: 'quota_limit' | 'save_favorite' | 'claim_voucher' | 'open_wishlist' | 'open_history' })
+gtag('event', 'anon_quota_exhausted', { type: 'tempat' | 'makan' })
+gtag('event', 'voucher_claimed', { tenant_id, mall_slug })
 gtag('event', 'user_registered', { method })
 gtag('event', 'user_logged_in', { method })
 
@@ -567,9 +586,10 @@ gtag('event', 'timeout_occurred')
 - **Avg Time on Page:** >60 seconds
 - **Save/Share Rate:** >10%
 
-### Auth Conversion
-- **Anonymous → Register:** >25%
-- **Login Prompt → Signup:** >40%
+### Auth Conversion (patch Addendum 09 v1.3 — funnel progresif, bukan mandatory)
+- **Anonymous → Register:** >15% (7-day window, event `user_registered` setelah `anon_quota_exhausted`)
+- **Login Prompt → Signup:** >40% per momen (`quota_limit` / `claim_voucher`pisah ukur — voucher wall biasanya tertinggi)
+- **Voucher Claim Rate:** >20% dari viewer result makan yang login (sinyal monetisasi tenant)
 
 ### Retention
 - **Day 2 Return:** >30%
@@ -596,6 +616,14 @@ List 40 tenant searchable + filter halal/budget/lantai/kids/mission/search + ban
 
 ### Step 12: History/Favorites Split
 Tab Tempat | Makanan. Snapshot JSONB + `type: 'tempat'|'makan'` agar tidak kecampur.
+
+### Step 13: Klaim Voucher Makan — WAJIB login (Addendum 09 v1.3, 7 Okt 2026)
+**Goal:** User makan → tunjukin kode → tenant happy → repeat order.
+**Flow:** Result makan → card tenant promo → tap "Klaim Voucher" → kalau anon: bottom sheet login ("Login buat klaim voucher — 10 detik via Google") → klaim → kode `WIK-XXXXX` + "Tunjukin ke kasir" → 1 user 1 tenant per hari (`voucher_claims` UNIQUE) → double-klaim = 409 `ALREADY_CLAIMED` + ajak coba tenant lain. Kasir validasi visual Phase 1 (tunjukin kode), dashboard validasi Phase 2.
+**Analytics:** `gtag('event','voucher_claimed',{tenant_id,mall_slug})` + `login_prompted{reason:'claim_voucher'}`.
+
+### Step 14: Home Superapp Kombo 5+10+15 (ref visual `design/revamp-combo-5-10-15.html`)
+Wallet quota 2-state di hero ("🎁 1 tempat • 2 makan free — Login buat buka 2+5" vs register countdown 00.00) + 2 CTA "Cari Tempat" / "Cari Makan" + grid Event/Promo/Wishlist/Riwayat (2 terkunci gembok buat anon) + strip mall GI/CP/Kokas/PIM/Aeon → `/mall/:slug` → `/makan?mall=` pre-fill.
 
 ---
 

@@ -1,9 +1,9 @@
 # API Specification - Weekend Planner MVP
 
-**Version:** 1.0  
-**Date:** October 5, 2026  
+**Version:** 1.1 (7 Okt 2026 — patch Addendum 09 v1.3: quota split response + phone optional + voucher claim)
+**Date:** October 5, 2026 (asli) + patch 7 Okt 2026
 **Base URL:** `https://wikendo-web-app.vercel.app` (Production)  
-**Status:** Final for MVP Development
+**Status:** Final + patch v1.3 LOCKED
 
 ---
 
@@ -245,7 +245,8 @@ export default defineEventHandler(async (event) => {
 
 **Endpoint:** `GET /api/quota`
 
-**Description:** Get current quota status for user
+**Description:** Get current quota status for user — SPLIT tempat+makan (patch Addendum 09 v1.3).
+Dipakai Home wallet 2-state: anon `1 tempat • 2 makan free`, register `2 • 5`.
 
 **Authentication:** Optional
 
@@ -254,22 +255,21 @@ export default defineEventHandler(async (event) => {
 **Response (Anonymous):**
 ```typescript
 {
-  quota_used: 0,
-  quota_limit: 1,
-  quota_remaining: 1,
+  tempat: { used: 0|1, limit: 1, remaining: 1|0 },
+  makan: { used: 0|1|2, limit: 2, remaining: 2|1|0 },
   is_logged_in: false,
-  reset_at: null // No reset for anonymous
+  reset_at: null, // cookie-based, reset tengah malam browser
+  login_cta: "Login gratis → buka 2 tempat + 5 makan/hari"
 }
 ```
 
 **Response (Registered):**
 ```typescript
 {
-  quota_used: 1,
-  quota_limit: 2,
-  quota_remaining: 1,
+  tempat: { used: 1, limit: 2, remaining: 1 },
+  makan: { used: 3, limit: 5, remaining: 2 },
   is_logged_in: true,
-  reset_at: "2026-10-06T00:00:00+07:00",
+  reset_at: "2026-10-08T00:00:00+07:00",
   hours_until_reset: 18.5
 }
 ```
@@ -279,34 +279,34 @@ export default defineEventHandler(async (event) => {
 
 **Implementation:**
 ```typescript
-// server/api/quota.get.ts
+// server/api/quota.get.ts (patch Addendum 09 v1.3 — split tempat+makan)
 export default defineEventHandler(async (event) => {
   const user = event.context.user
-  
+
   if (!user) {
-    // Anonymous user
-    const sessionId = getCookie(event, 'session_id')
-    const quotaUsed = getCookie(event, 'quota_used') === '1' ? 1 : 0
-    
+    // Anonymous: cookie terpisah (tempat 1x, makan 2x)
+    const tempatUsed = getCookie(event, 'quota_used') === '1' ? 1 : 0
+    const makanUsed = Math.min(parseInt(getCookie(event, 'makan_quota_used') || '0'), 2)
+
     return {
-      quota_used: quotaUsed,
-      quota_limit: 1,
-      quota_remaining: 1 - quotaUsed,
+      tempat: { used: tempatUsed, limit: 1, remaining: 1 - tempatUsed },
+      makan: { used: makanUsed, limit: 2, remaining: 2 - makanUsed },
       is_logged_in: false,
-      reset_at: null
+      reset_at: null,
+      login_cta: "Login gratis → buka 2 tempat + 5 makan/hari"
     }
   }
-  
-  // Registered user
-  const quota = await getQuotaStatus(user.id)
-  
+
+  // Registered: user_quota (tempat 2) + mall_search_quota hari ini (makan 5)
+  const tempat = await getQuotaStatus(user.id)
+  const makan = await getMakanQuotaStatus(user.id) // mall_search_quota WHERE date=CURRENT_DATE
+
   return {
-    quota_used: quota.quota_used,
-    quota_limit: quota.quota_limit,
-    quota_remaining: quota.quota_limit - quota.quota_used,
+    tempat: { used: tempat.quota_used, limit: 2, remaining: 2 - tempat.quota_used },
+    makan: { used: makan.used, limit: 5, remaining: 5 - makan.used },
     is_logged_in: true,
-    reset_at: calculateResetTime(quota.last_reset_at),
-    hours_until_reset: calculateHoursUntilReset(quota.last_reset_at)
+    reset_at: calculateResetTime(tempat.last_reset_at),
+    hours_until_reset: calculateHoursUntilReset(tempat.last_reset_at)
   }
 })
 ```
@@ -503,7 +503,7 @@ export default defineEventHandler(async (event) => {
 
 **Endpoint:** `POST /api/auth/register`
 
-**Description:** Create new user account
+**Description:** Create new user account (patch Addendum 09 v1.3: phone OPTIONAL)
 
 **Authentication:** None
 
@@ -512,7 +512,7 @@ export default defineEventHandler(async (event) => {
 {
   email: "agesta@example.com",
   password: "SecurePass123!",
-  phone: "+628123456789"
+  phone?: "+628123456789" // OPTIONAL — NULL = valid, format +62 divalidasi HANYA kalau diisi
 }
 ```
 
@@ -538,32 +538,33 @@ export default defineEventHandler(async (event) => {
 // server/api/auth/register.post.ts
 export default defineEventHandler(async (event) => {
   const { email, password, phone } = await readBody(event)
-  
-  // Validate
-  if (!email || !password || !phone) {
-    throw createError({ statusCode: 400, message: 'Missing fields' })
+
+  // Validate (patch Addendum 09 v1.3: phone OPTIONAL)
+  if (!email || !password) {
+    throw createError({ statusCode: 400, message: 'Email + password wajib' })
   }
-  
-  if (!/^\+62[0-9]{9,13}$/.test(phone)) {
-    throw createError({ statusCode: 400, message: 'Invalid phone format' })
+
+  const cleanPhone = phone?.trim() ? phone.trim() : null
+  if (cleanPhone && !/^\+62[0-9]{9,13}$/.test(cleanPhone)) {
+    throw createError({ statusCode: 400, message: 'Format HP: +62...' })
   }
-  
+
   // Create user in Supabase
   const supabase = createServiceClient()
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
-      data: { phone }
+      data: { phone: cleanPhone }
     }
   })
-  
+
   if (error) {
     throw createError({ statusCode: 409, message: error.message })
   }
-  
-  // Initialize user profile & quota
-  await initializeNewUser(data.user.id, phone)
+
+  // Initialize user profile & quota (tempat 2 + makan 5 hari ini)
+  await initializeNewUser(data.user.id, cleanPhone)
   
   // Set session cookie
   setCookie(event, 'sb-access-token', data.session.access_token, {
@@ -784,12 +785,12 @@ export interface GenerateResponse {
 }
 
 export interface QuotaStatus {
-  quota_used: number
-  quota_limit: number
-  quota_remaining: number
+  tempat: { used: number; limit: 2 | 1; remaining: number }, // register 2, anon 1
+  makan: { used: number; limit: 5 | 2; remaining: number }, // register 5, anon 2
   is_logged_in: boolean
   reset_at: string | null
   hours_until_reset?: number
+  login_cta?: string // anon only: "Login gratis → buka 2 tempat + 5 makan/hari"
 }
 ```
 
@@ -861,8 +862,14 @@ Body `{generation_id, tenant_id}`. Tanpa login, rate-limit IP 10/menit. Untuk gr
 ### 15. Report Tenant — `POST /api/report-tenant`
 Body `{tenant_id, issue: 'tutup'|'buka'|'salah_info'}`. Tanpa login. Masuk review queue (freshness > completeness).
 
+### 16. Claim Voucher — `POST /api/voucher/claim` (BARU — Addendum 09 v1.3, WAJIB login)
+KENAPA wajib login? Voucher = duit tenant. Anon bisa bikin 100 akun → borong voucher. Login = 1 user 1 klaim/tenant/hari.
+Body `{tenant_id}`. Auth: Required (anon → 401 + bottom sheet login "Login buat klaim voucher").
+Flow: cek tenant ada promo aktif → cek `voucher_claims` belum ada (user_id, tenant_id, today) → generate code `WIK-XXXXX` → insert → return code + cara pakai ("Tunjukin ke kasir").
+Double-klaim hari sama → 409 `ALREADY_CLAIMED`. Response: `{success, code, tenant_name, cara_pakai}`.
+
 ---
 
-**Document Status:** FINAL  
-**Last Updated:** October 5, 2026  
+**Document Status:** FINAL + patch v1.3 LOCKED
+**Last Updated:** October 7, 2026 (patch Addendum 09 v1.3)
 **Next Review:** After soft launch feedback

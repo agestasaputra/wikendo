@@ -1,9 +1,9 @@
 # Database Schema - Weekend Planner MVP
 
-**Version:** 1.0  
-**Date:** October 5, 2026  
+**Version:** 1.1 (7 Okt 2026 — patch Addendum 09 v1.3: phone optional + voucher_claims)
+**Date:** October 5, 2026 (asli) + patch 7 Okt 2026
 **Database:** PostgreSQL (Supabase)  
-**Status:** Ready for Implementation
+**Status:** Ready for Implementation + patch v1.3 LOCKED
 
 ---
 
@@ -79,31 +79,43 @@ This document defines the complete database schema for Weekend Planner MVP, incl
 
 ### 2. `user_profiles`
 
-**Purpose:** Extended user information beyond auth (phone, preferences)
+**Purpose:** Extended user information beyond auth (phone optional Phase 2, preferences)
 
-**Schema:**
+**Schema (patch Addendum 09 v1.3, 7 Okt 2026 — phone DROP mandatory):**
 ```sql
 CREATE TABLE user_profiles (
   user_id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
-  phone TEXT NOT NULL,
+  phone TEXT DEFAULT NULL,              -- OPTIONAL (was NOT NULL). NULL = user skip, valid.
   phone_verified BOOLEAN DEFAULT FALSE,
   preferences JSONB DEFAULT '{}'::jsonb,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Indexes
-CREATE INDEX idx_user_profiles_phone ON user_profiles(phone);
+-- Indexes (partial: cuma index yang terisi, NULL di-skip otomatis)
+CREATE INDEX idx_user_profiles_phone ON user_profiles(phone) WHERE phone IS NOT NULL;
 
--- Constraints
+-- Constraints: format +62 HANYA kalau diisi (NULL lolos, kosong '' DITOLAK)
+ALTER TABLE user_profiles
+  DROP CONSTRAINT IF EXISTS phone_format_check;
 ALTER TABLE user_profiles
   ADD CONSTRAINT phone_format_check
-  CHECK (phone ~ '^\+62[0-9]{9,13}$');
+  CHECK (phone IS NULL OR phone ~ '^\+62[0-9]{9,13}$');
 
 -- Comments
 COMMENT ON TABLE user_profiles IS 'Extended user profile data';
-COMMENT ON COLUMN user_profiles.phone IS 'Indonesian phone number format: +62xxxxxxxxx';
+COMMENT ON COLUMN user_profiles.phone IS 'OPTIONAL since Addendum 09 v1.3 (was mandatory). +62 format if filled, NULL if skipped. Phase 2: broadcast promo.';
 COMMENT ON COLUMN user_profiles.preferences IS 'JSON: {favorite_locations: [], notification_enabled: bool}';
+```
+
+**Migrasi existing (kalau tabel lama sudah ada):**
+```sql
+ALTER TABLE user_profiles ALTER COLUMN phone DROP NOT NULL;
+ALTER TABLE user_profiles DROP CONSTRAINT IF EXISTS phone_format_check;
+ALTER TABLE user_profiles ADD CONSTRAINT phone_format_check
+  CHECK (phone IS NULL OR phone ~ '^\+62[0-9]{9,13}$');
+DROP INDEX IF EXISTS idx_user_profiles_phone;
+CREATE INDEX idx_user_profiles_phone ON user_profiles(phone) WHERE phone IS NOT NULL;
 ```
 
 **Sample Data:**
@@ -392,33 +404,39 @@ CREATE POLICY "Service role only"
 
 ### 1. Initialize New User
 
-**Purpose:** Called after registration to set up profile + quota
+**Purpose:** Called after registration to set up profile + quota (patch Addendum 09 v1.3: phone optional)
 
 ```sql
 CREATE OR REPLACE FUNCTION initialize_new_user(
   p_user_id UUID,
-  p_phone TEXT
+  p_phone TEXT DEFAULT NULL   -- OPTIONAL since Addendum 09 v1.3 (was mandatory)
 )
 RETURNS void AS $$
 BEGIN
-  -- Create profile
+  -- Create profile (phone boleh NULL = user skip)
   INSERT INTO user_profiles (user_id, phone)
-  VALUES (p_user_id, p_phone)
+  VALUES (p_user_id, NULLIF(TRIM(COALESCE(p_phone, '')), ''))
   ON CONFLICT (user_id) DO NOTHING;
   
-  -- Initialize quota
+  -- Initialize quota tempat (2/hari, PRD v2.0)
   INSERT INTO user_quota (user_id, quota_used, quota_limit, last_reset_at)
   VALUES (p_user_id, 0, 2, NOW())
   ON CONFLICT (user_id) DO NOTHING;
+
+  -- Initialize quota makan HARI INI (5/hari, Addendum 07 v1.1)
+  INSERT INTO mall_search_quota (user_id, date, used)
+  VALUES (p_user_id, CURRENT_DATE, 0)
+  ON CONFLICT (user_id, date) DO NOTHING;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
-COMMENT ON FUNCTION initialize_new_user IS 'Set up new user profile and quota';
+COMMENT ON FUNCTION initialize_new_user IS 'Set up new user profile and quota (tempat 2 + makan 5). Phone optional since Addendum 09 v1.3';
 ```
 
 **Usage:**
 ```sql
-SELECT initialize_new_user('550e8400-e29b-41d4-a716-446655440000', '+628123456789');
+SELECT initialize_new_user('550e8400-e29b-41d4-a716-446655440000', NULL); -- Google OAuth tanpa HP
+SELECT initialize_new_user('550e8400-e29b-41d4-a716-446655440000', '+628123456789'); -- email + HP diisi
 ```
 
 ---
@@ -836,16 +854,40 @@ CREATE TABLE mall_search_quota (
 -- Anonymous: cookie makan_quota_used (max 2). Login: 5/hari.
 ```
 
+### 10. `voucher_claims` (BARU — Addendum 09 v1.3, 7 Okt 2026: klaim voucher WAJIB login)
+
+**Purpose:** 1 user = 1x klaim per tenant per hari (anti-farming voucher pakai anon baru).
+KENAPA perlu? Voucher = duit tenant, 1 klaim palsu = rugi beneran. Tabel kecil, cost $0.
+
+```sql
+CREATE TABLE voucher_claims (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE, -- WAJIB login, no anon
+  tenant_id UUID NOT NULL REFERENCES tenants(id) ON DELETE CASCADE,
+  date DATE NOT NULL DEFAULT CURRENT_DATE,
+  code TEXT NOT NULL,                       -- kode ditunjuk ke kasir, cth "WIK-HB7K2"
+  redeemed BOOLEAN DEFAULT false,           -- TRUE setelah kasir validasi (Phase 2)
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE (user_id, tenant_id, date)          -- anti double-klaim hari yang sama
+);
+
+CREATE INDEX idx_voucher_claims_user ON voucher_claims(user_id, date DESC);
+CREATE INDEX idx_voucher_claims_tenant ON voucher_claims(tenant_id, date DESC);
+```
+
 ### RLS tambahan
 ```sql
 ALTER TABLE malls ENABLE ROW LEVEL SECURITY;
 ALTER TABLE tenants ENABLE ROW LEVEL SECURITY;
 ALTER TABLE mall_search_quota ENABLE ROW LEVEL SECURITY;
 ALTER TABLE raw_scrape ENABLE ROW LEVEL SECURITY;
+ALTER TABLE voucher_claims ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Public read malls" ON malls FOR SELECT USING (true);
 CREATE POLICY "Public read tenants" ON tenants FOR SELECT USING (true);
 CREATE POLICY "Users view own makan quota" ON mall_search_quota FOR SELECT USING (auth.uid() = user_id);
 CREATE POLICY "Service manage makan quota" ON mall_search_quota FOR ALL USING (true);
+CREATE POLICY "Users view own claims" ON voucher_claims FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "Service manage claims" ON voucher_claims FOR ALL USING (true);
 -- raw_scrape: TIDAK public-read. Hanya service role (bypass RLS via supabaseAdmin).
 CREATE POLICY "No public access raw_scrape" ON raw_scrape FOR SELECT USING (false);
 CREATE POLICY "Service manage raw_scrape" ON raw_scrape FOR ALL USING (true);

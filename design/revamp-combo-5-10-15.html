@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wikendo — Kombo 5+10+15 (Swipe + Superapp + Mall)</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:#f4f4f5;color:#18181b;line-height:1.55}
+.nav{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e4e4e7}
+.nav-in{max-width:1200px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.logo{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:18px}.logo span{color:#f97316}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.nav-links a{font-size:12px;font-weight:600;color:#3f3f46;text-decoration:none;background:#f4f4f5;padding:7px 10px;border-radius:999px}
+.wrap{max-width:1200px;margin:0 auto;padding:24px 16px 80px}
+.hero{background:#18181b;color:#fff;border-radius:20px;padding:32px 28px}
+.hero h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(24px,4vw,36px);font-weight:800;letter-spacing:-.5px;line-height:1.15;margin-bottom:10px}
+.hero h1 em{font-style:normal;color:#fb923c}
+.hero p{color:#d4d4d8;max-width:800px;font-size:15px}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chip{font-size:12px;font-weight:600;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);padding:6px 12px;border-radius:999px}
+.chip.warn{background:#f97316;border-color:#f97316;color:#fff}
+.pick-banner{background:#fff7ed;border:2px dashed #f97316;border-radius:16px;padding:16px 20px;margin:20px 0;font-weight:700;text-align:center}
+.arch{background:#fff;border:1px solid #e4e4e7;border-radius:16px;padding:20px 22px;margin:20px 0}
+.arch h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;margin-bottom:10px}
+.arch code{display:block;background:#18181b;color:#fdba74;border-radius:12px;padding:14px 16px;font-size:12.5px;line-height:1.7;white-space:pre-wrap}
+.tokens{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0;align-items:center}
+.sw{display:flex;align-items:center;gap:6px;font-size:12px;color:#52525b;font-weight:600}
+.dot{width:22px;height:22px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #d4d4d8}
+section.flow{background:#fff;border:1px solid #e4e4e7;border-radius:20px;padding:26px;margin:26px 0}
+.flow-head{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.num{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:14px;background:#f97316;color:#fff;border-radius:12px;padding:8px 14px;white-space:nowrap}
+.flow-head h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:21px;font-weight:800;letter-spacing:-.3px}
+.sub{font-size:13px;color:#71717a;font-weight:500}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.tag{font-size:12px;font-weight:600;padding:5px 12px;border-radius:999px;background:#f4f4f5;color:#3f3f46;border:1px solid #e4e4e7}
+.tag.good{background:#ecfdf5;color:#047857;border-color:#a7f3d0}
+.tag.eff{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe}
+.phones{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:18px}
+.ph-wrap{display:flex;flex-direction:column;align-items:center}
+.ph-label{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#71717a;margin-bottom:10px}
+.device{background:#0c0c0d;border-radius:42px;padding:11px;width:100%;max-width:340px;box-shadow:0 20px 50px -20px rgba(0,0,0,.35)}
+.screen{border-radius:31px;overflow:hidden;min-height:620px;display:flex;flex-direction:column;position:relative;font-size:14px;background:#fffdf9}
+.bar{padding:12px 16px;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:13px;background:#fff;border-bottom:1px solid #f1f1f2}
+.pros{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.pros div{background:#fafafa;border:1px solid #e4e4e7;border-radius:12px;padding:12px 14px;font-size:13px}
+.pick-btn{margin-top:18px;width:100%;padding:15px;border-radius:14px;border:2px solid #f97316;background:#f97316;color:#fff;font-weight:800;font-size:15px;cursor:pointer}
+/* SHARED COMBO TOKENS */
+.combo{font-family:'Plus Jakarta Sans',sans-serif}
+.combo .btn56{min-height:56px;border-radius:16px;font-weight:800;font-size:15px;border:none;width:100%;cursor:pointer}
+.combo .card24{border-radius:24px}
+.combo .opt-card{background:#fff;border:2px solid #ececec;border-radius:20px;padding:14px;margin:9px 0;font-weight:700;font-size:14px;display:flex;gap:10px;align-items:center;cursor:pointer}
+.combo .opt-card.sel{border-color:#f97316;background:#fff7ed}
+.combo .pbar{height:8px;background:#ececec;border-radius:99px;overflow:hidden}
+.combo .pbar i{display:block;height:100%;background:linear-gradient(90deg,#f97316,#fb923c);border-radius:99px}
+/* HOME */
+.chome{padding:16px}
+.wallet{background:linear-gradient(140deg,#0e7490,#164e63);color:#fff;border-radius:20px;padding:16px}
+.wallet small{opacity:.85;font-size:11px;letter-spacing:.5px}.wallet b{font-size:21px;display:block;margin:2px 0}
+.wallet .q{display:flex;gap:8px;margin-top:10px}
+.wallet .q span{flex:1;background:rgba(255,255,255,.15);border-radius:12px;padding:8px;text-align:center;font-size:12px;font-weight:700}
+.cta2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.cta2 button{border:none;border-radius:20px;padding:18px 12px;font-weight:800;font-size:14px;cursor:pointer;line-height:1.3}
+.cta2 .t{background:#f97316;color:#fff;box-shadow:0 10px 20px -8px rgba(249,115,22,.6)}
+.cta2 .m{background:#fff;border:2px solid #ee2c4b;color:#ee2c4b}
+.grid8{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:6px 0 12px}
+.grid8 div{background:#fff;border:1px solid #f1f1f2;border-radius:14px;padding:12px 4px;text-align:center;font-size:11px;font-weight:700;color:#3f3f46}
+.grid8 i{font-size:22px;display:block;margin-bottom:4px;font-style:normal}
+.banner{background:linear-gradient(120deg,#ee2c4b,#fb923c);color:#fff;border-radius:16px;padding:14px 16px;font-weight:800;font-size:13.5px}
+.sec{background:#fff;border:1px solid #f1f1f2;border-radius:16px;padding:14px;margin-top:12px}
+.sec h4{font-size:13.5px;margin-bottom:6px}
+.rowx{display:flex;gap:10px;align-items:center;padding:9px 0;border-top:1px solid #f6f6f6;font-size:13px}
+/* SWIPE QUIZ */
+.cquiz{padding:18px;flex:1;display:flex;flex-direction:column}
+.cquiz h3{font-size:21px;font-weight:800;margin:12px 0 4px}
+.cquiz p.dim{font-size:13px;color:#71717a;margin-bottom:8px}
+/* DECK */
+.deck{padding:16px;flex:1;display:flex;flex-direction:column}
+.hero-card{background:#fff;border:1px solid #eee;border-radius:24px;overflow:hidden;box-shadow:0 16px 32px -16px rgba(0,0,0,.25)}
+.hero-card .im{height:150px;display:flex;align-items:center;justify-content:center;font-size:56px}
+.hero-card .bd{padding:14px 16px}
+.badge{display:inline-block;font-size:11px;font-weight:800;padding:4px 10px;border-radius:99px;margin:0 6px 8px 0}
+.b-teal{background:#ecfeff;color:#0e7490}.b-org{background:#fff7ed;color:#c2410c}.b-red{background:#ee2c4b;color:#fff}.b-green{background:#ecfdf5;color:#047857}
+.deck .actions{display:flex;gap:10px;margin-top:12px}
+.deck .actions button{flex:1;padding:15px;border-radius:16px;font-weight:800;font-size:14px;border:none;cursor:pointer}
+.btn-maps{background:#18181b;color:#fff}
+.btn-save{background:#fff;border:2px solid #e4e4e7}
+.mini-deck{display:flex;gap:8px;margin-top:12px}
+.mini-deck div{flex:1;background:#fff;border:1px solid #eee;border-radius:14px;padding:10px;text-align:center;font-size:12px;font-weight:700;color:#52525b}
+/* MALL */
+.malls{display:flex;gap:8px;padding:12px 0;overflow:hidden}
+.mall{flex:none;font-size:12px;font-weight:700;border:1.5px solid #e4e4e7;border-radius:12px;padding:9px 12px;background:#fff;cursor:pointer}
+.mall.on{background:#ee2c4b;color:#fff;border-color:#ee2c4b}
+.tnt{border:1px solid #eee;border-radius:16px;overflow:hidden;display:flex;gap:10px;padding:10px;background:#fff;margin-bottom:10px}
+.tnt .im{width:62px;height:62px;flex:none;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:30px}
+.promo{display:inline-block;background:#ee2c4b;color:#fff;font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:6px;margin-bottom:4px}
+.claim{width:100%;background:#ee2c4b;color:#fff;border:none;border-radius:14px;padding:15px;font-weight:800;font-size:14.5px;cursor:pointer}
+.fchip{font-size:11.5px;font-weight:700;border:1.5px solid #e4e4e7;border-radius:99px;padding:7px 11px;background:#fff}
+.fchip.on{background:#18181b;color:#fff;border-color:#18181b}
+.cmp{width:100%;border-collapse:collapse;font-size:12.5px;background:#fff;border-radius:16px;overflow:hidden}
+.cmp th,.cmp td{padding:11px;border-bottom:1px solid #e4e4e7;text-align:left;vertical-align:top}
+.cmp th{background:#18181b;color:#fff;font-size:11.5px}
+.foot{text-align:center;color:#71717a;font-size:12.5px;margin-top:26px}
+@media(max-width:640px){.pros{grid-template-columns:1fr}.hero{padding:24px 18px}}
+</style>
+</head>
+<body>
+<div class="nav"><div class="nav-in">
+<div class="logo">Wikendo<span>.</span> kombo 5+10+15</div>
+<div class="nav-links"><a href="#home">Home 10</a><a href="#quiz-t">Quiz 5</a><a href="#res-t">Result 5</a><a href="#quiz-m">Makan 5</a><a href="#res-m">Voucher 15</a><a href="#dir">Direktori 15</a><a href="#nilai">Nilai</a></div>
+</div></div>
+<div class="wrap">
+<div class="hero">
+<h1>Kombo <em>5 + 10 + 15</em> = 1 alur utuh, bukan 3 design ditempel.</h1>
+<p><b style="color:#fff">10 = kulit (home).</b> 2 entry jelas + dompet quota. <b style="color:#fff">5 = mesin (quiz + result).</b> Pola swipe yang sama dipakai tempat &amp; makan. <b style="color:#fff">15 = duit (modul makan).</b> Direktori + voucher tenant. Visual disatuin: base hangat #fffdf9, aksen Orange tempat #f97316, aksen Merah makan #ee2c4b, font Plus Jakarta Sans, kartu 24px, tombol 56px thumb-zone. <b style="color:#fff">Split PRD dijaga: tempat ≠ makan.</b></p>
+<div class="meta"><span class="chip warn">STATUS: butuh approval Agesta — 0 ubah di app/</span><span class="chip">Mobile-first 375px</span><span class="chip">Effort kombo M 22–28 jam</span><span class="chip">File: design/revamp-combo-5-10-15.html</span></div>
+</div>
+<div class="pick-banner">Suka kombo ini? Tap “Setuju, gas kombo ini” di bawah — kesimpen di browser lu. Atau balas “gas kombo” ke gue → gue tulis Addendum + eksekusi Nuxt TDD.</div>
+<div class="arch"><h2>🧭 Cara bacanya (30 detik)</h2>
+<code>HOME (10) ── 🗺️ Cari Tempat ──→ QUIZ SWIPE (5) ──→ RESULT DECK (5) ──→ 📍 Maps / 💾 Simpan
+            └── 🍜 Cari Makan ───→ QUIZ SWIPE (5) ──→ RESULT+VOUCHER (15) ──→ 🎟️ Klaim
+            └── 📁 Direktori /mall/:slug (15, SEO, tanpa LLM, gratis)
+
+Quota wallet selalu kelihatan: 2 tempat/hari • 5 makan/hari (terpisah).
+Curi foto/mood dari Opsi 2 • peta Opsi 7 jadi toggle Phase 2 (bukan fondasi).</code>
+<div class="tokens"><span class="sw"><i class="dot" style="background:#fffdf9"></i>#fffdf9 base</span><span class="sw"><i class="dot" style="background:#f97316"></i>#f97316 tempat</span><span class="sw"><i class="dot" style="background:#ee2c4b"></i>#ee2c4b makan</span><span class="sw"><i class="dot" style="background:#0e7490"></i>#0e7490 wallet</span><span class="sw"><i class="dot" style="background:#18181b"></i>#18181b teks</span><span class="tag">Plus Jakarta Sans 800/400 • kartu 24px • tombol 56px</span></div>
+</div>
+
+<!-- HOME -->
+<section class="flow" id="home">
+<div class="flow-head"><div class="num">10 → HOME</div><div><h2>Home Superapp = pintu Two Entry</h2><div class="sub">Warisan Opsi 10: quota wallet + 2 CTA gede. Tugasnya cuma 1 — dorong landing→quiz &gt;40%.</div></div></div>
+<div class="tags"><span class="tag good">N Prim: landing→quiz &gt;40%</span><span class="tag">Tanpa edukasi, pola Gojek</span><span class="tag eff">~6 jam (kulit only)</span></div>
+<div class="phones">
+<div class="ph-wrap"><div class="ph-label">A. Home — 2 entry + quota</div><div class="device"><div class="screen combo">
+<div class="bar"><span>Halo, Agesta 👋</span><span>🔔</span></div>
+<div class="chome"><div class="wallet"><small>QUOTA HARI INI 🔥 • reset 00.00</small><b>2 tempat • 5 makan</b><div class="q"><span>🗺️ 2/2 tempat</span><span>🍜 5/5 makan</span></div></div>
+<div class="cta2"><button class="t">🗺️<br>Cari Tempat<br><small style="font-weight:400">quiz 30 dtk</small></button><button class="m">🍜<br>Cari Makan<br><small style="font-weight:400">quiz 20 dtk</small></button></div>
+<div class="grid8"><div><i>🎡</i>Event</div><div><i>🎁</i>Promo</div><div><i>❤️</i>Wishlist</div><div><i>🕘</i>Riwayat</div></div>
+<div class="banner">🔥 Hype minggu ini: Rooftop Senayan — tap 🗺️ →</div>
+<div class="sec"><h4>Terakhir dilihat 👀</h4><div class="rowx"><span style="font-size:22px">🏛️</span><div><b>Museum MACAN</b><br><span style="color:#71717a;font-size:12px">Kebon Jeruk • <u>buka lagi →</u></span></div></div></div>
+</div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Kenapa begini (bisnis)</div><div class="device"><div class="screen" style="background:#fff;padding:22px;font-size:13.5px">
+<b style="font-family:'Plus Jakarta Sans';font-size:16px">✅ Menang di kejelasan</b>
+<p style="margin:10px 0;color:#3f3f46">PRD Addendum = <b>Two Entry, Two Quiz.</b> Home ini bikin 2 entry kelihatan duluan — user nggak perlu nebak. Wallet quota bikin scarcity jujur (“2 tempat • 5 makan, gratis, reset 00.00”) → dorong tap sekarang.</p>
+<p style="background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:12px">⚠️ <b>Aturan main:</b> Event/Promo/Wishlist/ Riwayat BOLEH kosong pas MVP — tapi jangan dihapus. Mereka = slot iklan + retention Phase 2. Yang penting 2 CTA gede selalu di atas.</p>
+<p style="margin-top:10px;color:#3f3f46">Curi dari Opsi 2: banner + thumbnail history pake <b>foto real</b> (bukan emoji) biar time-on-screen naik.</p>
+</div></div></div>
+</div>
+</section>
+
+<!-- QUIZ TEMPAT -->
+<section class="flow" id="quiz-t">
+<div class="flow-head"><div class="num">5 → QUIZ TEMPAT</div><div><h2>Quiz tempat = swipe story, 30 detik</h2><div class="sub">Warisan Opsi 5: 1 layar 1 tanya (Q1 mood → Q2 companion → Q3 child conditional → Q4 budget → Q5 lokasi → Q6 waktu). Target completion &gt;70%.</div></div></div>
+<div class="tags"><span class="tag good">N Prim: completion &gt;70%</span><span class="tag">Thumb-zone 56px</span><span class="tag eff">Reuse engine ~10 jam</span></div>
+<div class="phones">
+<div class="ph-wrap"><div class="ph-label">B. Quiz tempat 2/6</div><div class="device"><div class="screen combo">
+<div class="bar"><span>← 🗺️ Quiz tempat</span><span>2/6 • ⏱ 30 dtk</span></div>
+<div class="cquiz"><div class="pbar"><i style="width:33%"></i></div>
+<h3>Dengan siapa? 👯</h3><p class="dim">Tap 1 — nggak ada jawaban salah</p>
+<div class="opt-card">🧘 Sendiri</div><div class="opt-card sel">💑 Pasangan</div><div class="opt-card">👥 Teman 2–4</div><div class="opt-card">👨‍👩‍👧 Keluarga</div>
+<div style="flex:1"></div>
+<button class="btn56" style="background:#f97316;color:#fff">Lanjut →</button>
+<p style="text-align:center;font-size:12px;color:#a1a1aa;margin-top:8px">Quota kepake pas Generate, bukan per tanya</p>
+</div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">C. Quiz tempat 4/6 (budget)</div><div class="device"><div class="screen combo">
+<div class="bar"><span>← 🗺️ Quiz tempat</span><span>4/6</span></div>
+<div class="cquiz"><div class="pbar"><i style="width:66%"></i></div>
+<h3>Budget per orang? 💰</h3><p class="dim">Biar rekomendasi nggak ngaco</p>
+<div class="opt-card">💰 Hemat &lt;100rb</div><div class="opt-card sel">💰💰 Menengah 100–300rb</div><div class="opt-card">💰💰💰 Leluasa &gt;300rb</div>
+<div style="flex:1"></div>
+<button class="btn56" style="background:#18181b;color:#fff">Lanjut →</button>
+</div>
+</div></div></div>
+</div>
+<div class="pros"><div><b>✅ Kenapa swipe menang</b>Zero learning 20–35thn, 1 keputusan kecil per layar = drop-off kecil. Engine ini dipakai ulang buat quiz makan (beda Q, pola sama) → codebase 1x, bukan 2x.</div><div><b>⚠️ Jaga-jaga</b>Q3 child_age conditional cuma muncul kalau Q2 = keluarga. Q6 waktu optional — boleh skip. Jangan tambah Q7+ biar &lt;45 detik (PRD).</div></div>
+</section>
+
+<!-- RESULT TEMPAT -->
+<section class="flow" id="res-t">
+<div class="flow-head"><div class="num">5 → RESULT TEMPAT</div><div><h2>Result tempat = 1 hero deck, bukan list blog</h2><div class="sub">5 rekomendasi LLM (nama, kategori, alasan personal, budget, area, best time). Fokus 1 hero → CTR Maps &gt;50%. Tap kartu / “Lainnya” buat geser deck. Coba tap! 👇</div></div></div>
+<div class="tags"><span class="tag good">N Prim: CTR Maps &gt;50% • time &gt;60 dtk</span><span class="tag">P1 PRD: swipeable cards ✔</span></div>
+<div class="phones">
+<div class="ph-wrap"><div class="ph-label">D. Result — hero #1 (tap Lainnya 👇)</div><div class="device"><div class="screen combo">
+<div class="bar"><span>← Hasil buatmu 🎉</span><span>Quota 1/2</span></div>
+<div class="deck"><div class="hero-card card24"><div class="im" style="background:linear-gradient(140deg,#ffedd5,#fdba74)">🏛️</div>
+<div class="bd"><span class="badge b-org">★ #1 BEST</span><span class="badge b-teal">🏛️ museum</span>
+<div style="font-weight:800;font-size:17px">Museum MACAN</div>
+<p style="font-size:12.5px;color:#52525b;margin:6px 0">Kenapa cocok: seni + ngobrol santai berdua, adem siang hari.</p>
+<p style="font-size:12.5px">💰 100–150rb • 📍 Kebon Jeruk • ⏰ best siang</p>
+<div class="actions"><button class="btn-maps">📍 Navigasi →</button><button class="btn-save">💾</button><button class="btn-save">⤴</button></div>
+</div></div>
+<div class="mini-deck"><div>② ☕ Nako</div><div>③ 🌳 GBK</div><div id="deckNext" style="background:#18181b;color:#fff;cursor:pointer">Lainnya →</div></div>
+<p id="deckNote" style="font-size:12px;color:#71717a;margin-top:10px;text-align:center">Kartu 1/5 • generate ulang = quota 2/2 • <u>lihat semua 5 ↓</u></p>
+</div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Aturan result (PRD lock)</div><div class="device"><div class="screen" style="background:#fff;padding:22px;font-size:13.5px">
+<b style="font-family:'Plus Jakarta Sans';font-size:16px">📏 5 kartu, isinya wajib:</b>
+<ul style="margin:10px 0 10px 18px;color:#3f3f46"><li>Nama + badge kategori</li><li>Alasan personal (“kenapa cocok”)</li><li>Budget range + area + best time</li><li>📍 Maps (deep link) • 💾 Simpan (login wall) • ⤴ Share</li></ul>
+<p style="background:#fef2f2;border:1px solid #fecaca;border-radius:12px;padding:12px">🚫 <b>Lock Addendum:</b> result tempat = TEMPAT saja. Tenant mall dilarang muncul di sini. Quota tempat (2/hari) terpisah dari makan.</p>
+<p style="margin-top:10px;color:#3f3f46">LLM fail → error + <b>quota nggak kepotong</b>, boleh retry (PRD edge case).</p>
+</div></div></div>
+</div>
+</section>
+
+<!-- QUIZ MAKAN -->
+<section class="flow" id="quiz-m">
+<div class="flow-head"><div class="num">5+15 → QUIZ MAKAN</div><div><h2>Quiz makan = engine swipe yang sama, Q beda</h2><div class="sub">4 tanya ~20 dtk (Q1 mall wajib → Q2 misi → Q3 budget → Q4 rombongan+toggle). Bisa pre-filled dari direktori (/makan?mall=gi).</div></div></div>
+<div class="tags"><span class="tag good">N Prim: completion &gt;75% (lebih pendek)</span><span class="tag">DB Supabase, LLM cuma ranking ~400 token = $0</span></div>
+<div class="phones">
+<div class="ph-wrap"><div class="ph-label">E. Quiz makan 1/4 — mall</div><div class="device"><div class="screen combo">
+<div class="bar"><span>← 🍜 Quiz makan</span><span>1/4 • ⏱ 20 dtk</span></div>
+<div class="cquiz"><div class="pbar"><i style="width:25%;background:linear-gradient(90deg,#ee2c4b,#fb923c)"></i></div>
+<h3>Makan di mall mana? 📍</h3><p class="dim">Wajib 1 — biar hasil murni tenant situ</p>
+<div class="malls"><span class="mall on">GI</span><span class="mall">Central Park</span><span class="mall">Kokas</span><span class="mall">PIM</span><span class="mall">Aeon BSD</span></div>
+<div class="opt-card sel">🏬 Grand Indonesia <span style="margin-left:auto;font-size:12px;color:#71717a">40 tenant</span></div>
+<div style="flex:1"></div>
+<button class="btn56" style="background:#ee2c4b;color:#fff">Lanjut →</button>
+</div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">F. Quiz makan 4/4 — rombongan</div><div class="device"><div class="screen combo">
+<div class="bar"><span>← 🍜 Quiz makan</span><span>4/4</span></div>
+<div class="cquiz"><div class="pbar"><i style="width:100%;background:linear-gradient(90deg,#ee2c4b,#fb923c)"></i></div>
+<h3>Rombongan + pantangan? 👥</h3><p class="dim">Terakhir, janji 😄</p>
+<div class="opt-card">🧍 Sendiri</div><div class="opt-card sel">💑 Berdua</div><div class="opt-card">👥 Rame-rame</div>
+<div style="display:flex;gap:8px;margin-top:4px"><span class="fchip on">✅ Halal only</span><span class="fchip">👶 Kids-friendly</span></div>
+<div style="flex:1"></div>
+<button class="btn56" style="background:#ee2c4b;color:#fff">Lihat 5 tenant + voucher →</button>
+</div>
+</div></div></div>
+</div>
+</section>
+
+<!-- RESULT MAKAN -->
+<section class="flow" id="res-m">
+<div class="flow-head"><div class="num">15 → RESULT MAKAN + VOUCHER</div><div><h2>Result makan = deck + klaim voucher</h2><div class="sub">5 TENANT murni dari DB (anti-halu). Card: nama, kategori • mall lantai, badge halal, alasan, harga, kids, hype. Voucher = umpan kuota 5/hari.</div></div></div>
+<div class="tags"><span class="tag good">N Prim: Maps &gt;40% • redeem voucher</span><span class="tag">Jalur duit B2B paling jelas</span><span class="tag eff">~8 jam (card tenant + klaim)</span></div>
+<div class="phones">
+<div class="ph-wrap"><div class="ph-label">G. Result makan — best match</div><div class="device"><div class="screen combo">
+<div class="bar"><span>← Hasil • GI 📍</span><span>5/5 tersisa</span></div>
+<div class="deck"><div class="hero-card card24" style="border:2px solid #ee2c4b"><div class="bd">
+<span class="badge b-red">★ BEST MATCH • -20%</span><span class="badge b-green">✅ Halal</span>
+<div style="font-weight:800;font-size:16.5px">🍜 Marugame Udon — GI L3</div>
+<p style="font-size:12.5px;color:#52525b;margin:6px 0">Kenapa: gurih cepat + halal + budget 50–100rb • antrean pendek jam 14.00 • 🔥 hype TikTok</p>
+<p style="font-size:12.5px">💰 30–80rb • 👶 kids • 📍 L3A dekat Atrium</p>
+<button class="claim" style="margin-top:10px">🎟️ Klaim voucher → tunjukin ke kasir</button>
+<div class="actions"><button class="btn-maps">📍 Maps tenant →</button><button class="btn-save">💾</button></div>
+<p style="font-size:11.5px;color:#71717a;margin-top:8px;text-align:center"><u>Lapor tutup/buka</u> • <u>Share ke temen</u> • Quota makan 4/5 tersisa</p>
+</div></div>
+<div class="mini-deck"><div>② 🧋 Xing Fu</div><div>③ 🍛 Ramen</div><div style="background:#ee2c4b;color:#fff">Lainnya →</div></div>
+</div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Aturan duit (jujur)</div><div class="device"><div class="screen" style="background:#fff;padding:22px;font-size:13.5px">
+<b style="font-family:'Plus Jakarta Sans';font-size:16px">💰 Sponsored = jelas, bukan nyusup</b>
+<p style="margin:10px 0;color:#3f3f46">Slot kartu #1 di deck makan boleh disewa tenant — tapi badge-nya wajib <b>“Sponsored”</b>, bukan “Best Match”. Best Match = murni skor filter + ranking. Trust &gt; duit cepat.</p>
+<p style="background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:12px">📋 PRD §8: monetisasi resmi dibuka pas <b>500+ users / 30% DAU-MAU / LLM jebol budget</b>. Kombo ini siapin fondasinya dari hari 1, tanpa paywall MVP.</p>
+<p style="margin-top:10px;color:#3f3f46">Data redeem voucher = bukti ke mall (pitch B2B). Badge NULL tri-state: ❓ Belum terverifikasi + 📋 Perlu survey.</p>
+</div></div></div>
+</div>
+</section>
+
+<!-- DIREKTORI -->
+<section class="flow" id="dir">
+<div class="flow-head"><div class="num">15 → DIREKTORI</div><div><h2>Direktori /mall/:slug = SEO gratis, tanpa LLM</h2><div class="sub">List 40 tenant searchable + filter halal/budget/lantai/kids/misi. Tombol “Cariin yang cocok →” masuk /makan?mall=gi (pre-filled Q1).</div></div></div>
+<div class="tags"><span class="tag good">Akuisisi organik (SEO)</span><span class="tag">Tanpa LLM = gratis</span><span class="tag eff">~5 jam (reuse card)</span></div>
+<div class="phones">
+<div class="ph-wrap"><div class="ph-label">H. Direktori GI (SEO page)</div><div class="device"><div class="screen combo">
+<div class="bar"><span>← 🏬 Grand Indonesia</span><span>40 tenant</span></div>
+<div style="padding:14px;flex:1">
+<div style="background:#f4f4f5;border-radius:12px;padding:11px 13px;font-size:13px;color:#71717a">🔍 Cari tenant… <span style="float:right">halal ▾</span></div>
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin:10px 0"><span class="fchip on">✅ Halal</span><span class="fchip on">💰 50–100rb</span><span class="fchip">L3</span><span class="fchip">Nongkrong</span></div>
+<div class="tnt"><div class="im" style="background:#fff7ed">🍜</div><div><span class="promo">-20%</span><br><b style="font-size:13px">Marugame GI L3</b><p style="font-size:12px;color:#71717a">Udon • ✅ Halal • ★ 4.8</p></div></div>
+<div class="tnt"><div class="im" style="background:#fef2f2">🧋</div><div><span class="promo">B1G1</span><br><b style="font-size:13px">Xing Fu Tang</b><p style="font-size:12px;color:#71717a">Minuman • ✅ Halal • ★ 4.7</p></div></div>
+<button class="claim">✨ Cariin yang cocok → (quiz 20 dtk)</button>
+</div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Kenapa wajib ada</div><div class="device"><div class="screen" style="background:#fff;padding:22px;font-size:13.5px">
+<b style="font-family:'Plus Jakarta Sans';font-size:16px">🔍 Google → tenant → quiz</b>
+<p style="margin:10px 0;color:#3f3f46">Orang search “makan halal GI murah” → landing direktori → filter → tap <b>Cariin yang cocok</b> → quiz pre-filled → result + voucher. 1 funnel penuh tanpa iklan.</p>
+<p style="background:#ecfdf5;border:1px solid #a7f3d0;border-radius:12px;padding:12px">✅ SSR buat SEO (landing + direktori). Quiz + result CSR (interaktif). Sesuai arsitektur PRD §5.</p>
+</div></div></div>
+</div>
+</section>
+
+<!-- NILAI -->
+<section class="flow" id="nilai">
+<div class="flow-head"><div class="num">VS</div><div><h2>Nilai kombo vs North Star + constraint</h2><div class="sub">Kenapa 5+10+15 bareng lebih kuat dari masing-masing solo</div></div></div>
+<div style="overflow-x:auto;margin-top:14px"><table class="cmp">
+<tr><th>Metrik PRD</th><th>Target</th><th>Kombo jawab apa</th></tr>
+<tr><td>Landing→quiz</td><td>&gt;40%</td><td>Home 10: 2 CTA gede + wallet quota → pilihan jelas dalam 3 detik</td></tr>
+<tr><td>Quiz completion</td><td>&gt;70% (makan &gt;75%)</td><td>Engine 5: 1 layar 1 tanya, swipe, 30/20 dtk, thumb 56px</td></tr>
+<tr><td>CTR Maps</td><td>&gt;50% (makan &gt;40%)</td><td>Deck 5: 1 hero fokus + Navigasi gede; makan + klaim voucher (15)</td></tr>
+<tr><td>Time &gt;60 dtk, share &gt;5%</td><td>kualitas</td><td>Alasan personal per kartu + forward WA (curi Opsi 11 Phase 2)</td></tr>
+<tr><td>Load &lt;2 dtk 3G, cost &lt;500rb</td><td>NFR</td><td>Tanpa Maps SDK, tanpa foto wajib; makan = filter DB gratis, LLM cuma ranking</td></tr>
+<tr><td>Split tempat≠makan, quota 2 vs 5</td><td>Addendum lock</td><td>2 quiz + 2 result + wallet terpisah; 0 tenant di result tempat</td></tr>
+</table></div>
+<div class="pros"><div><b>✅ Yang lu hemat</b>1 engine swipe dipakai 2 quiz. 1 pola kartu dipakai 2 result (beda field). Home + direktori reuse card. Total kombo <b>M 22–28 jam</b> — muat timeline solo 2–3 minggu, sisa buat TDD + prompt LLM.</div><div><b>⚠️ Yang ditunda (sengaja)</b>Foto real Opsi 2 = Phase 2 (placeholder emoji/gradasi dulu biar nggak halu). Peta Opsi 7 = toggle “lihat peta” di result Phase 2, bukan fondasi. Gamifikasi Opsi 8/12 = bumbu copy, bukan sistem.</div></div>
+<button class="pick-btn" id="agreeBtn">Setuju, gas kombo 5 + 10 + 15 ✅</button>
+<p style="text-align:center;font-size:12.5px;color:#71717a;margin-top:10px">Tanpa approval lu, <b>0 baris di app/ gue ubah.</b> Abis setuju → Addendum revamp → eksekusi Nuxt TDD (test→lint→build).</p>
+</section>
+
+<div class="foot">Wikendo Kombo Board 5+10+15 • proposal di <span style="font-family:monospace">design/revamp-combo-5-10-15.html</span> • bukan perubahan codebase • 2026-10-07</div>
+</div>
+<script>
+(function(){
+try{
+var deckData=[
+{emoji:'🏛️',bg:'linear-gradient(140deg,#ffedd5,#fdba74)',tag:'★ #1 BEST',name:'Museum MACAN',desc:'Kenapa cocok: seni + ngobrol santai berdua, adem siang hari.',meta:'💰 100–150rb • 📍 Kebon Jeruk • ⏰ best siang'},
+{emoji:'☕',bg:'linear-gradient(140deg,#fef3c7,#fcd34d)',tag:'★ #2',name:'Kopi Nako Alam Sutera',desc:'Kenapa cocok: nongkrong lama, budget aman, spot foto.',meta:'💰 <100rb • 📍 Alam Sutera • ⏰ best sore'},
+{emoji:'🌳',bg:'linear-gradient(140deg,#dcfce7,#86efac)',tag:'★ #3',name:'Hutan Kota GBK',desc:'Kenapa cocok: udara segar + piknik pelan berdua.',meta:'💰 Gratis–50rb • 📍 Senayan • ⏰ best pagi'}];
+var i=0;
+var btn=document.getElementById('deckNext'),note=document.getElementById('deckNote');
+if(btn){btn.addEventListener('click',function(){i=(i+1)%deckData.length;var d=deckData[i];var card=btn.closest('.deck').querySelector('.hero-card');card.querySelector('.im').textContent=d.emoji;card.querySelector('.im').style.background=d.bg;card.querySelector('.b-org').textContent=d.tag;card.querySelector('.bd div').textContent=d.name;card.querySelectorAll('.bd p')[0].textContent=d.desc;card.querySelectorAll('.bd p')[1].textContent=d.meta;if(note)note.textContent='Kartu '+(i+1)+'/5 • generate ulang = quota 2/2 • tap Lainnya buat geser 👉';});}
+document.querySelectorAll('.opt-card,.mall,.fchip').forEach(function(el){el.addEventListener('click',function(){var sib=el.parentElement.querySelectorAll('.'+el.classList[0]);sib.forEach(function(s){s.classList.remove('sel');s.classList.remove('on');});el.classList.add(el.classList.contains('mall')||el.classList.contains('fchip')?'on':'sel');});});
+var agree=document.getElementById('agreeBtn');
+if(agree){if(localStorage.getItem('wikendo-combo-pick')==='yes'){agree.textContent='✅ Kombo disetujui (tersimpan di browser) — balas “gas kombo” ke gue';}
+agree.addEventListener('click',function(){localStorage.setItem('wikendo-combo-pick','yes');agree.textContent='✅ Kombo disetujui (tersimpan di browser) — balas “gas kombo” ke gue';agree.scrollIntoView({block:'center'});});}
+}catch(e){}
+})();
+</script>
+</body>
+</html>

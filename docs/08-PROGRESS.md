@@ -13,9 +13,10 @@
 
 ---
 
-## 📌 BOARD — posisi per 7 Okt 2026 dini hari (deploy preview)
+## 📌 BOARD — posisi per 7 Okt 2026 siang (patch downstream v1.3 jalan)
 
 ### 🔥 NOW (lagi dikerjain)
+- [ ] Patch 5 docs downstream Addendum v1.3 (ADR ✅ + Schema ✅ + API ✅ + Journey ✅ + Checklist ⏳ sisa) — `app/` NOL diubah
 - [ ] Redeploy Vercel (commit 481f82c sudah ter-push, nunggu build hijau di Vercel)
 - [ ] Auth slice: login/register/callback/middleware (0 file = blocker quota login + Simpan/history)
 
@@ -30,6 +31,9 @@
 - [ ] Scraper `raw_scrape` → parser per-mall (post-PMF)
 
 ### ✅ DONE (ringkas — detail di LOG bawah)
+- [x] Addendum v1.3 Revamp+Auth APPROVED by Agesta 7 Okt 2026 — LOCKED (`docs/09-PRD-Addendum-Revamp-Combo-Auth.md` DRAFT → Approved) ✅
+- [x] Revamp kombo 5+10+15 (`design/revamp-combo-5-10-15.html`) — 1 alur utuh Home→Quiz→Result→Makan→Voucher→Direktori, visual disatuin, nunggu approval Agesta ✅
+- [x] Revamp option board Vol.1 (Opsi 1–5, `design/revamp-options-v1.html`) + Vol.2 (Opsi 6–15, `design/revamp-options-v2.html`) — proposal visual only, 0 ubah `app/`, nunggu approval Agesta ✅
 - [x] Migrasi npm → pnpm + fix build Vercel (lockfile tencentyun ENOTFOUND, Node 22, ESLint 10) → commit `481f82c`, push main ✅
 - [x] Push repo ke GitHub public `agestasaputra/wikendo-web-app` (SSH key `hermes-wikendo-deploy`, 12 commit, remote origin main ✅)
 - [x] Rename repo `weekend-planner` → `wikendo-web-app` + lock brand Wikendo (folder mv, 13 file patch, git mv 2 artefak, verify test 12/12 + lint + pytest 10/10 + build 3.15MB ✅, commit rename)
@@ -46,6 +50,41 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-07 siang — Patch downstream v1.3 (🔥 IN PROGRESS, 4/5 docs)
+- **Kenapa:** Agesta "Approve" Addendum v1.3 → kunci downstream biar eksekusi Nuxt 1 interpretasi. PRD Final TIDAK diutak-atik (aturan Addendum).
+- **Dikerjain:**
+  - `02-ADR.md` v2.1 → v2.2 (7 patch: header, phone optional, progresif auth, OAuth tanpa modal HP, konsekuensi, quota split 1+2/wall 4 momen/voucher wajib login, analytics 3 event, summary, footer, change log).
+  - `04-Database-Schema.md` v1.0 → v1.1 (3 patch: header, `user_profiles.phone` NOT NULL → NULL + CHECK optional + index partial + komentar, `initialize_new_user` phone DEFAULT NULL + quota makan, tabel baru `voucher_claims` + RLS).
+  - `05-API-Specification.md` v1.0 → v1.1 (6 patch: header, `GET /api/quota` split tempat+makan + login_cta, implementasi cookie ganda, `POST /api/auth/register` phone optional, validasi + init, tipe `QuotaStatus` split, endpoint 16 `POST /api/voucher/claim` + footer).
+  - `03-User-Journey.md` v2.0 → v2.1 (6 patch: header, quota rules split, register phone optional + OAuth tanpa modal, generate-again + Step 8 wallet 2-state, Step 13 voucher + Step 14 Home kombo, analytics 3 event, metrics anon→register >15%).
+  - ⏳ Sisa: `06-MVP-Checklist.md` (scope auth progresif + voucher) → commit + kirim file.
+- **Verifikasi:** docs only, `app/` NOL diubah ✅. Patch per-file verified ✅.
+- **Files:** `docs/02-ADR.md`, `docs/04-Database-Schema.md`, `docs/05-API-Specification.md`, `docs/03-User-Journey.md`, `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** Checklist → commit `docs: patch downstream v1.3` → kirim PROGRESS.md → eksekusi Nuxt TDD.
+
+## 2026-10-07 — Addendum v1.3 Revamp+Auth DRAFT (⏳ nunggu approve Agesta)
+- **Kenapa:** Agesta lock kombo 5+10+15 + 2 open question (mandatory login? kejar user sebanyak-banyaknya?) belum terkunci di dokumen. Tanpa ini eksekusi Nuxt bakal beda interpretasi.
+- **Dikerjain:** `docs/09-PRD-Addendum-Revamp-Combo-Auth.md` DRAFT (~7.5KB): §1 kombo LOCKED (ref visual HTML 31KB, token #fffdf9/#f97316/#ee2c4b, tunda foto/peta/streak/gacha Phase 2) + §2 auth progresif (anon tempat 1x + makan 2x, voucher WAJIB login, phone DROP → NULL-able, email verif optional, Google 1-tap primary, 4 momen login wall, wallet 2-state) + §3 quota/abuse/cost + §4 delta API/Schema non-breaking + §5 metrics (anon→register >15%) + §6 effort ~5-6 jam + §7 next (approve → patch downstream → TDD).
+- **Verifikasi:** write verified ✅. `app/` NOL diubah ✅ (lock approval masih berlaku). Patch ADR/Schema/API/Journey/Checklist DITAHAN sampai Agesta approve.
+- **Files:** `docs/09-PRD-Addendum-Revamp-Combo-Auth.md` (baru), `docs/08-PROGRESS.md` (BOARD NOW + LOG ini).
+- **Next:** Agesta "approve" → patch ADR v2.2 + Schema + API + Journey + Checklist → eksekusi Nuxt TDD. Atau "revisi: ..." kalau mau ubah.
+
+## 2026-10-07 — Kombo board 5+10+15 (✅ BERES, proposal only)
+- **Kenapa:** Agesta shortlist 2/5/7/10/15, minta ranking + visual kombo biar kebayang. Lock: 0 ubah `app/` sebelum approval.
+- **Dikerjain:** `design/revamp-combo-5-10-15.html` (31KB) — 1 alur utuh 8 mockup HP: Home Superapp (10) → Quiz swipe tempat (5) → Result deck (5, tap "Lainnya" demo geser) → Quiz makan (5+15) → Result+voucher (15) → Direktori /mall/:slug (15, SEO). Token disatuin: base #fffdf9, Orange tempat #f97316, Merah makan #ee2c4b, Plus Jakarta Sans, kartu 24px, tombol 56px. Plus: peta alur ASCII, tabel nilai vs North Star, tombol "Setuju gas kombo" (localStorage), aturan sponsored jujur + penundaan Opsi 2/7/8/12.
+- **Verifikasi:** write verified ✅. Browser visual check belum (no browser tool sesi ini) — Agesta review langsung di HP.
+- **Files:** `design/revamp-combo-5-10-15.html` (baru), `docs/08-PROGRESS.md` (BOARD+DONE+LOG ini).
+- **Next:** Agesta balas "gas kombo" → tulis Addendum revamp → eksekusi Nuxt TDD (test→lint→build).
+
+## 2026-10-07 — Revamp option board Vol.1 + Vol.2 (✅ BERES, proposal only)
+- **Kenapa:** Agesta kurang suka UI existing, minta 5 opsi revamp lalu nambah 10 lagi. Aturan lock: JANGAN eksekusi perubahan di codebase sebelum approval.
+- **Dikerjain:**
+  - `design/revamp-options-v1.html` (44KB): Opsi 1 Warm Evolution, 2 Explore Photo-First, 3 Night Dark, 4 Premium Clean, 5 Swipe Quiz (rekomendasi) — tiap opsi 3 mockup HP Landing→Quiz→Result + tabel head-to-head + tombol pilih (localStorage).
+  - `design/revamp-options-v2.html` (51KB): Opsi 6 Chat Concierge, 7 Map-First, 8 Brutalist Playful, 9 Editorial Guide, 10 Superapp Home, 11 WA-Native, 12 Lucky Spin Gacha, 13 Group Vote, 14 Calm Zen, 15 Mall Directory+Voucher — tiap opsi 3 mockup HP + tabel Vol.2 + rekomendasi kombo 5+15+11.
+- **Verifikasi:** file exists ✅, ukuran + hitung marker OPSI ✅, `app/` NOL diubah ✅ (proposal di `design/` only). Browser visual check belum (no browser tool di sesi ini) — Agesta review langsung di HP.
+- **Files:** `design/revamp-options-v1.html` (baru), `design/revamp-options-v2.html` (baru), `docs/08-PROGRESS.md` (BOARD+DONE+LOG ini).
+- **Next:** Agesta pilih (angka / kombo / "gas rekomendasi") → tulis Addendum revamp → eksekusi ke Nuxt via TDD.
 
 ## 2026-10-07 dini hari — Migrasi npm → pnpm + fix build Vercel ✅ BERES
 - **Kenapa:** Build Vercel fail `ENOTFOUND mirrors.tencentyun.com` — `package-lock.json` kekunci ke mirror Tencent (bawaan server dev), DNS-nya unreachable dari server Vercel `iad1`. Agesta juga request sekalian pindah ke pnpm + beresin warning.

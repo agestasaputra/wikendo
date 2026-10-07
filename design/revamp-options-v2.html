@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wikendo — 10 Opsi Revamp Vol.2 (Opsi 6–15)</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:#f4f4f5;color:#18181b;line-height:1.55}
+.nav{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e4e4e7}
+.nav-in{max-width:1200px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.logo{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:18px}.logo span{color:#f97316}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.nav-links a{font-size:12px;font-weight:600;color:#3f3f46;text-decoration:none;background:#f4f4f5;padding:7px 10px;border-radius:999px}
+.wrap{max-width:1200px;margin:0 auto;padding:24px 16px 80px}
+.hero{background:#18181b;color:#fff;border-radius:20px;padding:32px 28px}
+.hero h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(24px,4vw,36px);font-weight:800;letter-spacing:-.5px;line-height:1.15;margin-bottom:10px}
+.hero h1 em{font-style:normal;color:#fb923c}
+.hero p{color:#d4d4d8;max-width:760px;font-size:15px}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chip{font-size:12px;font-weight:600;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);padding:6px 12px;border-radius:999px}
+.chip.warn{background:#f97316;border-color:#f97316;color:#fff}
+.pick-banner{background:#fff7ed;border:2px dashed #f97316;border-radius:16px;padding:16px 20px;margin:20px 0;font-weight:700;text-align:center}
+section.opt{background:#fff;border:1px solid #e4e4e7;border-radius:20px;padding:26px;margin:26px 0}
+section.opt.picked{border:2px solid #f97316}
+.opt-head{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.num{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:14px;background:#18181b;color:#fff;border-radius:12px;padding:8px 14px;white-space:nowrap}
+.opt-head h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:21px;font-weight:800;letter-spacing:-.3px}
+.sub{font-size:13px;color:#71717a;font-weight:500}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.tag{font-size:12px;font-weight:600;padding:5px 12px;border-radius:999px;background:#f4f4f5;color:#3f3f46;border:1px solid #e4e4e7}
+.tag.good{background:#ecfdf5;color:#047857;border-color:#a7f3d0}
+.tag.bad{background:#fef2f2;color:#b91c1c;border-color:#fecaca}
+.tag.eff{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe}
+.tokens{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0;align-items:center}
+.sw{display:flex;align-items:center;gap:6px;font-size:12px;color:#52525b;font-weight:600}
+.dot{width:22px;height:22px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #d4d4d8}
+.pros{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.pros div{background:#fafafa;border:1px solid #e4e4e7;border-radius:12px;padding:12px 14px;font-size:13px}
+.phones{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px;margin-top:18px}
+.ph-wrap{display:flex;flex-direction:column;align-items:center}
+.ph-label{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#71717a;margin-bottom:10px}
+.device{background:#0c0c0d;border-radius:42px;padding:11px;width:100%;max-width:330px;box-shadow:0 20px 50px -20px rgba(0,0,0,.35)}
+.screen{border-radius:31px;overflow:hidden;min-height:600px;display:flex;flex-direction:column;position:relative;font-size:14px}
+.bar{padding:12px 16px;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:13px}
+.ph{height:120px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;color:#fff;font-weight:800}
+.ph .e{font-size:40px}.ph small{font-weight:500;font-size:11px;opacity:.85}
+.pick-btn{margin-top:18px;width:100%;padding:15px;border-radius:14px;border:2px solid #18181b;background:#fff;font-weight:800;font-size:15px;cursor:pointer}
+/* T6 chat */
+.t6{font-family:'Inter',sans-serif;background:#f7f5f0;color:#141413}
+.t6 .bar{background:#fff;border-bottom:1px solid #e8e6dc}
+.t6 .chat{padding:14px;display:flex;flex-direction:column;gap:10px;flex:1}
+.t6 .b{max-width:85%;padding:11px 13px;border-radius:14px;font-size:13.5px;line-height:1.5}
+.t6 .ai{background:#fff;border:1px solid #e8e6dc;border-bottom-left-radius:4px;align-self:flex-start}
+.t6 .me{background:#c96442;color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+.t6 .typing{display:flex;gap:4px;padding:12px 14px;background:#fff;border:1px solid #e8e6dc;border-radius:14px;width:64px}
+.t6 .typing i{width:7px;height:7px;border-radius:50%;background:#c96442;animation:bl 1s infinite}
+.t6 .typing i:nth-child(2){animation-delay:.15s}.t6 .typing i:nth-child(3){animation-delay:.3s}
+@keyframes bl{0%,100%{opacity:.3}50%{opacity:1}}
+.t6 .chips{display:flex;gap:8px;flex-wrap:wrap;padding:0 14px 8px}
+.t6 .ch{font-size:12.5px;font-weight:600;border:1.5px solid #c96442;color:#c96442;padding:8px 13px;border-radius:99px;background:#fff}
+.t6 .input{margin:0 14px 14px;background:#fff;border:1px solid #e8e6dc;border-radius:99px;padding:12px 16px;font-size:13px;color:#87867f}
+/* T7 map */
+.t7{font-family:'DM Sans',sans-serif;background:#e8eef2;color:#18181b}
+.t7 .map{flex:1;min-height:340px;background:linear-gradient(#dbe7ee 1px,transparent 1px),linear-gradient(90deg,#dbe7ee 1px,transparent 1px),#eef4f7;background-size:28px 28px;position:relative;padding:14px}
+.t7 .pin{position:absolute;background:#fff;border-radius:12px;padding:8px 10px;font-size:12px;font-weight:700;box-shadow:0 6px 16px -6px rgba(0,0,0,.3)}
+.t7 .sheet{background:#fff;border-radius:22px 22px 0 0;padding:16px;margin-top:-24px;position:relative}
+.t7 .grab{width:44px;height:5px;border-radius:99px;background:#e4e4e7;margin:0 auto 12px}
+.t7 .qq{font-weight:700;font-size:16px;margin-bottom:10px}
+.t7 .o2{display:flex;gap:8px;flex-wrap:wrap}
+.t7 .o2 span{font-size:13px;font-weight:600;background:#f4f4f5;border:2px solid #e4e4e7;padding:10px 14px;border-radius:14px}
+.t7 .o2 span.on{border-color:#000;background:#000;color:#fff}
+.t7 .go{width:100%;background:#000;color:#fff;border:none;border-radius:99px;padding:15px;font-weight:700;margin-top:12px}
+/* T8 brutal */
+.t8{font-family:'Plus Jakarta Sans',sans-serif;background:#fff7d6;color:#18181b}
+.t8 .bar{background:#7c3aed;color:#fff}
+.t8 .bhero{background:#ffd02f;border-bottom:3px solid #000;padding:22px 18px;text-align:center}
+.t8 .bhero h3{font-size:23px;font-weight:800;line-height:1.2}
+.t8 .bcard{margin:14px;background:#fff;border:3px solid #000;border-radius:18px;padding:14px;box-shadow:5px 5px 0 #000}
+.t8 .bopt{border:3px solid #000;border-radius:14px;padding:13px;margin:9px 0;font-weight:800;font-size:14px;background:#fff;box-shadow:3px 3px 0 #000}
+.t8 .bopt.sel{background:#7c3aed;color:#fff}
+.t8 .bbtn{display:block;width:calc(100% - 28px);margin:4px 14px 16px;background:#22c55e;border:3px solid #000;border-radius:14px;padding:15px;font-weight:800;font-size:15px;box-shadow:4px 4px 0 #000}
+.t8 .streak{display:flex;gap:6px;justify-content:center;margin-top:10px;font-size:13px;font-weight:800}
+/* T9 editorial */
+.t9{font-family:Georgia,serif;background:#faf9f5;color:#141413}
+.t9 .bar{font-family:'Inter',sans-serif;background:#faf9f5;border-bottom:1px solid #e8e6dc;font-size:13px}
+.t9 .cover{padding:24px 20px}
+.t9 .kicker{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;color:#c96442;font-weight:600}
+.t9 .cover h3{font-size:29px;line-height:1.15;font-weight:500;margin:10px 0}
+.t9 .cover p{font-family:'Inter',sans-serif;font-size:13.5px;color:#5e5d59;line-height:1.6}
+.t9 .art{margin:0 16px 12px;background:#fff;border:1px solid #f0eee6;border-radius:12px;overflow:hidden;display:flex;gap:12px;padding:12px}
+.t9 .art .im{width:74px;height:74px;flex:none;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:32px}
+.t9 .art b{font-size:15px}.t9 .art p{font-family:'Inter',sans-serif;font-size:12px;color:#5e5d59;margin-top:4px}
+.t9 .q9{padding:22px 20px}.t9 .q9 h3{font-size:24px;font-weight:500;margin-bottom:12px}
+.t9 .o9{font-family:'Inter',sans-serif;border:1px solid #e8e6dc;border-radius:10px;padding:13px;margin:8px 0;font-size:14px;background:#fff}
+/* T10 superapp */
+.t10{font-family:'Plus Jakarta Sans',sans-serif;background:#f4f4f5;color:#18181b}
+.t10 .hi{padding:16px}
+.t10 .wallet{background:linear-gradient(140deg,#0891b2,#164e63);color:#fff;border-radius:18px;padding:16px}
+.t10 .wallet small{opacity:.8;font-size:11px}.t10 .wallet b{font-size:22px;display:block}
+.t10 .grid10{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.t10 .g10{background:#fff;border-radius:14px;padding:12px 4px;text-align:center;font-size:11px;font-weight:700}
+.t10 .g10 i{font-size:22px;display:block;margin-bottom:4px;font-style:normal}
+.t10 .banner{background:linear-gradient(120deg,#f97316,#fb923c);color:#fff;border-radius:16px;padding:16px;font-weight:800;font-size:14px}
+.t10 .sec{background:#fff;border-radius:16px;padding:14px;margin-top:12px}
+.t10 .sec h4{font-size:14px;margin-bottom:10px}
+.t10 .row10{display:flex;gap:10px;align-items:center;padding:9px 0;border-top:1px solid #f1f1f2;font-size:13px}
+/* T11 WA */
+.t11{font-family:'Inter',sans-serif;background:#e5ddd5;color:#111}
+.t11 .wa{background:#075e54;color:#fff;padding:12px 14px;font-size:13px;font-weight:600;display:flex;gap:10px;align-items:center}
+.t11 .wa .av{width:34px;height:34px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:18px}
+.t11 .chat11{padding:14px;display:flex;flex-direction:column;gap:8px;flex:1}
+.t11 .m{max-width:85%;padding:10px 12px;border-radius:10px;font-size:13px;line-height:1.5;box-shadow:0 1px 1px rgba(0,0,0,.15)}
+.t11 .in{background:#fff;align-self:flex-start;border-top-left-radius:0}
+.t11 .out{background:#dcf8c6;align-self:flex-end;border-top-right-radius:0}
+.t11 .quick{display:flex;gap:8px;padding:0 14px 6px;flex-wrap:wrap}
+.t11 .quick span{font-size:12px;font-weight:600;background:#fff;border-radius:99px;padding:8px 13px;box-shadow:0 1px 2px rgba(0,0,0,.15);color:#075e54}
+.t11 .tb{margin:0 14px 14px;background:#fff;border-radius:99px;padding:12px 16px;font-size:13px;color:#8696a0;display:flex;justify-content:space-between}
+/* T12 gacha */
+.t12{font-family:'Plus Jakarta Sans',sans-serif;background:#1e1b4b;color:#fff;text-align:center}
+.t12 .bar{color:#fff}
+.t12 .wheel{width:190px;height:190px;border-radius:50%;margin:16px auto;background:conic-gradient(#f97316 0 25%,#0891b2 0 50%,#a78bfa 0 75%,#22c55e 0);border:8px solid #fff;position:relative;display:flex;align-items:center;justify-content:center}
+.t12 .wheel b{background:#1e1b4b;border-radius:50%;width:86px;height:86px;display:flex;align-items:center;justify-content:center;font-size:13px}
+.t12 .spin{background:#f97316;color:#fff;border:none;border-radius:99px;padding:15px 44px;font-weight:800;font-size:15px;margin-top:6px}
+.t12 .energy{font-size:12px;color:#c4b5fd;font-weight:700;margin-top:10px}
+.t12 .mys{display:flex;gap:10px;padding:16px}
+.t12 .my{flex:1;background:#2e2a7a;border-radius:16px;padding:22px 8px;font-size:13px;font-weight:700}
+.t12 .my.open{background:#fff;color:#1e1b4b}
+/* T13 group */
+.t13{font-family:'Inter',sans-serif;background:#f8fafc;color:#0f172a}
+.t13 .bar{background:#fff;border-bottom:1px solid #e2e8f0}
+.t13 .plan{margin:14px;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:14px}
+.t13 .votes{display:flex;gap:6px;margin:8px 0}
+.t13 .avt{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;background:#e2e8f0;border:2px solid #fff}
+.t13 .vote{border:1px solid #e2e8f0;border-radius:12px;padding:11px;margin:8px 0;font-size:13px}
+.t13 .vote .barv{height:7px;background:#f1f5f9;border-radius:99px;margin-top:8px;overflow:hidden}
+.t13 .vote .barv i{display:block;height:100%;background:#0891b2;border-radius:99px}
+.t13 .split{background:#f0fdfa;border:1px dashed #0891b2;border-radius:12px;padding:12px;font-size:12.5px;margin-top:10px}
+.t13 .go13{width:100%;background:#0f172a;color:#fff;border:none;border-radius:12px;padding:14px;font-weight:700;margin-top:10px}
+/* T14 zen */
+.t14{font-family:Georgia,serif;background:#f8fafc;color:#0f172a;text-align:center}
+.t14 .zq{padding:34px 22px;flex:1;display:flex;flex-direction:column;justify-content:center}
+.t14 .breath{width:130px;height:130px;border-radius:50%;margin:0 auto 22px;background:radial-gradient(circle,#bae6fd,#e0f2fe);animation:br 4s ease-in-out infinite}
+@keyframes br{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+.t14 .zq h3{font-size:26px;font-weight:500;margin-bottom:10px}
+.t14 .zq p{font-family:'Inter',sans-serif;font-size:13.5px;color:#64748b}
+.t14 .zopt{font-family:'Inter',sans-serif;background:#fff;border:1px solid #e2e8f0;border-radius:99px;padding:14px;margin:8px 0;font-size:14px}
+/* T15 marketplace */
+.t15{font-family:'Plus Jakarta Sans',sans-serif;background:#fff;color:#18181b}
+.t15 .bar{background:#fff;border-bottom:1px solid #eee}
+.t15 .malls{display:flex;gap:8px;padding:12px 14px;overflow:hidden}
+.t15 .mall{flex:none;font-size:12px;font-weight:700;border:1.5px solid #e4e4e7;border-radius:12px;padding:9px 12px}
+.t15 .mall.on{background:#ee2c4b;color:#fff;border-color:#ee2c4b}
+.t15 .tnt{margin:0 14px 10px;border:1px solid #eee;border-radius:14px;overflow:hidden;display:flex;gap:10px;padding:10px}
+.t15 .tnt .im{width:66px;height:66px;flex:none;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:30px}
+.t15 .promo{display:inline-block;background:#ee2c4b;color:#fff;font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:6px;margin-bottom:4px}
+.t15 .claim{width:calc(100% - 28px);margin:4px 14px 14px;background:#ee2c4b;color:#fff;border:none;border-radius:12px;padding:14px;font-weight:800}
+.cmp{width:100%;border-collapse:collapse;font-size:12.5px;background:#fff;border-radius:16px;overflow:hidden}
+.cmp th,.cmp td{padding:11px;border-bottom:1px solid #e4e4e7;text-align:left;vertical-align:top}
+.cmp th{background:#18181b;color:#fff;font-size:11.5px}
+.foot{text-align:center;color:#71717a;font-size:12.5px;margin-top:26px}
+@media(max-width:640px){.pros{grid-template-columns:1fr}.hero{padding:24px 18px}}
+</style>
+</head>
+<body>
+<div class="nav"><div class="nav-in">
+<div class="logo">Wikendo<span>.</span> vol.2 — opsi 6–15</div>
+<div class="nav-links"><a href="#opsi-6">6 Chat</a><a href="#opsi-7">7 Map</a><a href="#opsi-8">8 Brutal</a><a href="#opsi-9">9 Editorial</a><a href="#opsi-10">10 Superapp</a><a href="#opsi-11">11 WA</a><a href="#opsi-12">12 Gacha</a><a href="#opsi-13">13 Group</a><a href="#opsi-14">14 Zen</a><a href="#opsi-15">15 Mall</a><a href="#banding">Banding</a></div>
+</div></div>
+<div class="wrap">
+<div class="hero">
+<h1>10 opsi baru <em>Wikendo</em> — beda total dari Vol.1.</h1>
+<p>Vol.1 = 5 opsi (Warm, Explore, Dark, Premium, Swipe). File ini = <b style="color:#fff">Opsi 6–15</b>, tiap opsi tetap nunjukin <b style="color:#fff">Landing → Quiz → Result</b>. Total sekarang 15 opsi. <b style="color:#fff">Belum ada perubahan di <span style="font-family:monospace">app/</span></b> — ini file proposal di <span style="font-family:monospace">design/</span>.</p>
+<div class="meta"><span class="chip warn">STATUS: butuh approval Agesta</span><span class="chip">Mobile-first • 375px</span><span class="chip">Split dijaga: tempat ≠ makan</span></div>
+</div>
+<div class="pick-banner">Pilihan lu (Vol.2): <span id="pickName">belum ada — tap “Pilih opsi ini” di favorit lu</span></div>
+
+<!-- 6 -->
+<section class="opt" data-opt="6" id="opsi-6">
+<div class="opt-head"><div class="num">OPSI 6</div><div><h2>Chat Concierge</h2><div class="sub">Referensi: ChatGPT × Claude • Surface: Command — quiz = ngobrol, bukan form</div></div></div>
+<div class="tags"><span class="tag eff">Effort M • 14–18 jam</span><span class="tag">Aksen terracotta #c96442</span><span class="tag">Canvas parchment #f5f4ed</span><span class="tag good">AI-native, zero learning</span></div>
+<div class="tokens"><span class="sw"><i class="dot" style="background:#f5f4ed"></i>#f5f4ed</span><span class="sw"><i class="dot" style="background:#141413"></i>#141413</span><span class="sw"><i class="dot" style="background:#c96442"></i>#c96442</span></div>
+<div class="phones">
+<div class="ph-wrap"><div class="ph-label">Landing</div><div class="device"><div class="screen t6">
+<div class="bar"><span>✦ Wikendo AI</span><span>⤴</span></div>
+<div class="chat"><div class="b ai">Halo! 👋 Weekend ini mau ngapain? Ceritain aja, gue yang beresin.</div>
+<div class="b me">Mau healing berdua, budget 200rb, daerah Jaksel</div>
+<div class="b ai">Siap. 3 pertanyaan cepat biar pas — atau langsung kasih rekomendasi?</div></div>
+<div class="chips"><span class="ch">🗺️ Cari tempat</span><span class="ch">🍜 Laper di mall</span></div>
+<div class="input">Tulis maunya… &nbsp; 🎤</div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Quiz (chat)</div><div class="device"><div class="screen t6">
+<div class="bar"><span>← ✦ Concierge</span><span>● online</span></div>
+<div class="chat"><div class="b ai">Dengan siapa weekend kali ini? 👇</div>
+<div class="b me">Berdua 💑</div>
+<div class="b ai">Budget per orang berapa?</div></div>
+<div class="chips"><span class="ch">💰 &lt;100rb</span><span class="ch">💰💰 100–300rb</span><span class="ch">💰💰💰 &gt;300rb</span></div>
+<div class="input">Ketik / tap jawaban…</div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Result (chat cards)</div><div class="device"><div class="screen t6">
+<div class="bar"><span>← ✦ Hasil buat kamu</span><span>Quota 1/2</span></div>
+<div class="chat"><div class="b ai">Nih 5 yang paling cocok 🎉<br><br><b>1. Museum MACAN</b> 🏛️<br>💰 100–150rb • 📍 Kebon Jeruk<br><u>Buka di Maps →</u><br><br><b>2. Kopi Nako</b> ☕<br>💰 &lt;100rb • 📍 Alam Sutera<br><u>Buka di Maps →</u></div>
+<div class="typing"><i></i><i></i><i></i></div></div>
+<div class="input">Minta yang lain / ubah budget…</div>
+</div></div></div>
+</div>
+<div class="pros"><div><b>✅ Plus bisnis</b>Terasa paling “AI”, friksi nol (semua orang bisa chat), follow-up natural → quota 2/hari kepake buat iterasi, bukan hangus.</div><div><b>⚠️ Hati-hati</b>Hasil susah di-compare sekaligus, ketergantungan LLM cost per chat, perlu guardrail biar nggak ngelantur.</div></div>
+<button class="pick-btn" data-pick="6">Pilih Opsi 6 — Chat Concierge</button>
+</section>
+
+<!-- 7 -->
+<section class="opt" data-opt="7" id="opsi-7">
+<div class="opt-head"><div class="num">OPSI 7</div><div><h2>Map-First Gojek Mode</h2><div class="sub">Referensi: Gojek/Grab • Surface: Operate — peta dulu, quiz nempel di bottom sheet</div></div></div>
+<div class="tags"><span class="tag eff">Effort L • 20–28 jam</span><span class="tag bad">Butuh Maps SDK</span><span class="tag">Hitam-putih tegas + pin</span></div>
+<div class="tokens"><span class="sw"><i class="dot" style="background:#000000"></i>#000</span><span class="sw"><i class="dot" style="background:#ffffff"></i>#fff</span><span class="sw"><i class="dot" style="background:#efefef"></i>#efefef</span></div>
+<div class="phones">
+<div class="ph-wrap"><div class="ph-label">Landing (peta)</div><div class="device"><div class="screen t7">
+<div class="bar"><span>🗓️ Wikendo</span><span>📍 Jaksel ▾</span></div>
+<div class="map"><div class="pin" style="top:30px;left:30px">🏛️ MACAN</div><div class="pin" style="top:90px;right:24px">☕ Nako</div><div class="pin" style="top:170px;left:60px">🌳 GBK</div>
+<div style="position:absolute;bottom:14px;left:14px;right:14px;background:#000;color:#fff;border-radius:16px;padding:14px;font-weight:700;font-size:13.5px">Weekend mau kemana? 👇<br><span style="font-weight:400;font-size:12px;color:#d4d4d8">Quiz 30 dtk → pin rekomendasi nyala di peta</span></div></div>
+<div class="sheet"><div class="grab"></div><div style="display:flex;gap:8px"><span class="o2" style="display:contents"><span class="on">🗺️ Cari Tempat</span><span>🍜 Laper di Mall</span></span></div><button class="go">Mulai quiz 30 dtk →</button></div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Quiz (sheet)</div><div class="device"><div class="screen t7">
+<div class="bar"><span>← Quiz 2/5</span><span>✕</span></div>
+<div class="map" style="min-height:180px"><div class="pin" style="top:40px;left:40px">📍 kamu</div></div>
+<div class="sheet"><div class="grab"></div><div class="qq">Budget per orang?</div><div class="o2"><span>💰 &lt;100rb</span><span class="on">💰💰 100–300rb</span><span>💰💰💰 &gt;300rb</span></div><button class="go">Lanjut →</button></div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Result (pin)</div><div class="device"><div class="screen t7">
+<div class="bar"><span>← 5 hasil</span><span>Quota 1/2</span></div>
+<div class="map"><div class="pin" style="top:24px;left:24px;border:2px solid #000">★ 🏛️ MACAN</div><div class="pin" style="top:100px;right:20px">☕ Nako</div><div class="pin" style="top:180px;left:50px">🌳 GBK</div></div>
+<div class="sheet"><div class="grab"></div><b>★ Museum MACAN</b><p style="font-size:12.5px;color:#52525b">💰 100–150rb • 4,2 km • ⏰ best siang</p><button class="go">📍 Navigasi →</button></div>
+</div></div></div>
+</div>
+<div class="pros"><div><b>✅ Plus bisnis</b>Jarak = alasan paling jujur buat pergi. CTR navigasi diprediksi tertinggi. Fondasi kuat buat fitur “dekat gue” + ads tenant berbasis lokasi.</div><div><b>⚠️ Hati-hati</b>Effort terbesar (Maps SDK, permission lokasi, HP kentang), indoor mall accuracy jelek, cost map tile.</div></div>
+<button class="pick-btn" data-pick="7">Pilih Opsi 7 — Map-First</button>
+</section>
+
+<!-- 8 -->
+<section class="opt" data-opt="8" id="opsi-8">
+<div class="opt-head"><div class="num">OPSI 8</div><div><h2>Brutalist Playful (Duolingo Energy)</h2><div class="sub">Referensi: Duolingo × Gumroad • Surface: Decide — chunky, gamified, nagih streak</div></div></div>
+<div class="tags"><span class="tag eff">Effort M • 12–16 jam</span><span class="tag good">Gen-Z magnet</span><span class="tag">Border 3px + shadow 5px</span></div>
+<div class="tokens"><span class="sw"><i class="dot" style="background:#ffd02f"></i>#ffd02f</span><span class="sw"><i class="dot" style="background:#7c3aed"></i>#7c3aed</span><span class="sw"><i class="dot" style="background:#22c55e"></i>#22c55e</span></div>
+<div class="phones">
+<div class="ph-wrap"><div class="ph-label">Landing</div><div class="device"><div class="screen t8">
+<div class="bar"><span>🗓️ WIKENDO!</span><span>🔥 3</span></div>
+<div class="bhero"><h3>WEEKEND<br>MISI DIMULAI! 🚀</h3><p style="font-size:13px;font-weight:700">30 detik → 5 misi weekend!</p><div class="streak"><span>🔥 streak 3</span><span>⭐ 120 XP</span></div></div>
+<div class="bcard"><b>⚡ Misi hari ini</b><p style="font-size:13px">Sisa <b>2x</b> generate tempat + <b>5x</b> makan. Gas sebelum reset jam 00.00!</p></div>
+<button class="bbtn">▶ GAS MISI!</button>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Quiz</div><div class="device"><div class="screen t8">
+<div class="bar"><span>← MISI 2/5</span><span>⭐ +10 XP</span></div>
+<div style="padding:16px"><h3 style="font-size:20px;font-weight:800">Pilih squad-mu! 👯</h3>
+<div class="bopt">🧘 Solo player</div><div class="bopt sel">💑 Duo + pasangan</div><div class="bopt">👥 Party 2–4 orang</div><div class="bopt">👨‍👩‍👧 Family guild</div></div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Result</div><div class="device"><div class="screen t8">
+<div class="bar"><span>← HASIL MISI</span><span>+50 XP 🎉</span></div>
+<div class="bcard"><div style="font-size:40px;text-align:center">🏛️</div><b>🏆 MISI #1: Museum MACAN!</b><p style="font-size:13px">💰 100–150rb • 📍 Kebon Jeruk • ⏰ siang</p></div>
+<div class="bcard" style="background:#f0fdf4"><b>🎖️ Achievement: Culture Explorer!</b><p style="font-size:13px">Share ke squad → +20 XP</p></div>
+<button class="bbtn">📍 GAS KE SANA!</button>
+</div></div></div>
+</div>
+<div class="pros"><div><b>✅ Plus bisnis</b>Retention mechanic bawaan (streak/XP/achievement), share ke squad natural, beda total dari kompetitor kalem.</div><div><b>⚠️ Hati-hati</b>Terlalu rame buat usia 30+, B2B mall susah anggap serius, gampang kelihatan “bocah” kalau copy nggak tajam.</div></div>
+<button class="pick-btn" data-pick="8">Pilih Opsi 8 — Brutalist Playful</button>
+</section>
+
+<!-- 9 -->
+<section class="opt" data-opt="9" id="opsi-9">
+<div class="opt-head"><div class="num">OPSI 9</div><div><h2>Editorial Weekend Guide</h2><div class="sub">Referensi: Medium × Kinfolk mag • Surface: Learn — Wikendo = kurator, bukan form</div></div></div>
+<div class="tags"><span class="tag eff">Effort S–M • 10–14 jam</span><span class="tag good">SEO + shareable</span><span class="tag">Serif Georgia</span></div>
+<div class="tokens"><span class="sw"><i class="dot" style="background:#faf9f5"></i>#faf9f5</span><span class="sw"><i class="dot" style="background:#141413"></i>#141413</span><span class="sw"><i class="dot" style="background:#c96442"></i>#c96442</span></div>
+<div class="phones">
+<div class="ph-wrap"><div class="ph-label">Landing</div><div class="device"><div class="screen t9">
+<div class="bar"><span>Wikendo <i style="font-style:normal;color:#c96442">Journal</i></span><span>☰</span></div>
+<div class="cover"><div class="kicker">EDISI WEEKEND INI</div><h3>7 Spot Healing di Jaksel yang Belum Rame</h3><p>Kurasi editor + quiz 30 detik buat versi personal kamu. Gratis.</p>
+<p style="margin-top:10px"><span style="background:#141413;color:#fff;border-radius:8px;padding:10px 18px;font-size:13px">🗺️ Buat versi gue →</span> <u>🍜 versi makan</u></p></div>
+<div class="art"><div class="im" style="background:#e8e6dc">🏛️</div><div><b>Museum MACAN pagi hari</b><p>4 min read • Kebon Jeruk</p></div></div>
+<div class="art"><div class="im" style="background:#fde8d8">☕</div><div><b>Kopi Nako buat nongkrong lama</b><p>3 min read • Alam Sutera</p></div></div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Quiz (3 tanya)</div><div class="device"><div class="screen t9">
+<div class="bar"><span>← Personalizer</span><span>2/3</span></div>
+<div class="q9"><div class="kicker">PERSONALIZER</div><h3>Weekend ideal versi kamu?</h3>
+<div class="o9">😌 Tenang &amp; slow</div><div class="o9" style="border-color:#141413">❤️ Berdua, ngobrol lama</div><div class="o9">🏃 Aktif seharian</div>
+<p style="font-family:Inter;font-size:12px;color:#87867f;margin-top:8px">Cuma 3 pertanyaan — sisanya biar kurator yang mikir.</p></div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Result (artikel)</div><div class="device"><div class="screen t9">
+<div class="bar"><span>← Panduanmu</span><span>⤴ share</span></div>
+<div class="cover"><div class="kicker">PANDUAN PERSONAL • 5 SPOT</div><h3>Untuk pasangan yang mau slow weekend ☕</h3><p>Estimasi total: 150–250rb • area: Jaksel • best: siang–sore</p></div>
+<div class="art"><div class="im" style="background:#e8e6dc">🏛️</div><div><b>1. Museum MACAN</b><p>Kenapa cocok: seni + ngobrol santai • <u>Maps →</u></p></div></div>
+<div class="art"><div class="im" style="background:#fde8d8">☕</div><div><b>2. Kopi Nako</b><p>Sore santai &lt;100rb • <u>Maps →</u></p></div></div>
+</div></div></div>
+</div>
+<div class="pros"><div><b>✅ Plus bisnis</b>Konten = SEO evergreen (“healing di jaksel”), gampang di-share sebagai artikel, positioning premium-kalem tanpa kelihatan enterprise-kaku.</div><div><b>⚠️ Hati-hati</b>Butuh mesin konten (editor/AI), quiz 3 pertanyaan bisa kurang akurat, kesan “lambat” buat user yang maunya instan.</div></div>
+<button class="pick-btn" data-pick="9">Pilih Opsi 9 — Editorial Guide</button>
+</section>
+
+<!-- 10 -->
+<section class="opt" data-opt="10" id="opsi-10">
+<div class="opt-head"><div class="num">OPSI 10</div><div><h2>Superapp Home</h2><div class="sub">Referensi: Gojek/Grab home • Surface: Operate — 1 home, semua job beres</div></div></div>
+<div class="tags"><span class="tag eff">Effort M • 15–20 jam</span><span class="tag">Grid layanan + wallet quota</span><span class="tag good">Skalabel ke fitur baru</span></div>
+<div class="tokens"><span class="sw"><i class="dot" style="background:#0891b2"></i>#0891b2</span><span class="sw"><i class="dot" style="background:#f97316"></i>#f97316</span><span class="sw"><i class="dot" style="background:#f4f4f5"></i>#f4f4f5</span></div>
+<div class="phones">
+<div class="ph-wrap"><div class="ph-label">Landing (home)</div><div class="device"><div class="screen t10">
+<div class="bar"><span>Halo, Agesta 👋</span><span>🔔</span></div>
+<div class="hi"><div class="wallet"><small>QUOTA HARI INI 🔥</small><b>2 tempat • 5 makan</b><small>Reset 00.00 • gratis</small></div>
+<div class="grid10"><div class="g10"><i>🗺️</i>Tempat</div><div class="g10"><i>🍜</i>Makan</div><div class="g10"><i>🎡</i>Event</div><div class="g10"><i>🎁</i>Promo</div><div class="g10"><i>❤️</i>Wishlist</div><div class="g10"><i>🕘</i>Riwayat</div><div class="g10"><i>👥</i>Bareng</div><div class="g10"><i>⋯</i>Lainnya</div></div>
+<div class="banner">🔥 Hype minggu ini: Rooftop Senayan — quiz 30 dtk →</div></div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Quiz</div><div class="device"><div class="screen t10">
+<div class="bar"><span>← Quiz tempat</span><span>2/5</span></div>
+<div class="hi"><div class="sec"><h4>Dengan siapa? 👯</h4>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><span class="tag">🧘 Sendiri</span><span class="tag" style="background:#0891b2;color:#fff;border-color:#0891b2">💑 Pasangan</span><span class="tag">👥 Teman</span><span class="tag">👨‍👩‍👧 Keluarga</span></div>
+<button style="width:100%;margin-top:12px;background:#f97316;color:#fff;border:none;border-radius:12px;padding:14px;font-weight:800">Lanjut →</button></div></div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Result</div><div class="device"><div class="screen t10">
+<div class="bar"><span>← Hasil</span><span>Quota 1/2</span></div>
+<div class="hi"><div class="sec"><h4>🎉 5 rekomendasi • best: Museum MACAN</h4>
+<div class="row10"><span style="font-size:24px">🏛️</span><div><b>Museum MACAN</b><br><span style="color:#71717a;font-size:12px">100–150rb • Kebon Jeruk • <u>Maps →</u></span></div></div>
+<div class="row10"><span style="font-size:24px">☕</span><div><b>Kopi Nako</b><br><span style="color:#71717a;font-size:12px">&lt;100rb • Alam Sutera • <u>Maps →</u></span></div></div>
+<div class="row10"><span style="font-size:24px">🌳</span><div><b>Hutan Kota GBK</b><br><span style="color:#71717a;font-size:12px">Gratis–50rb • Senayan • <u>Maps →</u></span></div></div></div></div>
+</div></div></div>
+</div>
+<div class="pros"><div><b>✅ Plus bisnis</b>Pola paling familiar se-Indonesia (nggak perlu edukasi), slot Event/Promo = inventory iklan masa depan, gampang nambah fitur tanpa rombak home.</div><div><b>⚠️ Hati-hati</b>Terlihat “biasa aja”, home bisa jadi kuburan fitur kalau Event/Promo masih kosong, butuh konten banner rutin.</div></div>
+<button class="pick-btn" data-pick="10">Pilih Opsi 10 — Superapp Home</button>
+</section>
+
+<!-- 11 -->
+<section class="opt" data-opt="11" id="opsi-11">
+<div class="opt-head"><div class="num">OPSI 11</div><div><h2>WA-Native Planner</h2><div class="sub">Surface: Operate — Wikendo berasa chatbot WA, share = napasnya</div></div></div>
+<div class="tags"><span class="tag eff">Effort M • 14–18 jam</span><span class="tag good">Share rate prediksi tertinggi</span><span class="tag">Hijau WA #075e54</span></div>
+<div class="tokens"><span class="sw"><i class="dot" style="background:#075e54"></i>#075e54</span><span class="sw"><i class="dot" style="background:#dcf8c6"></i>#dcf8c6</span><span class="sw"><i class="dot" style="background:#e5ddd5"></i>#e5ddd5</span></div>
+<div class="phones">
+<div class="ph-wrap"><div class="ph-label">Landing (chat WA)</div><div class="device"><div class="screen t11">
+<div class="wa"><div class="av">🗓️</div><div>Wikendo<br><small style="font-weight:400;opacity:.8">online • balas <1 menit</small></div></div>
+<div class="chat11"><div class="m in">Halo kak! Weekend ini mau kemana? 🥰<br>Pilih aja di bawah 👇</div>
+<div class="m in">Quota hari ini: <b>2 tempat</b> + <b>5 makan di mall</b>. Gratis! 🎉</div></div>
+<div class="quick"><span>🗺️ Cari tempat</span><span>🍜 Laper di mall</span></div>
+<div class="tb"><span>Ketik pesan…</span><span>🎤</span></div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Quiz (quick reply)</div><div class="device"><div class="screen t11">
+<div class="wa"><div class="av">🗓️</div><div>Wikendo<br><small style="font-weight:400;opacity:.8">online</small></div></div>
+<div class="chat11"><div class="m in">Siap! Pertama: dengan siapa? 👯</div><div class="m out">💑 Berdua</div><div class="m in">Oke noted! Budget per orang? 💰</div></div>
+<div class="quick"><span>&lt;100rb</span><span>100–300rb</span><span>&gt;300rb</span></div>
+<div class="tb"><span>Ketik pesan…</span><span>🎤</span></div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Result (forwardable)</div><div class="device"><div class="screen t11">
+<div class="wa"><div class="av">🗓️</div><div>Wikendo<br><small style="font-weight:400;opacity:.8">online</small></div></div>
+<div class="chat11"><div class="m in">🎉 Ini 5 yang paling cocok!<br><br>★ <b>Museum MACAN</b> 🏛️<br>💰 100–150rb • Kebon Jeruk<br>➡️ <u>Maps</u> • <u>Forward ke pasangan 💑</u><br><br>2. <b>Kopi Nako</b> ☕ &lt;100rb<br>➡️ <u>Maps</u> • <u>Forward</u></div>
+<div class="m out">Forward ke 💑 dulu ya!</div></div>
+<div class="tb"><span>Ketik pesan…</span><span>➤</span></div>
+</div></div></div>
+</div>
+<div class="pros"><div><b>✅ Plus bisnis</b>Forward ke pasangan/grup = growth loop gratis (target share &gt;5% paling gampang dicapai di sini), cocok jadi channel WA resmi + broadcast promo mall.</div><div><b>⚠️ Hati-hati</b>Kelihatan “murahan” buat pitch enterprise mall, compare 5 tempat susah di bubble chat, risiko dikira spam WA.</div></div>
+<button class="pick-btn" data-pick="11">Pilih Opsi 11 — WA-Native</button>
+</section>
+
+<!-- 12 -->
+<section class="opt" data-opt="12" id="opsi-12">
+<div class="opt-head"><div class="num">OPSI 12</div><div><h2>Lucky Spin Gacha</h2><div class="sub">Referensi: TikTok reward × CapCut • Surface: Operate — keputusan = main, bukan mikir</div></div></div>
+<div class="tags"><span class="tag eff">Effort M–L • 18–24 jam</span><span class="tag bad">Risiko: terasa judi</span><span class="tag">Ungu malam #1e1b4b</span></div>
+<div class="tokens"><span class="sw"><i class="dot" style="background:#1e1b4b"></i>#1e1b4b</span><span class="sw"><i class="dot" style="background:#f97316"></i>#f97316</span><span class="sw"><i class="dot" style="background:#a78bfa"></i>#a78bfa</span></div>
+<div class="phones">
+<div class="ph-wrap"><div class="ph-label">Landing</div><div class="device"><div class="screen t12">
+<div class="bar"><span>🗓️ Wikendo</span><span>⚡ 2 spin</span></div>
+<div style="padding:8px 18px"><h3 style="font-size:22px;font-weight:800">SPIN WEEKEND-MU! 🎡</h3><p style="font-size:13px;color:#c4b5fd">Quiz 3 tap → roda milih takdirmu</p></div>
+<div class="wheel"><b>PUTAR<br>🎡</b></div>
+<button class="spin">Rose gold spin!</button><div class="energy">⚡ 2 spin tempat • 🍜 5 spin makan • reset 00.00</div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Quiz (3 tap)</div><div class="device"><div class="screen t12">
+<div class="bar"><span>← Filter takdir</span><span>✕</span></div>
+<div style="padding:20px"><h3 style="font-size:20px;font-weight:800;margin-bottom:12px">Kunci 3 filter biar spin nggak ngaco 👇</h3>
+<div class="mys" style="padding:0;flex-direction:column"><div class="my open">💑 Berdua ✓</div><div class="my open">💰💰 100–300rb ✓</div><div class="my">📍 Area? <b>tap…</b></div></div>
+<button class="spin" style="width:100%">SPIN SEKARANG 🎡</button></div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Result (reveal)</div><div class="device"><div class="screen t12">
+<div class="bar"><span>← Hasil spin</span><span>⤴ share</span></div>
+<div style="padding:14px"><p style="font-size:13px;color:#c4b5fd">🎉 TAKDIR MEMILIH…</p>
+<div class="mys" style="padding:10px 0"><div class="my">❓</div><div class="my open" style="font-size:30px">🏛️</div><div class="my">❓</div></div>
+<div style="background:#fff;color:#1e1b4b;border-radius:16px;padding:14px"><b>Museum MACAN! 🏛️</b><p style="font-size:12.5px">💰 100–150rb • 📍 Kebon Jeruk<br><u>Buka Maps →</u> • <u>Spin lagi (1 tersisa)</u></p></div></div>
+</div></div></div>
+</div>
+<div class="pros"><div><b>✅ Plus bisnis</b>Dopamine tertinggi → quota hangus kepake (“spin lagi”), konten screen-record spin = viral organik, slot “Sponsored spin” premium.</div><div><b>⚠️ Hati-hati</b>Terasa kurang serius (“masa liburan diundi?”), perlu mode “serius” pendamping, hati-hati regulasi persepsi judi — hindari bahasa taruhan.</div></div>
+<button class="pick-btn" data-pick="12">Pilih Opsi 12 — Lucky Spin</button>
+</section>
+
+<!-- 13 -->
+<section class="opt" data-opt="13" id="opsi-13">
+<div class="opt-head"><div class="num">OPSI 13</div><div><h2>Group Vote Board</h2><div class="sub">Referensi: Splitwise × Trello • Surface: Compare — weekend = keputusan bareng, bukan sendiri</div></div></div>
+<div class="tags"><span class="tag eff">Effort L • 20–26 jam</span><span class="tag good">Killer buat grup 3–6 orang</span><span class="tag">Slate + teal</span></div>
+<div class="tokens"><span class="sw"><i class="dot" style="background:#0f172a"></i>#0f172a</span><span class="sw"><i class="dot" style="background:#0891b2"></i>#0891b2</span><span class="sw"><i class="dot" style="background:#f0fdfa"></i>#f0fdfa</span></div>
+<div class="phones">
+<div class="ph-wrap"><div class="ph-label">Landing</div><div class="device"><div class="screen t13">
+<div class="bar"><span>🗓️ Wikendo Groups</span><span>＋ New plan</span></div>
+<div class="plan"><b>Weekend bareng siapa? 👥</b><p style="font-size:12.5px;color:#64748b">Bikin plan → share link → squad voting → split cost otomatis.</p>
+<div style="display:flex;gap:8px;margin-top:10px"><span class="tag">🗺️ Plan tempat</span><span class="tag">🍜 Plan makan mall</span></div>
+<button class="go13">＋ Bikin plan weekend</button></div>
+<div class="plan"><b style="font-size:13px">Plan aktif gue</b><p style="font-size:12.5px">🎡 Dufan ramean — 4/6 voted • deadline Sabtu 10.00</p></div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Quiz (1x setup)</div><div class="device"><div class="screen t13">
+<div class="bar"><span>← Setup plan</span><span>1/2</span></div>
+<div class="plan"><b>Aturan main 👇</b>
+<div class="vote">💰 Budget max/orang: <b>150rb</b></div>
+<div class="vote">📍 Area: <b>Jaksel + sekitarnya</b></div>
+<div class="vote">👥 Peserta: <b>4 orang</b> (link invite)</div>
+<button class="go13">Generate 5 opsi → share ke grup</button></div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Result (voting)</div><div class="device"><div class="screen t13">
+<div class="bar"><span>← Dufan ramean 🗳️</span><span>4/6 voted</span></div>
+<div class="plan"><b>Vote tempat 👇</b><div class="votes"><span class="avt">🧑</span><span class="avt">👩</span><span class="avt">🧒</span><span class="avt">👴</span><span class="avt">＋</span></div>
+<div class="vote"><b>🏛️ Museum MACAN</b> — 3 vote<div class="barv"><i style="width:75%"></i></div></div>
+<div class="vote"><b>☕ Kopi Nako</b> — 1 vote<div class="barv"><i style="width:25%"></i></div></div>
+<div class="split">💰 Split cost: 125rb/orang • <u>lihat rincian</u><br>📍 <u>Maps</u> • <u>Share hasil ke grup WA</u></div>
+</div>
+</div></div></div>
+</div>
+<div class="pros"><div><b>✅ Plus bisnis</b>Menjawab use-case nyata (debat grup = paralel quiz 4x user baru), invite link = akuisisi gratis, split cost = fondasi fitur booking/SaaS grup.</div><div><b>⚠️ Hati-hati</b>Effort terbesar kedua (realtime vote, link, state), overkill buat user solois, butuh push/notif biar voting nggak mandek.</div></div>
+<button class="pick-btn" data-pick="13">Pilih Opsi 13 — Group Vote</button>
+</section>
+
+<!-- 14 -->
+<section class="opt" data-opt="14" id="opsi-14">
+<div class="opt-head"><div class="num">OPSI 14</div><div><h2>Calm Zen (Anti-Form)</h2><div class="sub">Referensi: Headspace × Apple • Surface: Configure — cuma 3 napas, 3 tanya, beres</div></div></div>
+<div class="tags"><span class="tag eff">Effort S • 8–12 jam</span><span class="tag good">Paling cepat dibangun</span><span class="tag">Slate lembut, napas 4 dtk</span></div>
+<div class="tokens"><span class="sw"><i class="dot" style="background:#f8fafc"></i>#f8fafc</span><span class="sw"><i class="dot" style="background:#0f172a"></i>#0f172a</span><span class="sw"><i class="dot" style="background:#bae6fd"></i>#bae6fd</span></div>
+<div class="phones">
+<div class="ph-wrap"><div class="ph-label">Landing</div><div class="device"><div class="screen t14">
+<div class="bar"><span>Wikendo</span><span>○ ○ ○</span></div>
+<div class="zq"><div class="breath"></div><h3>Tarik napas.<br>Weekend biar kami yang mikir.</h3><p>3 pertanyaan pelan • tanpa skor • tanpa iklan ganggu</p>
+<p style="margin-top:16px"><span style="background:#0f172a;color:#fff;border-radius:99px;padding:13px 30px;font-family:Inter;font-size:14px">Mulai dengan tenang →</span></p>
+<p style="margin-top:10px;font-family:Inter;font-size:12px"><u>mode makan di mall 🍜</u></p></div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Quiz</div><div class="device"><div class="screen t14">
+<div class="bar"><span>←</span><span>2 / 3</span><span>✕</span></div>
+<div class="zq"><h3>Weekend ini butuh apa?</h3><p>jawab jujur, nggak ada yang salah</p>
+<div style="margin-top:16px"><div class="zopt">😌 Ketenangan</div><div class="zopt" style="border-color:#0f172a">❤️ Kebersamaan</div><div class="zopt">🌿 Udara segar</div></div></div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Result</div><div class="device"><div class="screen t14">
+<div class="bar"><span>←</span><span>untukmu</span><span>⤴</span></div>
+<div style="padding:22px;text-align:left"><p style="font-family:Inter;font-size:11px;letter-spacing:2px;color:#64748b">REKOMENDASI UTAMA</p>
+<h3 style="font-size:27px;font-weight:500;margin:8px 0">Hutan Kota GBK, pagi hari 🌳</h3>
+<p style="font-family:Inter;font-size:13px;color:#475569;line-height:1.6">Piknik pelan 2–3 jam. Bawa bekal, duduk di bawah pohon rindang. Estimasi di bawah 50rb.</p>
+<p style="font-family:Inter;font-size:13px;margin-top:12px"><span style="background:#0f172a;color:#fff;border-radius:99px;padding:12px 22px">📍 Petunjuk jalan →</span></p>
+<p style="font-family:Inter;font-size:12px;color:#64748b;margin-top:12px"><u>Lihat 4 alternatif pelan ↓</u> • Quota 1/2</p></div>
+</div></div></div>
+</div>
+<div class="pros"><div><b>✅ Plus bisnis</b>Effort terkecil Vol.2, anti-bounce buat user lelah-form, 1 rekomendasi hero = CTR Maps fokus (bukan terpecah ke 5).</div><div><b>⚠️ Hati-hati</b>Terlalu sepi buat yang cari seru, 1 hero pick berisiko (kalau meleset, user pergi), susah selipin slot iklan tanpa ngerusak zen.</div></div>
+<button class="pick-btn" data-pick="14">Pilih Opsi 14 — Calm Zen</button>
+</section>
+
+<!-- 15 -->
+<section class="opt" data-opt="15" id="opsi-15">
+<div class="opt-head"><div class="num">OPSI 15</div><div><h2>Mall Directory + Voucher</h2><div class="sub">Referensi: Tokopedia × Shopee • Surface: Explore — /makan jadi etalase tenant, voucher = umpan</div></div></div>
+<div class="tags"><span class="tag eff">Effort M • 15–20 jam</span><span class="tag good">Mesin duit B2B paling jelas</span><span class="tag">Merah promo #ee2c4b</span></div>
+<div class="tokens"><span class="sw"><i class="dot" style="background:#ee2c4b"></i>#ee2c4b</span><span class="sw"><i class="dot" style="background:#ffffff"></i>#fff</span><span class="sw"><i class="dot" style="background:#fff7ed"></i>#fff7ed</span></div>
+<div class="phones">
+<div class="ph-wrap"><div class="ph-label">Landing</div><div class="device"><div class="screen t15">
+<div class="bar"><span>🗓️ <b>Wikendo</b></span><span>🎟️ 3 voucher</span></div>
+<div style="padding:14px"><div style="background:linear-gradient(120deg,#ee2c4b,#fb923c);color:#fff;border-radius:16px;padding:16px;font-weight:800">🍜 Laper di mall? Quiz 20 dtk → voucher tenant!</div>
+<div class="malls"><span class="mall on">GI</span><span class="mall">Central Park</span><span class="mall">Kokas</span><span class="mall">PIM</span><span class="mall">Aeon BSD</span></div>
+<div class="tnt"><div class="im" style="background:#fff7ed">🍜</div><div><span class="promo">-20% • s/d Minggu</span><br><b style="font-size:13.5px">Marugame GI L3</b><p style="font-size:12px;color:#71717a">Udon + Free karaage • ★ 4.8</p></div></div>
+<div class="tnt"><div class="im" style="background:#fef2f2">🧋</div><div><span class="promo">B1G1 • tenant baru</span><br><b style="font-size:13.5px">Xing Fu Tang CP</b><p style="font-size:12px;color:#71717a">Brown sugar fresh • ★ 4.7</p></div></div></div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Quiz makan</div><div class="device"><div class="screen t15">
+<div class="bar"><span>← Quiz makan</span><span>2/4 • GI 📍</span></div>
+<div style="padding:18px"><h3 style="font-size:19px;font-weight:800">Lagi pengen yang…? 🍜</h3>
+<div class="malls" style="padding:12px 0"><span class="mall">🍜 Mie/Gurih</span><span class="mall on">🍰 Manis</span><span class="mall">🥤 Minum aja</span><span class="mall">🔥 Pedas</span></div>
+<div class="malls" style="padding:0"><span class="mall">💰 &lt;50rb</span><span class="mall on">💰 50–100rb</span><span class="mall">💰 &gt;100rb</span></div>
+<button class="claim">Lihat 5 tenant + voucher →</button></div>
+</div></div></div>
+<div class="ph-wrap"><div class="ph-label">Result + klaim</div><div class="device"><div class="screen t15">
+<div class="bar"><span>← Hasil • GI</span><span>5/5 tersisa</span></div>
+<div style="padding:14px"><div class="tnt" style="border:2px solid #ee2c4b"><div class="im" style="background:#fff7ed">🍜</div><div><span class="promo">★ BEST MATCH • -20%</span><br><b style="font-size:13.5px">Marugame GI L3</b><p style="font-size:12px;color:#71717a">Kenapa: manis-gurih + budget 50–100rb • antrean pendek jam 14.00</p></div></div>
+<button class="claim">🎟️ Klaim voucher → tunjukin ke kasir</button>
+<p style="font-size:12px;color:#71717a;text-align:center">+ 📍 <u>Maps ke tenant</u> • <u>Share ke temen</u></p></div>
+</div></div></div>
+</div>
+<div class="pros"><div><b>✅ Plus bisnis</b>Jalur monetisasi paling terang (tenant bayar placement + voucher → komisi), quiz makan 20 dtk terasa worth it karena ada hadiah, data redeem = bukti ke mall.</div><div><b>⚠️ Hati-hati</b>Butuh tim sales/ops ke tenant, voucher abal-abal = trust hancur, flow tempat (non-makan) butuh desain saudara yang setara.</div></div>
+<button class="pick-btn" data-pick="15">Pilih Opsi 15 — Mall + Voucher</button>
+</section>
+
+<!-- BANDING -->
+<section class="opt" id="banding">
+<div class="opt-head"><div class="num">VS</div><div><h2>Head-to-head Vol.2 (6–15)</h2><div class="sub">Digabung Vol.1, lu sekarang punya 15 opsi. Ini peta cepat Vol.2</div></div></div>
+<div style="overflow-x:auto;margin-top:14px"><table class="cmp">
+<tr><th>Opsi</th><th>Menang di</th><th>Effort</th><th>Risiko</th><th>Jalan duit</th></tr>
+<tr><td><b>6 Chat</b></td><td>AI-native, friksi nol</td><td>M 14–18j</td><td>Cost LLM, susah compare</td><td>Iterasi quota, upsell+</td></tr>
+<tr><td><b>7 Map</b></td><td>CTR navigasi</td><td>L 20–28j</td><td>SDK + lokasi</td><td>Ads lokasi ★</td></tr>
+<tr><td><b>8 Brutal</b></td><td>Retention Gen-Z</td><td>M 12–16j</td><td>Kekanak-an buat B2B</td><td>Streak, misi sponsor</td></tr>
+<tr><td><b>9 Editorial</b></td><td>SEO + share artikel</td><td>S–M 10–14j</td><td>Butuh konten</td><td>Native placement</td></tr>
+<tr><td><b>10 Superapp</b></td><td>Familiar, skalabel</td><td>M 15–20j</td><td>Biasa aja</td><td>Slot Event/Promo ★</td></tr>
+<tr><td><b>11 WA</b></td><td>Share/forward</td><td>M 14–18j</td><td>Kesan murahan B2B</td><td>Broadcast, WA official</td></tr>
+<tr><td><b>12 Gacha</b></td><td>Viral spin</td><td>M–L 18–24j</td><td>Kesan judi</td><td>Sponsored spin ★</td></tr>
+<tr><td><b>13 Group</b></td><td>Keputusan bareng</td><td>L 20–26j</td><td>Realtime berat</td><td>SaaS grup, split bill</td></tr>
+<tr><td><b>14 Zen</b></td><td>Termurah + fokus</td><td>S 8–12j</td><td>Terlalu sepi</td><td>Susah selipin ads</td></tr>
+<tr><td><b>15 Mall</b></td><td>Duit B2B</td><td>M 15–20j</td><td>Butuh sales tenant</td><td>Placement + voucher ★★</td></tr>
+</table></div>
+<div class="pros"><div><b>🏆 Rekomendasi gue tetap</b>Vol.1 Opsi 5 (Swipe) sebagai <b>arus utama tempat</b>. Dari Vol.2, yang paling layak jadi <b>pendamping</b>: <b>15 (Mall+Voucher)</b> buat jalur makan/B2B + <b>11 (WA)</b> buat growth loop share. Kombinasi 5+15+11 = konversi + duit + viral, tanpa ngadu konsep.</div><div><b>⏭️ Cara pilih</b>Balas angka <b>6–15</b> (boleh campur Vol.1, mis. “5 + 15”), atau “gas rekomendasi”. Abis itu gue tulis Addendum + eksekusi ke Nuxt pake TDD. Tanpa approval, <b>nggak ada yang gue ubah di codebase</b>.</div></div>
+</section>
+
+<div class="foot">Wikendo Revamp Option Board Vol.2 (Opsi 6–15) • file proposal di <span style="font-family:monospace">design/revamp-options-v2.html</span> • bukan perubahan codebase • 2026-10-07</div>
+</div>
+<script>
+(function(){
+try{
+var saved=localStorage.getItem('wikendo-revamp-pick-v2');
+var names={6:'Opsi 6 — Chat Concierge',7:'Opsi 7 — Map-First',8:'Opsi 8 — Brutalist Playful',9:'Opsi 9 — Editorial Guide',10:'Opsi 10 — Superapp Home',11:'Opsi 11 — WA-Native',12:'Opsi 12 — Lucky Spin',13:'Opsi 13 — Group Vote',14:'Opsi 14 — Calm Zen',15:'Opsi 15 — Mall + Voucher'};
+function paint(v){document.getElementById('pickName').textContent=v?names[v]:'belum ada — tap “Pilih opsi ini” di favorit lu';document.querySelectorAll('section.opt[data-opt]').forEach(function(s){s.classList.toggle('picked',s.getAttribute('data-opt')===String(v));});}
+if(saved)paint(saved);
+document.querySelectorAll('[data-pick]').forEach(function(b){b.addEventListener('click',function(){localStorage.setItem('wikendo-revamp-pick-v2',b.getAttribute('data-pick'));paint(b.getAttribute('data-pick'));document.getElementById('pickName').scrollIntoView();});});
+}catch(e){}
+})();
+</script>
+</body>
+</html>
