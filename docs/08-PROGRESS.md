@@ -56,6 +56,12 @@
 
 ## 🧾 LOG (newest first)
 
+## 2026-10-08 — Audit feedback UI (background flat / guideline / palette / ikon)
+- **Kenapa:** Agesta VERBATIM feedback 4 poin: background flat putih statis, butuh brand/design guideline, review palette/brand color, ikon tidak senada. Minta insight expert selaras brand identity Wikendo.
+- **Audit live (6 pages + token):** base #fffdf9 flat tanpa texture di semua page; header putih polos + wordmark teks (belum D16); wallet 1-satunya gradient (#0e7490→#164e63) ✅; CTA tempat solid #f97316 ✅ vs CTA makan outline (inkonsisten); progress makan gradient #ee2c4b→#fb923c (nyampur orange tempat ✖); gray chaos (#ececec/#e4e4e7/gray-100/gray-500); ikon 100% emoji (~30 macam, gaya + ukuran + render OS beda-beda ✖); font Plus Jakarta Sans ✅; radius 14/20/24 campur.
+- **Dikerjain:** insight 4 poin di chat (bukan eksekusi `app/`, nunggu approval). Next yang ditawarin: docs/18-Brand-Guideline.md + board polish + swap ikon Lucide + bg signature.
+- **Files:** `docs/08-PROGRESS.md` (LOG ini) — `app/` NOL diubah.
+
 ## 2026-10-08 — Semua dokumentasi nyebar dimirror ke docs/ (10–17)
 - **Kenapa:** Agesta VERBATIM "Btw tolong semua dokumentasi yang udah dibuat, ditaruh juga di folder docs di repo. Agar terdokumentasi dengan baik."
 - **Dikerjain:** 7 file nyebar dimirror utuh ke `docs/` (skema: file asli = source of truth, mirror cuma salinan + banner sync): 10-App-Guide ← `app/README.md`, 11-AGENTS-App ← `app/AGENTS.md`, 12-Supabase-Guide ← `supabase/README.md`, 13-Data-Audit-Tenant-V1 ← `supabase/AUDIT.md`, 14-Prototype-Guide ← `design/prototype/README.md`, 15-Wireframes ← `design/wikendo-wireframes.md`, 16-Repo-Overview ← `README.md` (root). Plus 17-Design-Index (indeks aset `design/`: 5 SVG master D16 P3 + 6 board HTML + 3 arsip revamp). Plus update struktur folder di `README.md` root (docs 01–17).
