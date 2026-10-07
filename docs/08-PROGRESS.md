@@ -56,6 +56,11 @@
 
 ## 🧾 LOG (newest first)
 
+## 2026-10-08 — D16 dadu dikecilin lagi (feedback "terlalu besar haha")
+- **Kenapa:** revisi sebelumnya kebablasan mekar (Day 68 / Night 72). Titik tengah: Day dadu 68→**60** (W 33→30), Night 72→**64** (W 35→31). Napas tile balik ~18-20px.
+- **Files:** `design/logo-d16-dual-mode.html`, `docs/08-PROGRESS.md` (LOG ini).
+- **Next:** Agesta cek — kalau pas balas "gas pasang D16" → export 4 asset + header & favicon.
+
 ## 2026-10-08 — D16 dual Day/Night (✅ DONE, nunggu "gas pasang D16")
 - **Kenapa:** Agesta VERBATIM "Gua suka d16 (asli). Tapi jika background nya gelap, sepertinya outer warna hitamnya lebih baik ditakeout ya? Jadi ada 2 versi logo? Gimana menurut lu" — dijawab sebagai expert: YA wajib 2 versi = logo system (Day/Night/Mono), standar semua app besar. Bukan ganti logo, dadu IDENTIK, cuma wadah adaptif.
 - **Dikerjain:** `design/logo-d16-dual-mode.html` — VERSI 1 D16-Day tile ink #18181b (asli, app icon utama + light) vs VERSI 2 D16-Night dadu-takeout transparan (web dark via `prefers-color-scheme`, header dark, splash dark). Bukti fisika kontras: Day di OLED 1.1:1 (buta) vs Night takeout 15:1 (tajam). Aturan dikunci: dadu tak tersentuh, app icon selalu opaque Day, favicon = Day, struk = mono.
