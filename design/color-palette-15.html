@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wikendo — 15 Opsi Color Palette (applied ke UI)</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#f5f1e8;color:#18181b;padding:24px 16px 140px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto}
+.hero{background:#18181b;color:#fff;border-radius:24px;padding:28px 24px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.13) 1.3px,transparent 1.4px);background-size:22px 22px;pointer-events:none}
+.hero h1{font-size:23px;font-weight:800;position:relative;z-index:1}
+.hero h1 .dot{color:#f97316}
+.hero p{position:relative;z-index:1;color:#d6d3d1;font-size:13px;margin-top:8px;max-width:840px}
+.hero p b{color:#fff}
+.badges{position:relative;z-index:1;display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.badge{font-size:11.5px;font-weight:800;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2)}
+.badge.ok{background:#0e7490;border-color:#0e7490}
+.diagnose{position:relative;z-index:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:14px 16px;margin-top:14px;font-size:12.5px;color:#e7e5e4}
+.diagnose b{color:#fdba74}
+.diagnose li{margin:4px 0 4px 18px}
+.filters{position:relative;z-index:1;display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.filters button{border:1.5px solid rgba(255,255,255,.35);background:transparent;color:#fff;border-radius:999px;padding:8px 16px;font-weight:800;font-size:12.5px;cursor:pointer;font-family:inherit}
+.filters button.on{background:#f97316;border-color:#f97316}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.gcard{background:#fff;border:1.5px solid #ece7dd;border-radius:20px;overflow:hidden}
+.gcard.picked{border-color:#f97316;box-shadow:0 0 0 2px #f97316}
+.gprev{height:360px;padding:14px;position:relative;overflow:hidden;background:#f5f1e8}
+.mini{max-width:300px;margin:0 auto;border-radius:18px;padding:12px 14px 16px;min-height:332px;position:relative;color:#18181b}
+.mini .m-head{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:800}
+.mini .m-wallet{margin-top:8px;border-radius:12px;padding:8px 10px;font-size:11px;font-weight:800}
+.mini .m-ctas{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.mini .m-ctas span{border-radius:10px;padding:9px 4px;text-align:center;font-size:10.5px;font-weight:800}
+.mini .m-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin-top:8px}
+.mini .m-grid span{border-radius:10px;padding:8px 2px;text-align:center;font-size:9.5px;font-weight:800;background:#fff;box-shadow:0 4px 12px -6px rgba(0,0,0,.15)}
+.mini .m-hype{margin-top:8px;border-radius:10px;padding:8px 10px;font-size:10.5px;font-weight:800}
+.mini .m-txt{margin-top:8px;font-size:10.5px;font-weight:700;opacity:.75}
+.gbody{padding:14px 16px 16px}
+.gbody h3{font-size:15px;font-weight:800}
+.gnum{display:inline-block;background:#18181b;color:#fff;font-size:11px;font-weight:800;border-radius:8px;padding:2px 9px;margin-right:6px}
+.tag{display:inline-block;font-size:10.5px;font-weight:800;padding:3px 10px;border-radius:999px;margin:6px 4px 0 0}
+.t-s{background:#ecfdf5;color:#047857}.t-h{background:#fff7ed;color:#c2410c}.t-f{background:#fdf2f8;color:#be123c}.t-c{background:#eff6ff;color:#1d4ed8}
+.gbody p{font-size:12.5px;color:#44403c;margin-top:6px}
+.hexes{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.hex{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;background:#f5f1e8;border:1px solid #e7e0d2;border-radius:8px;padding:3px 9px}
+.cssbox{font-family:'JetBrains Mono',monospace;font-size:10.5px;background:#18181b;color:#d6d3d1;border-radius:10px;padding:9px 11px;margin-top:8px;overflow-x:auto;white-space:nowrap}
+.rowbtns{display:flex;gap:8px;margin-top:10px}
+.rowbtns button{flex:1;border-radius:11px;padding:10px;font-weight:800;font-size:12.5px;cursor:pointer;font-family:inherit;border:1.5px solid #18181b}
+.btn-copy{background:#fff;color:#18181b}
+.btn-pick{background:#18181b;color:#fff}
+.gcard.picked .btn-pick{background:#f97316;border-color:#f97316}
+.sec{background:#fff;border:1px solid #ece7dd;border-radius:20px;padding:22px;margin-top:18px}
+.sec h2{font-size:18px;font-weight:800;margin-bottom:4px}
+.sec .sub{font-size:13px;color:#78716c;margin-bottom:12px}
+.sec p,.sec li{font-size:13px;color:#44403c}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:10px}
+th,td{border:1px solid #ece7dd;padding:9px 10px;text-align:left;vertical-align:top}
+th{background:#faf7f0;font-size:11.5px}
+td.win{background:#ecfdf5;font-weight:700}
+td.lose{background:#fef2f2}
+.bar{position:fixed;bottom:0;left:0;right:0;background:rgba(24,24,27,.97);color:#fff;padding:13px 16px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;z-index:50;font-size:13px}
+.bar button{border:none;border-radius:12px;padding:12px 18px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit}
+.btnGo{background:#f97316;color:#fff}.btnGhost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+code{background:rgba(255,255,255,.12);padding:1px 7px;border-radius:6px;font-size:11.5px}
+/* ===== 15 PALETTES — applied ke .mini (= div.max-w-md.mx-auto.px-4.pb-10) ===== */
+.p1{background:#FFFBF5}.p1 .m-wallet{background:#1C1917;color:#fff}.p1 .m-ctas span{background:#EA580C;color:#fff}.p1 .m-hype{background:#1C1917;color:#fff}
+.p2{background:#FFF7ED}.p2 .m-wallet{background:#1C1917;color:#fff}.p2 .m-ctas span{background:#DC2626;color:#fff}.p2 .m-hype{background:#1C1917;color:#fff}
+.p3{background:#FFFBEB}.p3 .m-wallet{background:#1C1917;color:#fff}.p3 .m-ctas span{background:#D97706;color:#fff}.p3 .m-hype{background:#1C1917;color:#fff}
+.p9{background:#FAFAF9}.p9 .m-wallet{background:#18181B;color:#fff}.p9 .m-ctas span{background:#18181B;color:#fff}.p9 .m-hype{background:#18181B;color:#fff;border-left:4px solid #F97316}
+.p4{background:#FAF7F2}.p4 .m-wallet{background:#292524;color:#FDE68A}.p4 .m-ctas span{background:#C2410C;color:#fff}.p4 .m-hype{background:#292524;color:#fff}
+.p10{background:#FAF6F0}.p10 .m-wallet{background:#292524;color:#FDE68A}.p10 .m-ctas span{background:#78350F;color:#fff}.p10 .m-hype{background:#B45309;color:#fff}
+.p11{background:#FFFBF5}.p11 .m-wallet{background:#1C1917;color:#fff}.p11 .m-ctas .ct-t{background:#FB923C;color:#fff}.p11 .m-ctas .ct-m{background:#E11D48;color:#fff}.p11 .m-hype{background:#1C1917;color:#fff}
+.p12{background:#fffdf9}.p12 .m-wallet{background:#18181B;color:#fff}.p12 .m-ctas .ct-t{background:#F97316;color:#fff}.p12 .m-ctas .ct-m{background:#EE2C4B;color:#fff}.p12 .m-hype{background:linear-gradient(120deg,#EE2C4B,#FB923C);color:#fff}
+.p5{background:#FDF2F6}.p5 .m-wallet{background:#1F1218;color:#FBCFE8}.p5 .m-ctas .ct-t{background:#9D174D;color:#fff}.p5 .m-ctas .ct-m{background:#BE123C;color:#fff}.p5 .m-hype{background:#1F1218;color:#fff}
+.p6{background:#F6F7F4}.p6 .m-wallet{background:#14211A;color:#BBF7D0}.p6 .m-ctas span{background:#15803D;color:#fff}.p6 .m-hype{background:#14211A;color:#fff}
+.p13{background:#FFFBEB}.p13 .m-wallet{background:#1C1917;color:#FDE68A}.p13 .m-ctas span{background:#A16207;color:#fff}.p13 .m-hype{background:#1C1917;color:#fff}
+.p14{background:#FAF5FF}.p14 .m-wallet{background:#1E1B2E;color:#DDD6FE}.p14 .m-ctas .ct-t{background:#7C3AED;color:#fff}.p14 .m-ctas .ct-m{background:#DB2777;color:#fff}.p14 .m-hype{background:#1E1B2E;color:#fff}
+.p7{background:#F8FAFA}.p7 .m-wallet{background:#134E4A;color:#CCFBF1}.p7 .m-ctas span{background:#0F766E;color:#fff}.p7 .m-hype{background:#0F172A;color:#fff}
+.p8{background:#F8FAFC}.p8 .m-wallet{background:#0F172A;color:#FDE68A}.p8 .m-ctas span{background:#1D4ED8;color:#fff}.p8 .m-hype{background:#0F172A;color:#fff}
+.p15{background:#F5F5F4}.p15 .m-wallet{background:#0C0A09;color:#D9F99D}.p15 .m-ctas span{background:#0C0A09;color:#fff;border-bottom:3px solid #A3E635}.p15 .m-hype{background:#0C0A09;color:#D9F99D}
+.p0{background:#fffdf9}.p0 .m-wallet{background:linear-gradient(140deg,#0e7490,#164e63);color:#fff}.p0 .m-ctas .ct-t{background:#F97316;color:#fff}.p0 .m-ctas .ct-m{background:#EE2C4B;color:#fff}.p0 .m-hype{background:linear-gradient(120deg,#EE2C4B,#FB923C);color:#fff}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <h1>15 Opsi Color Palette <span class="dot">.</span></h1>
+  <p>Vonis Agesta BENAR: <b>orange + merah + cyan + putih = 4 warna teriak di 1 layar</b>. Tiap kartu = <b>home Wikendo yang SAMA</b> (wallet + 2 CTA + grid 4 + hype) dirender langsung dalam palet itu — di dalam simulasi <b>div <code>max-w-md mx-auto px-4 pb-10</code></b>. Kartu P0 = palet SEKARANG (pembanding). <b>Design-only — <code>app/</code> NOL diubah.</b></p>
+  <div class="badges"><span class="badge ok">⭐ Rekomendasi gue: P1 · P9 · P12</span><span class="badge">● Satu Aksen 4</span><span class="badge">◐ Harmoni 4</span><span class="badge">◆ Fresh 4</span><span class="badge">○ Calm 3</span></div>
+  <div class="diagnose"><b>Kenapa palet sekarang jelek (3 dosa):</b>
+    <li><b>Cyan vs orange = geter.</b> Komplementer disejajarin (wallet teal gelap vs 2 CTA panas) → mata capek. Referensi Banking/Food lu: kartu saldo HITAM/putih, bukan warna ketiga.</li>
+    <li><b>Orange + merah berdampingan = rebutan.</b> Dua blok solid sama bobot → bukan "setara", tapi "perang". Solusi expert: 1 warna aksi ATAU 2 tint satu keluarga dengan hierarki jelas.</li>
+    <li><b>Putih bukan masalah.</b> Base <code>#fffdf9</code> sekeluarga cream referensi lu. Yang murah = border garis keras + se-kebun emoji warna-warni di atasnya.</li>
+    <li>→ Aturan semua opsi baru: <b>60-30-10</b> (base netral 60 · surface 30 · 1 aksen 10), wallet = anchor netral/gelap, warna cuma di aksi + foto.</li>
+  </div>
+  <div class="filters" id="filters">
+    <button class="on" data-f="all">Semua 15 + P0</button>
+    <button data-f="single">● Satu Aksen</button>
+    <button data-f="harmoni">◐ Harmoni (fix orange/merah)</button>
+    <button data-f="fresh">◆ Fresh Hues</button>
+    <button data-f="calm">○ Calm/Trust</button>
+  </div>
+</div>
+
+<div class="grid" id="grid"><!-- cards by JS --></div>
+
+<div class="sec">
+  <h2>⚔️ Head-to-head vs palet sekarang (P0)</h2>
+  <p class="sub">North Star: landing→quiz &gt;40% · CTR /makan · voucher claim. Dinilai sebagai founder, bukan desainer.</p>
+  <table>
+    <tr><th>Opsi</th><th>landing→quiz</th><th>CTR /makan</th><th>Voucher</th><th>Risiko rebrand</th></tr>
+    <tr><td>P0 sekarang</td><td class="lose">Mata pecah 3 arah</td><td class="lose">Makan rebutan vs Tempat</td><td>Biasa (wallet = promo)</td><td>—</td></tr>
+    <tr><td class="win"><b>🥇 P1 Arang Ember</b></td><td class="win">1 arah jelas → klik naik</td><td class="win">Setara via ikon+foto, bukan perang warna</td><td class="win">Wallet ink = saldo beneran</td><td class="win">Rendah (orange dipertahankan)</td></tr>
+    <tr><td class="win"><b>🥈 P9 Kopi Hitam</b></td><td class="win">Paling tegas (semua CTA hitam)</td><td>Netral (foto yang jualan)</td><td class="win">Paling premium</td><td>Sedang (berani, kayak Linear)</td></tr>
+    <tr><td class="win"><b>🥉 P12 Evolusi Minimal</b></td><td>Naik sedikit (cyan mati)</td><td>Tetap (dual dipertahankan)</td><td>Naik (wallet ink)</td><td class="win">NOL (cuma bunuh cyan)</td></tr>
+  </table>
+  <p style="margin-top:10px"><b>Rekomendasi tunggal gue: P1.</b> Satu warna aksi ember <code>#EA580C</code> (evolusi orange sekarang, sedikit dimatangkan biar kontras teks putih lolos), wallet ink anchor, tempat≠makan dibedain ikon + foto (bukan blok warna). Risiko rebrand rendah, dampak hierarki terbesar. Cadangan pengecut: P12 (cuma ganti wallet teal→ink, 1 baris CSS). Cadangan berani: P9 (monokrom total, paling dekat Banking ref lu).</p>
+</div>
+
+<div class="sec">
+  <h2>✅ Cara putusin</h2>
+  <p>Tombol <b>+ Shortlist</b> di tiap kartu → kesimpen otomatis di browser ini. Balas misal: <code>"Gua suka P1, P9"</code> atau <code>"gas P1"</code> — baru gue eksekusi ke <code>app/</code> via TDD (token → 6 pages → test/lint/build → deploy). P0 tidak bisa dipilih (pembanding saja).</p>
+</div>
+
+</div>
+<div class="bar" id="bar">
+  <span id="pickLabel">👆 Shortlist: 0 — tap + Shortlist di kartu favorit lu</span>
+  <button class="btnGo" onclick="copyPick()">📋 Salin pilihan</button>
+  <button class="btnGhost" onclick="clearPick()">Reset</button>
+</div>
+<script>
+var DATA=[
+["P0","Palet Sekarang (pembanding)","single","JANGAN dipilih ⚠️",0,"Orange #f97316 + merah #ee2c4b + teal #0e7490 + cream. Pembanding: 3 blok warna perang, wallet teriak sendiri. Ada di sini biar lu bandingkan apel-ke-apel.","#f97316 · #ee2c4b · #0e7490 · #fffdf9","--base:#fffdf9; --cta-tempat:#f97316; --cta-makan:#ee2c4b; --wallet:#0e7490;"],
+["P1","Arang Ember ⭐","single","Rekomendasi #1 ✅",0,"SATU warna aksi ember #EA580C (orange sekarang dimatangkan 1 step) untuk Tempat+Makan — bedanya ikon + foto, bukan blok. Wallet ink anchor. Cyan DIBUNUH. Risiko rebrand paling rendah, hierarki paling rapi.","#FFFBF5 · #EA580C · #1C1917","--base:#FFFBF5; --cta:#EA580C; --wallet:#1C1917; /* tempat=makan, beda ikon */"],
+["P2","Cabai Tunggal","single","Satu Aksen ●",0,"Makan-led: satu merah cabai #DC2626 untuk semua aksi. Cocok kalau voucher F&B mau jadi mesin uang utama. Wallet ink. Berani, Gen-Z lapar.","#FFF7ED · #DC2626 · #1C1917","--base:#FFF7ED; --cta:#DC2626; --wallet:#1C1917;"],
+["P3","Kunyit Premium","single","Satu Aksen ●",0,"Satu amber matang #D97706 — hangat, optimis, beda dari kompetitor orange-merah. Berasa 'golden hour tiap buka app'. Wallet ink.","#FFFBEB · #D97706 · #1C1917","--base:#FFFBEB; --cta:#D97706; --wallet:#1C1917;"],
+["P9","Kopi Hitam ⭐","single","Rekomendasi #2 ✅",0,"MONOKROM total: semua CTA + wallet HITAM #18181B, aksen orange cuma strip 4px. DNA Linear/Apple/Banking-ref lu. Yang jualan = foto + copy, bukan chrome. Paling premium, paling berani.","#FAFAF9 · #18181B · strip #F97316","--base:#FAFAF9; --cta:#18181B; --wallet:#18181B; --accent-strip:#F97316;"],
+["P4","Terracotta Dewasa","harmoni","Harmoni ◐",0,"Orange didalamin jadi terracotta #C2410C — Wikendo versi kopi & rooftop, bukan hype & neon. Wallet cokelat pekat + teks gold. Dewasa, earthy, mahal.","#FAF7F2 · #C2410C · #292524","--base:#FAF7F2; --cta:#C2410C; --wallet:#292524;"],
+["P10","Espresso Susu","harmoni","Harmoni ◐",0,"Keluarga kopi: CTA espresso #78350F + hype karamel #B45309. Cozy nongkrong santai. Wallet arang + gold. Paling 'cafe' dari semua opsi.","#FAF6F0 · #78350F · #B45309","--base:#FAF6F0; --cta:#78350F; --hype:#B45309; --wallet:#292524;"],
+["P11","Rose Arang","harmoni","Harmoni ◐",0,"Dual DIPERBAIKI: Tempat peach #FB923C (muda) vs Makan rose #E11D48 (tua) — hierarki jelas, bukan rebutan. Cyan mati → wallet ink. Buat yang ngotot dual harus beda warna.","#FB923C · #E11D48 · #1C1917","--base:#FFFBF5; --tempat:#FB923C; --makan:#E11D48; --wallet:#1C1917;"],
+["P12","Evolusi Minimal ⭐","harmoni","Rekomendasi #3 ✅",0,"Perubahan 1 baris: orange + merah DIPERTAHANKAN, cuma wallet teal→ink #18181B. Buat yang takut rebrand. Membuktikan 70% masalah = cyan, bukan orange/merah.","#fffdf9 · #f97316 · #ee2c4b · #18181B","--base:#fffdf9; --tempat:#F97316; --makan:#EE2C4B; --wallet:#18181B; /* cta untouched */"],
+["P5","Plum Malam","fresh","Fresh ◆",0,"Cabut total dari orange: berry dalam #9D174D + #BE123C analogue. Kulineran, Gen-Z, shareable. Wallet plum-ink. Paling beda dari kompetitor mall.","#9D174D · #BE123C · #1F1218","--base:#FDF2F6; --tempat:#9D174D; --makan:#BE123C; --wallet:#1F1218;"],
+["P6","Hutan Kota","fresh","Fresh ◆",0,"Healing weekend: forest #15803D tunggal + wallet pine-ink. Adem, calming, 'leyeh-leyeh'. Trade-off: hijau kurang nafsu makan — andalkan foto juicy.","#F6F7F4 · #15803D · #14211A","--base:#F6F7F4; --cta:#15803D; --wallet:#14211A;"],
+["P13","Mustard Nori","fresh","Fresh ◆",0,"Playful food-brand: mustard #A16207 + nori ink. Berasa brand snack kekinian. Wallet ink + gold. Murah-meriah tapi niat.","#FFFBEB · #A16207 · #1C1917","--base:#FFFBEB; --cta:#A16207; --wallet:#1C1917;"],
+["P14","Ungu Senja","fresh","Fresh ◆",0,"DNA AI-Match ref lu: violet #7C3AED → magenta #DB2777 analogue. Tech, malam mingguan, event. Wallet midnight. Paling 'startup'.","#7C3AED · #DB2777 · #1E1B2E","--base:#FAF5FF; --tempat:#7C3AED; --makan:#DB2777; --wallet:#1E1B2E;"],
+["P7","Teal Trust","calm","Calm ○",0,"DIBALIK: trust jadi hero — satu teal #0F766E untuk semua aksi, orange/merah cuma di foto. Wallet pine. Adem kayak Banking/Insurance ref. Cocok kalau voucher mau berasa 'saldo'.","#F8FAFA · #0F766E · #134E4A","--base:#F8FAFA; --cta:#0F766E; --wallet:#134E4A;"],
+["P8","Navy Eksekutif","calm","Calm ○",0,"Banking-grade: royal #1D4ED8 + wallet navy + aksen gold. Paling terpercaya, paling korporat. Trade-off: kurang 'weekend fun' — cocok segmen family/mall premium.","#F8FAFC · #1D4ED8 · #0F172A","--base:#F8FAFC; --cta:#1D4ED8; --wallet:#0F172A; --gold:#D97706;"],
+["P15","Lime Banking","calm","Calm ○",0,"KEMBARAN Banking ref Agesta: base greige #F5F5F4 + CTA HITAM + garis lime #A3E635 + wallet hitam-lime. Uang = lime, aksi = hitam. Foto yang berwarna.","#F5F5F4 · #0C0A09 · #A3E635","--base:#F5F5F4; --cta:#0C0A09; --accent:#A3E635; --wallet:#0C0A09;"]
+];
+var MODE={single:"● Satu Aksen",harmoni:"◐ Harmoni",fresh:"◆ Fresh Hues",calm:"○ Calm/Trust"};
+var picks=[];
+try{picks=JSON.parse(localStorage.getItem('wikendo-palet15-pick')||'[]');}catch(e){picks=[];}
+function card(d){
+  var id=d[0],name=d[1],mode=d[2],use=d[3],dark=d[4],desc=d[5],hex=d[6],css=d[7];
+  var pk=picks.indexOf(id)>=0?' picked':'';
+  var dual=(id=="P11"||id=="P12"||id=="P5"||id=="P14"||id=="P0");
+  var ctas=dual
+    ?'<div class="m-ctas"><span class="ct-t">Cari Tempat</span><span class="ct-m">Cari Makan</span></div>'
+    :'<div class="m-ctas"><span>Cari Tempat</span><span>Cari Makan</span></div>';
+  var nopick=(id=="P0");
+  return '<div class="gcard'+pk+'" data-mode="'+mode+'" id="c-'+id+'">'
+  +'<div class="gprev"><div class="mini '+id.toLowerCase()+'">'
+  +'<div class="m-head"><span>🎲 wikendo.</span><span>🔔</span></div>'
+  +'<div class="m-wallet">QUOTA HARI INI · 2 tempat · 5 makan</div>'
+  +ctas
+  +'<div class="m-grid"><span>🎡</span><span>🎁</span><span>❤️</span><span>🕘</span></div>'
+  +'<div class="m-hype">🔥 Rooftop Senayan →</div>'
+  +'<div class="m-txt">Container div.max-w-md — '+name+'. Teks contoh cek keterbacaan.</div>'
+  +'</div></div>'
+  +'<div class="gbody"><h3><span class="gnum">'+id+'</span>'+name+'</h3>'
+  +'<span class="tag t-'+(mode=='single'?'s':mode=='harmoni'?'h':mode=='fresh'?'f':'c')+'">'+MODE[mode]+'</span><span class="tag" style="background:#f5f1e8;color:#57534e">'+use+'</span>'
+  +'<p>'+desc+'</p><div class="hexes">'+hex.split(' · ').map(function(h){return '<span class="hex">'+h+'</span>';}).join('')+'</div>'
+  +'<div class="cssbox">'+css.replace(/</g,'&lt;')+'</div>'
+  +'<div class="rowbtns"><button class="btn-copy" onclick="copyCss(\''+id+'\')">📋 Copy CSS</button>'+(nopick?'<button class="btn-pick" disabled style="opacity:.4">pembanding</button>':'<button class="btn-pick" onclick="toggle(\''+id+'\')">'+(picks.indexOf(id)>=0?'✅ Shortlisted':'＋ Shortlist')+'</button>')+'</div>'
+  +'</div></div>';
+}
+function render(){document.getElementById('grid').innerHTML=DATA.map(card).join('');label();}
+function label(){document.getElementById('pickLabel').textContent=picks.length?('👆 Shortlist ('+picks.length+'): '+picks.join(', ')+' — balas di chat "Gua suka '+picks.join(', ')+'"'):'👆 Shortlist: 0 — tap + Shortlist di kartu favorit lu (P0 pembanding, tak bisa dipilih)';}
+function save(){try{localStorage.setItem('wikendo-palet15-pick',JSON.stringify(picks));}catch(e){}}
+function toggle(id){if(id=="P0")return;var i=picks.indexOf(id);if(i>=0)picks.splice(i,1);else picks.push(id);save();render();}
+function clearPick(){picks=[];save();render();}
+function copyCss(id){var d=null;DATA.forEach(function(x){if(x[0]==id)d=x;});var t=d[7];if(navigator.clipboard)navigator.clipboard.writeText(t);else{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}ta.remove();}}
+function copyPick(){var t=picks.length?('Gua suka '+picks.join(', ')):'(belum ada shortlist)';if(navigator.clipboard)navigator.clipboard.writeText(t);document.getElementById('pickLabel').textContent='📋 Tersalin: "'+t+'" — paste di chat!';}
+document.getElementById('filters').addEventListener('click',function(e){
+  if(e.target.tagName!='BUTTON')return;
+  var f=e.target.getAttribute('data-f');
+  var bs=this.querySelectorAll('button');for(var i=0;i<bs.length;i++)bs[i].classList.remove('on');e.target.classList.add('on');
+  var cs=document.querySelectorAll('.gcard');for(var j=0;j<cs.length;j++){cs[j].style.display=(f=='all'||cs[j].getAttribute('data-mode')==f)?'':'none';}
+});
+render();
+</script>
+</body>
+</html>
