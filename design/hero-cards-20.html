@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wikendo — 20 Opsi Hero Card (referensi Insurance App)</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#f5f1e8;color:#18181b;padding:24px 16px 140px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto}
+.hero{background:#18181b;color:#fff;border-radius:24px;padding:28px 24px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.13) 1.3px,transparent 1.4px);background-size:22px 22px;pointer-events:none}
+.hero h1{font-size:23px;font-weight:800;position:relative;z-index:1}
+.hero h1 .dot{color:#f97316}
+.hero p{position:relative;z-index:1;color:#d6d3d1;font-size:13px;margin-top:8px;max-width:860px}
+.hero p b{color:#fff}
+.badges{position:relative;z-index:1;display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.badge{font-size:11.5px;font-weight:800;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2)}
+.badge.ok{background:#0e7490;border-color:#0e7490}
+.anat{position:relative;z-index:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:14px 16px;margin-top:14px;font-size:12.5px;color:#e7e5e4}
+.anat b{color:#fdba74}
+.anat li{margin:4px 0 4px 18px}
+.anat code{background:rgba(255,255,255,.14);padding:1px 7px;border-radius:6px;font-size:11.5px}
+.filters{position:relative;z-index:1;display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.filters button{border:1.5px solid rgba(255,255,255,.35);background:transparent;color:#fff;border-radius:999px;padding:8px 16px;font-weight:800;font-size:12.5px;cursor:pointer;font-family:inherit}
+.filters button.on{background:#f97316;border-color:#f97316}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.gcard{background:#fff;border:1.5px solid #ece7dd;border-radius:20px;overflow:hidden}
+.gcard.picked{border-color:#f97316;box-shadow:0 0 0 2px #f97316}
+.gprev{padding:14px;background:#eee9dd;overflow:hidden}
+.mini{max-width:300px;margin:0 auto;border-radius:18px;padding:12px 14px 16px;min-height:340px;background:#FFFBF5;color:#18181b;position:relative}
+.mini .m-head{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:800}
+.mini .m-head .av{display:flex;align-items:center;gap:7px}
+.mini .m-head .ava{width:26px;height:26px;border-radius:50%;background:#1C1917;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px}
+.mini .m-head .bell{width:26px;height:26px;border-radius:50%;background:#EEF2FF;display:flex;align-items:center;justify-content:center;font-size:13px}
+.mini .m-ctx{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.mini .m-ctx span{background:#fff;box-shadow:0 4px 12px -6px rgba(0,0,0,.15);border-radius:10px;padding:9px 4px;text-align:center;font-size:10.5px;font-weight:800;color:#44403c}
+.mini .m-note{margin-top:8px;font-size:10px;font-weight:700;opacity:.6}
+/* ===== HERO base (anatomi Insurance: label + angka hero + sub + pill CTA + ilustrasi) ===== */
+.hh{margin-top:8px;border-radius:16px;padding:12px;position:relative;overflow:hidden;min-height:132px}
+.hh .h-label{font-size:10px;font-weight:800;letter-spacing:.6px;opacity:.75}
+.hh .h-num{font-size:25px;font-weight:800;line-height:1.1;margin-top:2px}
+.hh .h-sub{font-size:11px;font-weight:700;opacity:.8;margin-top:1px}
+.hh .h-chips{display:flex;gap:6px;margin-top:8px}
+.hh .h-chips span{flex:1;border-radius:9px;padding:6px 4px;text-align:center;font-size:10px;font-weight:800}
+.hh .h-pill{display:inline-block;margin-top:9px;border-radius:999px;padding:7px 14px;font-size:11px;font-weight:800}
+.hh .h-illus{position:absolute;right:-8px;top:50%;transform:translateY(-50%);font-size:74px;opacity:.22;pointer-events:none}
+.hh .h-bar{height:8px;border-radius:999px;margin-top:6px;overflow:hidden}
+.hh .h-bar i{display:block;height:100%;border-radius:999px}
+.hh .h-split{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:8px;border-radius:10px;overflow:hidden}
+.hh .h-split div{padding:8px 6px;text-align:center}
+.hh .h-ringrow{display:flex;gap:10px;margin-top:8px}
+.hh .h-ringrow .rg{flex:1;text-align:center;font-size:10px;font-weight:800}
+.hh .h-dot{width:44px;height:44px;border-radius:50%;margin:0 auto 4px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+.hh .h-photo3{display:flex;gap:6px;margin-top:8px}
+.hh .h-photo3 span{flex:1;border-radius:9px;padding:8px 2px;text-align:center;font-size:9.5px;font-weight:800}
+.hh .h-band{margin:-12px -12px 8px;padding:14px 12px;font-size:20px}
+/* ===== 20 hero variants ===== */
+.h1{background:#1C1917;color:#fff}.h1 .h-chips span{background:rgba(255,255,255,.14);color:#fff}.h1 .h-pill{background:#fff;color:#EA580C}
+.h2{background:#18181B;color:#fff;border-left:5px solid #F97316}.h2 .h-chips span{background:rgba(255,255,255,.14);color:#fff}.h2 .h-pill{background:#fff;color:#18181B}
+.h3{background:#18181B;color:#fff}.h3 .h-chips span{background:rgba(255,255,255,.14);color:#fff}.h3 .h-pill{background:#F97316;color:#fff}
+.h4{background:linear-gradient(135deg,#1E3A8A,#0F172A);color:#fff}.h4 .h-num{color:#FDE68A}.h4 .h-chips span{background:rgba(255,255,255,.14);color:#fff}.h4 .h-pill{background:#fff;color:#0F172A}
+.h5{background:linear-gradient(135deg,#134E4A,#0F766E);color:#fff}.h5 .h-chips span{background:rgba(255,255,255,.16);color:#fff}.h5 .h-pill{background:#fff;color:#134E4A}
+.h6{background:#fff;color:#18181b;border:1.5px solid #E7E0D2}.h6 .h-split{background:#FAFAF9;border:1px solid #E7E0D2}.h6 .h-split .s-t{border-right:1px solid #E7E0D2}.h6 .h-pill{background:#1C1917;color:#fff}
+.h7{background:#1C1917;color:#fff}.h7 .h-split .s-t{background:#FB923C}.h7 .h-split .s-m{background:#E11D48}.h7 .h-pill{background:#fff;color:#1C1917}
+.h8{background:#fff;color:#18181b;border:1.5px solid #E7E0D2}.h8 .h-bar{background:#F1F5F9}.h8 .h-pill{background:#1C1917;color:#fff}
+.h9{background:#fff;color:#18181b;border:1.5px solid #E7E0D2}.h9 .h-pill{background:#1C1917;color:#fff}
+.h10{background:linear-gradient(150deg,rgba(63,29,29,.96),rgba(136,19,55,.88));color:#fff}.h10 .h-chips span{background:rgba(255,255,255,.18);color:#fff}.h10 .h-pill{background:#fff;color:#881337}
+.h11{background:#fff;color:#18181b;border:1.5px solid #E7E0D2}.h11 .h-band{background:linear-gradient(120deg,#FDBA74,#FB923C)}.h11 .h-pill{background:#1C1917;color:#fff}
+.h12{background:#1C1917;color:#fff}.h12 .h-photo3 span{background:rgba(255,255,255,.14);color:#fff}.h12 .h-pill{background:#fff;color:#EA580C}
+.h13{background:#1F1218;color:#fff}.h13 .h-num{color:#FBCFE8}.h13 .h-chips span{background:rgba(255,255,255,.14);color:#fff}.h13 .h-pill{background:#fff;color:#9D174D}
+.h14{background:#14211A;color:#fff}.h14 .h-num{color:#BBF7D0}.h14 .h-chips span{background:rgba(255,255,255,.14);color:#fff}.h14 .h-pill{background:#fff;color:#15803D}
+.h15{background:#A16207;color:#fff}.h15 .h-chips span{background:rgba(255,255,255,.2);color:#fff}.h15 .h-pill{background:#1C1917;color:#FDE68A}
+.h16{background:linear-gradient(135deg,#7C3AED,#DB2777);color:#fff}.h16 .h-chips span{background:rgba(255,255,255,.2);color:#fff}.h16 .h-pill{background:#fff;color:#7C3AED}
+.h17{background:#0C0A09;color:#fff}.h17 .h-num{color:#D9F99D}.h17 .h-chips span{background:rgba(255,255,255,.12);color:#fff}.h17 .h-pill{background:#A3E635;color:#0C0A09}
+.h18{background:#fff;color:#0F172A;border:1.5px solid #E2E8F0}.h18 .h-chips span{background:#F1F5F9;color:#334155}.h18 .h-pill{background:#1D4ED8;color:#fff}
+.h19{background:linear-gradient(150deg,#FAF5FF,#FFE4E6);color:#1E1B2E}.h19 .h-chips span{background:rgba(255,255,255,.8);color:#6D28D9}.h19 .h-pill{background:#4C1D95;color:#fff}
+.h20{background:radial-gradient(300px 140px at 50% 0%,rgba(249,115,22,.45),transparent 70%),linear-gradient(180deg,#27272A,#18181B);color:#fff}.h20 .h-chips span{background:rgba(255,255,255,.12);color:#fff}.h20 .h-pill{background:#F97316;color:#fff}
+.gbody{padding:14px 16px 16px}
+.gbody h3{font-size:15px;font-weight:800}
+.gnum{display:inline-block;background:#18181b;color:#fff;font-size:11px;font-weight:800;border-radius:8px;padding:2px 9px;margin-right:6px}
+.tag{display:inline-block;font-size:10.5px;font-weight:800;padding:3px 10px;border-radius:999px;margin:6px 4px 0 0}
+.t-i{background:#eff6ff;color:#1d4ed8}.t-s{background:#ecfdf5;color:#047857}.t-f{background:#fdf2f8;color:#be123c}.t-p{background:#faf5ff;color:#6d28d9}
+.gbody p{font-size:12.5px;color:#44403c;margin-top:6px}
+.hexes{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.hex{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;background:#f5f1e8;border:1px solid #e7e0d2;border-radius:8px;padding:3px 9px}
+.cssbox{font-family:'JetBrains Mono',monospace;font-size:10.5px;background:#18181b;color:#d6d3d1;border-radius:10px;padding:9px 11px;margin-top:8px;overflow-x:auto;white-space:nowrap}
+.rowbtns{display:flex;gap:8px;margin-top:10px}
+.rowbtns button{flex:1;border-radius:11px;padding:10px;font-weight:800;font-size:12.5px;cursor:pointer;font-family:inherit;border:1.5px solid #18181b}
+.btn-copy{background:#fff;color:#18181b}
+.btn-pick{background:#18181b;color:#fff}
+.gcard.picked .btn-pick{background:#f97316;border-color:#f97316}
+.sec{background:#fff;border:1px solid #ece7dd;border-radius:20px;padding:22px;margin-top:18px}
+.sec h2{font-size:18px;font-weight:800;margin-bottom:4px}
+.sec .sub{font-size:13px;color:#78716c;margin-bottom:12px}
+.sec p,.sec li{font-size:13px;color:#44403c}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:10px}
+th,td{border:1px solid #ece7dd;padding:9px 10px;text-align:left;vertical-align:top}
+th{background:#faf7f0;font-size:11.5px}
+td.win{background:#ecfdf5;font-weight:700}
+td.lose{background:#fef2f2}
+.bar{position:fixed;bottom:0;left:0;right:0;background:rgba(24,24,27,.97);color:#fff;padding:13px 16px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;z-index:50;font-size:13px}
+.bar button{border:none;border-radius:12px;padding:12px 18px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit}
+.btnGo{background:#f97316;color:#fff}.btnGhost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <h1>20 Opsi Hero Card <span class="dot">.</span></h1>
+  <p>Transplant skeleton <b>Insurance hero</b> (Total Coverage <code>$1,586.00</code> + pill <code>View all Policies →</code> + ilustrasi perisai) ke wallet quota Wikendo — di dalam simulasi <b>div <code>max-w-md mx-auto px-4 pb-10</code></b>. Tiap kartu = konteks home SAMA (header avatar + hero varian + 2 CTA netral), yang beda cuma HERONYA. Warna ikut kandidat palet P1/P9/P12 biar nyambung board palet. <b>Design-only — <code>app/</code> NOL diubah.</b></p>
+  <div class="badges"><span class="badge ok">⭐ Rekomendasi gue: H1 · H8 · H17</span><span class="badge">◈ Insurance 5</span><span class="badge">◐ Split & Progress 4</span><span class="badge">◆ Photo 3</span><span class="badge">● Fresh 4</span><span class="badge">◆ Premium 4</span></div>
+  <div class="anat"><b>Anatomi yang ditransplant (kiri Insurance → kanan Wikendo):</b>
+    <li>Header <code>avatar + Good Morning, Alex + bell</code> → <code>avatar + Halo, teman Wikendo + bell</code> (pola sama, 1:1).</li>
+    <li>Hero <code>Total Coverage $1,586.00 + Auto+Home + pill View all → + perisai</code> → <code>QUOTA HARI INI + 1 tempat • 2 makan + pill Mulai Quiz → + dadu D16</code>.</li>
+    <li>Yang TIDAK di-copy: <b>bottom nav 4 tab</b> (mecah fokus landing→quiz &gt;40%) + <b>gradasi biru-ungu</b> (tabrakan vonis bunuh-cyan) + <b>timeline/key-value</b> (itu pola result, bukan home).</li>
+  </div>
+  <div class="filters" id="filters">
+    <button class="on" data-f="all">Semua 20</button>
+    <button data-f="insurance">◈ Insurance Direct</button>
+    <button data-f="split">◐ Split & Progress</button>
+    <button data-f="photo">◆ Photo</button>
+    <button data-f="fresh">● Fresh Hues</button>
+    <button data-f="premium">◆ Premium</button>
+  </div>
+</div>
+
+<div class="grid" id="grid"><!-- cards by JS --></div>
+
+<div class="sec">
+  <h2>⚔️ Head-to-head vs wallet sekarang</h2>
+  <p class="sub">North Star: landing→quiz &gt;40% · CTR /makan · voucher claim. Wallet sekarang: gradasi teal, angka kecil, tanpa pill CTA, tanpa ilustrasi.</p>
+  <table>
+    <tr><th>Opsi</th><th>landing→quiz</th><th>CTR /makan</th><th>Voucher</th><th>Risiko</th></tr>
+    <tr><td>Sekarang (teal)</td><td class="lose">Angka kecil, CTA tersembunyi</td><td class="lose">Makan rebutan vs Tempat</td><td>Biasa (wallet = promo)</td><td>—</td></tr>
+    <tr><td class="win"><b>🥇 H1 Arang Ember</b></td><td class="win">Angka hero 25px + pill putih → 1 arah klik</td><td class="win">Setara via chip, bukan perang blok</td><td class="win">Ink = saldo beneran</td><td class="win">Rendah (P1)</td></tr>
+    <tr><td class="win"><b>🥈 H8 Bar Transparan</b></td><td class="win">Bar = progres kelihatan → penasaran</td><td>Netral</td><td class="win">Transplant claim-screen Insurance</td><td class="win">Rendah (putih)</td></tr>
+    <tr><td class="win"><b>🥉 H17 Lime Banking</b></td><td class="win">Angka lime nyala di hitam</td><td>Netral (foto yang jualan)</td><td class="win">Kembaran Banking ref</td><td>Sedang (berani)</td></tr>
+  </table>
+  <p style="margin-top:10px"><b>Rekomendasi tunggal gue: H1.</b> Transplant paling setia (label + angka hero + sub + 2 chip + pill putih + watermark 🎲 D16), palet P1 Arang Ember (risiko rebrand terendah), cyan mati total. Cadangan jujur: H8 kalau lu mau quota berasa "progres klaim" kayak layar claim Insurance; H17 kalau mau kembaran Banking ref.</p>
+</div>
+
+<div class="sec">
+  <h2>✅ Cara putusin</h2>
+  <p>Tombol <b>+ Shortlist</b> di tiap kartu → kesimpen otomatis di browser ini. Balas misal: <code>"Gua suka H1, H8"</code> atau <code>"gas H1"</code> — baru gue eksekusi ke <code>app/pages/index.vue</code> via TDD (token → hero → test wallet tetap hijau → lint → build → deploy). Kombinasi dengan palet boleh: misal <code>"gas H1 + P1"</code>.</p>
+</div>
+
+</div>
+<div class="bar" id="bar">
+  <span id="pickLabel">👆 Shortlist: 0 — tap + Shortlist di kartu favorit lu</span>
+  <button class="btnGo" onclick="copyPick()">📋 Salin pilihan</button>
+  <button class="btnGhost" onclick="clearPick()">Reset</button>
+</div>
+<script>
+var DATA=[
+["H1","Arang Ember ⭐","insurance","Rekomendasi #1 ✅","Transplant 1:1 Insurance: angka hero 25px + 2 chip + pill putih + watermark 🎲 D16. Palet P1, cyan mati, rebrand risk terendah.","#1C1917 · #EA580C · #FFFBF5","background:#1C1917;color:#fff; /* pill:#fff, cta-text:#EA580C */"],
+["H2","Kopi Stripe","insurance","Insurance ◈","Varian P9: strip orange 5px kiri (satu-satunya aksen). Sisanya monokrom. Pill putih teks ink. Paling Linear.","#18181B · strip #F97316","background:#18181B;color:#fff;border-left:5px solid #F97316;"],
+["H3","Ember Pill","insurance","Insurance ◈","Hero ink + pill EMBER solid (bukan putih) — CTA berasa tombol beneran. Chip putih/14. Buat yang mau aksi lebih teriak.","#18181B · pill #F97316","background:#18181B;color:#fff; /* pill:#F97316,color:#fff */"],
+["H4","Navy Eksekutif","insurance","Insurance ◈","Banking-grade: navy gradient + angka GOLD. Pill putih teks navy. Paling terpercaya, cocok segmen family/mall premium.","#1E3A8A · #0F172A · #FDE68A","background:linear-gradient(135deg,#1E3A8A,#0F172A); /* num:#FDE68A */"],
+["H5","Teal Dalam","insurance","Insurance ◈","Trust jadi hero TAPI dimatangkan (pine, bukan cyan live). Pill putih teks pine. Adem kayak Insurance-ref, tanpa geter vs orange.","#134E4A · #0F766E","background:linear-gradient(135deg,#134E4A,#0F766E);color:#fff;"],
+["H6","Duo Netral","split","Split ◐","Aturan split divisualkan: 2 kolom tempat|makan di hero PUTIH + 1 pill ink. Cyan/orange/merah mati semua di hero. Paling aman.","#fff · #1C1917","background:#fff;color:#18181b;border:1.5px solid #E7E0D2;"],
+["H7","Duo Panas","split","Split ◐","Dual dipertahankan: kolom peach vs rose di atas ink. Hierarki jelas (muda vs tua), bukan rebutan. Buat yang ngotot dual beda warna.","#FB923C · #E11D48 · #1C1917","split:tempat #FB923C, makan #E11D48; base #1C1917;"],
+["H8","Bar Transparan ⭐","split","Rekomendasi #2 ✅","Transplant LAYAR CLAIM Insurance (progress 60%): 2 bar tempat + makan. Quota berasa progres, bukan angka mati. Hero putih, bar orange/rose.","#fff · bar #EA580C · #E11D48","bars: tempat 50% #EA580C, makan 40% #E11D48 on #F1F5F9;"],
+["H9","Cincin Ganda","split","Split ◐","Versi ring dari H8: 2 donut tempat + makan (conic-gradient). Playful, Gen-Z, shareable. Angka di tengah ring.","#fff · ring orange/rose","rings: conic-gradient tempat 50%, makan 40%;"],
+["H10","Kuliner Gelap","photo","Photo ◆","DNA Food ref penuh: hero foto-gelap maroon + teks putih + pill putih. Yang jualan = nafsu makan. Butuh foto tenant asli.","#3F1D1D · #881337","background:linear-gradient(150deg,#3F1D1D,#881337);color:#fff;"],
+["H11","Travel Overlap","photo","Photo ◆","DNA Travel ref: band foto peach 56px + kartu putih overlap. Berasa buka itinerary. Butuh 1 foto hero per mall.","band #FDBA74→#FB923C","band:linear-gradient(120deg,#FDBA74,#FB923C); body:#fff;"],
+["H12","Mall Strip","photo","Photo ◆","Hero ink + strip 3 foto mall (GI/CP/Kokas). Quota + konteks mall satu tatap. Jembatan ke direktori /mall.","#1C1917 + foto ×3","background:#1C1917; strip:3 foto tenant/mall;"],
+["H13","Plum Malam","fresh","Fresh ●","Cabut dari orange: berry dalam + angka pink. Kulineran, Gen-Z, shareable. Wallet plum-ink. Paling beda dari kompetitor.","#1F1218 · #FBCFE8","background:#1F1218; /* num:#FBCFE8, pill:#fff */"],
+["H14","Hutan Kota","fresh","Fresh ●","Healing weekend: pine-ink + angka mint. Adem, calming. Trade-off: hijau kurang nafsu makan — andalkan foto juicy.","#14211A · #BBF7D0","background:#14211A; /* num:#BBF7D0 */"],
+["H15","Mustard Nori","fresh","Fresh ●","Playful food-brand: mustard solid + pill nori. Berasa brand snack kekinian. Paling murah-meriah tapi niat.","#A16207 · #1C1917","background:#A16207;color:#fff; /* pill:#1C1917 */"],
+["H16","Ungu Senja","fresh","Fresh ●","DNA AI-Match ref: violet→magenta analogue. Tech, malam mingguan, event. Paling 'startup'.","#7C3AED · #DB2777","background:linear-gradient(135deg,#7C3AED,#DB2777);color:#fff;"],
+["H17","Lime Banking ⭐","premium","Rekomendasi #3 ✅","KEMBARAN Banking ref: hero hitam + angka LIME nyala + pill lime. Uang = lime, aksi = hitam. Foto yang berwarna.","#0C0A09 · #A3E635","background:#0C0A09; /* num:#D9F99D, pill:#A3E635 */"],
+["H18","Klinik Putih","premium","Premium ◆","DNA Insurance-ref steril: hero PUTIH + hairline + angka ink + pill biru. Ultra clean. Buat user yang takut warna.","#fff · hairline #E2E8F0","background:#fff;border:1.5px solid #E2E8F0; /* pill:#1D4ED8 */"],
+["H19","Self-care Calm","premium","Premium ◆","DNA Self-care ref: lavender→peach pastel, teks ink, pill plum. Weekend = healing, bukan kejar target. Paling lembut.","#FAF5FF · #FFE4E6","background:linear-gradient(150deg,#FAF5FF,#FFE4E6);color:#1E1B2E;"],
+["H20","AI Dark Glow","premium","Premium ◆","DNA AI-Match + D16-Night: charcoal + glow orange atas. Tiket eksklusif malam. Pasangan mode gelap.","glow orange · #18181B","background:radial-glow orange,linear-gradient(#27272A,#18181B);"]
+];
+var MODE={insurance:"◈ Insurance Direct",split:"◐ Split & Progress",photo:"◆ Photo",fresh:"● Fresh Hues",premium:"◆ Premium"};
+function heroInner(id){
+  var L='<div class="h-label">QUOTA HARI INI · reset 00.00</div>';
+  var N='<div class="h-num">1 tempat • 2 makan</div>';
+  var S='<div class="h-sub">Gratis hari ini — login buka 2 + 5</div>';
+  var C='<div class="h-chips"><span>🎲 1/1 tempat</span><span>🍜 2/2 makan</span></div>';
+  var P='<span class="h-pill">Mulai Quiz →</span>';
+  var W='<span class="h-illus">🎲</span>';
+  var SH='<span class="h-illus">🛡️</span>';
+  if(id=="H6") return L+N+'<div class="h-split"><div class="s-t"><b>1/1</b><br><small>🎲 Tempat</small></div><div><b>2/2</b><br><small>🍜 Makan</small></div></div>'+P;
+  if(id=="H7") return L+'<div class="h-split"><div class="s-t"><b>1/1</b><br><small>🎲 Tempat</small></div><div class="s-m"><b>2/2</b><br><small>🍜 Makan</small></div></div>'+P;
+  if(id=="H8") return L+N+S+'<div style="font-size:10px;font-weight:800;margin-top:8px">🎲 Tempat 1/1</div><div class="h-bar" style="background:#F1F5F9"><i style="width:100%;background:#EA580C"></i></div><div style="font-size:10px;font-weight:800;margin-top:6px">🍜 Makan 2/2</div><div class="h-bar" style="background:#F1F5F9"><i style="width:100%;background:#E11D48"></i></div>'+P;
+  if(id=="H9") return L+N+'<div class="h-ringrow"><div class="rg"><div class="h-dot" style="background:conic-gradient(#EA580C 100%,#F1F5F9 0);color:#fff">1/1</div>🎲 Tempat</div><div class="rg"><div class="h-dot" style="background:conic-gradient(#E11D48 100%,#F1F5F9 0);color:#fff">2/2</div>🍜 Makan</div></div>'+P;
+  if(id=="H10") return L+N+S+C+P+'<span class="h-illus">🍜</span>';
+  if(id=="H11") return '<div class="h-band">🗺️ <small style="font-size:10px;font-weight:800">Rooftop Senayan — foto mall</small></div>'+L+N+P;
+  if(id=="H12") return L+N+'<div class="h-photo3"><span>🏬 GI</span><span>🏬 CP</span><span>🏬 Kokas</span></div>'+P+W;
+  if(id=="H4") return L+N+S+C+P+SH;
+  if(id=="H18") return L+N+S+C+P;
+  if(id=="H19") return L+N+S+C+P;
+  return L+N+S+C+P+W;
+}
+function card(d){
+  var id=d[0],name=d[1],mode=d[2],use=d[3],desc=d[4],hex=d[5],css=d[6];
+  var pk=picks.indexOf(id)>=0?' picked':'';
+  return '<div class="gcard'+pk+'" data-mode="'+mode+'" id="c-'+id+'">'
+  +'<div class="gprev"><div class="mini">'
+  +'<div class="m-head"><span class="av"><span class="ava">👦</span><span>Halo, teman Wikendo</span></span><span class="bell">🔔</span></div>'
+  +'<div class="hh '+id.toLowerCase()+'">'+heroInner(id)+'</div>'
+  +'<div class="m-ctx"><span>Cari Tempat (konteks)</span><span>Cari Makan (konteks)</span></div>'
+  +'<div class="m-note">Konteks dinetralkan — yang dinilai cuma HERO di atas.</div>'
+  +'</div></div>'
+  +'<div class="gbody"><h3><span class="gnum">'+id+'</span>'+name+'</h3>'
+  +'<span class="tag t-'+(mode=='insurance'?'i':mode=='split'?'s':mode=='photo'?'f':mode=='fresh'?'i':'p')+'">'+MODE[mode]+'</span><span class="tag" style="background:#f5f1e8;color:#57534e">'+use+'</span>'
+  +'<p>'+desc+'</p><div class="hexes">'+hex.split(' · ').map(function(h){return '<span class="hex">'+h+'</span>';}).join('')+'</div>'
+  +'<div class="cssbox">'+css.replace(/</g,'&lt;')+'</div>'
+  +'<div class="rowbtns"><button class="btn-copy" onclick="copyCss(\''+id+'\')">📋 Copy CSS</button><button class="btn-pick" onclick="toggle(\''+id+'\')">'+(picks.indexOf(id)>=0?'✅ Shortlisted':'＋ Shortlist')+'</button></div>'
+  +'</div></div>';
+}
+var picks=[];
+try{picks=JSON.parse(localStorage.getItem('wikendo-hero20-pick')||'[]');}catch(e){picks=[];}
+function render(){document.getElementById('grid').innerHTML=DATA.map(card).join('');label();}
+function label(){document.getElementById('pickLabel').textContent=picks.length?('👆 Shortlist ('+picks.length+'): '+picks.join(', ')+' — balas di chat "Gua suka '+picks.join(', ')+'"'):'👆 Shortlist: 0 — tap + Shortlist di kartu favorit lu';}
+function save(){try{localStorage.setItem('wikendo-hero20-pick',JSON.stringify(picks));}catch(e){}}
+function toggle(id){var i=picks.indexOf(id);if(i>=0)picks.splice(i,1);else picks.push(id);save();render();}
+function clearPick(){picks=[];save();render();}
+function copyCss(id){var d=null;DATA.forEach(function(x){if(x[0]==id)d=x;});var t=d[6];if(navigator.clipboard)navigator.clipboard.writeText(t);else{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}ta.remove();}}
+function copyPick(){var t=picks.length?('Gua suka '+picks.join(', ')):'(belum ada shortlist)';if(navigator.clipboard)navigator.clipboard.writeText(t);document.getElementById('pickLabel').textContent='📋 Tersalin: "'+t+'" — paste di chat!';}
+document.getElementById('filters').addEventListener('click',function(e){
+  if(e.target.tagName!='BUTTON')return;
+  var f=e.target.getAttribute('data-f');
+  var bs=this.querySelectorAll('button');for(var i=0;i<bs.length;i++)bs[i].classList.remove('on');e.target.classList.add('on');
+  var cs=document.querySelectorAll('.gcard');for(var j=0;j<cs.length;j++){cs[j].style.display=(f=='all'||cs[j].getAttribute('data-mode')==f)?'':'none';}
+});
+render();
+</script>
+</body>
+</html>

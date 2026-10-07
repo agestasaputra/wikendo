@@ -16,6 +16,8 @@
 ## 📌 BOARD — posisi per 8 Okt 2026 (Supabase + quota real + button merah DONE ✅, next slice auth)
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Board 20 opsi Hero Card DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/hero-cards-20.html` — transplant skeleton Insurance hero (label + angka hero + sub + 2 chip + pill CTA + watermark 🎲) ke wallet quota, tiap kartu konteks home SAMA yang beda cuma HERO, warna ikut P1/P9/P12, filter 5 keluarga + shortlist `wikendo-hero20-pick`, Top3 H1 > H8 > H17 — nunggu "Gua suka Hx" / "gas Hx"
+- [x] Board 15 opsi color palette DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/color-palette-15.html` — tiap palet render home SAMA di simulasi `div.max-w-md`, P0 = palet sekarang (pembanding, tak bisa dipilih), filter 4 keluarga + shortlist + Copy CSS, Top3 P1 > P9 > P12 — nunggu pick Agesta
 - [x] Halaman index direktori `/mall` (DONE ✅ 8 Okt): nav header "🏬 Mall" tadinya hardcode GI → sekarang hub 5 mall (Lihat Tenant / Cariin yang cocok per kartu) + helper `getMallName/getMallShortLabel` hapus duplikat mapping di 2 files
 - [x] Loader/spinner fetching API (DONE ✅ 8 Okt): komponen `AppLoader` (variant tempat/makan/mall) + helper `getLoaderMeta` tested → pasang ke `result.vue` + `result-makan.vue` + `mall/[slug].vue` (sebelumnya direktori NOL loader pas ganti filter)
 - [x] Quota real DONE ✅ 8 Okt: `GET /api/quota` (anon-only via `buildQuotaStatus`, helper SAMA dgn wallet) → wallet home jujur (anon 1 • 2, skeleton loading, fallback 1 • 2, login CTA pas exhausted) + label quota real di `result`/`result-makan` dari `quota_remaining` (ganti static bohong 1/2 & 4/5) + `POST /api/voucher/claim` DITUNDA ke slice auth (kontrak WAJIB login/401, belum ada session infra)
@@ -59,6 +61,13 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-08 — Board 20 opsi Hero Card DONE ✅ (transplant Insurance hero, design-only)
+- **Kenapa:** Agesta VERBATIM "gua suka Hero card dari apps insurance itu. generate 20 opsi design berdasarkan referensi dari apps insurance itu". Dribbble blokir scraper (web_extract 804 chars gagal + browser /root/.cache/ms-playwright missing) → solved via bedah piksel `vision_analyze` screenshot Agesta (8.861 chars): anatomi label + angka hero + sub + pill CTA + ilustrasi + header avatar/greeting/bell + quick action 4 + list + AI card + bottom nav.
+- **Dikerjain:** `design/hero-cards-20.html` — 20 hero (◈ Insurance Direct H1-H5, ◐ Split&Progress H6-H9, ◆ Photo H10-H12, ● Fresh H13-H16, ◆ Premium H17-H20), tiap kartu konteks home SAMA (header avatar + hero varian + 2 CTA netral) di simulasi `div.max-w-md`, warna ikut P1/P9/P12, filter 5 keluarga + shortlist `wikendo-hero20-pick` + Copy CSS. Yang TIDAK di-copy: bottom nav 4 tab (mecah fokus landing→quiz >40%), gradasi biru-ungu (tabrakan vonis bunuh-cyan), timeline/key-value (pola result bukan home). Top3: H1 Arang Ember > H8 Bar Transparan > H17 Lime Banking.
+- **Verifikasi:** node COUNT=20 (H1-H20 unik) ✅ + HAS_SHORTLIST ✅ + HAS_FILTER ✅. `app/` NOL sentuh ✅.
+- **Files:** `design/hero-cards-20.html` (baru), `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** nunggu "Gua suka Hx" / "gas Hx (+ Px)" → eksekusi ke `app/pages/index.vue` via TDD.
 
 ## 2026-10-08 — Patch AGENTS.md susulan DONE ✅ (2 baris keblokir proteksi, approved Agesta)
 - **Kenapa:** patch AGENTS.md kemarin ke-BLOCK proteksi file instruksi-agen (approval timeout) → Agesta jawab "gas AGENTS" = approval eksplisit.
