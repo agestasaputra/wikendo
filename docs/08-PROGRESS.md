@@ -65,7 +65,7 @@
 - **Dikerjain:** spec `design/revamp-combo-5-10-15.html` (`.cta2 .m` solid + shadow) + `app/pages/index.vue` (button Makan solid, spec=app biar nggak split-brain) → quota TDD: `tests/wallet.test.ts` 4 test (MERAH 4 FAIL → HIJAU 4/4) → `WalletLabel` di `types` + `buildWalletLabel()` di `quiz-logic` → baru `server/api/quota.get.ts` (cookie anon via helper SAMA, anon-only) → wallet home wire `GET /api/quota` (skeleton, fallback 1 • 2, login CTA pas exhausted) → label `result`/`result-makan` baca `quota_remaining` (ganti static 1/2 & 4/5). `POST /api/voucher/claim` DITUNDA ke slice auth (kontrak WAJIB login/401, belum ada session infra — endpoint yang selalu 401 = sia-sia).
 - **Verifikasi:** test 68/68 (6 files) ✅ + lint 0 error ✅ + build 8.84s ✅. `AGENTS.md` §4 + §7 (68 test) diupdate.
 - **Files:** `design/revamp-combo-5-10-15.html`, `app/pages/index.vue`, `app/pages/result.vue`, `app/pages/result-makan.vue`, `app/types/index.ts`, `app/utils/quiz-logic.ts`, `app/server/api/quota.get.ts` (baru), `app/tests/wallet.test.ts` (baru), `app/AGENTS.md`, `docs/08-PROGRESS.md` (BOARD + LOG ini).
-- **Next:** commit + push + deploy Vercel → verify prod `/` + `/api/quota`.
+- **Next:** ~~commit + push + deploy Vercel → verify prod `/` + `/api/quota`~~ ✅ DONE: commit `758e396` push main → prod `/` 200 + `/api/quota` 200 (anon fresh 1 • 2) + `background:#ee2c4b` solid merah live ✅.
 
 ## 2026-10-08 — Halaman index direktori `/mall` DONE ✅ (fix hardcode GI)
 - **Kenapa:** temuan Agesta "klik button mall di header, redirect ke mall/grand-indonesia? seharusnya ga langsung auto select" — benar, link header hardcode GI sisa slicing (dulu DB kosong). User non-GI ngerasa "cuma GI doang" → cabut.
