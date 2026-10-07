@@ -13,9 +13,11 @@
 
 ---
 
-## 📌 BOARD — posisi per 7 Okt 2026 sore (auth slice TDD jalan)
+## 📌 BOARD — posisi per 8 Okt 2026 (integrasi Supabase NOW, gradasi BACKLOG)
 
 ### 🔥 NOW (lagi dikerjain)
+- [ ] Integrasi Supabase DB (NOW ⏳ 8 Okt): wire project → run migration + seed → env lokal + Vercel → verifikasi endpoint baca DB beneran
+- [ ] NEXT: finalin lockup resmi (master mark + wordmark) + pasang ke header web & favicon + stamp voucher 1-warna
 - [x] UI kombo slice-1→4 (DONE ✅ 7 Okt): Home wallet + quiz swipe + result deck/voucher + direktori SEO (`e12be1b` live, prod 200 `QUOTA HARI INI` ✅)
 - [x] Logo board v1 30 opsi (DONE ✅ 7 Okt malam): `design/logo-wikendo-30.html` — campur wordmark, KURANG cocok (Agesta: prefer icon-first app icon)
 - [ ] Logo board v2 icon-first 30 opsi (DONE ✅ 7 Okt malam): `design/logo-wikendo-icon-30.html` — SEMUA icon-first app-icon ready + varian logo saja / logo+wordmark bawah
@@ -26,10 +28,10 @@
 - [x] Push + Deploy Vercel AUTO via main (kombo `e12be1b` live, prod 200 `QUOTA HARI INI` ✅ 7 Okt malam)
 
 ### ⏳ NEXT (antrian dekat)
-- [ ] Run migration + seed ke Supabase beneran (butuh dashboard user)
 - [ ] 8.4 E2E (butuh DB seeded dulu)
 
 ### 📦 BACKLOG (nanti)
+- [ ] Board 20 gradasi background (SKIP ⏸️ 8 Okt — `design/background-gradients-20.html` nunggu "Gua suka Gx" / "gas Gx" → eksekusi via TDD)
 - [ ] `components/`/`composables/`/`layouts/` + `GET /api/health` (UI masih inline)
 - [ ] Vote/report tenant P1 (`POST /api/vote`, `POST /api/report-tenant`)
 - [ ] Sisa Phase 4-7 yang belum dicentang rapi (sinkron lanjutan checklist)
@@ -55,6 +57,17 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-08 — Integrasi Supabase START (Agesta: skip gradasi → fokus DB)
+- **Kenapa:** Agesta VERBATIM "okee jadikan ini sebagai todolist kita. kita skip ke next step aja. Gua mau integrate database dengan supabase". Board 20 gradasi → BACKLOG SKIP ⏸️.
+- **Audit integrasi (temuan):**
+  - Kode app SUDAH siap: `server/utils/db.ts` (singleton service role), 4 endpoint (`tempat/recommend`, `makan/recommend`, `malls`, `malls/:slug/tenants`) + `nuxt.config.ts` runtimeConfig + `app/.env.example` (tanpa `.env` asli ✅).
+  - DB: `migration.sql` (mall F&B) + `seed.sql` (200 tenant) SIAP. GAP: tabel dasar (`generations` dst) cuma ada di `docs/04` sebagai snippet — tidak ada file SQL runnable + FK `voucher_claims→tenants` lintas file.
+  - `.env` lokal BELUM ada (cuma `.env.example` ✅ bagus, tidak bocor).
+  - Status Supabase Agesta: BELUM ADA project sama sekali → pandu dari register akun.
+- **Dikerjain:** `supabase/migration-base.sql` (baru, runnable, idempotent): 6 tabel dasar + RLS + 4 functions + FK voucher→tenants dipisah (§8b, aman run duluan) + verifikasi COUNT otomatis. Urutan run: base → migration.sql → seed.sql.
+- **Files:** `supabase/migration-base.sql`, `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** pandu Agesta register → bikin project → run 3 SQL → kirim 3 keys → wire env lokal + Vercel → verifikasi endpoint.
 
 ## 2026-10-08 — Board 20 gradasi background (biar Agesta bisa putusin pakai mata)
 - **Kenapa:** Agesta VERBATIM "Gua masih ga suka sama background color yang lu kasih. Gua mau gradasi color untuk background apps nya. Kasih gua 20 rekomendasi gradasi color untuk wikendo" + "Kasih gua html format, biar bisa gua cek".
