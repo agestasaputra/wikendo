@@ -22,7 +22,7 @@
 - [x] UI kombo slice-4 (DONE ✅): `mall/[slug].vue` direktori SEO + filter chip + CTA pre-filled quiz
 - [ ] NEXT: wire quota real `GET /api/quota` → wallet 2-state + `POST /api/voucher/claim` klaim beneran
 - [x] Patch 5 docs downstream Addendum v1.3 (ADR v2.2 ✅ + Schema v1.1 ✅ + API v1.1 ✅ + Journey v2.1 ✅ + Checklist v1.2 ✅) — `app/` NOL diubah ✅ 5/5 GENAP
-- [x] Push + Deploy Vercel AUTO via main (commit `a36c6e0` live, prod 200 `Wikendo — Bingung Weekend Mau Kemana?` ✅ 7 Okt sore)
+- [x] Push + Deploy Vercel AUTO via main (kombo `e12be1b` live, prod 200 `QUOTA HARI INI` ✅ 7 Okt malam)
 
 ### ⏳ NEXT (antrian dekat)
 - [ ] Run migration + seed ke Supabase beneran (butuh dashboard user)
