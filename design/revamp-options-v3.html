@@ -239,18 +239,18 @@ function heroInner(id){
 function headerHTML(){return '<div class="m-head"><span class="av"><span class="ava">👦</span><span>Halo, teman Wikendo</span></span><span class="bell">🔔</span></div>';}
 function ctaHTML(d){
   var acc=d[13];
-  if(d[10]=="duo") return '<div class="m-cta2"><span style="background:#FB923C">🗺️<br>Cari Tempat<br><small style="font-weight:400">quiz 30 dtk</small></span><span style="background:#E11D48">🍜<br>Cari Makan<br><small style="font-weight:400">quiz 20 dtk</small></span></div>';
-  if(d[10]=="stack") return '<div class="m-stack"><span style="background:'+acc+'">🗺️ Cari Tempat — quiz 30 dtk →</span><span style="background:'+acc+'">🍜 Cari Makan — quiz 20 dtk →</span></div>';
-  if(d[10]=="assistant") return '<div class="m-asst"><span class="aa">🎲</span><span class="at">Bingung mau kemana?<small>Quiz 30 dtk → 5 rekomendasi</small></span><span class="go" style="color:'+acc+'">→</span></div>';
+  if(d[9]=="duo") return '<div class="m-cta2"><span style="background:#FB923C">🗺️<br>Cari Tempat<br><small style="font-weight:400">quiz 30 dtk</small></span><span style="background:#E11D48">🍜<br>Cari Makan<br><small style="font-weight:400">quiz 20 dtk</small></span></div>';
+  if(d[9]=="stack") return '<div class="m-stack"><span style="background:'+acc+'">🗺️ Cari Tempat — quiz 30 dtk →</span><span style="background:'+acc+'">🍜 Cari Makan — quiz 20 dtk →</span></div>';
+  if(d[9]=="assistant") return '<div class="m-asst"><span class="aa">🎲</span><span class="at">Bingung mau kemana?<small>Quiz 30 dtk → 5 rekomendasi</small></span><span class="go" style="color:'+acc+'">→</span></div>';
   return '<div class="m-cta2"><span style="background:'+acc+'">🗺️<br>Cari Tempat<br><small style="font-weight:400">quiz 30 dtk</small></span><span style="background:'+acc+'">🍜<br>Cari Makan<br><small style="font-weight:400">quiz 20 dtk</small></span></div>';
 }
 function qkHTML(d){
   var items=[["🎡","Event"],["🎁","Promo"],["❤️","Wishlist"],["🕘","Riwayat"]];
-  if(d[11]=="ci") return '<div class="m-qk ci">'+items.map(function(x){return '<span><i>'+x[0]+'</i>'+x[1]+'</span>';}).join('')+'</div>';
+  if(d[10]=="ci") return '<div class="m-qk ci">'+items.map(function(x){return '<span><i>'+x[0]+'</i>'+x[1]+'</span>';}).join('')+'</div>';
   return '<div class="m-qk sq">'+items.map(function(x){return '<span><i>'+x[0]+'</i>'+x[1]+'</span>';}).join('')+'</div>';
 }
 function midHTML(d){
-  var k=d[12], acc=d[13];
+  var k=d[11], acc=d[13];
   var hype='<div class="m-hype" style="background:linear-gradient(120deg,'+acc+',#FB923C)">🔥 Hype minggu ini: Rooftop Senayan →</div>';
   var list='<div class="m-list"><div class="lh">Rekomendasi buatmu <small>Lihat Semua →</small></div><div class="lr"><span>🗺️ Rooftop Senayan<small>Senayan · 4.8 ★</small></span><b class="tag2">−20%</b></div><div class="lr"><span>🍜 Kopi Kekinian<small>GI · 4.9 ★</small></span><b class="tag2">Voucher</b></div></div>';
   var malllist='<div class="m-list"><div class="lh">Mall di sekitarmu <small>Lihat Semua →</small></div><div class="lr"><span>🏬 Grand Indonesia<small>40 tenant</small></span><b class="tag2">→</b></div><div class="lr"><span>🏬 Central Park<small>40 tenant</small></span><b class="tag2">→</b></div></div>';
@@ -265,10 +265,10 @@ function midHTML(d){
 }
 function histHTML(){return '<div class="m-hist"><b>Terakhir dilihat 👀</b><p>Belum ada riwayat — mulai quiz pertamamu →</p></div><div class="m-foot">Result tidak dicampur: tempat ya tempat, makan ya makan.</div>';}
 function miniPage(d){
-  var dark=d[9+4]===1?' dark':'';
-  return '<div class="mini'+dark+'" style="background:'+d[8]+'">'
+  var dark=d[12]===1?' dark':'';
+  return '<div class="mini'+dark+'" style="background:'+d[7]+'">'
   +headerHTML()
-  +'<div class="hh h'+d[9]+'">'+heroInner('H'+d[9])+'</div>'
+  +'<div class="hh h'+d[8]+'">'+heroInner('H'+d[8])+'</div>'
   +ctaHTML(d)+qkHTML(d)+midHTML(d)+histHTML()+'</div>';
 }
 function card(d){
