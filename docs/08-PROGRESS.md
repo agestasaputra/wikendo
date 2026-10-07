@@ -19,7 +19,7 @@
 - [x] UI kombo slice-1→4 (DONE ✅ 7 Okt): Home wallet + quiz swipe + result deck/voucher + direktori SEO (`e12be1b` live, prod 200 `QUOTA HARI INI` ✅)
 - [x] Logo board v1 30 opsi (DONE ✅ 7 Okt malam): `design/logo-wikendo-30.html` — campur wordmark, KURANG cocok (Agesta: prefer icon-first app icon)
 - [ ] Logo board v2 icon-first 30 opsi (DONE ✅ 7 Okt malam): `design/logo-wikendo-icon-30.html` — SEMUA icon-first app-icon ready + varian logo saja / logo+wordmark bawah
-- [x] D16 dual Day/Night (DONE ✅ 8 Okt): Agesta kunci D16 asli + usul takeout outer hitam di dark → dijawab YA wajib 2 versi (logo system) di `design/logo-d16-dual-mode.html` — Day tile ink (app icon) + Night dadu-takeout transparan (web dark `prefers-color-scheme`), tes kontras OLED 1.1:1 vs 15:1. Revisi feedback: padding tile dikecilin (dadu 52→68 Day / 72 Night, W 28→33/35) + lockup Night `.tight` wordmark nempel bawah dadu (gap 0, margin -6px). Nunggu "gas pasang D16" (export SVG/PNG + header & favicon, butuh approval karena nyentuh `app/`)
+- [x] D16 P4 FULL VERSION (DONE ✅ 8 Okt): Agesta "Gua suka p4. Coba bikin full version" → `design/logo-d16-full-version.html` brand sheet resmi + `design/assets/` 5 SVG master (d16-day/night/mono/lockup/lockup-horizontal, dadu 60 W30 rotasi -8°) — isi: master asset + warna/tipo + mock header light/dark + struk + brand police + paket rilis. Nunggu "gas pasang D16" (H-LOCK + favicon ke `app/`, butuh approval karena nyentuh `app/`)
 - [ ] NEXT: finalin lockup resmi (master mark + wordmark) + pasang ke header web & favicon + stamp voucher 1-warna
 - [ ] NEXT: wire quota real `GET /api/quota` → wallet 2-state + `POST /api/voucher/claim` klaim beneran
 - [x] Patch 5 docs downstream Addendum v1.3 (ADR v2.2 ✅ + Schema v1.1 ✅ + API v1.1 ✅ + Journey v2.1 ✅ + Checklist v1.2 ✅) — `app/` NOL diubah ✅ 5/5 GENAP
@@ -55,6 +55,13 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-08 — D16 P4 full version (✅ DONE, nunggu "gas pasang D16")
+- **Kenapa:** Agesta VERBATIM "Gua suka p4. Coba bikin full version" — P4 dikunci (dadu 60, W 30, tile ink, rotasi -8°).
+- **Dikerjain:** `design/assets/` 5 SVG master (d16-day tile ink app-icon, d16-night takeout transparan, d16-mono 1-warna struk, d16-lockup vertikal icon+wordmark bawah, d16-lockup-horizontal icon+wordmark kanan) + `design/logo-d16-full-version.html` brand sheet resmi 4 seksi: ① master asset + skala 64/32/16 favicon, ② token warna (ink/cream/tempat/makan) + font ExtraBold + titik oranye sakral, ③ mock header light/dark + struk voucher, ④ brand police (jangan stretch/ganti warna/Day-di-gelap/Night-jadi-icon). Wordmark lockup penuhi 2 pilihan Agesta (icon saja + icon+wordmark).
+- **Verifikasi:** 6 file exists (5 SVG + 1 HTML) ✅, `app/` NOL diubah ✅ (design-only).
+- **Files:** `design/assets/*.svg` (5 baru), `design/logo-d16-full-version.html` (baru), `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** Agesta balas "gas pasang D16" → H-LOCK + favicon Day ke `app/` via TDD (test→lint→build→commit+push+deploy) + export PNG 1024 via browser render.
 
 ## 2026-10-08 — Board 7 opsi padding D16 (P1 48 → P7 72)
 - **Kenapa:** feedback "Dadunya terlalu besar haha" (revisi 60/64 kebablasan) → "Coba bikin banyak opsi dari macam2 padding value". Board perbandingan visual biar pilih pakai mata, bukan angka.
