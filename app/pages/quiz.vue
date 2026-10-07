@@ -1,58 +1,64 @@
-<!-- pages/quiz.vue → GET /quiz (Quiz TEMPAT, 5 pertanyaan ~30 detik).
-  Pola: 1 layar 1 pertanyaan + progress bar + Kembali. State lokal (step/answers) — TIDAK fetch.
-  Selesai → redirect /result?mood=..&companion=.. (jawaban via query string).
-  Logic progress/last-step dari ~/utils/quiz-logic (sudah di-unit-test). -->
+<!-- pages/quiz.vue → GET /quiz (Quiz TEMPAT swipe, mockup B-C kombo 5+10+15).
+  APA: 1 layar 1 tanya + progress + opt-card + tombol 56px Orange #f97316, base #fffdf9.
+  KENAPA: 1 keputusan kecil per layar = completion >70% (PRD §4). Engine sama dipakai quiz makan → codebase 1x.
+  Contoh: tap opsi langsung next (tanpa tombol Lanjut) — quota kepake pas Generate, bukan per tanya. -->
 <template>
-  <div class="container mx-auto px-4 py-8 max-w-2xl">
-    <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
-      <div class="bg-orange-500 h-2 rounded-full transition-all" :style="{ width: progress + '%' }"/>
+  <div class="max-w-md mx-auto px-4 pb-10 min-h-[80vh] flex flex-col" style="background:#fffdf9">
+    <div class="flex justify-between items-center font-bold text-[13px] py-3">
+      <NuxtLink to="/" class="text-ink">← 🗺️ Quiz tempat</NuxtLink>
+      <span class="text-gray-500">{{ step + 1 }}/{{ questions.length }} • ⏱ 30 dtk</span>
     </div>
-    <p class="text-sm text-gray-600 mb-6">Pertanyaan {{ step + 1 }} dari {{ questions.length }} • ~30 detik</p>
-    <h2 class="text-2xl font-bold mb-6">{{ q.question }}</h2>
-    <div class="space-y-3">
+    <div class="h-2 bg-[#ececec] rounded-full overflow-hidden">
+      <div class="h-full rounded-full transition-all" style="background:linear-gradient(90deg,#f97316,#fb923c)" :style="{ width: progress + '%' }" />
+    </div>
+    <h3 class="text-[21px] font-extrabold mt-3">{{ q.question }}</h3>
+    <p class="text-[13px] text-gray-500 mb-2">Tap 1 — nggak ada jawaban salah</p>
+    <div class="flex flex-col gap-2 mt-1">
       <button
         v-for="o in q.options"
         :key="o.value"
-        class="w-full bg-white border-2 border-gray-200 rounded-xl p-4 text-left hover:border-orange-500"
+        class="w-full bg-white rounded-[20px] p-[14px] font-bold text-sm flex gap-2.5 items-center cursor-pointer text-left border-2 transition-colors"
+        :style="answers[q.id] === o.value ? 'border-color:#f97316;background:#fff7ed' : 'border-color:#ececec'"
+        style="min-height:56px"
         @click="select(o.value)"
       >
-        <div class="flex items-center gap-4">
-          <span class="text-3xl">{{ o.icon }}</span>
-          <div><div class="font-semibold">{{ o.label }}</div><div class="text-sm text-gray-600">{{ o.desc }}</div></div>
-        </div>
+        <span class="text-2xl">{{ o.icon }}</span>
+        <span>{{ o.label }} <small class="font-normal text-gray-500">{{ o.desc }}</small></span>
       </button>
     </div>
-    <button v-if="step > 0" class="mt-4 text-gray-500 text-sm" @click="step--">← Kembali</button>
+    <div class="flex-1" />
+    <p class="text-center text-xs text-gray-400 mt-4">Quota kepake pas Generate, bukan per tanya</p>
+    <button v-if="step > 0" class="mt-2 text-gray-500 text-sm" @click="step--">← Kembali</button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { progressPercent, isLastStep } from '~/utils/quiz-logic'
 const questions = [
-  { id: 'mood', question: 'Weekend ini lagi pengen yang gimana?', options: [
+  { id: 'mood', question: 'Weekend ini pengen yang gimana? 🧭', options: [
     { icon: '🧘', label: 'Santai / Healing', desc: 'Slow living, recharge', value: 'santai' },
     { icon: '🎉', label: 'Seru / Hype', desc: 'Ramai, FOMO, viral', value: 'seru' },
     { icon: '🍜', label: 'Kulineran', desc: 'Makan enak', value: 'kuliner' },
     { icon: '🌿', label: 'Alam / Outdoor', desc: 'Hijau, udara segar', value: 'alam' }
   ]},
-  { id: 'companion', question: 'Pergi sama siapa?', options: [
+  { id: 'companion', question: 'Dengan siapa? 👯', options: [
     { icon: '🧘', label: 'Sendiri', desc: 'Me time', value: 'sendiri' },
-    { icon: '💑', label: 'Berdua', desc: 'Pasangan / teman', value: 'berdua' },
-    { icon: '👥', label: 'Rame-rame', desc: '3+ orang', value: 'rame' },
+    { icon: '💑', label: 'Pasangan', desc: 'Pasangan / teman', value: 'berdua' },
+    { icon: '👥', label: 'Teman 2–4', desc: '3+ orang', value: 'rame' },
     { icon: '👨‍👩‍👧', label: 'Keluarga', desc: 'Anak / ortu', value: 'keluarga' }
   ]},
-  { id: 'budget', question: 'Budget per orang?', options: [
+  { id: 'budget', question: 'Budget per orang? 💰', options: [
     { icon: '💰', label: 'Hemat', desc: '< Rp 50.000', value: 'hemat' },
     { icon: '💰💰', label: 'Menengah', desc: 'Rp 50-150rb', value: 'menengah' },
     { icon: '💰💰💰', label: 'Leluasa', desc: '> Rp 150.000', value: 'leluasa' }
   ]},
-  { id: 'location', question: 'Area mana?', options: [
+  { id: 'location', question: 'Area mana? 📍', options: [
     { icon: '📍', label: 'Jakarta Selatan', desc: 'Jaksel hype', value: 'jaksel' },
     { icon: '📍', label: 'Jakarta Pusat', desc: 'Jakpus klasik', value: 'jakpus' },
     { icon: '📍', label: 'Jakarta Barat', desc: 'Jakbar cozy', value: 'jakbar' },
     { icon: '📍', label: 'Bebas / Fleksibel', desc: 'Dimana aja oke', value: 'bebas' }
   ]},
-  { id: 'time', question: 'Kapan mau jalan?', options: [
+  { id: 'time', question: 'Kapan mau jalan? ⏰', options: [
     { icon: '☀️', label: 'Siang', desc: 'Siang-sore', value: 'siang' },
     { icon: '🌙', label: 'Malam', desc: 'Malam-minggu', value: 'malam' },
     { icon: '📅', label: 'Fleksibel', desc: 'Kapan aja', value: 'fleksibel' }

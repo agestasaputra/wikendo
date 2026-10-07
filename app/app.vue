@@ -1,14 +1,17 @@
-<!-- app.vue — Layout GLOBAL (header + <NuxtPage/> + footer).
-  Semua pages/*.vue di-render di dalam <NuxtPage/>. Mau ubah navbar/footer global? Edit file ini aja. -->
+<!-- app.vue — Layout GLOBAL kombo 5+10+15 (Addendum 09 v1.3 APPROVED).
+  APA: header sticky + <NuxtPage/> + footer, base hangat #fffdf9 + font Plus Jakarta Sans.
+  KENAPA: 1 layout dipakai 6 pages (Home, 2 quiz, 2 result, direktori) → konsisten + hemat.
+  Contoh: mau ubah navbar/footer global? Edit file ini aja. -->
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-base text-ink" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif">
     <header class="bg-white sticky top-0 z-40 shadow-sm">
       <div class="container mx-auto px-4 py-3 flex justify-between items-center max-w-4xl">
-        <NuxtLink to="/" class="font-bold text-gray-900">🗓️ Wikendo</NuxtLink>
-        <div class="flex gap-4 text-sm font-semibold">
-          <NuxtLink to="/makan" class="text-orange-600">🍜 Makan</NuxtLink>
-          <NuxtLink to="/mall/grand-indonesia" class="text-gray-600 hidden sm:inline">🏬 Mall</NuxtLink>
-        </div>
+        <NuxtLink to="/" class="font-extrabold text-ink text-lg">Wikendo<span class="text-tempat">.</span></NuxtLink>
+        <nav class="flex gap-4 text-sm font-bold">
+          <NuxtLink to="/quiz" class="text-tempat">🗺️ Tempat</NuxtLink>
+          <NuxtLink to="/makan" class="text-makan">🍜 Makan</NuxtLink>
+          <NuxtLink to="/mall/grand-indonesia" class="text-gray-500 hidden sm:inline">🏬 Mall</NuxtLink>
+        </nav>
       </div>
     </header>
     <NuxtPage />

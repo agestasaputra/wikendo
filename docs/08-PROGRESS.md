@@ -16,8 +16,11 @@
 ## 📌 BOARD — posisi per 7 Okt 2026 sore (auth slice TDD jalan)
 
 ### 🔥 NOW (lagi dikerjain)
-- [x] Auth slice tracer-1 (TDD GREEN ✅ 18/18): `tests/quota-auth.test.ts` — quota split anon 1+2 vs register 2+5 + login wall momen #1 (pure, tanpa mock DB) — test 30/30 + lint bersih + build 9.09s ✅
-- [x] Auth slice tracer-2 (TDD GREEN ✅ 26/26): `tests/auth-gate.test.ts` — phone optional NULL + voucher `WIK-XXXXX` + wall momen #2-4 (Simpan/Wishlist/Riwayat/klaim) — total test 56/56 + lint bersih + build 9.05s ✅
+- [x] UI kombo slice-1 (DONE ✅): Home Superapp `index.vue` + token + layout `app.vue` + font Plus Jakarta Sans (wallet 2-state + 2 CTA + grid8, base #fffdf9)
+- [x] UI kombo slice-2 (DONE ✅): `quiz.vue` + `makan.vue` swipe 56px (Orange tempat / Merah makan, Q1 mall chip + toggle halal/kids)
+- [x] UI kombo slice-3 (DONE ✅): `result.vue` + `result-makan.vue` deck hero + voucher klaim wall + quota note
+- [x] UI kombo slice-4 (DONE ✅): `mall/[slug].vue` direktori SEO + filter chip + CTA pre-filled quiz
+- [ ] NEXT: wire quota real `GET /api/quota` → wallet 2-state + `POST /api/voucher/claim` klaim beneran
 - [x] Patch 5 docs downstream Addendum v1.3 (ADR v2.2 ✅ + Schema v1.1 ✅ + API v1.1 ✅ + Journey v2.1 ✅ + Checklist v1.2 ✅) — `app/` NOL diubah ✅ 5/5 GENAP
 - [x] Push + Deploy Vercel AUTO via main (commit `a36c6e0` live, prod 200 `Wikendo — Bingung Weekend Mau Kemana?` ✅ 7 Okt sore)
 
@@ -51,6 +54,19 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-07 sore — UI kombo 5+10+15 SLICING (✅ 6 halaman, test 56/56 + lint + build 8.93s)
+- **Kenapa:** approval kombo dikunci Agesta ("gas slicing eksekusi ui nya di repo" + "kan udah gua approve tadi terkait design kombo revamp"). Prod live tapi masih UI lama (0 file .vue diubah di 3 commit terakhir) — design kombo masih statis di `design/revamp-combo-5-10-15.html` yang nggak ikut deploy (Vercel Root = `app/`).
+- **Dikerjain (slice-1 → slice-4):**
+  - Token: `tailwind.config.ts` +5 warna kombo (`base #fffdf9`, `tempat #f97316`, `makan #ee2c4b`, `wallet #0e7490`, `ink #18181b`) + `nuxt.config.ts` font Plus Jakarta Sans (preconnect + stylesheet) + `lang="id"`.
+  - Layout: `app.vue` rewrite (logo `Wikendo.` + nav Tempat/Makan/Mall, base hangat, font Jkt Sans).
+  - Slice-1 Home: `index.vue` rewrite (mockup A) — wallet 2-state static "2 tempat • 5 makan" + 2 CTA 56px + grid8 (Wishlist/Riwayat 🔒 momen #3) + banner hype + riwayat jujur kosong + `useHead` SEO/OG.
+  - Slice-2 Quiz: `quiz.vue` rewrite (mockup B-C) + `makan.vue` rewrite (mockup E-F) — 1 layar 1 tanya, opt-card selected Orange/Merah, progress gradient, `makan` Q1 chip mall horizontal + Q4 toggle halal/kids, pre-fill `?mall=` via `getMakanStartStep`.
+  - Slice-3 Result: `result.vue` rewrite (mockup D) — hero deck 24px + Navigasi/Simpan(wall momen #2)/Share + mini-deck geser + quota note + wall 403 jujur; `result-makan.vue` rewrite (mockup G) — border Merah 2px + badge halal tri-state + tombol Klaim wall (wire `POST /api/voucher/claim` Phase 2) + Maps tenant.
+  - Slice-4 Direktori: `mall/[slug].vue` rewrite (mockup H) — search + 4 filter chip (server query) + CTA `/makan?mall=` pre-filled + kartu tenant 62px + `useHead` SEO per-mall.
+- **Verifikasi:** `pnpm vitest run` 3 files 56/56 ✅ (no regresi) + `pnpm lint` bersih ✅ + `pnpm build` 8.93s 3.26MB ✅.
+- **Files:** `tailwind.config.ts`, `nuxt.config.ts`, `app.vue`, `pages/index.vue`, `pages/quiz.vue`, `pages/makan.vue`, `pages/result.vue`, `pages/result-makan.vue`, `pages/mall/[slug].vue`, `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** wire quota real `GET /api/quota` → wallet 2-state + `POST /api/voucher/claim` klaim beneran → commit+push+deploy (jalan di bawah).
 
 ## 2026-10-07 sore — Auth slice tracer-2 (✅ GREEN 26/26, total test 56/56 + lint + build)
 - **Kenapa:** tracer-1 ngunci quota split + wall momen #1. tracer-2 ngunci sisa gerbang auth v1.3: phone optional (skip ≠ error) + format kode voucher + wall momen #2-4 (Simpan/Wishlist/Riwayat/klaim WAJIB login).
