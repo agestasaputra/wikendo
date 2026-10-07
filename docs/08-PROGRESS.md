@@ -16,6 +16,7 @@
 ## 📌 BOARD — posisi per 8 Okt 2026 (Supabase + quota real + button merah DONE ✅, next slice auth)
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Board 20 opsi Revamp Index Full-Page DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/revamp-options-v3.html` — 1 halaman index UTUH per opsi (header avatar + hero + dual CTA + quick 4 + hype/list/assistant + riwayat), skeleton Insurance transplant, warna ikut P1/P9/P12, filter 5 keluarga + shortlist `wikendo-index20-pick`, Top3 I1 > I8 > I17 — nunggu "Gua suka Ix" / "gas Ix (+ Px)"
 - [x] Board 20 opsi Hero Card DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/hero-cards-20.html` — transplant skeleton Insurance hero (label + angka hero + sub + 2 chip + pill CTA + watermark 🎲) ke wallet quota, tiap kartu konteks home SAMA yang beda cuma HERO, warna ikut P1/P9/P12, filter 5 keluarga + shortlist `wikendo-hero20-pick`, Top3 H1 > H8 > H17 — nunggu "Gua suka Hx" / "gas Hx"
 - [x] Board 15 opsi color palette DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/color-palette-15.html` — tiap palet render home SAMA di simulasi `div.max-w-md`, P0 = palet sekarang (pembanding, tak bisa dipilih), filter 4 keluarga + shortlist + Copy CSS, Top3 P1 > P9 > P12 — nunggu pick Agesta
 - [x] Halaman index direktori `/mall` (DONE ✅ 8 Okt): nav header "🏬 Mall" tadinya hardcode GI → sekarang hub 5 mall (Lihat Tenant / Cariin yang cocok per kartu) + helper `getMallName/getMallShortLabel` hapus duplikat mapping di 2 files
@@ -61,6 +62,13 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-08 — Board 20 opsi Revamp Index Full-Page DONE ✅ (Insurance transplant, design-only)
+- **Kenapa:** Agesta VERBATIM "Eeh lu revamp hero cards doang? Langsung satu halaman index aja lu revamp". Bedah `app/pages/index.vue` 72 baris (wallet teal + 2 CTA + grid emoji + hype + riwayat) → tiap opsi render 1 halaman UTUH (bukan hero doang).
+- **Dikerjain:** `design/revamp-options-v3.html` — 20 full-page (◈ Insurance I1-I5, ◐ Split&Progress I6-I9, ◆ Photo I10-I12, ● Fresh I13-I16, ◆ Premium I17-I20), tiap kartu: header avatar + hero varian + CTA (dual 2-kolom / stack / duo-terbelah / assistant-tunggal) + quick 4 (lingkaran-stroke vs square) + mid (combo list+assistant / list+hype / mall-list / timeline klaim) + riwayat. Warna ikut P1/P9/P12, filter 5 keluarga + shortlist `wikendo-index20-pick` + Copy CSS. Top3: I1 Arang Ember Full > I8 Bar Transparan Full > I17 Lime Banking Full.
+- **Verifikasi:** node COUNT=20 (I1-I20 unik) ✅ + HAS_SHORTLIST ✅ + HAS_FILTER ✅. `app/` NOL sentuh ✅.
+- **Files:** `design/revamp-options-v3.html` (baru), `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** nunggu "Gua suka Ix" / "gas Ix (+ Px)" → eksekusi ke `app/pages/index.vue` via TDD.
 
 ## 2026-10-08 — Board 20 opsi Hero Card DONE ✅ (transplant Insurance hero, design-only)
 - **Kenapa:** Agesta VERBATIM "gua suka Hero card dari apps insurance itu. generate 20 opsi design berdasarkan referensi dari apps insurance itu". Dribbble blokir scraper (web_extract 804 chars gagal + browser /root/.cache/ms-playwright missing) → solved via bedah piksel `vision_analyze` screenshot Agesta (8.861 chars): anatomi label + angka hero + sub + pill CTA + ilustrasi + header avatar/greeting/bell + quick action 4 + list + AI card + bottom nav.
