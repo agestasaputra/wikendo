@@ -16,6 +16,7 @@
 ## 📌 BOARD — posisi per 8 Okt 2026 (Supabase + quota real + button merah DONE ✅, next slice auth)
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Revisi lime touch Q2c M3c R3b F1b S2c DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/revamp-options-v6.html` — Q2c+M3c segmen blok LIME + question putih + label lime (input: SETUJU 100%) + R3b pill BEST lime + badge foto lime + F1b klaim solid → tiket dashed (off ink-lime) + S2c cariin solid → kartu asisten strip lime. Aturan: lime=kemajuan/nilai <10%, ember/rose tetap aksi — next: nunggu "gas Q2c+M3c+R3b+F1b+S2c"
 - [x] Revisi pick Q2 M3 R3 F1 S2 DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/revamp-options-v5.html` — Q2b+M3b segmen blok di ink header (5/4 blok, on ember/rose) + S2b infinity 10/page (skeleton + sticky count + spec API limit/offset backward-compat) + R3/F1 lock 3 lapis (hero+minis+full list 5). Jawab question: result = item list isi 5 (recommendations[5]) — next: nunggu "gas Q2b+M3b+R3+F1+S2b"
 - [x] Board 20 opsi Revamp Pages Non-Index DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/revamp-options-v4.html` — audit existing 6 page vs rule V2 (vonis: semua langgar token lama) → 20 opsi komparasi apple-to-apple: Quiz Tempat 4 (Q1-Q4) + Quiz Makan 4 (M1-M4) + Result Tempat 4 (R1-R4) + Result Makan 4 (F1-F4) + Mall 2+2 (D1-D2+S1-S2), semua ikut V2 Ember P1 (paper/ink/lime/ember/rose, kartu 24px, tombol 56px, strip 5px, hero netral, cyan mati), filter 5 keluarga + shortlist `wikendo-pages20-pick`, Top sistem Q1+M1+R1+F1+D1+S1 — nunggu "Gua suka Xx" / "gas sistem"
 - [x] Board I17 border sweep + palet diperluas APPROVED V2 ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/i17-border-sweep.html` — Agesta VERBATIM "Gua suka dan approve v2 ember p1" — lock strip hero = Ember `#EA580C` (token P1) + palet skala 60-30-10 — next: tunggu "gas" eksplisit buat eksekusi ke `app/`
@@ -65,6 +66,13 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-08 — Revisi lime touch Q2c M3c R3b F1b S2c DONE ✅ (design-only)
+- **Kenapa:** Agesta VERBATIM "Gua butuh sentuhin warna lime di tiap halamannya. Q2b dan M3b: segmen blok diubah warna jadi lime (gua minta input dari lu?) dan question text diubah jadi warna cenderung putih (gua minta input dari lu?). R3: butuh sentuhan lime. F1: butuh lime + card klaim voucher terlalu solid dan bold. S2b: butuh lime + card Cariin terlalu solid dan bold".
+- **Input gue (tegas):** segmen → LIME SETUJU 100% (kontras ink menang, peran bersih lime=kemajuan vs ember/rose=aksi, split dijaga via selected+CTA) + question → PUTIH `#fff` SETUJU (label kecil lime, question besar putih, AAA, anti-capek) + R3 lime di nilai (pill BEST + badge foto + rating, strip/CTA tetap ember/ink) + F1 solid → tiket dashed putih (off ink-lime, benefit −20% gede, pill Klaim kecil, urgensi microcopy) + S2c solid → kartu asisten putih strip lime (pull bukan push, avatar ink-lime).
+- **Dikerjain:** `design/revamp-options-v6.html` 5 kartu Q2c/M3c/R3b/F1b/S2c + head-to-head v5→v6 + spec eksekusi TDD. Verifikasi node COUNT=5 + SHORTLIST + LIME_SEG + TICKET + ASST ✅.
+- **Files:** `design/revamp-options-v6.html` (baru), `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** nunggu "gas Q2c+M3c+R3b+F1b+S2c" → eksekusi ke `app/pages/*.vue` via TDD.
 
 ## 2026-10-08 — Revisi pick Q2 M3 R3 F1 S2 DONE ✅ (segmen blok + infinity, design-only)
 - **Kenapa:** Agesta VERBATIM "Gua suka Q2, M3, R3, F1, S2. Untuk Q2 dan M3 tolong implemen segmen blok. Untuk S2 tolong dibuatkan infinity scroll (pagination feature). Question: untuk result tempat dan result makanan, dia bentuknya item list bukan sih, ketika itemnya lebih dari satu?"
