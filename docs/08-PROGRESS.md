@@ -56,6 +56,12 @@
 
 ## 🧾 LOG (newest first)
 
+## 2026-10-08 — Fix full-version corrupt: SVG di-inline (self-contained)
+- **Kenapa:** Agesta VERBATIM "Gambarnya kok corrupt di file html nya" — akar: 16 `<img src="assets/...">` path relatif putus saat HTML dikirim single-file via Telegram (folder `assets/` tidak ikut). SVG master sehat (489–826 bytes), yang rusak link-nya.
+- **Dikerjain:** `design/logo-d16-full-version.html` — 16 `<img>` → inline `<svg>` (style bawaan ikut pindah), CSS `.hero`/`.bar` samakan `img,svg`. Verifikasi: `src="assets` = 0, `<img` = 0, inline `<svg` = 16, size 12KB→19.7KB ✅. File master `design/assets/*.svg` tetap ada (dipakai pas "gas pasang D16").
+- **Files:** `design/logo-d16-full-version.html` (fix), `docs/08-PROGRESS.md` (LOG ini).
+- **Next:** Agesta buka ulang file di bawah — harusnya semua gambar tampil ✅. Lalu balas "gas pasang D16".
+
 ## 2026-10-08 — D16 P4 full version (✅ DONE, nunggu "gas pasang D16")
 - **Kenapa:** Agesta VERBATIM "Gua suka p4. Coba bikin full version" — P4 dikunci (dadu 60, W 30, tile ink, rotasi -8°).
 - **Dikerjain:** `design/assets/` 5 SVG master (d16-day tile ink app-icon, d16-night takeout transparan, d16-mono 1-warna struk, d16-lockup vertikal icon+wordmark bawah, d16-lockup-horizontal icon+wordmark kanan) + `design/logo-d16-full-version.html` brand sheet resmi 4 seksi: ① master asset + skala 64/32/16 favicon, ② token warna (ink/cream/tempat/makan) + font ExtraBold + titik oranye sakral, ③ mock header light/dark + struk voucher, ④ brand police (jangan stretch/ganti warna/Day-di-gelap/Night-jadi-icon). Wordmark lockup penuhi 2 pilihan Agesta (icon saja + icon+wordmark).

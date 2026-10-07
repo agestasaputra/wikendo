@@ -11,7 +11,7 @@
 *{box-sizing:border-box}body{margin:0;background:var(--base);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,sans-serif}
 .wrap{max-width:1120px;margin:0 auto;padding:24px 18px 90px}
 .hero{border:2px solid var(--ink);border-radius:22px;background:#fff;padding:24px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
-.hero img{width:112px;height:112px;border-radius:28px;box-shadow:0 10px 26px rgba(0,0,0,.25)}
+.hero img,.hero svg{width:112px;height:112px;border-radius:28px;box-shadow:0 10px 26px rgba(0,0,0,.25)}
 .hero h1{margin:0;font-size:24px;letter-spacing:-.4px}.hero h1 i{font-style:normal;color:var(--tempat)}
 .hero p{color:var(--mut);font-size:13.5px;line-height:1.7;max-width:640px;margin:8px 0 0}
 .badge{display:inline-block;font-size:11px;font-weight:800;background:#f0fdf4;border:1.5px solid #bbf7d0;color:#15803d;border-radius:999px;padding:4px 12px;margin-top:10px}
@@ -34,7 +34,7 @@
 .sw .c{height:64px}.sw .t{padding:8px 10px;font-size:11.5px;line-height:1.5;background:#fff}
 .mock{border-radius:14px;overflow:hidden;border:1px solid var(--line)}
 .mock .bar{display:flex;align-items:center;gap:10px;padding:10px 14px}
-.mock .bar img{width:32px;height:32px;border-radius:8px}
+.mock .bar img,.mock .bar svg{width:32px;height:32px;border-radius:8px}
 .mock .bar b{font-size:14px}.mock .bar b i{font-style:normal;color:var(--tempat)}
 .mock .bar.light{background:#fff;color:var(--ink)}
 .mock .bar.darkm{background:#111113;color:#fff}
@@ -57,7 +57,16 @@ a.btn{display:inline-block;margin-top:12px;background:#fff;color:var(--ink);font
 <div class="wrap">
 
 <div class="hero">
-<img src="assets/d16-day.svg" alt="D16 P4 Day master">
+<svg style="display:block;height:auto;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  
+  <rect width="96" height="96" rx="22" fill="#18181b"/>
+  <g transform="rotate(-8 48 48)">
+    <rect x="18" y="18" width="60" height="60" rx="16" fill="#fffdf9"/>
+    <text x="48" y="61" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="30" font-weight="800" fill="#18181b">W</text>
+    <circle cx="28" cy="28" r="4" fill="#f97316"/>
+    <circle cx="68" cy="68" r="4" fill="#ee2c4b"/>
+  </g>
+</svg>
 <div>
 <h1>D16 P4 — full version <i>wikendo.</i></h1>
 <p><b>Master terkunci:</b> dadu 60px · W 30 · tile ink #18181b · dadu cream #fffdf9 · titik tempat #f97316 + makan #ee2c4b · rotasi dadu -8°. File master: <b>design/assets/</b> (5 SVG). Sheet ini = aturan resmi pemakaian.</p>
@@ -71,20 +80,96 @@ a.btn{display:inline-block;margin-top:12px;background:#fff;color:var(--ink);font
 <p>Semua turunan wajib dari 5 file ini. Jangan redraw manual — dadu (W + 2 titik + rotasi -8°) tidak boleh diubah di versi apa pun.</p>
 <div class="grid">
 <div class="card"><h3><span>DAY</span>Icon utama</h3><p class="use">App icon HP · header light · splash light · favicon · Play Store listing.</p>
-<div class="stage light"><img src="assets/d16-day.svg" style="width:96px;height:96px;border-radius:24px;box-shadow:0 8px 22px rgba(0,0,0,.25)" alt="day"><span class="file">assets/d16-day.svg</span></div></div>
+<div class="stage light"><svg style="display:block;height:auto;width:96px;height:96px;border-radius:24px;box-shadow:0 8px 22px rgba(0,0,0,.25)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  
+  <rect width="96" height="96" rx="22" fill="#18181b"/>
+  <g transform="rotate(-8 48 48)">
+    <rect x="18" y="18" width="60" height="60" rx="16" fill="#fffdf9"/>
+    <text x="48" y="61" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="30" font-weight="800" fill="#18181b">W</text>
+    <circle cx="28" cy="28" r="4" fill="#f97316"/>
+    <circle cx="68" cy="68" r="4" fill="#ee2c4b"/>
+  </g>
+</svg><span class="file">assets/d16-day.svg</span></div></div>
 <div class="card"><h3><span>NIGHT</span>Takeout transparan</h3><p class="use">Web dark-mode · header dark · splash dark. JANGAN jadi app icon (iOS nolak transparan).</p>
-<div class="stage dark"><img src="assets/d16-night.svg" style="width:84px;height:84px;filter:drop-shadow(0 4px 14px rgba(0,0,0,.4))" alt="night"><span class="file">assets/d16-night.svg</span></div></div>
+<div class="stage dark"><svg style="display:block;height:auto;width:84px;height:84px;filter:drop-shadow(0 4px 14px rgba(0,0,0,.4))" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  
+  <g transform="rotate(-8 48 48)">
+    <rect x="18" y="18" width="60" height="60" rx="16" fill="#fffdf9"/>
+    <text x="48" y="61" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="30" font-weight="800" fill="#18181b">W</text>
+    <circle cx="28" cy="28" r="4" fill="#f97316"/>
+    <circle cx="68" cy="68" r="4" fill="#ee2c4b"/>
+  </g>
+</svg><span class="file">assets/d16-night.svg</span></div></div>
 <div class="card"><h3><span>MONO</span>1-warna</h3><p class="use">Struk voucher WIK-XXXXX · fotokopi · stempel tenant · fax. Putih = knockout warna kertas.</p>
-<div class="stage paper"><img src="assets/d16-mono.svg" style="width:96px;height:96px" alt="mono"><span class="file">assets/d16-mono.svg</span></div></div>
+<div class="stage paper"><svg style="display:block;height:auto;width:96px;height:96px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  
+  <g transform="rotate(-8 48 48)">
+    <rect x="18" y="18" width="60" height="60" rx="16" fill="#18181b"/>
+    <text x="48" y="61" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="30" font-weight="800" fill="#ffffff">W</text>
+    <circle cx="28" cy="28" r="4" fill="#ffffff"/>
+    <circle cx="68" cy="68" r="4" fill="#ffffff"/>
+  </g>
+</svg><span class="file">assets/d16-mono.svg</span></div></div>
 <div class="card"><h3><span>V-LOCK</span>Vertikal</h3><p class="use">Icon + wordmark di bawah. Splash screen · kaos tenant · header opsional. (2 pilihan lu ✅)</p>
-<div class="stage light"><img src="assets/d16-lockup.svg" style="width:110px" alt="lockup vertikal"><span class="file">assets/d16-lockup.svg</span></div></div>
+<div class="stage light"><svg style="display:block;height:auto;width:110px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 156">
+  
+  <g transform="translate(12,0)">
+    <rect width="96" height="96" rx="22" fill="#18181b"/>
+    <g transform="rotate(-8 48 48)">
+      <rect x="18" y="18" width="60" height="60" rx="16" fill="#fffdf9"/>
+      <text x="48" y="61" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="30" font-weight="800" fill="#18181b">W</text>
+      <circle cx="28" cy="28" r="4" fill="#f97316"/>
+      <circle cx="68" cy="68" r="4" fill="#ee2c4b"/>
+    </g>
+  </g>
+  <text x="60" y="134" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="25" font-weight="800" fill="#18181b">wikendo<tspan fill="#f97316">.</tspan></text>
+</svg><span class="file">assets/d16-lockup.svg</span></div></div>
 <div class="card"><h3><span>H-LOCK</span>Horizontal</h3><p class="use">Icon kiri + wordmark kanan. Header web / navbar app — paling sering dipakai.</p>
-<div class="stage light"><img src="assets/d16-lockup-horizontal.svg" style="width:190px" alt="lockup horizontal"><span class="file">assets/d16-lockup-horizontal.svg</span></div></div>
+<div class="stage light"><svg style="display:block;height:auto;width:190px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216 96">
+  
+  <g>
+    <rect width="96" height="96" rx="22" fill="#18181b"/>
+    <g transform="rotate(-8 48 48)">
+      <rect x="18" y="18" width="60" height="60" rx="16" fill="#fffdf9"/>
+      <text x="48" y="61" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="30" font-weight="800" fill="#18181b">W</text>
+      <circle cx="28" cy="28" r="4" fill="#f97316"/>
+      <circle cx="68" cy="68" r="4" fill="#ee2c4b"/>
+    </g>
+  </g>
+  <text x="108" y="60" font-family="'Plus Jakarta Sans',sans-serif" font-size="26" font-weight="800" fill="#18181b">wikendo<tspan fill="#f97316">.</tspan></text>
+</svg><span class="file">assets/d16-lockup-horizontal.svg</span></div></div>
 <div class="card"><h3><span>SIZE</span>Skala baca</h3><p class="use">96px app icon → 16px favicon. W + titik tetap kebaca sampai 16px.</p>
 <div class="stage light"><div class="sizes">
-<div><img src="assets/d16-day.svg" style="width:64px;height:64px;border-radius:16px" alt="64"><small>64</small></div>
-<div><img src="assets/d16-day.svg" style="width:32px;height:32px;border-radius:8px" alt="32"><small>32</small></div>
-<div><img src="assets/d16-day.svg" style="width:16px;height:16px;border-radius:4px" alt="16"><small>16 favicon</small></div>
+<div><svg style="display:block;height:auto;width:64px;height:64px;border-radius:16px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  
+  <rect width="96" height="96" rx="22" fill="#18181b"/>
+  <g transform="rotate(-8 48 48)">
+    <rect x="18" y="18" width="60" height="60" rx="16" fill="#fffdf9"/>
+    <text x="48" y="61" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="30" font-weight="800" fill="#18181b">W</text>
+    <circle cx="28" cy="28" r="4" fill="#f97316"/>
+    <circle cx="68" cy="68" r="4" fill="#ee2c4b"/>
+  </g>
+</svg><small>64</small></div>
+<div><svg style="display:block;height:auto;width:32px;height:32px;border-radius:8px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  
+  <rect width="96" height="96" rx="22" fill="#18181b"/>
+  <g transform="rotate(-8 48 48)">
+    <rect x="18" y="18" width="60" height="60" rx="16" fill="#fffdf9"/>
+    <text x="48" y="61" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="30" font-weight="800" fill="#18181b">W</text>
+    <circle cx="28" cy="28" r="4" fill="#f97316"/>
+    <circle cx="68" cy="68" r="4" fill="#ee2c4b"/>
+  </g>
+</svg><small>32</small></div>
+<div><svg style="display:block;height:auto;width:16px;height:16px;border-radius:4px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  
+  <rect width="96" height="96" rx="22" fill="#18181b"/>
+  <g transform="rotate(-8 48 48)">
+    <rect x="18" y="18" width="60" height="60" rx="16" fill="#fffdf9"/>
+    <text x="48" y="61" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="30" font-weight="800" fill="#18181b">W</text>
+    <circle cx="28" cy="28" r="4" fill="#f97316"/>
+    <circle cx="68" cy="68" r="4" fill="#ee2c4b"/>
+  </g>
+</svg><small>16 favicon</small></div>
 </div></div></div>
 </div>
 </div>
@@ -107,9 +192,34 @@ a.btn{display:inline-block;margin-top:12px;background:#fff;color:var(--ink);font
 <h2>3 · Dipasang di mana (mock)</h2>
 <p>Preview 1:1 sebelum masuk <code>app/</code> — header pakai H-LOCK, splash pakai V-LOCK, struk pakai MONO.</p>
 <div class="grid">
-<div class="card"><h3><span>WEB-L</span>Header light</h3><div class="mock"><div class="bar light"><img src="assets/d16-day.svg" alt="h"><b>wikendo<i>.</i></b><span style="margin-left:auto;font-size:11px;color:#6b7280">Tempat · Makan · Mall</span></div><div class="body" style="background:#fffdf9">QUOTA HARI INI — 1 tempat · 2 makan free…</div></div></div>
-<div class="card"><h3><span>WEB-D</span>Header dark</h3><div class="mock"><div class="bar darkm"><img src="assets/d16-night.svg" alt="h"><b>wikendo<i>.</i></b><span style="margin-left:auto;font-size:11px;color:#a1a1aa">Tempat · Makan · Mall</span></div><div class="body" style="background:#111113;color:#e4e4e7">QUOTA HARI INI — 1 tempat · 2 makan free…</div></div></div>
-<div class="card"><h3><span>STRUK</span>Voucher kasir</h3><div class="mock"><div class="body" style="background:#fff;font-family:monospace;text-align:center">*** WIKENDO ***<br><img src="assets/d16-mono.svg" style="width:56px;height:56px;margin:6px auto" alt="mono"><br>WIK-XXXXX<br>Tunjukin ke kasir<br>*** TERIMA KASIH ***</div></div></div>
+<div class="card"><h3><span>WEB-L</span>Header light</h3><div class="mock"><div class="bar light"><svg style="display:block;height:auto;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  
+  <rect width="96" height="96" rx="22" fill="#18181b"/>
+  <g transform="rotate(-8 48 48)">
+    <rect x="18" y="18" width="60" height="60" rx="16" fill="#fffdf9"/>
+    <text x="48" y="61" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="30" font-weight="800" fill="#18181b">W</text>
+    <circle cx="28" cy="28" r="4" fill="#f97316"/>
+    <circle cx="68" cy="68" r="4" fill="#ee2c4b"/>
+  </g>
+</svg><b>wikendo<i>.</i></b><span style="margin-left:auto;font-size:11px;color:#6b7280">Tempat · Makan · Mall</span></div><div class="body" style="background:#fffdf9">QUOTA HARI INI — 1 tempat · 2 makan free…</div></div></div>
+<div class="card"><h3><span>WEB-D</span>Header dark</h3><div class="mock"><div class="bar darkm"><svg style="display:block;height:auto;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  
+  <g transform="rotate(-8 48 48)">
+    <rect x="18" y="18" width="60" height="60" rx="16" fill="#fffdf9"/>
+    <text x="48" y="61" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="30" font-weight="800" fill="#18181b">W</text>
+    <circle cx="28" cy="28" r="4" fill="#f97316"/>
+    <circle cx="68" cy="68" r="4" fill="#ee2c4b"/>
+  </g>
+</svg><b>wikendo<i>.</i></b><span style="margin-left:auto;font-size:11px;color:#a1a1aa">Tempat · Makan · Mall</span></div><div class="body" style="background:#111113;color:#e4e4e7">QUOTA HARI INI — 1 tempat · 2 makan free…</div></div></div>
+<div class="card"><h3><span>STRUK</span>Voucher kasir</h3><div class="mock"><div class="body" style="background:#fff;font-family:monospace;text-align:center">*** WIKENDO ***<br><svg style="display:block;height:auto;width:56px;height:56px;margin:6px auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  
+  <g transform="rotate(-8 48 48)">
+    <rect x="18" y="18" width="60" height="60" rx="16" fill="#18181b"/>
+    <text x="48" y="61" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="30" font-weight="800" fill="#ffffff">W</text>
+    <circle cx="28" cy="28" r="4" fill="#ffffff"/>
+    <circle cx="68" cy="68" r="4" fill="#ffffff"/>
+  </g>
+</svg><br>WIK-XXXXX<br>Tunjukin ke kasir<br>*** TERIMA KASIH ***</div></div></div>
 </div>
 </div>
 
@@ -117,10 +227,45 @@ a.btn{display:inline-block;margin-top:12px;background:#fff;color:var(--ink);font
 <div class="sec">
 <h2>4 · Jangan (brand police 🚔)</h2>
 <div class="donts">
-<div class="dont"><img src="assets/d16-day.svg" style="width:64px;height:64px;border-radius:16px;transform:scaleX(1.35)" alt=""><b>Jangan stretch / gepeng</b><br>Selalu lock aspect ratio</div>
-<div class="dont"><img src="assets/d16-day.svg" style="width:64px;height:64px;border-radius:16px;filter:hue-rotate(120deg)" alt=""><b>Jangan ganti warna</b><br>Ink/cream/oranye/merah only</div>
-<div class="dont"><div style="background:#000;border-radius:16px;padding:8px"><img src="assets/d16-day.svg" style="width:48px;height:48px;border-radius:12px" alt=""></div><b>Jangan Day di atas gelap</b><br>Gelap = Night takeout</div>
-<div class="dont"><div style="background:#fff;border:1px solid var(--line);border-radius:16px;padding:8px"><img src="assets/d16-night.svg" style="width:48px;height:48px" alt=""></div><b>Jangan Night jadi app icon</b><br>Launcher wajib opaque (Day)</div>
+<div class="dont"><svg style="display:block;height:auto;width:64px;height:64px;border-radius:16px;transform:scaleX(1.35)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  
+  <rect width="96" height="96" rx="22" fill="#18181b"/>
+  <g transform="rotate(-8 48 48)">
+    <rect x="18" y="18" width="60" height="60" rx="16" fill="#fffdf9"/>
+    <text x="48" y="61" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="30" font-weight="800" fill="#18181b">W</text>
+    <circle cx="28" cy="28" r="4" fill="#f97316"/>
+    <circle cx="68" cy="68" r="4" fill="#ee2c4b"/>
+  </g>
+</svg><b>Jangan stretch / gepeng</b><br>Selalu lock aspect ratio</div>
+<div class="dont"><svg style="display:block;height:auto;width:64px;height:64px;border-radius:16px;filter:hue-rotate(120deg)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  
+  <rect width="96" height="96" rx="22" fill="#18181b"/>
+  <g transform="rotate(-8 48 48)">
+    <rect x="18" y="18" width="60" height="60" rx="16" fill="#fffdf9"/>
+    <text x="48" y="61" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="30" font-weight="800" fill="#18181b">W</text>
+    <circle cx="28" cy="28" r="4" fill="#f97316"/>
+    <circle cx="68" cy="68" r="4" fill="#ee2c4b"/>
+  </g>
+</svg><b>Jangan ganti warna</b><br>Ink/cream/oranye/merah only</div>
+<div class="dont"><div style="background:#000;border-radius:16px;padding:8px"><svg style="display:block;height:auto;width:48px;height:48px;border-radius:12px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  
+  <rect width="96" height="96" rx="22" fill="#18181b"/>
+  <g transform="rotate(-8 48 48)">
+    <rect x="18" y="18" width="60" height="60" rx="16" fill="#fffdf9"/>
+    <text x="48" y="61" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="30" font-weight="800" fill="#18181b">W</text>
+    <circle cx="28" cy="28" r="4" fill="#f97316"/>
+    <circle cx="68" cy="68" r="4" fill="#ee2c4b"/>
+  </g>
+</svg></div><b>Jangan Day di atas gelap</b><br>Gelap = Night takeout</div>
+<div class="dont"><div style="background:#fff;border:1px solid var(--line);border-radius:16px;padding:8px"><svg style="display:block;height:auto;width:48px;height:48px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  
+  <g transform="rotate(-8 48 48)">
+    <rect x="18" y="18" width="60" height="60" rx="16" fill="#fffdf9"/>
+    <text x="48" y="61" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="30" font-weight="800" fill="#18181b">W</text>
+    <circle cx="28" cy="28" r="4" fill="#f97316"/>
+    <circle cx="68" cy="68" r="4" fill="#ee2c4b"/>
+  </g>
+</svg></div><b>Jangan Night jadi app icon</b><br>Launcher wajib opaque (Day)</div>
 </div>
 </div>
 
