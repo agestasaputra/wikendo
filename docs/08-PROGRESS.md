@@ -19,7 +19,7 @@
 - [x] UI kombo slice-1→4 (DONE ✅ 7 Okt): Home wallet + quiz swipe + result deck/voucher + direktori SEO (`e12be1b` live, prod 200 `QUOTA HARI INI` ✅)
 - [x] Logo board v1 30 opsi (DONE ✅ 7 Okt malam): `design/logo-wikendo-30.html` — campur wordmark, KURANG cocok (Agesta: prefer icon-first app icon)
 - [ ] Logo board v2 icon-first 30 opsi (DONE ✅ 7 Okt malam): `design/logo-wikendo-icon-30.html` — SEMUA icon-first app-icon ready + varian logo saja / logo+wordmark bawah
-- [x] Finalis Top 4 Agesta (DONE ✅ 8 Okt): A2 W Gradient + A3 W Ink + D16 Dadu W + D18 Deck Swipe — issue dark mode tile hitam (A3, D16) → fix di `design/logo-finalis-top4-darkmode.html` (A3-cream + D16-orange, tes terang/gelap/OLED), nunggu kunci master A2 vs D16-orange
+- [x] D16 dual Day/Night (DONE ✅ 8 Okt): Agesta kunci D16 asli + usul takeout outer hitam di dark → dijawab YA wajib 2 versi (logo system) di `design/logo-d16-dual-mode.html` — Day tile ink (app icon) + Night dadu-takeout transparan (web dark `prefers-color-scheme`), tes kontras OLED 1.1:1 vs 15:1, nunggu "gas pasang D16" (export SVG/PNG + header & favicon, butuh approval karena nyentuh `app/`)
 - [ ] NEXT: finalin lockup resmi (master mark + wordmark) + pasang ke header web & favicon + stamp voucher 1-warna
 - [ ] NEXT: wire quota real `GET /api/quota` → wallet 2-state + `POST /api/voucher/claim` klaim beneran
 - [x] Patch 5 docs downstream Addendum v1.3 (ADR v2.2 ✅ + Schema v1.1 ✅ + API v1.1 ✅ + Journey v2.1 ✅ + Checklist v1.2 ✅) — `app/` NOL diubah ✅ 5/5 GENAP
@@ -56,7 +56,14 @@
 
 ## 🧾 LOG (newest first)
 
-## 2026-10-08 dinihari — Finalis Top 4 + fix dark mode (✅ DONE, nunggu kunci master)
+## 2026-10-08 — D16 dual Day/Night (✅ DONE, nunggu "gas pasang D16")
+- **Kenapa:** Agesta VERBATIM "Gua suka d16 (asli). Tapi jika background nya gelap, sepertinya outer warna hitamnya lebih baik ditakeout ya? Jadi ada 2 versi logo? Gimana menurut lu" — dijawab sebagai expert: YA wajib 2 versi = logo system (Day/Night/Mono), standar semua app besar. Bukan ganti logo, dadu IDENTIK, cuma wadah adaptif.
+- **Dikerjain:** `design/logo-d16-dual-mode.html` — VERSI 1 D16-Day tile ink #18181b (asli, app icon utama + light) vs VERSI 2 D16-Night dadu-takeout transparan (web dark via `prefers-color-scheme`, header dark, splash dark). Bukti fisika kontras: Day di OLED 1.1:1 (buta) vs Night takeout 15:1 (tajam). Aturan dikunci: dadu tak tersentuh, app icon selalu opaque Day, favicon = Day, struk = mono.
+- **Verifikasi:** file 10KB exists ✅, `app/` NOL diubah ✅ (design-only, pasang header/favicon nunggu approval karena nyentuh `app/`).
+- **Files:** `design/logo-d16-dual-mode.html` (baru), `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** Agesta balas "gas pasang D16" → export d16-day.svg/png1024 + d16-night.svg + d16-mono.svg + d16-lockup.svg + pasang header web & favicon.
+
+## 2026-10-08 dinihari — Finalis Top 4 + fix dark mode (✅ DONE, master dikunci D16)
 - **Kenapa:** Agesta shortlist A2 + A3 + D16 + D18 (verbatim) + flag issue "warna logonya hitam punya issue ketika dark mode". Valid: tile #18181b full nyatu sama wallpaper gelap/OLED, edge hilang.
 - **Dikerjain:** `design/logo-finalis-top4-darkmode.html` (self-contained) — tiap finalis dites 3 wallpaper (terang/gelap/OLED): A2 aman tanpa fix ✅, A3 tile hitam → fix A3-cream (tile #fffdf9 + ring ink + W ink, premium pindah ke huruf), D16 tile hitam → fix D16-orange (tile #f97316 + dadu cream outline ink, hitam jadi isi bukan wadah), D18 aman (hitam cuma isi kartu, + stroke cream 3px buat 16px). Prinsip dikunci: tile jangan hitam pekat, hitam = isi bukan wadah, tiap master wajib lolos terang+gelap+OLED + 16px + 1-warna. Rekomendasi: #1 A2 master (tanpa fix, store-ready) + #2 D16-orange runner-up (berkarakter, Gen-Z).
 - **Verifikasi:** file exists 15KB ✅, `app/` NOL diubah ✅ (design-only).

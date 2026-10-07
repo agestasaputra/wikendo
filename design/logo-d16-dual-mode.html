@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wikendo D16 — Dual Version (Day + Night Takeout)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--base:#fffdf9;--tempat:#f97316;--makan:#ee2c4b;--ink:#18181b;--mut:#6b7280;--line:#e5e7eb}
+*{box-sizing:border-box}body{margin:0;background:var(--base);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
+.hero{border:2px solid var(--ink);border-radius:22px;background:#fff;padding:24px}
+.hero h1{margin:0;font-size:24px;letter-spacing:-.4px}.hero h1 i{font-style:normal;color:var(--tempat)}
+.hero p{color:var(--mut);font-size:13.5px;line-height:1.7;max-width:840px}
+.hero p b{color:var(--ink)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+@media(max-width:860px){.grid{grid-template-columns:1fr}}
+.card{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:18px}
+.card h2{margin:0;font-size:17px}.card h2 span{font-size:11px;background:var(--ink);color:#fff;border-radius:8px;padding:2px 8px;margin-right:8px;vertical-align:middle}
+.card .why{font-size:12.5px;color:var(--mut);line-height:1.65;margin:6px 0 12px}
+.show{border-radius:14px;padding:18px;display:flex;flex-direction:column;align-items:center;gap:10px;border:1px solid var(--line)}
+.show.light{background:#fffdf9}.show.dark{background:#111113;color:#fff}.show.oled{background:#000;color:#fff}
+.appicon{width:96px;height:96px;border-radius:24px;overflow:hidden;box-shadow:0 8px 22px rgba(0,0,0,.25)}
+.appicon svg{width:100%;height:100%;display:block}
+.bare{width:96px;height:96px;display:flex;align-items:center;justify-content:center}
+.bare svg{width:88px;height:88px;display:block;filter:drop-shadow(0 4px 14px rgba(0,0,0,.35))}
+.lockup{display:flex;flex-direction:column;align-items:center;gap:2px}
+.lockup .wm{font-weight:800;font-size:14px}.show.dark .lockup .wm,.show.oled .lockup .wm{color:#fff}
+.lockup .wm i{font-style:normal;color:var(--tempat)}
+.tagrow{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.tag{font-size:11px;font-weight:800;border-radius:999px;padding:4px 10px;border:1.5px solid var(--line);background:#fff;color:#3f3f46}
+.tag.ok{background:#f0fdf4;border-color:#bbf7d0;color:#15803d}
+.tag.bad{background:#fef2f2;border-color:#fecaca;color:#b91c1c}
+.verdict{margin-top:12px;font-size:12.5px;line-height:1.65;border-radius:12px;padding:10px 12px}
+.v-ok{background:#f0fdf4;border:1px solid #bbf7d0}
+.v-bad{background:#fef2f2;border:1px solid #fecaca}
+.v-fix{background:#fff7ed;border:1px solid #fed7aa}
+.rule{background:var(--ink);color:#fff;border-radius:22px;padding:24px;margin-top:18px}
+.rule h2{margin:0 0 8px}.rule p,.rule li{font-size:13px;line-height:1.7;color:#d4d4d8}
+.rule b{color:#fff}
+table.spec{width:100%;border-collapse:collapse;margin-top:12px;font-size:12.5px}
+table.spec th,table.spec td{border:1px solid #3f3f46;padding:8px 10px;text-align:left;border-radius:4px}
+table.spec th{background:#27272a;color:#fff}
+.foot{margin-top:14px;font-size:12.5px;color:var(--mut);line-height:1.7}
+a.btn{display:inline-block;margin-top:12px;background:#fff;color:var(--ink);font-weight:800;font-size:13px;border-radius:12px;padding:10px 16px;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hero">
+<h1>D16 Dadu W <i>wikendo.</i> — dual version</h1>
+<p>Lu bener 100%: <b>outer hitam full di wallpaper gelap = mati</b> (edge tile nyatu sama background, apalagi OLED true-black). Jawaban expert-nya: <b>YA, wajib 2 versi</b>. Ini bukan "ganti logo", ini <b>logo system</b> — semua app besar (Gojek, Tokopedia, Grab) punya Day / Night / Mono. Dadu-nya tetap sama (brand equity kejaga), yang ganti cuma <b>wadahnya</b>.</p>
+</div>
+
+<div class="grid">
+<div class="card">
+<h2><span>VERSI 1</span>D16-Day — asli (tile ink)</h2>
+<p class="why">Logo yang lu suka, apa adanya. Tile hitam #18181b + dadu cream + titik oranye/merah. Dipakai di semua konteks TERANG + sebagai app icon utama.</p>
+<div class="show light">
+<div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#18181b"/><g transform="rotate(-8 48 48)"><rect x="22" y="22" width="52" height="52" rx="14" fill="#fffdf9"/><text x="48" y="60" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="28" font-weight="800" fill="#18181b">W</text><circle cx="31" cy="31" r="3.5" fill="#f97316"/><circle cx="65" cy="65" r="3.5" fill="#ee2c4b"/></g></svg></div>
+<div class="lockup"><div class="wm">wikendo<i>.</i></div></div>
+<div class="tagrow"><span class="tag ok">wallpaper terang ✅</span><span class="tag ok">app icon ✅</span><span class="tag ok">header light ✅</span><span class="tag bad">wallpaper gelap ✖</span></div>
+</div>
+<div class="verdict v-ok">✅ <b>Pakai di:</b> app icon utama, splash light, header web light, favicon, stamp voucher.</div>
+</div>
+
+<div class="card">
+<h2><span>VERSI 2</span>D16-Night — outer takeout</h2>
+<p class="why">Sesuai usulan lu: <b>outer hitam di-takeout</b>. Dadunya aja yang melayang (transparent, tanpa tile). Dadu cream pop di atas gelap karena kontrasnya tinggi.</p>
+<div class="show dark">
+<div class="bare"><svg viewBox="0 0 96 96"><g transform="rotate(-8 48 48)"><rect x="22" y="22" width="52" height="52" rx="14" fill="#fffdf9"/><text x="48" y="60" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="28" font-weight="800" fill="#18181b">W</text><circle cx="31" cy="31" r="4" fill="#f97316"/><circle cx="65" cy="65" r="4" fill="#ee2c4b"/></g></svg></div>
+<div class="lockup"><div class="wm">wikendo<i>.</i></div></div>
+<div class="tagrow"><span class="tag ok">wallpaper gelap ✅</span><span class="tag ok">dark header ✅</span><span class="tag ok">OLED ✅</span><span class="tag bad">jangan buat app icon ✖</span></div>
+</div>
+<div class="verdict v-fix">🔧 <b>Pakai di:</b> web dark-mode (<code>prefers-color-scheme</code>), header app dark, splash dark, stiker/kaos gelap. <b>Jangan</b> jadi app icon HP (iOS wajib opaque — transparan ditolak).</div>
+</div>
+
+<div class="card">
+<h2><span>TES</span>Head-to-head di 3 wallpaper</h2>
+<p class="why">Bukti kenapa 2 versi wajib — bukan selera, tapi fisika kontras.</p>
+<div class="show light" style="margin-bottom:10px"><b style="font-size:12px">☀️ TERANG — dua-duanya lolos</b><div style="display:flex;gap:16px"><div class="appicon" style="width:64px;height:64px"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#18181b"/><g transform="rotate(-8 48 48)"><rect x="22" y="22" width="52" height="52" rx="14" fill="#fffdf9"/><text x="48" y="60" text-anchor="middle" font-size="28" font-weight="800" fill="#18181b">W</text></g></svg></div><div class="bare" style="width:64px;height:64px;background:#fffdf9;border-radius:16px;border:1px solid #e5e7eb"><svg viewBox="0 0 96 96" style="width:56px;height:56px"><g transform="rotate(-8 48 48)"><rect x="22" y="22" width="52" height="52" rx="14" fill="#fffdf9" stroke="#18181b" stroke-width="4"/><text x="48" y="60" text-anchor="middle" font-size="28" font-weight="800" fill="#18181b">W</text></g></svg></div></div></div>
+<div class="show oled"><b style="font-size:12px">🌑 OLED — tile hitam HILANG, takeout MENANG</b><div style="display:flex;gap:16px;align-items:center"><div style="text-align:center"><div class="appicon" style="width:64px;height:64px;box-shadow:none;border-color:#333"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#18181b"/><g transform="rotate(-8 48 48)"><rect x="22" y="22" width="52" height="52" rx="14" fill="#fffdf9"/><text x="48" y="60" text-anchor="middle" font-size="28" font-weight="800" fill="#18181b">W</text></g></svg></div><small style="font-size:11px;color:#a1a1aa">edge nyatu ✖</small></div><div style="text-align:center"><div class="bare" style="width:64px;height:64px"><svg viewBox="0 0 96 96" style="width:56px;height:56px"><g transform="rotate(-8 48 48)"><rect x="22" y="22" width="52" height="52" rx="14" fill="#fffdf9"/><text x="48" y="60" text-anchor="middle" font-size="28" font-weight="800" fill="#18181b">W</text></g></svg></div><small style="font-size:11px;color:#a1a1aa">dadu pop ✅</small></div></div></div>
+<div class="verdict v-bad">✖ <b>D16-Day di OLED:</b> tile #18181b vs wallpaper #000 = kontras ~1.1:1 (buta). ✅ <b>D16-Night takeout:</b> dadu cream vs #000 = kontras ~15:1 (tajam).</div>
+</div>
+
+<div class="card">
+<h2><span>SYSTEM</span>Aturan pakai (kunci)</h2>
+<p class="why">Biar nggak "2 logo beda brand" — dadunya IDENTIK, cuma wadah yang adaptif.</p>
+<div class="verdict v-fix">1) Dadu (W + 2 titik) <b>tidak boleh diubah</b> di semua versi.<br>2) App icon HP <b>selalu opaque</b> → Day tile ink. Night-takeout <b>hanya</b> untuk web/UI transparan.<br>3) Web pakai <code>prefers-color-scheme</code>: light → Day, dark → Night otomatis.<br>4) Favicon: Day (16px lolos). Stamp struk: versi mono dadu saja.</div>
+<div class="verdict v-ok">✅ <b>Rekomendasi final gue:</b> kunci D16 sebagai master dengan sistem dual ini. A2/D18/A3 jadi cadangan (modul makan, onboarding, varian premium) — jangan dibuang, tapi jangan jadi master biar brand nggak pecah.</div>
+</div>
+</div>
+
+<div class="rule">
+<h2>📦 Paket asset D16 (yang gue siapin pas lu bilang "gas pasang")</h2>
+<table class="spec">
+<tr><th>File</th><th>Isi</th><th>Dipakai di</th></tr>
+<tr><td><code>d16-day.svg / .png 1024</code></td><td>Tile ink + dadu (asli)</td><td>App icon, splash light, header light, favicon, Play Store listing</td></tr>
+<tr><td><code>d16-night.svg</code></td><td>Dadu saja, transparent (takeout)</td><td>Web dark-mode, header dark, splash dark</td></tr>
+<tr><td><code>d16-mono.svg</code></td><td>Dadu 1-warna #18181b</td><td>Struk voucher WIK-XXXXX, fotokopi, stempel tenant</td></tr>
+<tr><td><code>d16-lockup.svg</code></td><td>Dadu + wordmark "wikendo." di bawah</td><td>Splash screen, kaos tenant, header web opsional</td></tr>
+</table>
+<p>👉 Balas <b>"gas pasang D16"</b> → gue export 4 file itu + pasang ke header web &amp; favicon (butuh approval lu karena nyentuh <code>app/</code>). File ini design-only, <b>app/ NOL diubah</b>.</p>
+<a class="btn" href="logo-wikendo-icon-30.html">← Board 30</a>
+<a class="btn" href="logo-finalis-top4-darkmode.html">← Finalis Top 4</a>
+</div>
+
+</div>
+</body>
+</html>
