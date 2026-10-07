@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wikendo — UI Polish Board v1 (Background · Guideline · Palette · Ikon)</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --base:#fffdf9; --ink:#18181b; --muted:#78716c; --line:#ece7dd;
+  --tempat:#f97316; --tempat-deep:#c2410c; --tempat-tint:#fff7ed;
+  --makan:#ee2c4b; --makan-deep:#881337; --makan-tint:#fff1f2;
+  --wallet:#0e7490; --wallet-deep:#164e63;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#f5f1e8;color:var(--ink);padding:24px 16px 120px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto}
+.hero{background:var(--ink);color:#fff;border-radius:24px;padding:28px 24px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.14) 1.3px,transparent 1.4px);background-size:22px 22px;pointer-events:none}
+.hero h1{font-size:24px;font-weight:800;position:relative;z-index:1}
+.hero h1 .dot{color:var(--tempat)}
+.hero p{position:relative;z-index:1;color:#d6d3d1;font-size:13.5px;margin-top:8px;max-width:760px}
+.badges{position:relative;z-index:1;display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.badge{font-size:11.5px;font-weight:800;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2)}
+.badge.ok{background:#0e7490;border-color:#0e7490}
+.sec{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px;margin-top:18px}
+.sec h2{font-size:18px;font-weight:800;margin-bottom:4px}
+.sec .sub{font-size:13px;color:var(--muted);margin-bottom:14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr}}
+.card{border:1.5px solid var(--line);border-radius:16px;padding:16px;background:#fff}
+.card.bad{border-color:#fecaca;background:#fef2f2}
+.card.good{border-color:#99f6e0;background:#ecfdf5}
+.card h3{font-size:14px;font-weight:800;margin-bottom:6px}
+.card p,.card li{font-size:12.5px;color:#44403c}
+.card ul{padding-left:18px;margin-top:6px}
+.tag{display:inline-block;font-size:10.5px;font-weight:800;padding:3px 10px;border-radius:999px;margin-bottom:8px}
+.tag.before{background:#18181b;color:#fff}
+.tag.after{background:#0e7490;color:#fff}
+.tag.rec{background:var(--tempat);color:#fff}
+.swatches{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.sw{flex:1;min-width:90px;border-radius:12px;padding:10px;color:#fff;font-size:11px;font-weight:800;border:1px solid rgba(0,0,0,.08)}
+.sw small{display:block;font-weight:400;opacity:.85}
+.sw.light{color:var(--ink)}
+/* phone frames */
+.phones{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:900px){.phones{grid-template-columns:1fr;max-width:400px;margin:0 auto}}
+.phone{border:3px solid #18181b;border-radius:32px;overflow:hidden;background:var(--base);min-height:560px;display:flex;flex-direction:column}
+.phone .notch{text-align:center;font-size:10px;font-weight:800;color:#a8a29e;padding:8px 0 2px}
+.screen{padding:0 14px 16px;flex:1;position:relative}
+.optA .screen{background-color:#fffdf9;background-image:radial-gradient(rgba(24,24,27,.055) 1.2px,transparent 1.3px);background-size:22px 22px}
+.optB-tempat .screen{background-color:#fffdf9;background-image:radial-gradient(rgba(249,115,22,.10) 1.4px,transparent 1.5px),radial-gradient(420px 200px at 50% -60px,rgba(249,115,22,.16),transparent 70%);background-size:22px 22px,cover}
+.optB-makan .screen{background-color:#fffdf9;background-image:radial-gradient(rgba(238,44,75,.10) 1.4px,transparent 1.5px),radial-gradient(420px 200px at 50% -60px,rgba(238,44,75,.15),transparent 70%);background-size:22px 22px,cover}
+.optC .screen{background:linear-gradient(180deg,#fff7ed 0%,#fffdf9 34%,#fff1f2 100%)}
+.optC .screen::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(24,24,27,.07) 1.3px,transparent 1.4px);background-size:20px 20px;pointer-events:none}
+.m-head{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;font-weight:800;padding:10px 0}
+.m-wallet{border-radius:18px;padding:14px;color:#fff;font-size:12px;font-weight:800}
+.m-cta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.m-cta a{border-radius:16px;padding:14px 8px;text-align:center;font-size:12px;font-weight:800;text-decoration:none;min-height:56px;display:block}
+.m-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0}
+.m-grid div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 2px;text-align:center;font-size:10px;font-weight:800;color:#57534e}
+.m-grid svg{display:block;margin:0 auto 4px}
+.m-q{font-size:16px;font-weight:800;margin:8px 0 2px}
+.m-opt{background:#fff;border:2px solid var(--line);border-radius:16px;padding:12px;font-size:12px;font-weight:700;display:flex;gap:8px;align-items:center;margin-top:8px}
+.m-opt.selT{border-color:var(--tempat);background:var(--tempat-tint)}
+.m-opt.selM{border-color:var(--makan);background:var(--makan-tint)}
+.m-bar{height:8px;background:#ece7dd;border-radius:99px;overflow:hidden;margin-top:8px}
+.m-bar i{display:block;height:100%;border-radius:99px}
+.m-hero{background:#fff;border-radius:20px;overflow:hidden;border:1px solid var(--line);margin-top:10px}
+.m-hero .img{height:110px;display:flex;align-items:center;justify-content:center}
+.m-hero .body{padding:12px 14px;font-size:12px}
+.pill{display:inline-block;font-size:10px;font-weight:800;padding:3px 10px;border-radius:99px;margin:0 4px 6px 0}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:10px}
+th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+th{background:#faf7f0;font-size:11.5px}
+td.win{background:#ecfdf5;font-weight:700}
+.eff{font-size:11px;font-weight:800;padding:4px 12px;border-radius:99px;display:inline-block;margin:6px 6px 0 0}
+.eff.S{background:#dcfce7;color:#166534}.eff.M{background:#fef3c7;color:#92400e}.eff.L{background:#fee2e2;color:#991b1b}
+.risk{font-size:11px;font-weight:800;padding:4px 12px;border-radius:99px;display:inline-block;margin-top:6px;background:#f5f5f4;color:#57534e}
+.approve{position:fixed;bottom:0;left:0;right:0;background:rgba(24,24,27,.96);color:#fff;padding:14px 16px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;z-index:50;font-size:13px}
+.approve button{border:none;border-radius:12px;padding:12px 18px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit}
+.btnB{background:var(--tempat);color:#fff}.btnG{background:#fff;color:var(--ink)}.btnT{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+.ico{display:inline-flex;vertical-align:-3px}
+code{background:#f5f5f4;padding:1px 7px;border-radius:6px;font-size:11.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <h1>UI Polish Board v1 <span class="dot">.</span></h1>
+  <p>Keputusan visual untuk 4 feedback Agesta: background flat · brand guideline · palette review · ikon tak senada. Selaras identitas <b>Wikendo D16 P3 🔒</b> (dadu W · titik orange/merah · cream hangat). <b>Design-only — <code>app/</code> NOL diubah sampai lu approve.</b></p>
+  <div class="badges">
+    <span class="badge ok">✅ Addendum v1.3 LOCKED</span>
+    <span class="badge">🔒 Split: tempat ≠ makan</span>
+    <span class="badge">📱 Mobile-first 375px</span>
+    <span class="badge">⚡ Load &lt;2 dtk · CSS-only</span>
+  </div>
+</div>
+
+<!-- DIAGNOSA -->
+<div class="sec">
+  <h2>🔍 Diagnosa jujur (kondisi live, 6 pages + token)</h2>
+  <p class="sub">Audit file asli <code>app/pages/*.vue</code> + <code>tailwind.config.ts</code> — bukan opini, temuan baris kode.</p>
+  <div class="grid2">
+    <div class="card bad"><span class="tag before">SEKARANG</span><h3>1 · Background flat</h3><p>Base <code>#fffdf9</code> polos 100% di semua page. Satu-satunya gradient = wallet. Akibat bisnis: 3 detik pertama user ngerasa "wireframe belum di-skin", bukan "oh ini Wikendo".</p></div>
+    <div class="card bad"><span class="tag before">SEKARANG</span><h3>2 · Tanpa guideline</h3><p>Radius campur 14/20/24 · gray chaos (<code>#ececec</code> vs <code>#e4e4e7</code> vs <code>gray-100</code>) · CTA Tempat solid vs CTA Makan outline (tidak setara). Tiap slicing baru = selera baru.</p></div>
+    <div class="card bad"><span class="tag before">SEKARANG</span><h3>3 · Palette bocor</h3><p>Arah benar (cream + orange vs merah + teal + ink) tapi: progress makan gradient <code>#ee2c4b→#fb923c</code> ujungnya orange tempat ✖ · orange dipakai untuk teks di atas putih (kontras jebol) · semua vivid tanpa rasio.</p></div>
+    <div class="card bad"><span class="tag before">SEKARANG</span><h3>4 · Ikon emoji ~30 macam</h3><p>🗺️🍜🎡🎁❤️🕘💰📍… render beda iOS vs Android vs Windows, bobot tak konsisten, kesan "proyek hobi". Fatal pas voucher dibawa meeting mall (B2B butuh trust).</p></div>
+  </div>
+</div>
+
+<!-- PALETTE -->
+<div class="sec">
+  <h2>🎨 Palette review — arah bener, disiplin bocor</h2>
+  <p class="sub">Cream <code>#fffdf9</code> = pembeda vs kompetitor putih-biru dingin. Orange vs Merah = bahasa "dua dunia" yang dukung aturan split. Yang diperbaiki: disiplin pakai + rasio.</p>
+  <div class="grid2">
+    <div class="card"><span class="tag before">MASALAH</span><h3>3 bocor konkret</h3>
+      <ul><li>Progress makan <code>#ee2c4b→#fb923c</code> — mata disuruh bedain split tapi UI-nya nyampur orange tempat.</li><li>CTA Tempat solid / CTA Makan outline — makan kelihatan "versi lite".</li><li>Teks orange di atas putih — kontras jebol, yang baca user 40+.</li></ul>
+    </div>
+    <div class="card good"><span class="tag after">USULAN FINAL</span><h3>Rasio 60 · 25 · 10 · 5</h3>
+      <ul><li><b>60</b> cream base + texture · <b>25</b> SATU aksen per flow (orange ATAU merah, jangan sekartu).</li><li><b>10</b> ink (teks + tombol gelap) · <b>5</b> teal cuma quota–voucher–trust.</li><li>Teks selalu ink; orange/merah cuma tombol + aksen (teks putih di atasnya).</li><li>Progress makan → <code>#ee2c4b→#881337</code> (merah→maroon, tetap satu keluarga).</li></ul>
+    </div>
+  </div>
+  <h3 style="font-size:13px;margin:14px 0 4px">Token final (tetap dipakai semua opsi)</h3>
+  <div class="swatches">
+    <div class="sw light" style="background:#fffdf9">base<small>#fffdf9 · 60%</small></div>
+    <div class="sw" style="background:#f97316">tempat<small>#f97316 · 25%</small></div>
+    <div class="sw" style="background:#ee2c4b">makan<small>#ee2c4b · 25%</small></div>
+    <div class="sw" style="background:#18181b">ink<small>#18181b · 10%</small></div>
+    <div class="sw" style="background:#0e7490">wallet<small>#0e7490 · 5%</small></div>
+    <div class="sw light" style="background:#ede6d8">line hangat<small>#ede6d8 ganti gray dingin</small></div>
+  </div>
+</div>
+
+<!-- IKON -->
+<div class="sec">
+  <h2>✨ Ikon — dari ~30 emoji ke 1 set Lucide</h2>
+  <p class="sub">Lucide = stroke 2px konsisten, MIT, cocok Nuxt. Emoji disimpen max 1 di copywriting (warmth), <b>nol</b> di navigasi / CTA / ikon fitur.</p>
+  <table>
+    <tr><th>Fungsi</th><th>❌ Sekarang (emoji)</th><th>✅ Usulan Lucide</th></tr>
+    <tr><td>Tempat / Makan</td><td>🗺️ / 🍜</td><td class="win">map-pin / utensils-crossed</td></tr>
+    <tr><td>Voucher</td><td>🎟️</td><td class="win">ticket (badge kode WIK-XXXXX mono)</td></tr>
+    <tr><td>Wishlist / Riwayat / Notif / Search</td><td>❤️ / 🕘 / 🔔 / 🔍</td><td class="win">heart / history / bell / search</td></tr>
+    <tr><td>Halal / Kids / Navigasi / Share / Simpan</td><td>✅ / 👶 / 📍 / ⤴ / 💾</td><td class="win">badge-check / baby / navigation / share-2 / bookmark</td></tr>
+  </table>
+</div>
+
+<!-- GUIDELINE PREVIEW -->
+<div class="sec">
+  <h2>📐 Brand guideline — rulebook sekali tulis (<code>docs/18</code>)</h2>
+  <p class="sub">Isi yang dikunci biar slicing ke depan tinggal nurut, bukan selera baru tiap page.</p>
+  <div class="grid2">
+    <div class="card good"><span class="tag after">ISI 18</span><h3>8 bab, 1 sumber</h3><p>Logo Day/Night/Mono + clearspace · palette + rasio 60-25-10-5 · tipo Plus Jakarta Sans + skala · radius 20/14/full + tombol 56px · set Lucide 1:1 · voice "teman weekend" · brand police (jangan stretch / ganti warna / Day-di-gelap / campur orange-merah sekartu).</p></div>
+    <div class="card"><span class="tag before">KENAPA DULU?</span><h3>Fondasi termurah</h3><p>Guideline = dokumen, nol risiko visual, ngunci semua eksekusi <code>app/</code> berikutnya. Board ini buktinya: tiap opsi di bawah nurut token yang sama, beda cuma keberanian background.</p></div>
+  </div>
+</div>
+
+<!-- OPSI A -->
+<div class="sec">
+  <h2><span class="tag">OPSI A · Konservatif</span> Warm Minimal — texture samar, risiko nol</h2>
+  <p class="sub">Komposisi sama persis kayak live, cuma: pola titik dadu samar di base + gray dingin → line hangat + emoji → Lucide + palette fix. <span class="eff S">Effort S · ~4 jam</span><span class="risk">Risiko: rendah · aman buat B2B</span></p>
+  <div class="phones optA">
+    <div class="phone"><div class="notch">HOME · A</div><div class="screen">
+      <div class="m-head"><span>Halo, teman Wikendo</span><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#18181b" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span></div>
+      <div class="m-wallet" style="background:linear-gradient(140deg,#0e7490,#164e63)"><small style="font-size:10px;opacity:.85">QUOTA HARI INI · reset 00.00</small><b style="display:block;font-size:19px">2 tempat · 5 makan</b></div>
+      <div class="m-cta"><a style="background:#f97316;color:#fff">Cari Tempat<br><small>quiz 30 dtk</small></a><a style="background:#ee2c4b;color:#fff">Cari Makan<br><small>quiz 20 dtk</small></a></div>
+      <div class="m-grid"><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>Event</div><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><rect x="3" y="8" width="18" height="4"/><path d="M5 12v8h14v-8"/></svg>Promo</div><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#57534e" stroke-width="2"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A3.5 3.5 0 0 0 15.5 5c-1.8 0-3 1-3.5 2-.5-1-1.7-2-3.5-2A3.5 3.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/></svg>Wishlist</div><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#57534e" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Riwayat</div></div>
+      <p style="font-size:10.5px;color:var(--muted)">Pro: aman, cepat · Kontra: "signature"-nya tipis, user mungkin nggak ngeh bedanya</p>
+    </div></div>
+    <div class="phone"><div class="notch">QUIZ TEMPAT · A</div><div class="screen">
+      <div class="m-head"><span>‹ Quiz tempat</span><span style="color:var(--muted)">2/5 · 30 dtk</span></div>
+      <div class="m-bar"><i style="width:40%;background:linear-gradient(90deg,#f97316,#fb923c)"></i></div>
+      <div class="m-q">Weekend ini pengen yang gimana?</div>
+      <div class="m-opt selT"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg> Seru / Hype</div>
+      <div class="m-opt"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#57534e" stroke-width="2"><path d="M12 3v18M3 12h18"/></svg> Santai / Healing</div>
+      <div class="m-opt"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#57534e" stroke-width="2"><path d="M4 11h16v9H4zM9 11V7h6v4"/></svg> Kulineran</div>
+    </div></div>
+    <div class="phone"><div class="notch">RESULT MAKAN · A</div><div class="screen">
+      <div class="m-head"><span>Hasil · GI</span><span style="color:var(--muted)">4/5 tersisa</span></div>
+      <div class="m-hero" style="border:2px solid #ee2c4b"><div class="body"><span class="pill" style="background:#ee2c4b;color:#fff">★ BEST MATCH</span><span class="pill" style="background:#ecfdf5;color:#047857">halal</span><div style="font-weight:800">Sushi Go — GI L3A</div><button style="width:100%;background:#ee2c4b;color:#fff;border:none;border-radius:12px;padding:13px;font-weight:800;margin-top:8px;font-family:inherit">Klaim voucher → tunjukin ke kasir</button></div></div>
+    </div></div>
+  </div>
+</div>
+
+<!-- OPSI B -->
+<div class="sec" style="border:2.5px solid var(--tempat)">
+  <h2><span class="tag rec">OPSI B · REKOMENDASI ⭐</span> Signature Cream — glow ikut mode + D16 header</h2>
+  <p class="sub">Background = arena dadu: pola titik + radial glow yang <b>ikut flow</b> (orange di tempat, merah di makan). Header pakai D16 P3 lockup-horizontal. CTA setara solid. <span class="eff M">Effort M · ~8 jam</span><span class="risk">Risiko: rendah–sedang · CSS-only, load tetap &lt;2 dtk</span></p>
+  <div class="phones">
+    <div class="phone optB-tempat"><div class="notch">HOME · B</div><div class="screen">
+      <div class="m-head"><span style="display:flex;align-items:center;gap:6px"><svg width="26" height="26" viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#18181b"/><g transform="rotate(-8 48 48)"><rect x="20" y="20" width="56" height="56" rx="15" fill="#fffdf9"/><text x="48" y="60" text-anchor="middle" font-family="sans-serif" font-size="29" font-weight="800" fill="#18181b">W</text><circle cx="30" cy="30" r="3.5" fill="#f97316"/><circle cx="66" cy="66" r="3.5" fill="#ee2c4b"/></g></svg>wikendo<b style="color:#f97316">.</b></span><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#18181b" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span></div>
+      <div class="m-wallet" style="background:linear-gradient(140deg,#0e7490,#164e63)"><small style="font-size:10px;opacity:.85">QUOTA HARI INI · reset 00.00</small><b style="display:block;font-size:19px">2 tempat · 5 makan</b></div>
+      <div class="m-cta"><a style="background:#f97316;color:#fff;box-shadow:0 10px 20px -8px rgba(249,115,22,.6)">Cari Tempat<br><small>quiz 30 dtk</small></a><a style="background:#ee2c4b;color:#fff;box-shadow:0 10px 20px -8px rgba(238,44,75,.55)">Cari Makan<br><small>quiz 20 dtk</small></a></div>
+      <div class="m-grid"><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>Event</div><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><rect x="3" y="8" width="18" height="4"/><path d="M5 12v8h14v-8"/></svg>Promo</div><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#57534e" stroke-width="2"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A3.5 3.5 0 0 0 15.5 5c-1.8 0-3 1-3.5 2-.5-1-1.7-2-3.5-2A3.5 3.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/></svg>Wishlist</div><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#57534e" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Riwayat</div></div>
+      <p style="font-size:10.5px;color:var(--muted)">Glow orange = mode tempat · header D16 P3 · CTA setara</p>
+    </div></div>
+    <div class="phone optB-tempat"><div class="notch">QUIZ TEMPAT · B</div><div class="screen">
+      <div class="m-head"><span>‹ Quiz tempat</span><span style="color:var(--muted)">2/5 · 30 dtk</span></div>
+      <div class="m-bar"><i style="width:40%;background:linear-gradient(90deg,#f97316,#fb923c)"></i></div>
+      <div class="m-q">Weekend ini pengen yang gimana?</div>
+      <div class="m-opt selT"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg> Seru / Hype</div>
+      <div class="m-opt"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#57534e" stroke-width="2"><path d="M12 3v18M3 12h18"/></svg> Santai / Healing</div>
+      <p style="font-size:10.5px;color:var(--muted);margin-top:8px">Background ikut flow — user ngerasa "masih di dunia tempat"</p>
+    </div></div>
+    <div class="phone optB-makan"><div class="notch">RESULT MAKAN · B</div><div class="screen">
+      <div class="m-head"><span>Hasil · GI</span><span style="color:var(--muted)">4/5 tersisa</span></div>
+      <div class="m-hero" style="border:2px solid #ee2c4b"><div class="body"><span class="pill" style="background:#ee2c4b;color:#fff">★ BEST MATCH</span><span class="pill" style="background:#ecfdf5;color:#047857">halal</span><div style="font-weight:800">Sushi Go — GI L3A</div><button style="width:100%;background:#ee2c4b;color:#fff;border:none;border-radius:12px;padding:13px;font-weight:800;margin-top:8px;font-family:inherit">Klaim voucher → tunjukin ke kasir</button></div></div>
+      <p style="font-size:10.5px;color:var(--muted);margin-top:8px">Glow merah = mode makan · progress makan merah→maroon (bukan orange)</p>
+    </div></div>
+  </div>
+</div>
+
+<!-- OPSI C -->
+<div class="sec">
+  <h2><span class="tag">OPSI C · Divergen</span> Bold Mesh — gradient berani, kartu ekspresif</h2>
+  <p class="sub">Buat yang mau Wikendo kelihatan paling muda di antara Gojek/Traveloka. Gradient mesh cream→tint, kartu hero bergambar pola besar, wallet dark. <span class="eff L">Effort L · ~14 jam</span><span class="risk">Risiko: sedang · selera membelah, QA kontras ekstra</span></p>
+  <div class="phones optC">
+    <div class="phone"><div class="notch">HOME · C</div><div class="screen">
+      <div class="m-head"><span>Halo, teman Wikendo 👋</span><span>🔔</span></div>
+      <div class="m-wallet" style="background:linear-gradient(140deg,#18181b,#0e7490)"><small style="font-size:10px;opacity:.85">QUOTA HARI INI 🔥 · reset 00.00</small><b style="display:block;font-size:20px">2 tempat · 5 makan</b></div>
+      <div class="m-cta"><a style="background:linear-gradient(140deg,#f97316,#fb923c);color:#fff">🗺️ Cari Tempat</a><a style="background:linear-gradient(140deg,#ee2c4b,#881337);color:#fff">🍜 Cari Makan</a></div>
+      <p style="font-size:10.5px;color:var(--muted)">Pro: paling memorable · Kontra: emoji masih dipakai di mock ini = contoh yang JANGAN ditiru; gradient berat = QA lama</p>
+    </div></div>
+    <div class="phone"><div class="notch">QUIZ · C</div><div class="screen">
+      <div class="m-head"><span>‹ Quiz tempat</span><span style="color:var(--muted)">2/5</span></div>
+      <div class="m-bar"><i style="width:40%;background:linear-gradient(90deg,#f97316,#ee2c4b)"></i></div>
+      <div class="m-q">Weekend ini pengen yang gimana?</div>
+      <div class="m-opt selT">🎉 Seru / Hype</div>
+      <div class="m-opt">🧘 Santai / Healing</div>
+    </div></div>
+    <div class="phone"><div class="notch">RESULT · C</div><div class="screen">
+      <div class="m-head"><span>Hasil buatmu 🎉</span><span style="color:var(--muted)">1/2</span></div>
+      <div class="m-hero" style="border:none;box-shadow:0 16px 30px -12px rgba(249,115,22,.5)"><div class="img" style="background:linear-gradient(140deg,#ffedd5,#fdba74);font-size:48px">🏛️</div><div class="body"><div style="font-weight:800">Rooftop Senayan</div><button style="width:100%;background:#18181b;color:#fff;border:none;border-radius:12px;padding:13px;font-weight:800;margin-top:8px;font-family:inherit">📍 Navigasi →</button></div></div>
+    </div></div>
+  </div>
+</div>
+
+<!-- HEAD TO HEAD -->
+<div class="sec">
+  <h2>⚔️ Head-to-head vs North Star</h2>
+  <p class="sub">Completion &gt;70% · landing→quiz &gt;40% · CTR Maps &gt;50% · anon→register &gt;15% · load &lt;2 dtk · B2B trust.</p>
+  <table>
+    <tr><th>Kriteria</th><th>A · Konservatif</th><th>B · Signature ⭐</th><th>C · Bold</th></tr>
+    <tr><td>Completion quiz</td><td>Netral (komposisi sama)</td><td class="win">Naik — glow per flow = orientasi, user nggak "nyasar dunia"</td><td>Naik, tapi distraksi gradient bisa turunin fokus</td></tr>
+    <tr><td>CTR / conversion CTA</td><td>Naik dikit (CTA makan jadi solid setara)</td><td class="win">Naik — CTA setara + header D16 = trust</td><td>Naik, risiko "terlalu ramai" di HP low-end</td></tr>
+    <tr><td>B2B trust (voucher ke mall)</td><td class="win">Aman (Lucide + rapi)</td><td class="win">Paling kuat (sistem utuh + guideline)</td><td>Kuat, tapi playful berlebihan bisa kurang serius</td></tr>
+    <tr><td>Load &amp; cost</td><td class="win">CSS 1 pola, nyaris nol</td><td class="win">CSS-only, tetap &lt;2 dtk, $0</td><td>Gradient mesh + shadow berat = QA + repaint</td></tr>
+    <tr><td>Effort / risiko</td><td class="win">S · ~4 jam · rendah</td><td>M · ~8 jam · rendah–sedang</td><td>L · ~14 jam · sedang</td></tr>
+  </table>
+  <div class="card good" style="margin-top:12px"><span class="tag after">REKOMENDASI GUE</span><h3>Opsi B — Signature Cream</h3><p>Satu-satunya yang jawab ke-4 feedback sekaligus: background jadi identitas (bukan dekorasi), palette dikunci rasio, ikon diseragamkan, guideline jadi rulebook. Beda vs A cuma ~4 jam tapi hasilnya "ini Wikendo banget". C ladang ranjau selera — simpen buat campaign, bukan sistem.</p></div>
+</div>
+
+<div class="sec">
+  <h2>✅ Cara putusin</h2>
+  <p class="sub">Klik pilihan di banner bawah — kesimpen otomatis di browser ini. Setelah itu gue eksekusi sesuai SOP (guideline → board lock → TDD ke <code>app/</code>).</p>
+  <p style="font-size:12.5px">Balas di chat: <code>gas guideline</code> (tulis docs/18 dulu) · <code>gas polish B</code> (langsung eksekusi B ke app/) · <code>gas A</code> / <code>gas C</code> (kalau mau yang lain).</p>
+</div>
+
+</div>
+<div class="approve" id="approveBar">
+  <span id="pickLabel">👆 Pilih: B = rekomendasi gue</span>
+  <button class="btnB" onclick="pick('B')">Gas Polish B ⭐</button>
+  <button class="btnG" onclick="pick('guideline')">Gas Guideline dulu</button>
+  <button class="btnT" onclick="pick('A')">Gas A</button>
+  <button class="btnT" onclick="pick('C')">Gas C</button>
+</div>
+<script>
+try{
+  var saved=localStorage.getItem('wikendo-polish-pick');
+  if(saved){document.getElementById('pickLabel').textContent='Pilihan tersimpan: '+saved+' — balas di chat "gas '+saved+'" untuk eksekusi.';}
+}catch(e){}
+function pick(v){
+  try{localStorage.setItem('wikendo-polish-pick',v);}catch(e){}
+  document.getElementById('pickLabel').textContent='Pilihan tersimpan: '+v+' — balas di chat "gas '+v+'" untuk eksekusi.';
+}
+</script>
+</body>
+</html>
