@@ -16,6 +16,7 @@
 ## 📌 BOARD — posisi per 8 Okt 2026 (Supabase + quota real + button merah DONE ✅, next slice auth)
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Board 20 opsi Revamp Pages Non-Index DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/revamp-options-v4.html` — audit existing 6 page vs rule V2 (vonis: semua langgar token lama) → 20 opsi komparasi apple-to-apple: Quiz Tempat 4 (Q1-Q4) + Quiz Makan 4 (M1-M4) + Result Tempat 4 (R1-R4) + Result Makan 4 (F1-F4) + Mall 2+2 (D1-D2+S1-S2), semua ikut V2 Ember P1 (paper/ink/lime/ember/rose, kartu 24px, tombol 56px, strip 5px, hero netral, cyan mati), filter 5 keluarga + shortlist `wikendo-pages20-pick`, Top sistem Q1+M1+R1+F1+D1+S1 — nunggu "Gua suka Xx" / "gas sistem"
 - [x] Board I17 border sweep + palet diperluas APPROVED V2 ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/i17-border-sweep.html` — Agesta VERBATIM "Gua suka dan approve v2 ember p1" — lock strip hero = Ember `#EA580C` (token P1) + palet skala 60-30-10 — next: tunggu "gas" eksplisit buat eksekusi ke `app/`
 - [x] Board 20 opsi Revamp Index Full-Page DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/revamp-options-v3.html` — 1 halaman index UTUH per opsi (header avatar + hero + dual CTA + quick 4 + hype/list/assistant + riwayat), skeleton Insurance transplant, warna ikut P1/P9/P12, filter 5 keluarga + shortlist `wikendo-index20-pick`, Top3 I1 > I8 > I17 — nunggu "Gua suka Ix" / "gas Ix (+ Px)"
 - [x] Board 20 opsi Hero Card DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/hero-cards-20.html` — transplant skeleton Insurance hero (label + angka hero + sub + 2 chip + pill CTA + watermark 🎲) ke wallet quota, tiap kartu konteks home SAMA yang beda cuma HERO, warna ikut P1/P9/P12, filter 5 keluarga + shortlist `wikendo-hero20-pick`, Top3 H1 > H8 > H17 — nunggu "Gua suka Hx" / "gas Hx"
@@ -63,6 +64,13 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-08 — Board 20 opsi Revamp Pages Non-Index DONE ✅ (audit + komparasi, design-only)
+- **Kenapa:** Agesta VERBATIM "btw sebelum bikin design.md. Tolong review page lain selain index page. Jika design existing tidak mengikuti rule atau preferensi dari design v2 ember p1, tolong revamp dan ikuti rule nya" + "eeh tolong buat 20 opsi design yaaa, biar ada komparasi".
+- **Dikerjain:** audit 6 page existing vs rule V2 (vonis: semua langgar token lama — quiz/makan bg `#fffdf9` + progress gradasi, result hero 5 gradasi pastel + badge cyan, result-makan `#ee2c4b` + wall orange, mall cyan + thumb tint) → `design/revamp-options-v4.html` 20 opsi: Quiz Tempat Q1-Q4 (Q1 Ember Strip baseline ⭐, Q2 Ink Header, Q3 Assistant, Q4 Segmen Blok) + Quiz Makan M1-M4 (M1 Rose Strip ⭐ cermin sistem, M2 Mall Chip, M3 Ink, M4 Toggle Focus) + Result Tempat R1-R4 (R1 Ink+Strip ⭐, R2 CTA Ember, R3 Photo, R4 Timeline) + Result Makan F1-F4 (F1 White+Klaim Rose ⭐, F2 Ink, F3 Tiket, F4 List) + Mall D1-D2+S1-S2 (D1 Netral ⭐, D2 Ink, S1 Row ⭐, S2 Foto). Semua ikut V2 (paper/ink/lime/ember/rose, kartu 24px, tombol 56px, strip 5px, hero netral, cyan mati, 60-30-10) + filter 5 keluarga + shortlist `wikendo-pages20-pick` + Copy CSS. Rekomendasi tunggal: paket sistem Q1+M1+R1+F1+D1+S1 (S effort, risiko rendah).
+- **Verifikasi:** node COUNT=20 unik ✅ + HAS_SHORTLIST ✅. `git status` cuma file board baru, `app/` NOL sentuh ✅.
+- **Files:** `design/revamp-options-v4.html` (baru), `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** nunggu "Gua suka Xx" / "gas sistem Q1+M1+R1+F1+D1+S1" → eksekusi ke `app/pages/*.vue` via TDD.
 
 ## 2026-10-08 — Board I17 border sweep + palet diperluas DONE ✅ (design-only)
 - **Kenapa:** Agesta VERBATIM "Gua suka i17 … tambahkan border left orange di hero card (seperti i2). Menurut lu warna apa border left yang cocok? Sekaligus untuk menambah color pallete wikendo, karena di design i17 hanya ada: hitam, putih, lime".

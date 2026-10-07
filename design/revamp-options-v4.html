@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wikendo — 20 Opsi Revamp Pages Non-Index (rule V2 Ember P1)</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#f5f1e8;color:#18181b;padding:24px 16px 140px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto}
+.hero{background:#0C0A09;color:#fff;border-radius:24px;padding:28px 24px;position:relative;overflow:hidden;border-left:5px solid #EA580C}
+.hero h1{font-size:23px;font-weight:800}
+.hero h1 .dot{color:#A3E635}
+.hero p{color:#d6d3d1;font-size:13px;margin-top:8px;max-width:900px}
+.hero p b{color:#fff}
+.hero code{background:rgba(255,255,255,.14);padding:1px 7px;border-radius:6px;font-size:11.5px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.badge{font-size:11.5px;font-weight:800;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2)}
+.badge.ok{background:#A3E635;border-color:#A3E635;color:#0C0A09}
+.audit{background:rgba(163,230,53,.08);border:1px solid rgba(163,230,53,.4);border-radius:16px;padding:14px 16px;margin-top:14px;font-size:12.5px;color:#e7e5e4}
+.audit b{color:#D9F99D}
+.audit li{margin:4px 0 4px 18px}
+.audit code{background:rgba(255,255,255,.14);padding:1px 7px;border-radius:6px;font-size:11px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.filters button{border:1.5px solid rgba(255,255,255,.35);background:transparent;color:#fff;border-radius:999px;padding:8px 16px;font-weight:800;font-size:12.5px;cursor:pointer;font-family:inherit}
+.filters button.on{background:#EA580C;border-color:#EA580C}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.gcard{background:#fff;border:1.5px solid #ece7dd;border-radius:20px;overflow:hidden}
+.gcard.picked{border-color:#EA580C;box-shadow:0 0 0 2px #EA580C}
+.gprev{padding:14px;background:#e9e2d3;overflow:hidden}
+.mini{max-width:300px;margin:0 auto;border-radius:18px;padding:12px 14px 14px;min-height:520px;color:#18181b;position:relative;background:#F5F5F4}
+.m-top{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:800}
+.m-crumb{font-size:10.5px;font-weight:700;color:#A8A29E;margin-top:8px}
+.m-q{font-size:17px;font-weight:800;margin-top:6px;line-height:1.25}
+.m-sub{font-size:11px;font-weight:700;color:#78716c;margin-top:2px}
+.m-bar{height:8px;border-radius:999px;margin-top:10px;overflow:hidden;background:#E7E5E4}
+.m-bar i{display:block;height:100%;border-radius:999px}
+.m-seg{display:flex;gap:5px;margin-top:10px}
+.m-seg i{flex:1;height:8px;border-radius:99px;background:#E7E5E4}
+.m-opt{background:#fff;border-radius:16px;padding:11px 12px;font-size:11.5px;font-weight:800;display:flex;gap:8px;align-items:center;margin-top:7px;border:2px solid #E7E5E4}
+.m-opt small{display:block;font-weight:700;color:#78716c;font-size:10px}
+.m-opt.sel-t{border-color:#EA580C;background:#FFF7ED}
+.m-opt.sel-m{border-color:#E11D48;background:#FFE4E6}
+.m-opt .em{font-size:20px;flex:none}
+.m-chiprow{display:flex;gap:6px;overflow:hidden;margin-top:10px}
+.m-chiprow span{flex:none;font-size:10px;font-weight:800;border-radius:10px;padding:8px 10px;background:#fff;border:1.5px solid #E7E5E4}
+.m-chiprow span.on-t{background:#EA580C;color:#fff;border-color:#EA580C}
+.m-chiprow span.on-m{background:#E11D48;color:#fff;border-color:#E11D48}
+.m-tog{display:flex;gap:6px;margin-top:8px}
+.m-tog span{flex:1;border-radius:99px;padding:8px 4px;text-align:center;font-size:10px;font-weight:800;background:#fff;border:1.5px solid #E7E5E4}
+.m-tog span.on{background:#0C0A09;color:#fff;border-color:#0C0A09}
+.m-hero{background:#fff;border-radius:18px;padding:12px;margin-top:10px;box-shadow:0 6px 16px -8px rgba(0,0,0,.2)}
+.m-hero.dark{background:#0C0A09;color:#fff}
+.m-hero.strip{border-left:5px solid #EA580C}
+.m-hero .lbl{font-size:10px;font-weight:800;letter-spacing:.5px;opacity:.7}
+.m-hero .nm{font-size:15px;font-weight:800;margin-top:2px;line-height:1.3}
+.m-hero .rs{font-size:11px;font-weight:700;opacity:.75;margin-top:3px}
+.m-hero .meta{font-size:10.5px;font-weight:700;opacity:.8;margin-top:3px}
+.m-pill{display:inline-block;font-size:10px;font-weight:800;padding:4px 10px;border-radius:99px;margin:6px 4px 0 0}
+.m-cta{display:flex;gap:6px;margin-top:10px}
+.m-cta span{flex:1;border-radius:12px;padding:11px 4px;text-align:center;font-size:10.5px;font-weight:800}
+.m-cta .p-ink{background:#0C0A09;color:#fff}
+.m-cta .p-emb{background:#EA580C;color:#fff}
+.m-cta .p-rose{background:#E11D48;color:#fff}
+.m-cta .g{background:#fff;border:2px solid #E7E5E4;color:#0C0A09}
+.m-claim{background:#E11D48;color:#fff;border-radius:12px;padding:12px;text-align:center;font-size:11.5px;font-weight:800;margin-top:10px}
+.m-tick{border:1.5px dashed #E11D48;border-radius:12px;padding:10px;margin-top:10px;background:#FFF1F2;font-size:10.5px;font-weight:800;text-align:center}
+.m-minis{display:flex;gap:6px;margin-top:8px}
+.m-minis span{flex:1;border-radius:10px;padding:8px 4px;text-align:center;font-size:9.5px;font-weight:800;background:#fff;border:1px solid #E7E5E4}
+.m-list{margin-top:8px;border-radius:12px;padding:8px;background:#fff;box-shadow:0 4px 12px -6px rgba(0,0,0,.15)}
+.m-list .lr{font-size:10.5px;font-weight:800;padding:7px 8px;border-radius:9px;background:#FAFAF9;margin-top:5px}
+.m-list .lr small{display:block;font-weight:700;opacity:.6;font-size:9.5px}
+.m-photo{height:110px;border-radius:14px 14px 0 0;margin:-12px -12px 8px;display:flex;align-items:center;justify-content:center;font-size:44px;background:linear-gradient(140deg,#1C1917,#44403C)}
+.m-tl{margin-top:8px;font-size:10px;font-weight:800}
+.m-tl div{padding:4px 0 4px 14px;border-left:2px solid #E7E5E4;margin-left:5px}
+.m-tl div:first-of-type{border-color:#EA580C}
+.m-tl small{display:block;font-weight:700;opacity:.6}
+.m-foot{margin-top:8px;font-size:9.5px;font-weight:700;opacity:.55;text-align:center}
+.m-back{margin-top:10px;font-size:11px;font-weight:700;color:#A8A29E;text-align:center}
+.m-inkhead{background:#0C0A09;color:#fff;border-radius:14px;padding:10px 12px;margin-top:10px}
+.m-inkhead .n{font-size:20px;font-weight:800;color:#D9F99D}
+.m-asst{display:flex;gap:8px;align-items:center;margin-top:8px;border-radius:14px;padding:10px;background:#fff;box-shadow:0 6px 16px -8px rgba(0,0,0,.25);font-size:10.5px;font-weight:800}
+.m-asst small{display:block;font-weight:700;opacity:.65;font-size:9.5px}
+.m srch,.m-srch{background:#fff;border-radius:11px;padding:9px 11px;font-size:11px;font-weight:700;color:#A8A29E;margin-top:10px;border:1px solid #E7E5E4}
+.m-mall{background:#fff;border:1px solid #E7E5E4;border-radius:16px;padding:11px;margin-top:8px}
+.m-mall b{font-size:12px}
+.m-mall p{font-size:10px;color:#78716c;font-weight:700}
+.m-tag{font-size:9.5px;font-weight:800;padding:3px 9px;border-radius:99px;background:#0C0A09;color:#fff}
+.m-ten{display:flex;gap:8px;align-items:center;background:#fff;border:1px solid #E7E5E4;border-radius:14px;padding:8px;margin-top:7px}
+.m-ten .th{width:46px;height:46px;flex:none;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:24px;background:#F5F5F4}
+.m-ten b{font-size:11px}
+.m-ten p{font-size:9.5px;color:#78716c;font-weight:700}
+.gbody{padding:14px 16px 16px}
+.gbody h3{font-size:15px;font-weight:800}
+.gnum{display:inline-block;background:#0C0A09;color:#fff;font-size:11px;font-weight:800;border-radius:8px;padding:2px 9px;margin-right:6px}
+.tag{display:inline-block;font-size:10.5px;font-weight:800;padding:3px 10px;border-radius:999px;margin:6px 4px 0 0}
+.gbody p{font-size:12.5px;color:#44403c;margin-top:6px}
+.pro{font-size:12px;color:#166534;margin-top:6px}
+.con{font-size:12px;color:#991b1b;margin-top:2px}
+.hexes{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.hex{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;background:#f5f1e8;border:1px solid #e7e0d2;border-radius:8px;padding:3px 9px}
+.cssbox{font-family:'JetBrains Mono',monospace;font-size:10.5px;background:#0C0A09;color:#D9F99D;border-radius:10px;padding:9px 11px;margin-top:8px;overflow-x:auto;white-space:nowrap}
+.rowbtns{display:flex;gap:8px;margin-top:10px}
+.rowbtns button{flex:1;border-radius:11px;padding:10px;font-weight:800;font-size:12.5px;cursor:pointer;font-family:inherit;border:1.5px solid #0C0A09}
+.btn-copy{background:#fff;color:#0C0A09}
+.btn-pick{background:#0C0A09;color:#fff}
+.gcard.picked .btn-pick{background:#EA580C;border-color:#EA580C}
+.sec{background:#fff;border:1px solid #ece7dd;border-radius:20px;padding:22px;margin-top:18px}
+.sec h2{font-size:18px;font-weight:800;margin-bottom:4px}
+.sec .sub{font-size:13px;color:#78716c;margin-bottom:12px}
+.sec p,.sec li{font-size:13px;color:#44403c}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:10px}
+th,td{border:1px solid #ece7dd;padding:9px 10px;text-align:left;vertical-align:top}
+th{background:#faf7f0;font-size:11.5px}
+td.win{background:#ecfdf5;font-weight:700}
+td.lose{background:#fef2f2}
+.bar{position:fixed;bottom:0;left:0;right:0;background:rgba(12,10,9,.97);color:#fff;padding:13px 16px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;z-index:50;font-size:13px}
+.bar button{border:none;border-radius:12px;padding:12px 18px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit}
+.btnGo{background:#A3E635;color:#0C0A09}.btnGhost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <h1>20 opsi pages non-index <span class="dot">.</span></h1>
+  <p>Semua ikut <b>rule V2 Ember P1 yang udah lu approve</b>: page <code>max-w-md</code> = <code>#F5F5F4</code> · kartu <code>#fff</code> · ink <code>#0C0A09</code> · lime = angka/nilai <code>#A3E635/#D9F99D</code> · ember = strip + Tempat <code>#EA580C</code> · rose = Makan SAJA <code>#E11D48</code> · hero selalu netral · cyan MATI · 60-30-10. Yang dibandingin di sini <b>struktur, bukan warna</b> — warna udah lock. <b>Design-only — <code>app/</code> NOL diubah sampai lu balas gas.</b></p>
+  <div class="badges"><span class="badge ok">⭐ Rekomendasi sistem: Q1 + M1 + R1 + F1 + D1 + S1</span><span class="badge">Quiz Tempat 4</span><span class="badge">Quiz Makan 4</span><span class="badge">Result Tempat 4</span><span class="badge">Result Makan 4</span><span class="badge">Mall 4</span></div>
+  <div class="audit"><b>Audit existing vs V2 (kenapa harus revamp):</b>
+    <li><code>quiz.vue</code>: bg <code>#fffdf9</code> → harus <code>#F5F5F4</code>; progress gradasi <code>#f97316→#fb923c</code> → ember solid <code>#EA580C</code>; selected <code>#f97316/#fff7ed</code> → border ember lock.</li>
+    <li><code>makan.vue</code>: bg lama; progress <code>#ee2c4b→#fb923c</code> (rose dicampur peach!) → rose solid <code>#E11D48</code>; chip mall + selected → rose lock <code>#E11D48</code>.</li>
+    <li><code>result.vue</code>: <b>pelanggaran berat</b> — hero 5 gradasi pastel (orange/kuning/hijau/indigo/cyan) → hero HARUS netral (ink/putih + strip ember); badge cyan <code>#ecfeff/#0e7490</code> → MATI (vonis bunuh-cyan).</li>
+    <li><code>result-makan.vue</code>: token merah lama <code>#ee2c4b</code> → rose lock <code>#E11D48</code>; wall error masih orange <code>#f97316</code> → ember; thumb/list netralkan.</li>
+    <li><code>mall/index.vue</code>: label mall cyan <code>#ecfeff/#0e7490</code> → ink; CTA rose lama → <code>#E11D48</code>; bg → greige.</li>
+    <li><code>mall/[slug].vue</code>: thumb <code>#fff7ed</code> (tint orange) → netral <code>#F5F5F4</code>; CTA + promo → rose lock; chips on-state ink tetap (udah bener, dipertahankan).</li>
+  </div>
+  <div class="filters" id="filters">
+    <button class="on" data-f="all">Semua 20</button>
+    <button data-f="qtempat">🎲 Quiz Tempat</button>
+    <button data-f="qmakan">🍜 Quiz Makan</button>
+    <button data-f="rtempat">🗺️ Result Tempat</button>
+    <button data-f="rmakan">🎟️ Result Makan</button>
+    <button data-f="mall">🏬 Mall</button>
+  </div>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="sec">
+  <h2>⚔️ Head-to-head vs existing</h2>
+  <p class="sub">North Star: quiz completion &gt;70% · CTR Maps &gt;50% · voucher claim · SEO direktori. Existing kalah di hierarki (4 warna teriak + hero pelangi + cyan), bukan di selera.</p>
+  <table>
+    <tr><th>Opsi</th><th>Quiz completion</th><th>CTR Maps / Klaim</th><th>Risiko</th></tr>
+    <tr><td>Existing</td><td class="lose">Progress gradasi + selected ad-hoc per page</td><td class="lose">Hero pelangi saingan sama CTA; cyan bocor</td><td>—</td></tr>
+    <tr><td class="win"><b>🥇 Sistem Q1+M1+R1+F1+D1+S1</b></td><td class="win">1 pola quiz × 2 aksen (ember/rose) → completion naik, codebase tetap 1 engine</td><td class="win">Hero netral + strip ember → mata cuma ke CTA (Navigasi ink / Klaim rose)</td><td class="win">Rendah (token udah lock)</td></tr>
+    <tr><td>🥈 Ink headers (Q2+M3+R4+F2)</td><td>Premium, step lime nyala</td><td>Kuat malam hari, tapi ink dobel hero+header berisik</td><td>Sedang</td></tr>
+    <tr><td>🥉 Photo/timeline (R3+R4+F4)</td><td>Naratif, penasaran lanjut</td><td>Butuh foto asli; timeline makan tempat vertikal</td><td>Sedang</td></tr>
+  </table>
+  <p style="margin-top:10px"><b>Rekomendasi tunggal gue: paket Q1 + M1 + R1 + F1 + D1 + S1.</b> 6 kartu ini satu bahasa (strip ember + hero netral + CTA peran). Alasan bisnis: paling murah dieksekusi (S, 2–3 jam/page), risiko paling rendah (nggak ada pola baru), dan CTR naik justru karena yang berwarna cuma tombol aksi. Varian lain (ink header / foto / timeline) bagus tapi itu P1 — eksekusi setelah sistem dasar live.</p>
+</div>
+
+<div class="sec">
+  <h2>✅ Cara putusin (approval gate)</h2>
+  <p>Tombol <b>+ Shortlist</b> di tiap kartu → kesimpen otomatis di browser ini. Balas misal: <code>"Gua suka R1, F1"</code> atau <code>"gas sistem Q1+M1+R1+F1+D1+S1"</code> — baru gue eksekusi ke <code>app/pages/*.vue</code> via TDD (token → layout → test tetap hijau → lint → build → deploy). Tanpa balasan = <code>app/</code> tetap NOL sentuh.</p>
+</div>
+
+</div>
+<div class="bar" id="bar">
+  <span id="pickLabel">👆 Shortlist: 0 — tap + Shortlist di kartu favorit lu</span>
+  <button class="btnGo" onclick="copyPick()">📋 Salin pilihan</button>
+  <button class="btnGhost" onclick="clearPick()">Reset</button>
+</div>
+<script>
+var TOK='--pg:#F5F5F4;--card:#fff;--ink:#0C0A09;--ember:#EA580C;--rose:#E11D48;--lime:#A3E635;';
+var DATA=[
+["Q1","Quiz Tempat · Ember Strip ⭐","qtempat","quiz","Sistem #1 ✅","Baseline V2: progress ember solid + opsi putih, selected border ember + wash. Paling bersih, paling murah.","#F5F5F4 · #EA580C · #FFF7ED","progress:#EA580C;sel:border #EA580C/bg #FFF7ED","S · 2-3 jam","Rendah","1 pola × 2 quiz, completion naik","Nol — ini baseline"],
+["Q2","Quiz Tempat · Ink Header","qtempat","quiz","Premium","Header ink + angka lime + progress ember di atas gelap. Premium, cocok malam.","#0C0A09 · #D9F99D · #EA580C","header:#0C0A09;num:#D9F99D;bar:#EA580C","S · 3 jam","Sedang","Step berasa saldo, premium","Ink dobel kalau hero juga gelap"],
+["Q3","Quiz Tempat · Assistant","qtempat","quiz","Asisten","Kartu assistant di atas pertanyaan (transplant I1): 2 pintu (tap opsi / tanya AI).","#F5F5F4 · #0C0A09 · #EA580C","asst:#fff;cta:#0C0A09;bar:#EA580C","M · 4-5 jam","Sedang","2 pintu quiz, kembaran index I1","Butuh copy AI, nambah vertikal"],
+["Q4","Quiz Tempat · Segmen Blok","qtempat","quiz","Progres","Progress 5 segmen (1 blok = 1 tanya) + opsi ikon gede. Paling game-like.","#F5F5F4 · #EA580C","seg:#EA580C on #E7E5E4;opt:56px","S · 3 jam","Rendah","Progres konkret, Gen-Z playful","Ikon gede makan tempat di HP kecil"],
+["M1","Quiz Makan · Rose Strip ⭐","qmakan","makan","Sistem #1 ✅","Cermin Q1 buat Makan: progress rose solid + selected border rose. Split terjaga (ember vs rose).","#F5F5F4 · #E11D48 · #FFE4E6","progress:#E11D48;sel:border #E11D48","S · 2-3 jam","Rendah","Split warna = split mental model","Nol — cermin sistem"],
+["M2","Quiz Makan · Mall Chip First","qmakan","makan","Direktori","Q1 mall dibikin hero: chip mall horizontal gede + kartu mall terpilih. Jembatan /mall kuat.","#F5F5F4 · #E11D48","chip-on:#E11D48;color:#fff","S · 3 jam","Rendah","Q1 wajib (mall) nggak berasa beban","Chip row butuh scroll hint"],
+["M3","Quiz Makan · Ink Header","qmakan","makan","Premium","Header ink + progress rose + toggle halal/kids on-state ink. Seragam sama Q2.","#0C0A09 · #E11D48","header:#0C0A09;bar:#E11D48;tog:#0C0A09","S · 3 jam","Sedang","Seragam Q2, premium malam","Sama: ink dobel risk"],
+["M4","Quiz Makan · Toggle Focus","qmakan","makan","Filter","Toggle halal/kids naik jadi kartu seleksi (bukan pill kecil) — pantangan berasa dihargai.","#F5F5F4 · #0C0A09 · #E11D48","tog-on:#0C0A09;bar:#E11D48","M · 4 jam","Sedang","Trust halal naik → CTR tenant halal","2 tap ekstra buat yang nggak butuh"],
+["R1","Result Tempat · Ink + Strip ⭐","rtempat","result","Sistem #1 ✅","Hero ink + strip ember 5px + badge BEST ember + Navigasi ink. Vonis pelangi mati.","#0C0A09 · #EA580C · #D9F99D","hero:#0C0A09;strip:#EA580C;nav:#0C0A09","S · 3 jam","Rendah","Mata cuma ke Navigasi → CTR Maps","Butuh emoji/foto biar nggak gothic"],
+["R2","Result Tempat · White + CTA Ember","rtempat","result","Aksi","Hero putih strip ember + Navigasi EMBER solid (bukan ink). Tombol aksi paling nyala.","#fff · #EA580C","hero:#fff;strip:#EA580C;nav:#EA580C","S · 3 jam","Rendah","CTA paling pop di semua opsi","Ember dobel strip+CTA, dosis aksen naik"],
+["R3","Result Tempat · Photo Band","rtempat","result","Foto","Band foto 110px + kartu overlap + strip ember. Yang jualan = tempat beneran.","#1C1917 · #fff · #EA580C","band:foto;strip:#EA580C;nav:#0C0A09","M · 5-6 jam","Sedang","Foto = CTR Maps, berasa trip","Butuh foto asli per rekomendasi"],
+["R4","Result Tempat · Timeline","rtempat","result","Naratif","Transplant claim Insurance: timeline Quiz→Rekomendasi→Navigasi + hero ink. Quota berasa progres.","#0C0A09 · #EA580C","tl:#EA580C;hero:#0C0A09","M · 4 jam","Sedang","Penasaran lanjut → share naik","Timeline makan vertikal di HP kecil"],
+["F1","Result Makan · White + Klaim Rose ⭐","rmakan","result-makan","Sistem #1 ✅","Hero putih + strip ember (brand) + Klaim ROSE solid + Maps ink. Rose cuma di aksi makan.","#fff · #EA580C · #E11D48","strip:#EA580C;claim:#E11D48;maps:#0C0A09","S · 3 jam","Rendah","Klaim = satu-satunya yang merah → CTR voucher","Nol — ini kunci voucher"],
+["F2","Result Makan · Ink Hero","rmakan","result-makan","Premium","Hero ink strip ember + Klaim rose + chip halal hijau. Paling Banking.","#0C0A09 · #E11D48","hero:#0C0A09;claim:#E11D48","S · 3 jam","Sedang","Malam + voucher = eksklusif","Ink + rose = kontras keras, dosis jaga"],
+["F3","Result Makan · Tiket Voucher","rmakan","result-makan","Voucher","Klaim dipisah jadi kartu tiket dashed (tunjukin ke kasir) — metafora fisik.","#FFF1F2 · #E11D48","ticket:dashed #E11D48;claim:#E11D48","M · 4-5 jam","Sedang","Voucher berasa benda → redeem naik","Butuh kode/QR real (slice auth)"],
+["F4","Result Makan · List First","rmakan","result-makan","Banding","Hero compact + list 5 tenant expanded (promo + halal per baris). Buat pembanding cepat.","#fff · #E11D48","hero:compact;list:#fff;tag:#E11D48","S · 3 jam","Rendah","Banding 5 tenant 1 tatap → decision cepat","Hero kurang heroik, CTR Maps pecah"],
+["D1","Mall Hub · Netral ⭐","mall","mall-index","Sistem #1 ✅","Label mall INK (cyan mati) + Lihat Tenant putih + Cariin rose. Bersih, SEO tetap.","#F5F5F4 · #0C0A09 · #E11D48","label:#0C0A09;quiz:#E11D48","S · 2 jam","Rendah","Paling murah, discoverability naik","Nol"],
+["D2","Mall Hub · Ink Header","mall","mall-index","Premium","Header ink + count lime + kartu putih. Mall berasa direktori premium.","#0C0A09 · #D9F99D","header:#0C0A09;count:#D9F99D","S · 2-3 jam","Rendah","Premium, seragam Q2/M3","Header gelap tiap buka /mall"],
+["S1","Direktori · Row Netral ⭐","mall","mall-slug","Sistem #1 ✅","Thumb netral + promo rose + chips on ink + CTA rose. Cyan/orange-tint mati total.","#F5F5F4 · #0C0A09 · #E11D48","thumb:#F5F5F4;chip:#0C0A09;cta:#E11D48","S · 3 jam","Rendah","SEO + filter + quiz 1 funnel bersih","Nol — baseline direktori"],
+["S2","Direktori · Foto Tenant","mall","mall-slug","Foto","Thumb 46px → foto tenant + badge promo overlay. Nafsu makan yang jualan.","foto · #E11D48","thumb:foto;promo:#E11D48","M · 5 jam","Sedang","CTR tenant + quiz prefill naik","Butuh foto 200 tenant (survey)"]
+];
+function topHTML(page){
+  if(page=='quiz') return '<div class="m-top"><span>← 🎲 Quiz tempat</span><span style="color:#A8A29E">1/5 · ⏱ 30 dtk</span></div>';
+  if(page=='makan') return '<div class="m-top"><span>← 🍜 Quiz makan</span><span style="color:#A8A29E">1/4 · ⏱ 20 dtk</span></div>';
+  if(page=='result') return '<div class="m-top"><span>← Hasil buatmu 🎉</span><span style="color:#A8A29E">Quota 0/1</span></div>';
+  if(page=='result-makan') return '<div class="m-top"><span>← Hasil · GI 📍</span><span style="color:#A8A29E">2/2 tersisa</span></div>';
+  if(page=='mall-index') return '<div class="m-crumb">Home / Mall</div><div class="m-top"><span style="font-size:16px">🏬 Mall</span><span style="color:#A8A29E;font-size:11px">5 mall</span></div>';
+  return '<div class="m-crumb">Home / Mall / GI</div><div class="m-top"><span style="font-size:16px">🏬 Grand Indonesia</span><span style="color:#A8A29E;font-size:11px">40 tenant</span></div>';
+}
+function bodyHTML(id){
+  var O='<div class="m-opt"><span class="em">🧘</span><span>Santai / Healing<small>Slow living, recharge</small></span></div><div class="m-opt sel-TPLACE"><span class="em">🎉</span><span>Seru / Hype<small>Ramai, FOMO, viral</small></span></div><div class="m-opt"><span class="em">🍜</span><span>Kulineran<small>Makan enak</small></span></div>';
+  if(id=='Q1') return '<div class="m-q">Weekend ini pengen yang gimana? 🧭</div><div class="m-sub">Tap 1 — nggak ada jawaban salah</div><div class="m-bar"><i style="width:20%;background:#EA580C"></i></div>'+O.split('TPLACE').join('-t')+'<div class="m-back">Quota kepake pas Generate, bukan per tanya · ← Kembali</div>';
+  if(id=='Q2') return '<div class="m-inkhead"><div class="lbl" style="font-size:10px;font-weight:800;opacity:.7">QUIZ TEMPAT · 1/5</div><div class="n">Weekend ini pengen yang gimana?</div><div class="m-bar"><i style="width:20%;background:#EA580C"></i></div></div>'+O.split('TPLACE').join('-t')+'<div class="m-back">← Kembali</div>';
+  if(id=='Q3') return '<div class="m-asst">🤖<span>Wikendo AI<small>Ceritain mood → rekomendasi instan →</small></span></div><div class="m-q">Weekend ini pengen yang gimana?</div><div class="m-bar"><i style="width:20%;background:#EA580C"></i></div>'+O.split('TPLACE').join('-t');
+  if(id=='Q4') return '<div class="m-q">Weekend ini pengen yang gimana?</div><div class="m-seg"><i style="background:#EA580C"></i><i></i><i></i><i></i><i></i></div>'+O.split('TPLACE').join('-t')+'<div class="m-back">1/5 · ← Kembali</div>';
+  if(id=='M1') return '<div class="m-q">Misi makan kali ini? 🎯</div><div class="m-sub">Tap 1 — nggak ada jawaban salah</div><div class="m-bar"><i style="width:50%;background:#E11D48"></i></div>'+O.split('TPLACE').join('-m').split('🧘</span><span>Santai').join('⚡</span><span>Makan Cepat').split('🎉</span><span>Seru / Hype').join('☕</span><span>Nongkrong Lama')+'<div class="m-tog"><span class="on">✅ Halal only</span><span>👶 Kids</span></div>';
+  if(id=='M2') return '<div class="m-q">Makan di mall mana? 📍</div><div class="m-sub">Wajib 1 — biar hasil murni tenant situ</div><div class="m-chiprow"><span class="on-m">GI</span><span>CP</span><span>Kokas</span><span>PIM</span><span>Aeon</span></div><div class="m-bar"><i style="width:25%;background:#E11D48"></i></div>'+O.split('TPLACE').join('-m');
+  if(id=='M3') return '<div class="m-inkhead"><div class="lbl" style="font-size:10px;font-weight:800;opacity:.7">QUIZ MAKAN · GI 📍</div><div class="n">Misi makan kali ini?</div><div class="m-bar"><i style="width:50%;background:#E11D48"></i></div></div>'+O.split('TPLACE').join('-m')+'<div class="m-tog"><span class="on">✅ Halal only</span><span class="on">👶 Kids</span></div>';
+  if(id=='M4') return '<div class="m-q">Rombongan + pantangan? 👥</div><div class="m-sub">Terakhir, janji 😄</div><div class="m-bar"><i style="width:100%;background:#E11D48"></i></div><div class="m-opt sel-m"><span class="em">✅</span><span>Halal only<small>Filter tenant halal aja</small></span></div><div class="m-opt"><span class="em">👶</span><span>Kids-friendly<small>Stroller + kursi anak</small></span></div><div class="m-opt"><span class="em">👥</span><span>Rame-rame<small>3+ orang</small></span></div>';
+  if(id=='R1') return '<div class="m-hero dark strip"><div class="lbl">★ #1 BEST · TEMPAT</div><div class="nm">Rooftop Senayan — Senayan</div><div class="rs">Kenapa: sunset + live music, cocok seru</div><div class="meta">💰 50-150rb · 📍 Jaksel · ⏰ best malam</div><div><span class="m-pill" style="background:#EA580C;color:#fff">★ BEST</span><span class="m-pill" style="background:rgba(255,255,255,.14);color:#fff">🗺️ Hype</span></div><div class="m-cta"><span class="p-ink" style="border:1.5px solid #fff">📍 Navigasi →</span><span class="g">💾</span><span class="g">⤴</span></div></div><div class="m-minis"><span>Kopi K…</span><span>Taman…</span><span style="background:#0C0A09;color:#fff">Lainnya →</span></div><div class="m-foot">Kartu 1/5 · generate ulang = quota habis</div>';
+  if(id=='R2') return '<div class="m-hero strip"><div class="lbl">★ #1 BEST · TEMPAT</div><div class="nm">Rooftop Senayan — Senayan</div><div class="rs">Kenapa: sunset + live music</div><div class="meta">💰 50-150rb · 📍 Jaksel · ⏰ malam</div><div class="m-cta"><span class="p-emb">📍 Navigasi →</span><span class="g">💾</span><span class="g">⤴</span></div></div><div class="m-minis"><span>Kopi K…</span><span>Taman…</span><span style="background:#EA580C;color:#fff">Lainnya →</span></div>';
+  if(id=='R3') return '<div class="m-hero strip" style="padding-top:0;overflow:hidden"><div class="m-photo">🌇</div><div class="lbl">★ #1 BEST · JAKSEL</div><div class="nm">Rooftop Senayan</div><div class="rs">Sunset + live music · 4.8★</div><div class="m-cta"><span class="p-ink">📍 Navigasi →</span><span class="g">⤴</span></div></div><div class="m-minis"><span>Kopi…</span><span>Taman…</span><span style="background:#0C0A09;color:#fff">→</span></div>';
+  if(id=='R4') return '<div class="m-hero dark strip"><div class="lbl">★ #1 BEST · TEMPAT</div><div class="nm">Rooftop Senayan</div><div class="m-tl"><div>Quiz 30 dtk<small>vibe seru · Jaksel</small></div><div>5 rekomendasi<small>tempat, tak campur makan</small></div><div>Navigasi →<small>Maps 1 tap</small></div></div><div class="m-cta"><span class="p-emb">📍 Navigasi →</span><span class="g">⤴</span></div></div>';
+  if(id=='F1') return '<div class="m-hero strip"><div><span class="m-pill" style="background:#E11D48;color:#fff">★ BEST MATCH</span><span class="m-pill" style="background:#ECFDF5;color:#047857">✅ Halal</span></div><div class="nm">🍜 Kopi Kekinian — GI L2</div><div class="rs">Kenapa: kopi susu + colokan, cocok nongkrong lama</div><div class="meta">💰 50-100rb · 👶 kids · 📍 L2</div><div class="m-claim">🎟️ Klaim voucher → tunjukin ke kasir</div><div class="m-cta"><span class="p-ink">📍 Maps tenant →</span><span class="g">💾</span></div></div><div class="m-minis"><span>Ramen…</span><span>Seblak…</span><span style="background:#E11D48;color:#fff">Lainnya →</span></div>';
+  if(id=='F2') return '<div class="m-hero dark strip"><div><span class="m-pill" style="background:#E11D48;color:#fff">★ BEST MATCH</span><span class="m-pill" style="background:#ECFDF5;color:#047857">✅ Halal</span></div><div class="nm">🍜 Kopi Kekinian — GI L2</div><div class="rs">Kopi susu + colokan · 4.9★</div><div class="m-claim">🎟️ Klaim voucher → tunjukin ke kasir</div><div class="m-cta"><span class="p-ink" style="border:1.5px solid #fff">📍 Maps →</span><span class="g">⤴</span></div></div>';
+  if(id=='F3') return '<div class="m-hero"><div class="lbl">★ BEST MATCH · GI L2</div><div class="nm">🍜 Kopi Kekinian</div><div class="m-tick">🎟️ VOUCHER −20% · KOPI-GI-20<br><small>tunjukin layar ini ke kasir · login pas klaim</small></div><div class="m-claim">Klaim voucher →</div><div class="m-cta"><span class="p-ink">📍 Maps →</span><span class="g">⤴</span></div></div>';
+  if(id=='F4') return '<div class="m-hero strip" style="padding:10px"><div class="lbl">5 TENANT · GI · HALAL</div><div class="nm" style="font-size:13px">🍜 Kopi Kekinian — L2 · −20%</div><div class="m-claim" style="margin-top:6px">🎟️ Klaim →</div></div><div class="m-list"><div class="lr">#1 Kopi Kekinian<small>Halal · L2 · −20%</small></div><div class="lr">#2 Ramen Juara<small>Halal · L3 · Voucher</small></div><div class="lr">#3 Seblak Nampol<small>Non-halal · L1</small></div></div>';
+  if(id=='D1') return '<div class="m-sub">Pilih mall → direktori tenant curated · tanpa login/quota</div><div class="m-mall"><div style="display:flex;justify-content:space-between;align-items:center"><b>Grand Indonesia</b><span class="m-tag">GI</span></div><p>Thamrin · 40 tenant</p><div class="m-cta"><span class="g">🏬 Lihat Tenant →</span><span class="p-rose">✨ Cariin →</span></div></div><div class="m-mall"><div style="display:flex;justify-content:space-between;align-items:center"><b>Central Park</b><span class="m-tag">CP</span></div><p>Grogol · 40 tenant</p><div class="m-cta"><span class="g">🏬 Lihat Tenant →</span><span class="p-rose">✨ Cariin →</span></div></div>';
+  if(id=='D2') return '<div class="m-inkhead"><div class="lbl" style="font-size:10px;font-weight:800;opacity:.7">DIREKTORI · 5 MALL</div><div class="n">🏬 Mall</div><div style="font-size:11px;opacity:.75">Pilih mall → 40 tenant curated</div></div><div class="m-mall"><div style="display:flex;justify-content:space-between;align-items:center"><b>Grand Indonesia</b><span class="m-tag">GI</span></div><p>Thamrin · 40 tenant</p><div class="m-cta"><span class="g">🏬 Lihat Tenant →</span><span class="p-rose">✨ Cariin →</span></div></div>';
+  if(id=='S1') return '<div class="m-srch">🔍 Cari tenant… mis. kopi, ramen</div><div class="m-tog"><span class="on">✅ Halal</span><span>💰 50–100rb</span><span>👶 Kids</span></div><div class="m-claim">✨ Cariin yang cocok → (quiz 20 dtk)</div><div class="m-ten"><div class="th">🍜</div><div><b>Kopi Kekinian L2 <span class="m-pill" style="background:#E11D48;color:#fff">−20%</span></b><p>Kopi · ✅ Halal</p></div></div><div class="m-ten"><div class="th">🍜</div><div><b>Ramen Juara L3</b><p>Jepang · ✅ Halal</p></div></div>';
+  if(id=='S2') return '<div class="m-srch">🔍 Cari tenant… mis. kopi, ramen</div><div class="m-tog"><span class="on">✅ Halal</span><span>💰 50–100rb</span><span>☕ Nongkrong</span></div><div class="m-claim">✨ Cariin yang cocok → (quiz 20 dtk)</div><div class="m-ten"><div class="th" style="background:linear-gradient(140deg,#3F1D1D,#9D174D);color:#fff">☕</div><div><b>Kopi Kekinian L2 <span class="m-pill" style="background:#E11D48;color:#fff">−20%</span></b><p>4.9★ · L2 · ✅ Halal</p></div></div><div class="m-ten"><div class="th" style="background:linear-gradient(140deg,#1C1917,#44403C);color:#fff">🍜</div><div><b>Ramen Juara L3</b><p>4.8★ · L3 · ✅ Halal</p></div></div>';
+  return '';
+}
+function card(d){
+  var id=d[0],name=d[1],fam=d[2],page=d[3],use=d[4],desc=d[5],hex=d[6],css=d[7],eff=d[8],risk=d[9],pro=d[10],con=d[11];
+  var pk=picks.indexOf(id)>=0?' picked':'';
+  var famLabel={qtempat:'🎲 Quiz Tempat',qmakan:'🍜 Quiz Makan',rtempat:'🗺️ Result Tempat',rmakan:'🎟️ Result Makan',mall:'🏬 Mall'}[fam];
+  return '<div class="gcard'+pk+'" data-f="'+fam+'">'
+  +'<div class="gprev"><div class="mini">'+topHTML(page)+bodyHTML(id)+'</div></div>'
+  +'<div class="gbody"><h3><span class="gnum">'+id+'</span>'+name+'</h3>'
+  +'<span class="tag" style="background:#f5f1e8;color:#57534e">'+famLabel+'</span><span class="tag" style="background:#f5f1e8;color:#57534e">'+use+'</span><span class="tag" style="background:#0C0A09;color:#fff">'+eff+'</span><span class="tag" style="background:#FFF7ED;color:#9a3412">risk: '+risk+'</span>'
+  +'<p>'+desc+'</p><p class="pro">✅ '+pro+'</p><p class="con">⚠️ '+con+'</p>'
+  +'<div class="hexes">'+hex.split(' · ').map(function(h){return '<span class="hex">'+h+'</span>';}).join('')+'</div>'
+  +'<div class="cssbox">'+css.replace(/</g,'&lt;')+'</div>'
+  +'<div class="rowbtns"><button class="btn-copy" onclick="copyCss(\''+id+'\')">📋 Copy CSS</button><button class="btn-pick" onclick="toggle(\''+id+'\')">'+(picks.indexOf(id)>=0?'✅ Shortlisted':'＋ Shortlist')+'</button></div>'
+  +'</div></div>';
+}
+var picks=[];
+try{picks=JSON.parse(localStorage.getItem('wikendo-pages20-pick')||'[]');}catch(e){picks=[];}
+function render(){document.getElementById('grid').innerHTML=DATA.map(card).join('');label();}
+function label(){document.getElementById('pickLabel').textContent=picks.length?('👆 Shortlist ('+picks.length+'): '+picks.join(', ')+' — balas di chat "Gua suka '+picks.join(', ')+'"'):'👆 Shortlist: 0 — tap + Shortlist di kartu favorit lu';}
+function save(){try{localStorage.setItem('wikendo-pages20-pick',JSON.stringify(picks));}catch(e){}}
+function toggle(id){var i=picks.indexOf(id);if(i>=0)picks.splice(i,1);else picks.push(id);save();render();}
+function clearPick(){picks=[];save();render();}
+function copyCss(id){var d=null;DATA.forEach(function(x){if(x[0]==id)d=x;});var t=d[7]+' /* '+TOK+' */';if(navigator.clipboard)navigator.clipboard.writeText(t);else{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}ta.remove();}}
+function copyPick(){var t=picks.length?('Gua suka '+picks.join(', ')):'(belum ada shortlist)';if(navigator.clipboard)navigator.clipboard.writeText(t);document.getElementById('pickLabel').textContent='📋 Tersalin: "'+t+'" — paste di chat!';}
+document.getElementById('filters').addEventListener('click',function(e){
+  if(e.target.tagName!='BUTTON')return;
+  var f=e.target.getAttribute('data-f');
+  var bs=this.querySelectorAll('button');for(var i=0;i<bs.length;i++)bs[i].classList.remove('on');e.target.classList.add('on');
+  var cs=document.querySelectorAll('.gcard');for(var j=0;j<cs.length;j++){cs[j].style.display=(f=='all'||cs[j].getAttribute('data-f')==f)?'':'none';}
+});
+render();
+</script>
+</body>
+</html>
