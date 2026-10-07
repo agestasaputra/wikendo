@@ -97,3 +97,61 @@ export function isTempatLoginWall(used: number, isLoggedIn: boolean): boolean {
 export function isMakanLoginWall(used: number, isLoggedIn: boolean): boolean {
   return !isLoggedIn && used >= 2
 }
+
+/* ── Auth gate v1.3 (Addendum 09) ─────────────────────────────────
+ * KENAPA di sini (pure): normalisasi phone + validasi format + format
+ * kode voucher + wall momen #2-4 dipakai server (register/claim) +
+ * pages (bottom sheet login). Tanpa baca auth/DB langsung.
+ * Kontrak: API §register (phone optional) + §16 claim (WIK-XXXXX) +
+ * Journey (4 momen wall). Contoh: normalizePhone('  ') → null.
+ */
+
+/** API §register: trim input HP, kosong/undefined → null (skip = valid). */
+export function normalizePhone(input: string | undefined): string | null {
+  const trimmed = (input || '').trim()
+  return trimmed ? trimmed : null
+}
+
+/**
+ * Schema CHECK `phone IS NULL OR phone ~ '^\+62[0-9]{9,13}$'`:
+ * null/undefined/kosong = true (skip), isi wajib format +62.
+ */
+export function isPhoneValid(phone: string | null | undefined): boolean {
+  if (phone === null || phone === undefined || phone === '') return true
+  return /^\+62[0-9]{9,13}$/.test(phone)
+}
+
+/** API §16: kode klaim `WIK-XXXXX` (5 char A-Z/0-9 uppercase). */
+export function isVoucherCodeValid(code: string | undefined): boolean {
+  return typeof code === 'string' && /^WIK-[A-Z0-9]{5}$/.test(code)
+}
+
+/** Generate kode klaim baru `WIK-XXXXX` (random A-Z/0-9, tanpa I/O biar testable). */
+export function generateVoucherCode(): string {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
+  let suffix = ''
+  for (let i = 0; i < 5; i++) {
+    suffix += chars[Math.floor(Math.random() * chars.length)]
+  }
+  return `WIK-${suffix}`
+}
+
+/** Momen wall #2: tap Simpan — anon dikunci, login lolos. */
+export function isSaveLoginWall(isLoggedIn: boolean): boolean {
+  return !isLoggedIn
+}
+
+/** Momen wall #3a: buka Wishlist — anon dikunci, login lolos. */
+export function isWishlistLoginWall(isLoggedIn: boolean): boolean {
+  return !isLoggedIn
+}
+
+/** Momen wall #3b: buka Riwayat — anon dikunci, login lolos. */
+export function isHistoryLoginWall(isLoggedIn: boolean): boolean {
+  return !isLoggedIn
+}
+
+/** Momen wall #4: klaim voucher WAJIB login (anon → 401, anti-farming). */
+export function isVoucherClaimWall(isLoggedIn: boolean): boolean {
+  return !isLoggedIn
+}

@@ -17,7 +17,7 @@
 
 ### 🔥 NOW (lagi dikerjain)
 - [x] Auth slice tracer-1 (TDD GREEN ✅ 18/18): `tests/quota-auth.test.ts` — quota split anon 1+2 vs register 2+5 + login wall momen #1 (pure, tanpa mock DB) — test 30/30 + lint bersih + build 9.09s ✅
-- [ ] Auth slice tracer-2 (TDD): phone optional + voucher code `WIK-XXXXX` + wall momen #2-4 (Simpan/Wishlist/voucher)
+- [x] Auth slice tracer-2 (TDD GREEN ✅ 26/26): `tests/auth-gate.test.ts` — phone optional NULL + voucher `WIK-XXXXX` + wall momen #2-4 (Simpan/Wishlist/Riwayat/klaim) — total test 56/56 + lint bersih + build 9.05s ✅
 - [x] Patch 5 docs downstream Addendum v1.3 (ADR v2.2 ✅ + Schema v1.1 ✅ + API v1.1 ✅ + Journey v2.1 ✅ + Checklist v1.2 ✅) — `app/` NOL diubah ✅ 5/5 GENAP
 - [x] Push + Deploy Vercel AUTO via main (commit `a36c6e0` live, prod 200 `Wikendo — Bingung Weekend Mau Kemana?` ✅ 7 Okt sore)
 
@@ -51,6 +51,15 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-07 sore — Auth slice tracer-2 (✅ GREEN 26/26, total test 56/56 + lint + build)
+- **Kenapa:** tracer-1 ngunci quota split + wall momen #1. tracer-2 ngunci sisa gerbang auth v1.3: phone optional (skip ≠ error) + format kode voucher + wall momen #2-4 (Simpan/Wishlist/Riwayat/klaim WAJIB login).
+- **Dikerjain (TDD RED→GREEN):**
+  - RED: `app/tests/auth-gate.test.ts` (26 test) — `normalizePhone` (trim, kosong→null) + `isPhoneValid` (NULL lolos, isi wajib `+62`) + `isVoucherCodeValid`/`generateVoucherCode` (`WIK-XXXXX`) + wall #2 Simpan / #3 Wishlist+Riwayat / #4 klaim voucher. RED valid 26/26 fail (fungsi belum ada).
+  - GREEN: `app/utils/quiz-logic.ts` +8 fungsi pure (seam komentar `Auth gate v1.3`, tanpa baca auth/DB langsung).
+- **Verifikasi:** `pnpm vitest run` 3 files 56/56 ✅ (12 lama + 18 tracer-1 + 26 tracer-2, no regresi) + `pnpm lint` bersih ✅ + `pnpm build` 9.05s 3.23MB ✅.
+- **Files:** `app/tests/auth-gate.test.ts` (baru), `app/utils/quiz-logic.ts`, `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** `server/api/quota.get.ts` pakai fungsi pure tracer-1 → wallet 2-state → `POST /api/voucher/claim` pakai `generateVoucherCode` + `isPhoneValid`.
 
 ## 2026-10-07 sore — Push + Deploy Vercel AUTO (✅ live, prod HTTP 200)
 - **Kenapa:** Agesta: "tiap ada perubahan jangan lupa langsung commit+push+deploy Vercel" → kunci ke global memory + SOP §5 (`agesta-app-workflow`).
