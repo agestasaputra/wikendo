@@ -18,7 +18,8 @@
 ### 🔥 NOW (lagi dikerjain)
 - [x] UI kombo slice-1→4 (DONE ✅ 7 Okt): Home wallet + quiz swipe + result deck/voucher + direktori SEO (`e12be1b` live, prod 200 `QUOTA HARI INI` ✅)
 - [x] Logo board v1 30 opsi (DONE ✅ 7 Okt malam): `design/logo-wikendo-30.html` — campur wordmark, KURANG cocok (Agesta: prefer icon-first app icon)
-- [ ] Logo board v2 icon-first 30 opsi (IN PROGRESS 🔨): `design/logo-wikendo-icon-30.html` — SEMUA icon-first app-icon ready + varian logo saja / logo+wordmark bawah, nunggu Top 3-5 Agesta
+- [ ] Logo board v2 icon-first 30 opsi (DONE ✅ 7 Okt malam): `design/logo-wikendo-icon-30.html` — SEMUA icon-first app-icon ready + varian logo saja / logo+wordmark bawah
+- [x] Finalis Top 4 Agesta (DONE ✅ 8 Okt): A2 W Gradient + A3 W Ink + D16 Dadu W + D18 Deck Swipe — issue dark mode tile hitam (A3, D16) → fix di `design/logo-finalis-top4-darkmode.html` (A3-cream + D16-orange, tes terang/gelap/OLED), nunggu kunci master A2 vs D16-orange
 - [ ] NEXT: finalin lockup resmi (master mark + wordmark) + pasang ke header web & favicon + stamp voucher 1-warna
 - [ ] NEXT: wire quota real `GET /api/quota` → wallet 2-state + `POST /api/voucher/claim` klaim beneran
 - [x] Patch 5 docs downstream Addendum v1.3 (ADR v2.2 ✅ + Schema v1.1 ✅ + API v1.1 ✅ + Journey v2.1 ✅ + Checklist v1.2 ✅) — `app/` NOL diubah ✅ 5/5 GENAP
@@ -54,6 +55,13 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-08 dinihari — Finalis Top 4 + fix dark mode (✅ DONE, nunggu kunci master)
+- **Kenapa:** Agesta shortlist A2 + A3 + D16 + D18 (verbatim) + flag issue "warna logonya hitam punya issue ketika dark mode". Valid: tile #18181b full nyatu sama wallpaper gelap/OLED, edge hilang.
+- **Dikerjain:** `design/logo-finalis-top4-darkmode.html` (self-contained) — tiap finalis dites 3 wallpaper (terang/gelap/OLED): A2 aman tanpa fix ✅, A3 tile hitam → fix A3-cream (tile #fffdf9 + ring ink + W ink, premium pindah ke huruf), D16 tile hitam → fix D16-orange (tile #f97316 + dadu cream outline ink, hitam jadi isi bukan wadah), D18 aman (hitam cuma isi kartu, + stroke cream 3px buat 16px). Prinsip dikunci: tile jangan hitam pekat, hitam = isi bukan wadah, tiap master wajib lolos terang+gelap+OLED + 16px + 1-warna. Rekomendasi: #1 A2 master (tanpa fix, store-ready) + #2 D16-orange runner-up (berkarakter, Gen-Z).
+- **Verifikasi:** file exists 15KB ✅, `app/` NOL diubah ✅ (design-only).
+- **Files:** `design/logo-finalis-top4-darkmode.html` (baru), `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** Agesta balas "kunci A2" / "kunci D16-orange" / dua-duanya → export SVG/PNG + pasang header web & favicon + stamp voucher 1-warna.
 
 ## 2026-10-07 malam — Logo board v2 icon-first 30 opsi (✅ DONE, nunggu shortlist Top 3-5 Agesta)
 - **Kenapa:** revisi brief Agesta VERBATIM "Gua lebih prefer logo daripada wordmark. Dapat dipakai sebagai logo app di smartphone. Bahkan lebih bagus jika dibawah logo ada wordmark nya. Jadi punya 2 pilihan: logo saja atau logo + wordmark". Board v1 campur wordmark → generate ulang full icon-first.
