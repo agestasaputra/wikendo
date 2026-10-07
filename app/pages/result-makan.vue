@@ -1,5 +1,5 @@
 <!-- pages/result-makan.vue → GET /result-makan (Result TENANT + voucher, mockup G kombo 15). -->
-APA: deck best match + tombol Klaim voucher (strip lime #A3E635 best-badge + R3b strip lime di area rating) + Maps tenant + quota makan.
+APA: deck best match + tombol Klaim voucher (F1b ticket-style dashed border + benefit −20% gede) + Maps tenant + quota makan.
 KENAPA: voucher = umpan kuota 5/hari + bukti B2B ke mall (PRD §8). Klaim WAJIB login (anti-farming, API 401).
 Contoh: anon tap Klaim → wall "Login 10 detik untuk klaim voucher". Lock: TENANT saja, 0 tempat wisata.
 <template>
@@ -15,23 +15,27 @@ Contoh: anon tap Klaim → wall "Login 10 detik untuk klaim voucher". Lock: TENA
     <template v-else>{{ errorMessage }}<br><button class="underline mt-1" @click="refresh()">Coba lagi → (quota nggak kepotong)</button></template>
   </div>
   <div v-else-if="list.length" class="flex flex-col">
-    <!-- R3b best-badge lime + strip lime di area rating -->
-    <div class="bg-white shadow-lg" style="border-radius:24px;border:2px solid #A3E635">
-      <div class="p-[14px_16px]">
-        <span class="inline-block text-[11px] font-extrabold px-2.5 py-1 rounded-full mr-1.5 mb-2 text-white" style="background:#A3E635">★ BEST MATCH{{ bestPromo ? ' • ' + bestPromo : '' }}</span>
-        <span v-if="hero.halal === true" class="inline-block text-[11px] font-extrabold px-2.5 py-1 rounded-full mb-2" style="background:#ecfdf5;color:#047857">✅ Halal</span>
-        <span v-else-if="hero.halal === false" class="inline-block text-[11px] font-extrabold px-2.5 py-1 rounded-full mb-2" style="background:#fef2f2;color:#991b1b">⚠️ Non-halal</span>
-        <span v-else class="inline-block text-[11px] font-extrabold px-2.5 py-1 rounded-full mb-2 bg-gray-100 text-gray-600">❓ Belum terverifikasi</span>
+    <!-- F1b ticket-style result: solid border di atas, dashed border di bawah, benefit −20% gede -->
+    <div class="bg-white shadow-lg rounded-2xl overflow-hidden" style="border-top:4px solid #FECDD3;border-bottom:2px dashed #FECDD3">
+      <div class="p-4">
         <div class="font-extrabold text-[16.5px]">🍜 {{ hero.name }} — {{ mallLabel }} L{{ hero.floor }}</div>
         <p class="text-[12.5px] text-gray-600 my-1.5">Kenapa: {{ hero.reason }}</p>
         <p class="text-[12.5px]">💰 {{ hero.price }} • {{ hero.kids }} • 📍 L{{ hero.floor }}</p>
-        <div class="mt-2 p-2 bg-gradient-to-r from-[#FFF7ED] to-[#FFE4E6]" style="border-radius:12px;border:1px solid #FECDD3">
-          <span class="text-[10px] font-semibold text-[#EA580C]">−20% ahorro</span>
-          <span class="text-[10px] ml-2 font-medium text-[#A3E635]" style="margin-left:6px">BEST</span>
+        <!-- F1b ticket: benefit −20% gede -->
+        <div class="mt-3 p-3 bg-gradient-to-r from-[#FFF7ED] to-[#FFE4E6]" style="border-radius:12px;border:2px solid #FECDD3;border-top:none">
+          <span class="text-[12px] font-semibold text-[#EA580C]">−20% ahorro</span>
+          <span class="text-[11px] ml-2 font-medium text-[#A3E635]">BEST</span>
         </div>
+        <p v-if="claimed" class="text-xs text-center mt-2" style="color:#047857">🎟️ Voucher: {{ claimed }}</p>
+        <p v-else-if="claimNote" class="text-xs text-center mt-2" style="color:#c2410c">{{ claimNote }}</p>
+        <div class="flex gap-2.5 mt-3">
+          <a :href="hero.maps" target="_blank" class="flex-1 text-center text-white p-[15px] rounded-2xl font-extrabold text-sm" style="background:#18181b">📍 Maps tenant →</a>
+          <button class="flex-1 p-[15px] rounded-2xl font-extrabold text-sm bg-white border-2 border-gray-200" title="Login untuk simpan" @click="claimNote = '🔒 Login 10 detik untuk simpan — gratis.'">💾</button>
+        </div>
+        <p class="text-[11.5px] text-gray-500 mt-2 text-center"><u>Lapor tutup/buka</u> • <u>Share ke temen</u> • Quota makan {{ quotaLabel }} tersisa</p>
       </div>
     </div>
-    <!-- end R3b -->
+    <!-- end F1b -->
 
     <!-- V12 gift surprise: grad cream-rose + border pink + pill rose Buka (meta tested) -->
     <div class="rounded-[14px] p-3 flex gap-2 items-center mt-2.5" :style="{ background: vGift.bg, border: '1px solid ' + vGift.border }">
@@ -53,7 +57,7 @@ Contoh: anon tap Klaim → wall "Login 10 detik untuk klaim voucher". Lock: TENA
 
 <script setup lang="ts">
 import type { TenantRecommendation } from '~/types'
-import { getMallShortLabel, getVoucherCardMeta } from '~/utils/quiz-logic'
+import { getMallShortLabel } from '~/utils/quiz-logic'
 const route = useRoute()
 const { data, pending, error, refresh } = await useFetch<{ recommendations: TenantRecommendation[], quota_remaining?: number }>('/api/makan/recommend', {
   method: 'POST',
@@ -72,14 +76,12 @@ const quotaLabel = computed(() => isWall.value ? '0/2 habis 🔒' : (quotaLeft.v
 const mallSlug = computed(() => String(route.query.mall_slug || route.query.mall || ''))
 const mallLabel = computed(() => (mallSlug.value ? getMallShortLabel(mallSlug.value) : 'Mall'))
 // V12 gift surprise: meta grad cream-rose + pill rose (helper tested).
-const vGift = getVoucherCardMeta('gift')
+const vGift = getMallShortLabel('gift')
 const hero = computed(() => {
   const r = list.value[idx.value] || ({} as TenantRecommendation)
   return { name: r.name || '—', reason: r.reason || '—', price: r.price_range || '—', floor: (r as { lantai?: string }).lantai || '?', halal: (r as { halal?: boolean | null }).halal ?? null, kids: (r as { kids_friendly?: boolean }).kids_friendly ? '👶 kids' : '—', maps: r.maps_url || '#' }
 })
-// minis unused (kept for future grid layout)
-const bestPromo = computed(() => '')
-// Klaim voucher: contract POST /api/voucher/claim (401 anon → wall, 409 claimed, 200 code). Wire Phase 2; sekarang wall jujur.
+// F1b ticket-based claim design: solid border atas, dashed bawah, benefit −20% gede
 async function claim() {
   claimNote.value = '🔒 Login 10 detik untuk klaim voucher — anti-farming, gratis.'
 }
