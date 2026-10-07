@@ -1,8 +1,8 @@
 # MVP Feature Checklist - Weekend Planner
 
-**Version:** 1.1
-**Date:** October 6, 2026
-**Status:** In Development — Phase 8.1 ✅ beres, 8.2/8.3 code-complete (belum E2E), Phase 1–3 sebagian, Phase 4–7 belum
+**Version:** 1.2 (7 Okt 2026 — patch Addendum 09 v1.3: auth progresif + voucher + kuota split)
+**Date:** October 6, 2026 (asli) + patch 7 Okt 2026
+**Status:** In Development — Phase 8.1 ✅ beres, 8.2/8.3 code-complete (belum E2E), Phase 1–3 sebagian, Phase 4–7 belum; scope v1.3 (auth progresif + voucher + wallet 2-state) LOCKED, eksekusi TDD next
 **Owner:** Agesta (Solo Founder)
 
 > **Sinkronisasi 6 Okt 2026:** checklist ini sempat tertinggal dari kode (8.1 beres tapi tak tercatat, kode 8.2/8.3 ada tapi tak dicentang).
@@ -82,11 +82,11 @@ This checklist breaks down Weekend Planner MVP into actionable tasks with priori
 
 **Goal:** Build all server routes and business logic
 
-### 2.1 Authentication Endpoints
+### 2.1 Authentication Endpoints (patch Addendum 09 v1.3 — progresif, phone optional, Google 1-tap primary)
 - [ ] **P0** `POST /api/auth/register` - Email/password signup - *1 hour*
-  - Validate email, password, phone format
+  - Validate email + password WAJIB; phone OPTIONAL (+62 HANYA kalau diisi, NULL = valid)
   - Call Supabase Auth signup
-  - Initialize user profile + quota
+  - Initialize user profile (phone NULL kalau skip) + quota tempat 2 + makan 5 hari ini via `initialize_new_user`
   - Set session cookie
   - Error handling (duplicate email, weak password)
 
@@ -101,36 +101,45 @@ This checklist breaks down Weekend Planner MVP into actionable tasks with priori
   - Call Supabase signOut
 
 - [ ] **P0** `GET /api/auth/callback` - OAuth callback handler - *45 min*
-  - Handle Google OAuth redirect
-  - Check if first-time user
-  - Collect phone if needed
-  - Initialize profile + quota
+  - Handle Google OAuth redirect (primary, 1-tap, friksi nol)
+  - Profile auto-created phone=NULL via trigger — TANPA modal "Masukkan nomor HP" (dihapus v1.3)
+  - Initialize quota tempat 2 + makan 5 hari ini
 
 - [ ] **P0** Auth middleware (`server/middleware/auth.ts`) - *30 min*
   - Extract JWT from cookie
   - Verify with Supabase
   - Attach user to request context
 
-**Subtotal:** ~3.5 hours
+- [ ] **P0** Login wall 4 momen + wallet 2-state (BARU v1.3) - *1.5 hours*
+  - Generate ke-2 tempat / ke-3 makan → 403 `LOGIN_REQUIRED` + copy "Login 10 detik → quota reset tiap hari, gratis"
+  - Tap Simpan/Klaim voucher (anon) → bottom sheet login
+  - Buka Wishlist/Riwayat (anon) → login prompt
+  - Klaim voucher WAJIB login (`POST /api/voucher/claim` anon → 401): cek promo aktif → cek `voucher_claims` (user_id, tenant_id, today) → code `WIK-XXXXX` → double-klaim 409
+  - Home wallet: anon "🎁 1 tempat • 2 makan free" vs register countdown 00.00
+  - Analytics: `login_prompted{reason}` 5 nilai + `anon_quota_exhausted{type}` + `voucher_claimed`
+
+**Subtotal:** ~5 hours (was ~3.5)
 
 ---
 
-### 2.2 Quota System
-- [ ] **P0** `GET /api/quota` - Check quota status - *45 min*
-  - Anonymous: check session cookie
-  - Registered: query database
-  - Calculate hours until reset
-  - Return status
+### 2.2 Quota System (patch Addendum 09 v1.3 — split tempat 2 + makan 5, cookie ganda)
+- [ ] **P0** `GET /api/quota` - Check quota status SPLIT - *45 min*
+  - Anonymous: cookie ganda (`quota_used` tempat 1x + `makan_quota_used` makan 2x) + `login_cta`
+  - Registered: `user_quota` (tempat 2) + `mall_search_quota` hari ini (makan 5, TERPISAH tidak makan quota tempat)
+  - Calculate hours until reset 00:00 WIB
+  - Return `{tempat:{used,limit,remaining}, makan:{...}, is_logged_in, reset_at, login_cta?}`
 
 - [ ] **P0** Quota check utility (`server/utils/quota.ts`) - *1.5 hours*
-  - `checkQuota(userId, sessionId)` function
+  - `checkQuota(userId, sessionId)` + `checkMakanQuota(userId)` terpisah
   - Handle anonymous vs registered logic
   - Auto-reset if >24h since last reset
-  - Return {allowed, remaining, resetAt, reason}
+  - Return {allowed, remaining, resetAt, reason} + 403 `LOGIN_REQUIRED` di momen wall (generate ke-2 tempat / ke-3 makan)
+  - LLM fail → quota TIDAK kepotong
 
 - [ ] **P0** Increment quota utility - *30 min*
-  - For registered: call `check_and_increment_quota()` DB function
-  - For anonymous: set cookie
+  - For registered: call `check_and_increment_quota()` DB function (tempat) + insert `mall_search_quota` (makan)
+  - For anonymous: set cookie (`quota_used` / `makan_quota_used`)
+  - Abuse clear-storage diterima soft launch (growth > strict; fingerprint/IP kalau spike)
 
 **Subtotal:** ~2.5 hours
 
@@ -159,20 +168,20 @@ This checklist breaks down Weekend Planner MVP into actionable tasks with priori
 
 ---
 
-### 2.4 History & Favorites
+### 2.4 History & Favorites (patch Addendum 09 v1.3 — anon LOCKED, split tempat|makan)
 - [ ] **P1** `GET /api/history` - Fetch generation history - *1 hour*
-  - Require auth
+  - Require auth (anon buka → login prompt, momen wall #3)
   - Paginated results (limit, offset)
-  - Return quiz_input + recommendations + created_at
+  - Return quiz_input + recommendations + created_at + `type: 'tempat'|'makan'` (tab split, tidak campur)
 
 - [ ] **P1** `POST /api/favorites` - Save favorite - *1 hour*
-  - Require auth
+  - Require auth (anon tap Simpan → bottom sheet login, momen wall #2)
   - Validate generation_id and index
   - Insert into favorites table
   - Handle duplicate (409 Conflict)
 
-- [ ] **P1** `GET /api/favorites` - Fetch favorites - *45 min*
-  - Require auth
+- [ ] **P1** `GET /api/favorites` - Fetch favorites (Wishlist) - *45 min*
+  - Require auth (anon buka → login prompt, momen wall #3)
   - Paginated results
   - Return recommendation data + notes
 
@@ -197,7 +206,7 @@ This checklist breaks down Weekend Planner MVP into actionable tasks with priori
 
 ---
 
-**Phase 2 Total:** ~13.5 hours
+**Phase 2 Total:** ~15 hours (was ~13.5 + v1.3 login wall 1.5h)
 
 ---
 
@@ -293,19 +302,20 @@ This checklist breaks down Weekend Planner MVP into actionable tasks with priori
 ---
 
 **Status 6 Okt 2026: BELUM ADA SAMA SEKALI** — `pages/login.vue`, `register.vue`, `auth/callback.vue`, `server/middleware/auth.ts` belum dibuat. Quota sekarang cookie-only (anon). Auth = blocker buat quota login + Simpan + history. Prioritas setelah 8.4.
+### 3.5 Auth Pages (patch Addendum 09 v1.3 — Google primary, phone opsional)
 - [ ] **P0** `pages/login.vue` - Login page - *1.5 hours*
   - Email + password form
   - "Remember me" checkbox
   - "Lupa password?" link (stub for now)
-  - "Login dengan Google" button
+  - "Login dengan Google" button (PRIMARY — 1-tap)
   - Link to register page
   - Form validation
   - Error display (invalid credentials)
   - Redirect after success
+  - Copy wall momen: "Login 10 detik → quota reset tiap hari, gratis"
 
 - [ ] **P0** `pages/register.vue` - Register page - *1.5 hours*
-  - Email, phone, password, confirm password fields
-  - Phone validation (+62 format)
+  - Email, password, confirm password WAJIB; phone collapsible OPSIONAL (+62 hanya kalau diisi)
   - Password strength indicator
   - Terms checkbox
   - "Daftar dengan Google" button
@@ -315,7 +325,7 @@ This checklist breaks down Weekend Planner MVP into actionable tasks with priori
 
 - [ ] **P0** `pages/auth/callback.vue` - OAuth callback - *1 hour*
   - Handle OAuth redirect
-  - Show phone collection modal (if first-time Google login)
+  - TANPA phone modal (dihapus v1.3 — phone=NULL via trigger)
   - Loading state
   - Redirect to previous page or quiz
 
@@ -346,11 +356,14 @@ This checklist breaks down Weekend Planner MVP into actionable tasks with priori
 
 ---
 
-### 3.7 Error & Edge Case Pages
-- [ ] **P0** `pages/quota-exhausted.vue` - Quota modal/page - *1 hour*
-  - Countdown to reset
-  - Alternative actions (history, share)
+### 3.7 Error & Edge Case Pages (patch Addendum 09 v1.3 — wallet 2-state + voucher gate)
+- [ ] **P0** `pages/quota-exhausted.vue` - Quota modal/page SPLIT tempat|makan - *1 hour*
+  - Countdown to reset 00:00 WIB (pisah tempat 2 vs makan 5)
+  - Wallet 2-state: anon tunjuk "1 tempat • 2 makan free" + CTA login 1-tap vs register tunjuk sisa + countdown
+  - Copy: "Login 10 detik → quota reset tiap hari, gratis"
+  - Alternative actions (history login, share read-only)
   - CTA to return tomorrow
+  - Voucher gate: klaim WAJIB login — anon tap → bottom sheet login, bukan error
 
 - [ ] **P0** Error components - *1 hour*
   - 404 page
@@ -367,12 +380,13 @@ This checklist breaks down Weekend Planner MVP into actionable tasks with priori
 
 ---
 
-## Phase 8: Mall F&B Split Quiz (Addendum 07 v1.1 Approved 6 Okt 2026)
+## Phase 8: Mall F&B Split Quiz (Addendum 07 v1.1 Approved 6 Okt 2026 + patch 09 v1.3 7 Okt 2026)
 
-**Goal:** Quiz makan + direktori tenant terpisah total dari quiz tempat. Result tidak dicampur.
+**Goal:** Quiz makan + direktori tenant terpisah total dari quiz tempat. Result tidak dicampur. Anon makan 2x cookie `makan_quota_used`, register 5x `mall_search_quota`; voucher WAJIB login (`voucher_claims` UNIQUE user+tenant+hari).
 
-### 8.1 Backend Mall (DB + Seed)
+### 8.1 Backend Mall (DB + Seed) (patch Addendum 09 v1.3 — tambah `voucher_claims`)
 - [x] **P0** Create tables `malls`, `tenants`, `mall_search_quota` + `raw_scrape` staging + RLS (public read, staging closed) - *30 min* ✅ BERES 6 Okt 2026 (`supabase/migration.sql`: 4 tabel + `idx_tenants_needs_survey` + `idx_raw_scrape_city_status`)
+- [ ] **P0** Create table `voucher_claims` (user_id NOT NULL, tenant_id, date, code WIK-XXXXX, redeemed, UNIQUE user+tenant+hari) + RLS own-claims - *30 min* ⏳ NEXT (spekschema v1.1, anti-farming 1 tenant 1x/hari)
 - [x] **P0** Import `data/tenants-seed.csv` 200 rows (5 mall x 40) + verifikasi - *30 min* ✅ BERES (`generate_seed.py` + `seed.sql` 205 INSERT, pytest 10/10)
 - [x] **P0** Patch NULL tri-state: kosong → `NULL` + `data_source`/`verified_at`/`needs_survey`, filter `.eq(true)` exclude NULL, badge ❓ - *1 jam* ✅ BERES 6 Okt 2026 (generator + migrasi + `types/` + `recommend.post.ts` + `tenants.get.ts` + `result-makan.vue` + `mall/[slug].vue` + `AUDIT.md`)
 
@@ -380,19 +394,21 @@ This checklist breaks down Weekend Planner MVP into actionable tasks with priori
 
 ---
 
-### 8.2 Makan API
+### 8.2 Makan API (patch Addendum 09 v1.3 — klaim voucher WAJIB login)
 - [x] **P0** `GET /api/malls` + `GET /api/malls/:slug` - *45 min* ✅ CODE-COMPLETE (`index.get.ts` ada; `:slug` detail via tenants.get — baca mall inline)
 - [x] **P0** `GET /api/malls/:slug/tenants` (filter halal/budget/mission/kids/search, tanpa LLM) - *1 hour* ✅ CODE-COMPLETE + aturan NULL `.eq(true)` + JSDoc tri-state
 - [x] **P0** `POST /api/makan/recommend` (cek quota makan → filter Supabase → LLM ranking Top 5 + reason 1 kalimat → save `generations {type:'makan'}`) - *2 hours* ✅ CODE-COMPLETE + passthrough `data_source`/`needs_survey`
+- [ ] **P0** `POST /api/voucher/claim` (WAJIB login: anon 401 → bottom sheet; cek promo aktif → cek `voucher_claims` → code WIK-XXXXX → double 409) - *1 hour* ⏳ NEXT (spek API v1.1, momen wall #4)
 - [ ] **P1** `POST /api/vote` (tanpa login, rate-limit IP) + `POST /api/report-tenant` - *1.5 hours* ⏳ BELUM — NEXT setelah 8.4 (nutup loop `is_open`/`needs_survey` dari AUDIT.md)
 
 **Subtotal (P0):** ~3.75 hours
 
 ---
 
-### 8.3 Frontend Makan + Direktori
+### 8.3 Frontend Makan + Direktori (patch Addendum 09 v1.3 — voucher gate + wallet)
 - [x] **P0** `pages/makan.vue` - Quiz 4Q (mall wajib 1 → misi → budget → rombongan+toggle halal/kids), reuse quiz tempat 80% - *2.5 hours* ✅ CODE-COMPLETE (+ pre-fill `?mall=` skip Q1 via `getMakanStartStep`, tested)
 - [x] **P0** `pages/result-makan.vue` - 5 kartu TENANT murni (nama + kategori•mall•lantai + halal + hype + reason + price_range + Maps gede + Simpan + Lapor tutup) - *2.5 hours* ✅ CODE-COMPLETE (+ badge ❓/📋 tri-state; tombol Simpan/Lapor ⏳ butuh auth/vote API)
+- [ ] **P0** Tombol "Klaim Voucher" di `result-makan.vue` (anon tap → bottom sheet login; login → `POST /api/voucher/claim` → code WIK-XXXXX + "Tunjukin ke kasir") - *1 hour* ⏳ NEXT (momen wall #4, sinyal monetisasi tenant)
 - [x] **P0** `pages/mall/[slug].vue` - Direktori SEO (list 40 + filter + search + banner "Cariin yang cocok → /makan?mall=") - *2.5 hours* ✅ CODE-COMPLETE (+ badge ❓/📋; SEO meta ⏳ menyusul)
 - [x] **P0** Update landing dual CTA (🗺️ Cari Tempat gede + 🍜 Cari Makan kedua) + navbar [Makan] - *45 min* ✅ SEBAGIAN (dual CTA di `index.vue` ✅; navbar [Makan] ⏳ BELUM — `layouts/` belum ada)
 - [ ] **P1** History/Favorites tab Tempat | Makanan (`type` field) - *1.5 hours*
@@ -401,17 +417,17 @@ This checklist breaks down Weekend Planner MVP into actionable tasks with priori
 
 ---
 
-### 8.4 Testing Makan
-- [ ] **P0** Test makan flow (landing → /makan → /result-makan → Maps/Simpan/Lapor) - *30 min*
-- [ ] **P0** Test quota pisah (tempat 2/hari vs makan 5/hari, tidak saling makan) - *20 min*
+### 8.4 Testing Makan (patch Addendum 09 v1.3 — split + wall + voucher)
+- [ ] **P0** Test makan flow (landing → /makan 2x anon → /result-makan → ke-3 = wall → login → klaim voucher WIK-XXXXX) - *30 min*
+- [ ] **P0** Test quota pisah (tempat 2/hari vs makan 5/hari, tidak saling makan; cookie ganda anon) - *20 min*
 - [ ] **P0** Test direktori filter + SEO meta `/mall/:slug` - *20 min*
 
 **Subtotal:** ~1.2 hours
 
 ---
 
-**Phase 8 Total (P0):** ~13-14 hours
-**Grand Total P0:** 64h + 13h = **~77h** (Solo founder 4-5h/hari → 16-19 hari)
+**Phase 8 Total (P0):** ~13-14 hours + v1.3 (voucher_claims 0.5h + claim API 1h + tombol klaim 1h) = **~15.5-16.5h**
+**Grand Total P0:** 64h + 13h + 2.5h (v1.3) = **~79.5h** (Solo founder 4-5h/hari → 16-20 hari)
 
 ---
 
@@ -471,7 +487,9 @@ This checklist breaks down Weekend Planner MVP into actionable tasks with priori
   - quiz_completed
   - recommendation_generated
   - recommendation_clicked
-  - login_prompted
+  - login_prompted{reason: quota_limit|save_favorite|claim_voucher|open_wishlist|open_history} (patch v1.3)
+  - anon_quota_exhausted{type: tempat|makan} (BARU v1.3)
+  - voucher_claimed{tenant_id, mall_slug} (BARU v1.3)
   - user_registered
   - quota_exhausted
   - generation_failed
@@ -498,12 +516,14 @@ This checklist breaks down Weekend Planner MVP into actionable tasks with priori
 
 **Goal:** Ensure everything works before launch
 
-### 6.1 Manual Testing
-- [ ] **P0** Test full anonymous flow (landing → quiz → result) - *30 min*
-- [ ] **P0** Test full registered flow (register → quiz → result × 2) - *30 min*
-- [ ] **P0** Test quota exhaustion scenarios - *30 min*
-- [ ] **P0** Test error scenarios (LLM timeout, invalid input) - *30 min*
-- [ ] **P0** Test OAuth flow (Google login) - *15 min*
+### 6.1 Manual Testing (patch Addendum 09 v1.3 — split + wall + voucher)
+- [ ] **P0** Test full anonymous flow (landing → quiz tempat 1x → result → generate ke-2 = LOGIN_REQUIRED wall) - *30 min*
+- [ ] **P0** Test full anonymous makan flow (landing → /makan 2x → result-makan → ke-3 = wall; Simpan/Klaim = bottom sheet login; Wishlist/Riwayat = prompt) - *30 min*
+- [ ] **P0** Test full registered flow (register phone skip=NULL → quiz tempat × 2 + makan × 5, tidak saling makan) - *30 min*
+- [ ] **P0** Test voucher claim gate (anon 401 → login → klaim WIK-XXXXX → double-klaim 409; 1 tenant 1x/hari) - *20 min*
+- [ ] **P0** Test quota exhaustion scenarios (wallet anon vs register, countdown 00:00 WIB) - *30 min*
+- [ ] **P0** Test error scenarios (LLM timeout → quota TIDAK kepotong, invalid input) - *30 min*
+- [ ] **P0** Test OAuth flow (Google login TANPA modal HP) - *15 min*
 - [ ] **P0** Test mobile responsive (iPhone, Android) - *30 min*
 - [ ] **P0** Test on multiple browsers (Chrome, Safari, Firefox) - *30 min*
 
@@ -587,13 +607,14 @@ This checklist breaks down Weekend Planner MVP into actionable tasks with priori
 | Phase | P0 (Must-Have) | P1 (Should-Have) | Total |
 |-------|----------------|------------------|-------|
 | 1. Setup & Foundation | 5.5h | 0.5h | 6h |
-| 2. Backend API | 10.5h | 3h | 13.5h |
+| 2. Backend API | 12h (was 10.5 + v1.3 login wall 1.5h) | 3h | 15h |
 | 3. Frontend UI | 19.5h | 5.5h | 25h |
 | 4. State Management | 6h | 0h | 6h |
 | 5. Analytics | 4h | 2h | 6h |
 | 6. Testing & QA | 11h | 6h | 17h |
 | 7. Pre-Launch | 7.5h | 2.5h | 10h |
-| **TOTAL** | **64h** | **19.5h** | **83.5h** |
+| 8. Mall F&B Split + v1.3 | 15.5h (was 13 + voucher 2.5h) | 4.5h | 20h |
+| **TOTAL** | **81h** | **24h** | **105h** |
 
 ---
 
@@ -626,8 +647,8 @@ This checklist breaks down Weekend Planner MVP into actionable tasks with priori
    - Mitigation: Test with 3-5 users early, iterate on flow
 
 3. **OAuth Integration** (Phase 2.1 + 3.5)
-   - Risk: Callback redirect issues, phone collection friction
-   - Mitigation: Test thoroughly, prepare fallback to email-only
+   - Risk: Callback redirect issues (phone friction SUDAH dihapus v1.3 — Google 1-tap langsung masuk, phone=NULL)
+   - Mitigation: Test thoroughly, email-only fallback ready
 
 4. **Mobile Responsive** (All frontend)
    - Risk: Layout breaks on small screens
@@ -655,13 +676,14 @@ This checklist breaks down Weekend Planner MVP into actionable tasks with priori
 
 Consider feature flags for:
 - [ ] Google OAuth (can disable if issues arise)
-- [ ] Phone number requirement (can make optional)
+- [x] Phone number requirement → SUDAH optional permanen (v1.3, bukan toggle lagi)
 - [ ] Quota limit (can increase from 2 to 3 if LLM cost allows)
 - [ ] P1 features (can enable gradually)
+- [ ] Voucher claim gate strengency (strict UNIQUE vs lenient kalau tenant komplain sepi klaim)
 
 ---
 
-## Success Criteria (2 Weeks Post-Launch)
+## Success Criteria (2 Weeks Post-Launch) (patch Addendum 09 v1.3 — funnel progresif)
 
 **Minimum Viable Success:**
 - ✅ 50+ registered users
@@ -669,6 +691,8 @@ Consider feature flags for:
 - ✅ 40%+ recommendation click-through rate
 - ✅ 20%+ day-2 return rate
 - ✅ <5% error rate
+- ✅ anon→register >15% (BARU v1.3 — bukti progressive login jalan, bukan mandatory)
+- ✅ voucher claim >20% viewer login result makan (BARU v1.3 — sinyal monetisasi tenant)
 
 **Strong Success:**
 - ✅ 100+ registered users
@@ -679,8 +703,8 @@ Consider feature flags for:
 
 ---
 
-**Document Status:** READY for execution  
-**Last Updated:** October 5, 2026  
+**Document Status:** READY for execution + patch v1.3 downstream 5/5 LOCKED  
+**Last Updated:** October 7, 2026 (patch Addendum 09 v1.3: auth progresif + voucher + kuota split + totals 81h P0)  
 **Owner:** Agesta
 
-**Next Action:** Begin Phase 1 (Project Setup)
+**Next Action:** Eksekusi Nuxt TDD (auth slice + login wall 4 momen + wallet 2-state + voucher gate) — spek 5 docs genap, `app/` siap diubah

@@ -16,7 +16,7 @@
 ## 📌 BOARD — posisi per 7 Okt 2026 siang (patch downstream v1.3 jalan)
 
 ### 🔥 NOW (lagi dikerjain)
-- [ ] Patch 5 docs downstream Addendum v1.3 (ADR ✅ + Schema ✅ + API ✅ + Journey ✅ + Checklist ⏳ sisa) — `app/` NOL diubah
+- [x] Patch 5 docs downstream Addendum v1.3 (ADR v2.2 ✅ + Schema v1.1 ✅ + API v1.1 ✅ + Journey v2.1 ✅ + Checklist v1.2 ✅) — `app/` NOL diubah ✅ 5/5 GENAP
 - [ ] Redeploy Vercel (commit 481f82c sudah ter-push, nunggu build hijau di Vercel)
 - [ ] Auth slice: login/register/callback/middleware (0 file = blocker quota login + Simpan/history)
 
@@ -51,17 +51,17 @@
 
 ## 🧾 LOG (newest first)
 
-## 2026-10-07 siang — Patch downstream v1.3 (🔥 IN PROGRESS, 4/5 docs)
+## 2026-10-07 siang — Patch downstream v1.3 (✅ BERES, 5/5 docs genap)
 - **Kenapa:** Agesta "Approve" Addendum v1.3 → kunci downstream biar eksekusi Nuxt 1 interpretasi. PRD Final TIDAK diutak-atik (aturan Addendum).
 - **Dikerjain:**
   - `02-ADR.md` v2.1 → v2.2 (7 patch: header, phone optional, progresif auth, OAuth tanpa modal HP, konsekuensi, quota split 1+2/wall 4 momen/voucher wajib login, analytics 3 event, summary, footer, change log).
   - `04-Database-Schema.md` v1.0 → v1.1 (3 patch: header, `user_profiles.phone` NOT NULL → NULL + CHECK optional + index partial + komentar, `initialize_new_user` phone DEFAULT NULL + quota makan, tabel baru `voucher_claims` + RLS).
   - `05-API-Specification.md` v1.0 → v1.1 (6 patch: header, `GET /api/quota` split tempat+makan + login_cta, implementasi cookie ganda, `POST /api/auth/register` phone optional, validasi + init, tipe `QuotaStatus` split, endpoint 16 `POST /api/voucher/claim` + footer).
   - `03-User-Journey.md` v2.0 → v2.1 (6 patch: header, quota rules split, register phone optional + OAuth tanpa modal, generate-again + Step 8 wallet 2-state, Step 13 voucher + Step 14 Home kombo, analytics 3 event, metrics anon→register >15%).
-  - ⏳ Sisa: `06-MVP-Checklist.md` (scope auth progresif + voucher) → commit + kirim file.
+  - `06-MVP-Checklist.md` v1.1 → v1.2 (14 patch: header+status, 2.1 auth progresif + login wall 4 momen + wallet + voucher gate, 2.2 quota split cookie ganda, 2.4 history/fav anon locked + split, 3.5 auth pages Google primary + phone opsional + tanpa modal, 3.7 quota-exhausted split + wallet + voucher gate, 5.1 analytics 3 event, 6.1 testing split + wall + voucher + LLM-fail, 8.0 goal + 8.1 voucher_claims + 8.2 claim API + 8.3 tombol klaim + 8.4 testing wall, totals 81h P0/105h, risk OAuth tanpa friksi HP, toggles phone permanen + voucher, success anon→register >15% + klaim >20%, footer next=TDD).
 - **Verifikasi:** docs only, `app/` NOL diubah ✅. Patch per-file verified ✅.
-- **Files:** `docs/02-ADR.md`, `docs/04-Database-Schema.md`, `docs/05-API-Specification.md`, `docs/03-User-Journey.md`, `docs/08-PROGRESS.md` (BOARD + LOG ini).
-- **Next:** Checklist → commit `docs: patch downstream v1.3` → kirim PROGRESS.md → eksekusi Nuxt TDD.
+- **Files:** `docs/02-ADR.md`, `docs/04-Database-Schema.md`, `docs/05-API-Specification.md`, `docs/03-User-Journey.md`, `docs/06-MVP-Checklist.md`, `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** commit `docs: patch downstream v1.3` → kirim PROGRESS.md → eksekusi Nuxt TDD (auth slice + wall + wallet + voucher).
 
 ## 2026-10-07 — Addendum v1.3 Revamp+Auth DRAFT (⏳ nunggu approve Agesta)
 - **Kenapa:** Agesta lock kombo 5+10+15 + 2 open question (mandatory login? kejar user sebanyak-banyaknya?) belum terkunci di dokumen. Tanpa ini eksekusi Nuxt bakal beda interpretasi.
