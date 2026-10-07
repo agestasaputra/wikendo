@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wikendo D16 — Opsi Padding (48→72)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--base:#fffdf9;--tempat:#f97316;--makan:#ee2c4b;--ink:#18181b;--mut:#6b7280;--line:#e5e7eb}
+*{box-sizing:border-box}body{margin:0;background:var(--base);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+.wrap{max-width:1120px;margin:0 auto;padding:24px 18px 80px}
+.hero{border:2px solid var(--ink);border-radius:22px;background:#fff;padding:24px}
+.hero h1{margin:0;font-size:24px;letter-spacing:-.4px}.hero h1 i{font-style:normal;color:var(--tempat)}
+.hero p{color:var(--mut);font-size:13.5px;line-height:1.7;max-width:860px}
+.hero p b{color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.card{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:16px}
+.card.cur{border:2px solid var(--tempat)}
+.card h2{margin:0;font-size:15px}.card h2 span{font-size:11px;background:var(--ink);color:#fff;border-radius:8px;padding:2px 8px;margin-right:8px;vertical-align:middle}
+.card.cur h2 span{background:var(--tempat)}
+.meta{font-size:12px;color:var(--mut);margin:4px 0 10px;line-height:1.6}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.panel{border-radius:12px;padding:12px 6px;display:flex;flex-direction:column;align-items:center;gap:6px;border:1px solid var(--line)}
+.panel small{font-size:10px;font-weight:800;letter-spacing:.3px}
+.panel.light{background:#fffdf9}.panel.dark{background:#111113;color:#fff}
+.appicon{width:88px;height:88px;border-radius:22px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.22)}
+.appicon svg{width:100%;height:100%;display:block}
+.bare{width:88px;height:88px;display:flex;align-items:center;justify-content:center}
+.bare svg{display:block;filter:drop-shadow(0 4px 12px rgba(0,0,0,.35))}
+.note{margin-top:8px;font-size:11.5px;line-height:1.6;border-radius:10px;padding:8px 10px;background:#f9fafb;border:1px solid var(--line);color:#52525b}
+.rule{background:var(--ink);color:#fff;border-radius:22px;padding:24px;margin-top:18px}
+.rule h2{margin:0 0 8px}.rule p{font-size:13px;line-height:1.7;color:#d4d4d8}
+.rule b{color:#fff}
+a.btn{display:inline-block;margin-top:12px;background:#fff;color:var(--ink);font-weight:800;font-size:13px;border-radius:12px;padding:10px 16px;text-decoration:none;margin-right:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hero">
+<h1>D16 <i>wikendo.</i> — 7 opsi padding</h1>
+<p>Canvas 96px. Angka = sisi dadu (px). Makin besar = padding makin ramping. <b>P2 = asli (52)</b>, <b>P4 = revisi sekarang (60)</b>. Semua Day pakai tile ink #18181b + dadu cream + W ink + titik oranye/merah. Semua Night = dadu takeout transparan + wordmark nempel (tight). Pilih 1 Day + 1 Night — boleh beda ukuran (misal Day 56, Night 64 karena takeout butuh presence lebih).</p>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<h2><span>P1 · 48</span>lega</h2>
+<p class="meta">Dadu 48 · W 24 · padding ~24px. Paling aman, paling kecil.</p>
+<div class="duo">
+<div class="panel light"><small>☀️ DAY</small><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#18181b"/><g transform="rotate(-8 48 48)"><rect x="24" y="24" width="48" height="48" rx="13" fill="#fffdf9"/><text x="48" y="58" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="24" font-weight="800" fill="#18181b">W</text><circle cx="32" cy="32" r="3.5" fill="#f97316"/><circle cx="64" cy="64" r="3.5" fill="#ee2c4b"/></g></svg></div></div>
+<div class="panel dark"><small>🌑 NIGHT</small><div class="bare"><svg viewBox="0 0 96 96" style="width:64px;height:64px"><g transform="rotate(-8 48 48)"><rect x="24" y="24" width="48" height="48" rx="13" fill="#fffdf9"/><text x="48" y="58" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="24" font-weight="800" fill="#18181b">W</text><circle cx="32" cy="32" r="3.5" fill="#f97316"/><circle cx="64" cy="64" r="3.5" fill="#ee2c4b"/></g></svg></div></div>
+</div>
+<div class="note">Kesan: premium-legap, tapi di home screen kalah lawan icon lain yang full-bleed.</div>
+</div>
+
+<div class="card">
+<h2><span>P2 · 52</span>asli ⭐</h2>
+<p class="meta">Dadu 52 · W 28 · padding ~22px. Versi asli yang lu suka.</p>
+<div class="duo">
+<div class="panel light"><small>☀️ DAY</small><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#18181b"/><g transform="rotate(-8 48 48)"><rect x="22" y="22" width="52" height="52" rx="14" fill="#fffdf9"/><text x="48" y="60" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="28" font-weight="800" fill="#18181b">W</text><circle cx="31" cy="31" r="3.5" fill="#f97316"/><circle cx="65" cy="65" r="3.5" fill="#ee2c4b"/></g></svg></div></div>
+<div class="panel dark"><small>🌑 NIGHT</small><div class="bare"><svg viewBox="0 0 96 96" style="width:68px;height:68px"><g transform="rotate(-8 48 48)"><rect x="22" y="22" width="52" height="52" rx="14" fill="#fffdf9"/><text x="48" y="60" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="28" font-weight="800" fill="#18181b">W</text><circle cx="31" cy="31" r="3.5" fill="#f97316"/><circle cx="65" cy="65" r="3.5" fill="#ee2c4b"/></g></svg></div></div>
+</div>
+<div class="note">Baseline selera lu. Kalau ragu, balik ke sini — terbukti lu suka.</div>
+</div>
+
+<div class="card">
+<h2><span>P3 · 56</span>seimbang</h2>
+<p class="meta">Dadu 56 · W 29 · padding ~20px. Napas + presence imbang.</p>
+<div class="duo">
+<div class="panel light"><small>☀️ DAY</small><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#18181b"/><g transform="rotate(-8 48 48)"><rect x="20" y="20" width="56" height="56" rx="15" fill="#fffdf9"/><text x="48" y="60" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="29" font-weight="800" fill="#18181b">W</text><circle cx="30" cy="30" r="3.5" fill="#f97316"/><circle cx="66" cy="66" r="3.5" fill="#ee2c4b"/></g></svg></div></div>
+<div class="panel dark"><small>🌑 NIGHT</small><div class="bare"><svg viewBox="0 0 96 96" style="width:72px;height:72px"><g transform="rotate(-8 48 48)"><rect x="20" y="20" width="56" height="56" rx="15" fill="#fffdf9"/><text x="48" y="60" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="29" font-weight="800" fill="#18181b">W</text><circle cx="30" cy="30" r="3.5" fill="#f97316"/><circle cx="66" cy="66" r="3.5" fill="#ee2c4b"/></g></svg></div></div>
+</div>
+<div class="note">Rekomendasi gue kalau P2 kerasa cungkring tapi P4 kegedean.</div>
+</div>
+
+<div class="card cur">
+<h2><span>P4 · 60</span>sekarang</h2>
+<p class="meta">Dadu 60 · W 30 · padding ~18px. Revisi yang live sekarang.</p>
+<div class="duo">
+<div class="panel light"><small>☀️ DAY</small><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#18181b"/><g transform="rotate(-8 48 48)"><rect x="18" y="18" width="60" height="60" rx="16" fill="#fffdf9"/><text x="48" y="61" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="30" font-weight="800" fill="#18181b">W</text><circle cx="28" cy="28" r="4" fill="#f97316"/><circle cx="68" cy="68" r="4" fill="#ee2c4b"/></g></svg></div></div>
+<div class="panel dark"><small>🌑 NIGHT</small><div class="bare"><svg viewBox="0 0 96 96" style="width:76px;height:76px"><g transform="rotate(-8 48 48)"><rect x="18" y="18" width="60" height="60" rx="16" fill="#fffdf9"/><text x="48" y="61" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="30" font-weight="800" fill="#18181b">W</text><circle cx="28" cy="28" r="4" fill="#f97316"/><circle cx="68" cy="68" r="4" fill="#ee2c4b"/></g></svg></div></div>
+</div>
+<div class="note">Titik tengah kemarin. Masih kerasa gede? Turun ke P3.</div>
+</div>
+
+<div class="card">
+<h2><span>P5 · 64</span>mekar</h2>
+<p class="meta">Dadu 64 · W 31 · padding ~16px. Night-takeout sekarang pakai ini.</p>
+<div class="duo">
+<div class="panel light"><small>☀️ DAY</small><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#18181b"/><g transform="rotate(-8 48 48)"><rect x="16" y="16" width="64" height="64" rx="17" fill="#fffdf9"/><text x="48" y="62" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="31" font-weight="800" fill="#18181b">W</text><circle cx="27" cy="27" r="4" fill="#f97316"/><circle cx="69" cy="69" r="4" fill="#ee2c4b"/></g></svg></div></div>
+<div class="panel dark"><small>🌑 NIGHT</small><div class="bare"><svg viewBox="0 0 96 96" style="width:80px;height:80px"><g transform="rotate(-8 48 48)"><rect x="16" y="16" width="64" height="64" rx="17" fill="#fffdf9"/><text x="48" y="62" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="31" font-weight="800" fill="#18181b">W</text><circle cx="27" cy="27" r="4" fill="#f97316"/><circle cx="69" cy="69" r="4" fill="#ee2c4b"/></g></svg></div></div>
+</div>
+<div class="note">Maksimal yang masih sopan buat Day. Buat Night oke karena tanpa tile.</div>
+</div>
+
+<div class="card">
+<h2><span>P6 · 68</span>full-bleed</h2>
+<p class="meta">Dadu 68 · W 33 · padding ~14px. Revisi pertama kemarin (kegedean).</p>
+<div class="duo">
+<div class="panel light"><small>☀️ DAY</small><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#18181b"/><g transform="rotate(-8 48 48)"><rect x="14" y="14" width="68" height="68" rx="18" fill="#fffdf9"/><text x="48" y="63" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="33" font-weight="800" fill="#18181b">W</text><circle cx="26" cy="26" r="4" fill="#f97316"/><circle cx="70" cy="70" r="4" fill="#ee2c4b"/></g></svg></div></div>
+<div class="panel dark"><small>🌑 NIGHT</small><div class="bare"><svg viewBox="0 0 96 96" style="width:84px;height:84px"><g transform="rotate(-8 48 48)"><rect x="14" y="14" width="68" height="68" rx="18" fill="#fffdf9"/><text x="48" y="63" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="33" font-weight="800" fill="#18181b">W</text><circle cx="26" cy="26" r="4" fill="#f97316"/><circle cx="70" cy="70" r="4" fill="#ee2c4b"/></g></svg></div></div>
+</div>
+<div class="note">Day-nya sesak (rotasi -8° bikin sudut dadu mepet edge). Night masih oke.</div>
+</div>
+
+<div class="card">
+<h2><span>P7 · 72</span>ekstrem</h2>
+<p class="meta">Dadu 72 · W 35 · padding ~12px. Batas — dadu rotasi nyaris nyentuh tile.</p>
+<div class="duo">
+<div class="panel light"><small>☀️ DAY</small><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#18181b"/><g transform="rotate(-8 48 48)"><rect x="12" y="12" width="72" height="72" rx="19" fill="#fffdf9"/><text x="48" y="64" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="35" font-weight="800" fill="#18181b">W</text><circle cx="25" cy="25" r="4.5" fill="#f97316"/><circle cx="71" cy="71" r="4.5" fill="#ee2c4b"/></g></svg></div></div>
+<div class="panel dark"><small>🌑 NIGHT</small><div class="bare"><svg viewBox="0 0 96 96" style="width:88px;height:88px"><g transform="rotate(-8 48 48)"><rect x="12" y="12" width="72" height="72" rx="19" fill="#fffdf9"/><text x="48" y="64" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="35" font-weight="800" fill="#18181b">W</text><circle cx="25" cy="25" r="4.5" fill="#f97316"/><circle cx="71" cy="71" r="4.5" fill="#ee2c4b"/></g></svg></div></div>
+</div>
+<div class="note">Disimpan biar lu lihat batasnya. Day JANGAN dipakai (sesak + sudut kepotong); Night maksimal.</div>
+</div>
+
+</div>
+
+<div class="rule">
+<h2>🎯 Cara pilih (rekomendasi expert)</h2>
+<p>Day dan Night <b>boleh beda ukuran</b>. Rumus aman: <b>Day = P2/P3/P4</b> (tile butuh napas, rotasi makan ruang) + <b>Night = Day + 1 tingkat</b> (takeout tanpa tile butuh presence ekstra). Kombinasi favorit gue: <b>Day P3 (56) + Night P4/P5 (60/64)</b>. Balas misal <b>"Day P3, Night P5"</b> → gue kunci + export asset + pasang header &amp; favicon. File ini design-only, <b>app/ NOL diubah</b>.</p>
+<a class="btn" href="logo-d16-dual-mode.html">← Dual mode</a>
+<a class="btn" href="logo-wikendo-icon-30.html">← Board 30</a>
+</div>
+
+</div>
+</body>
+</html>

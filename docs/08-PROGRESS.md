@@ -56,6 +56,12 @@
 
 ## 🧾 LOG (newest first)
 
+## 2026-10-08 — Board 7 opsi padding D16 (P1 48 → P7 72)
+- **Kenapa:** feedback "Dadunya terlalu besar haha" (revisi 60/64 kebablasan) → "Coba bikin banyak opsi dari macam2 padding value". Board perbandingan visual biar pilih pakai mata, bukan angka.
+- **Dikerjain:** `design/logo-d16-padding-options.html` — 7 kartu (P1 48 lega, P2 52 asli ⭐, P3 56 seimbang, P4 60 sekarang, P5 64 mekar, P6 68 full-bleed, P7 72 ekstrem), tiap kartu Day tile ink + Night takeout berdampingan. Rekomendasi: Day P3 (56) + Night P4/P5 (60/64), Day dan Night boleh beda ukuran.
+- **Files:** `design/logo-d16-padding-options.html` (baru), `docs/08-PROGRESS.md` (LOG ini).
+- **Next:** Agesta balas misal "Day P3, Night P5" → kunci + export 4 asset + pasang header & favicon.
+
 ## 2026-10-08 — D16 dadu dikecilin lagi (feedback "terlalu besar haha")
 - **Kenapa:** revisi sebelumnya kebablasan mekar (Day 68 / Night 72). Titik tengah: Day dadu 68→**60** (W 33→30), Night 72→**64** (W 35→31). Napas tile balik ~18-20px.
 - **Files:** `design/logo-d16-dual-mode.html`, `docs/08-PROGRESS.md` (LOG ini).
