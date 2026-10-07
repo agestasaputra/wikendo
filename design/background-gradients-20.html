@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wikendo — 20 Gradasi Background (selaras D16 P3 🔒)</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#f5f1e8;color:#18181b;padding:24px 16px 140px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto}
+.hero{background:#18181b;color:#fff;border-radius:24px;padding:28px 24px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.13) 1.3px,transparent 1.4px);background-size:22px 22px;pointer-events:none}
+.hero h1{font-size:23px;font-weight:800;position:relative;z-index:1}
+.hero h1 .dot{color:#f97316}
+.hero p{position:relative;z-index:1;color:#d6d3d1;font-size:13px;margin-top:8px;max-width:780px}
+.badges{position:relative;z-index:1;display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.badge{font-size:11.5px;font-weight:800;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2)}
+.badge.ok{background:#0e7490;border-color:#0e7490}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;position:relative;z-index:1}
+.filters button{border:1.5px solid rgba(255,255,255,.35);background:transparent;color:#fff;border-radius:999px;padding:8px 16px;font-weight:800;font-size:12.5px;cursor:pointer;font-family:inherit}
+.filters button.on{background:#f97316;border-color:#f97316}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.gcard{background:#fff;border:1.5px solid #ece7dd;border-radius:20px;overflow:hidden}
+.gcard.picked{border-color:#f97316;box-shadow:0 0 0 2px #f97316}
+.gprev{height:250px;padding:14px;position:relative}
+.mini{max-width:300px;margin:0 auto;background:rgba(255,255,255,.55);backdrop-filter:blur(2px);border:1px solid rgba(24,24,27,.12);border-radius:18px;padding:12px 14px}
+.mini.dark{background:rgba(24,24,27,.45);border-color:rgba(255,255,255,.25);color:#fff}
+.mini .m-head{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:800}
+.mini .m-wallet{margin-top:8px;border-radius:12px;padding:8px 10px;font-size:11px;font-weight:800;background:linear-gradient(140deg,#0e7490,#164e63);color:#fff}
+.mini .m-ctas{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.mini .m-ctas span{border-radius:10px;padding:9px 4px;text-align:center;font-size:10.5px;font-weight:800;color:#fff}
+.mini .m-txt{margin-top:8px;font-size:10.5px;font-weight:700;opacity:.75}
+.gbody{padding:14px 16px 16px}
+.gbody h3{font-size:15px;font-weight:800}
+.gnum{display:inline-block;background:#18181b;color:#fff;font-size:11px;font-weight:800;border-radius:8px;padding:2px 9px;margin-right:6px}
+.tag{display:inline-block;font-size:10.5px;font-weight:800;padding:3px 10px;border-radius:999px;margin:6px 4px 0 0}
+.t-u{background:#ecfdf5;color:#047857}.t-t{background:#fff7ed;color:#c2410c}.t-m{background:#fff1f2;color:#be123c}.t-d{background:#18181b;color:#fff}
+.t-hero{background:#fef3c7;color:#92400e}
+.gbody p{font-size:12.5px;color:#44403c;margin-top:6px}
+.hexes{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.hex{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;background:#f5f1e8;border:1px solid #e7e0d2;border-radius:8px;padding:3px 9px}
+.cssbox{font-family:'JetBrains Mono',monospace;font-size:10.5px;background:#18181b;color:#d6d3d1;border-radius:10px;padding:9px 11px;margin-top:8px;overflow-x:auto;white-space:nowrap}
+.rowbtns{display:flex;gap:8px;margin-top:10px}
+.rowbtns button{flex:1;border-radius:11px;padding:10px;font-weight:800;font-size:12.5px;cursor:pointer;font-family:inherit;border:1.5px solid #18181b}
+.btn-copy{background:#fff;color:#18181b}
+.btn-pick{background:#18181b;color:#fff}
+.gcard.picked .btn-pick{background:#f97316;border-color:#f97316}
+.sec{background:#fff;border:1px solid #ece7dd;border-radius:20px;padding:22px;margin-top:18px}
+.sec h2{font-size:18px;font-weight:800;margin-bottom:4px}
+.sec .sub{font-size:13px;color:#78716c;margin-bottom:12px}
+.sec p,.sec li{font-size:13px;color:#44403c}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:10px}
+th,td{border:1px solid #ece7dd;padding:9px 10px;text-align:left;vertical-align:top}
+th{background:#faf7f0;font-size:11.5px}
+td.win{background:#ecfdf5;font-weight:700}
+.bar{position:fixed;bottom:0;left:0;right:0;background:rgba(24,24,27,.97);color:#fff;padding:13px 16px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;z-index:50;font-size:13px}
+.bar button{border:none;border-radius:12px;padding:12px 18px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit}
+.btnGo{background:#f97316;color:#fff}.btnGhost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+/* ===== 20 GRADASI ===== */
+.g1{background:linear-gradient(180deg,#fffdf9 0%,#faf6ee 60%,#f5eee1 100%)}
+.g2{background:linear-gradient(180deg,#fffdf9 0%,#fff7ed 55%,#ffedd5 100%)}
+.g3{background:linear-gradient(180deg,#fff7ed 0%,#fffdf9 45%,#fff1f2 100%)}
+.g4{background:radial-gradient(480px 240px at 50% -80px,rgba(249,115,22,.20),transparent 70%),radial-gradient(480px 240px at 50% 115%,rgba(238,44,75,.14),transparent 70%),#fffdf9}
+.g5{background:radial-gradient(360px 220px at 12% -40px,rgba(249,115,22,.22),transparent 70%),radial-gradient(380px 230px at 88% 108%,rgba(238,44,75,.18),transparent 70%),radial-gradient(300px 200px at 50% 55%,rgba(14,116,144,.10),transparent 70%),#fffdf9}
+.g6{background:linear-gradient(180deg,#fffdf9 0%,#ffe4e6 55%,#fed7aa 100%)}
+.g7{background:linear-gradient(180deg,#fffdf9 0%,#ede6d8 60%,#dccfb8 100%)}
+.g8{background-color:#faf5ec;background-image:radial-gradient(rgba(24,24,27,.07) 1.2px,transparent 1.3px),linear-gradient(180deg,rgba(255,253,249,.6),rgba(243,236,224,.9));background-size:22px 22px,cover}
+.g9{background:radial-gradient(420px 200px at 50% -60px,rgba(249,115,22,.30),transparent 70%),linear-gradient(180deg,#fffdf9 0%,#fff7ed 60%,#fed7aa 100%)}
+.g10{background:linear-gradient(180deg,#fff7ed 0%,#fdba74 72%,#f97316 100%)}
+.g11{background:linear-gradient(180deg,#fffbeb 0%,#fef3c7 45%,#fed7aa 100%)}
+.g12{background:linear-gradient(180deg,#faf7f0 0%,#e9c9a8 60%,#c2703d 100%)}
+.g13{background:radial-gradient(420px 200px at 50% -60px,rgba(238,44,75,.26),transparent 70%),linear-gradient(180deg,#fffdf9 0%,#fff1f2 60%,#fecdd3 100%)}
+.g14{background:linear-gradient(160deg,#fff1f2 0%,#fbcfe8 55%,#f9a8d4 115%)}
+.g15{background:linear-gradient(180deg,#881337 0%,#ee2c4b 62%,#fecdd3 135%)}
+.g16{background:linear-gradient(180deg,#fffdf9 0%,#ffe4e6 60%,#fecdd3 100%)}
+.g17{background:linear-gradient(180deg,#ecfeff 0%,#cffafe 55%,#99e3ee 100%)}
+.g18{background:linear-gradient(180deg,#f0fdfa 0%,#ccfbf1 60%,#99f6e4 100%)}
+.g19{background:linear-gradient(180deg,#27272a 0%,#18181b 60%,#0c4a5e 160%)}
+.g20{background:radial-gradient(400px 200px at 50% 0%,rgba(249,115,22,.28),transparent 70%),linear-gradient(180deg,#27272a,#18181b)}
+code{background:#f5f1e8;padding:1px 7px;border-radius:6px;font-size:11.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <h1>20 Gradasi Background <span class="dot">.</span></h1>
+  <p>Semua selaras identitas Wikendo D16 P3 🔒 — cream hangat + orange tempat <code>#f97316</code> + merah makan <code>#ee2c4b</code> + teal trust <code>#0e7490</code> + ink <code>#18181b</code>. Tiap kartu = preview UI asli di atas gradasinya, jadi lu nilai keterbacaan, bukan sekadar warna. Semua CSS-only, $0, load tetap &lt;2 dtk. <b>Design-only — <code>app/</code> NOL diubah.</b></p>
+  <div class="badges"><span class="badge ok">⭐ Rekomendasi gue: G4 · G3 · G9+G13</span><span class="badge">🏠 Universal 8</span><span class="badge">🟧 Tempat 4</span><span class="badge">🟥 Makan 4</span><span class="badge">🌊 Trust/Dark 4</span></div>
+  <div class="filters" id="filters">
+    <button class="on" data-f="all">Semua 20</button>
+    <button data-f="universal">🏠 Universal</button>
+    <button data-f="tempat">🟧 Tempat</button>
+    <button data-f="makan">🟥 Makan</button>
+    <button data-f="dark">🌙 Dark/Trust</button>
+  </div>
+</div>
+
+<div class="grid" id="grid"><!-- cards by JS --></div>
+
+<div class="sec">
+  <h2>⭐ Top 3 versi gue (expert pick)</h2>
+  <p class="sub">Dinilai dari: keterbacaan teks ink · cerita brand · biaya render · cocok split tempat≠makan.</p>
+  <table>
+    <tr><th>Rank</th><th>Pilihan</th><th>Kenapa menang</th></tr>
+    <tr><td><b>🥇 1</b></td><td class="win">G4 · Sunset Glow (Universal)</td><td class="win">Signature "arena dadu": glow orange atas + merah bawah di atas cream. Ceritain split tanpa nyebut sepatah kata. Teks ink tetap kontras penuh. 2 radial = render murah.</td></tr>
+    <tr><td><b>🥈 2</b></td><td class="win">G3 · Duo Weekend (Home)</td><td class="win">Satu-satunya yang visualisasikan aturan bisnis "hasil nggak pernah dicampur": atas orange (tempat) → cream netral → bawah merah (makan). Home superapp berasa punya 2 dunia.</td></tr>
+    <tr><td><b>🥉 3</b></td><td class="win">G9 + G13 (pasangan mode)</td><td class="win">Glow ikut flow: quiz tempat glow orange, quiz makan glow merah. User selalu tahu "lagi di dunia mana". Pasangan serasi, bukan 2 warna asal.</td></tr>
+  </table>
+  <p style="margin-top:10px">Cadangan berani: <b>G5 Aurora</b> (paling premium, 3 glow — render sedikit lebih mahal) · <b>G10 Hype</b> / <b>G15 Ember</b> cuma untuk hero result, jangan full-app (teks bawah butuh putih) · <b>G19</b> kalau lu mau dark-mode beneran, pasangannya D16-Night takeout.</p>
+</div>
+
+<div class="sec">
+  <h2>✅ Cara putusin</h2>
+  <p>Tombol <b>+ Shortlist</b> di tiap kartu → kesimpen otomatis di browser ini. Terus balas di chat misal: <code>"Gua suka G4, G3"</code> atau <code>"gas G4"</code> — baru gue eksekusi ke <code>app/</code> via TDD (token → 6 pages → test/lint/build → deploy).</p>
+</div>
+
+</div>
+<div class="bar" id="bar">
+  <span id="pickLabel">👆 Shortlist: 0 — tap + Shortlist di kartu favorit lu</span>
+  <button class="btnGo" onclick="copyPick()">📋 Salin pilihan</button>
+  <button class="btnGhost" onclick="clearPick()">Reset</button>
+</div>
+<script>
+var DATA=[
+["G1","Pagi Cream","universal","Full-app ✅",1,"Versi paling aman dari live sekarang: cream → krem gelap hangat. Flat hilang, risiko nol. Buat yang takut berubah.","#fffdf9 · #faf6ee · #f5eee1","background:linear-gradient(180deg,#fffdf9 0%,#faf6ee 60%,#f5eee1 100%);"],
+["G2","Krim Sutra","universal","Full-app ✅",1,"Cream → tint orange samar → peach muda. Hangat tapi tetap terang, teks ink kontras penuh. Upgrade natural dari base sekarang.","#fffdf9 · #fff7ed · #ffedd5","background:linear-gradient(180deg,#fffdf9 0%,#fff7ed 55%,#ffedd5 100%);"],
+["G3","Duo Weekend","universal","Home ⭐",1,"Atas tint orange → cream netral → bawah tint merah. Satu-satunya yang ceritain aturan split di background. Paling cocok untuk HOME superapp.","#fff7ed · #fffdf9 · #fff1f2","background:linear-gradient(180deg,#fff7ed 0%,#fffdf9 45%,#fff1f2 100%);"],
+["G4","Sunset Glow","universal","Full-app ⭐",1,"Signature 'arena dadu': glow orange atas + glow merah bawah di atas cream. Jawab 4 feedback sekaligus. Rekomendasi #1 gue.","glow #f97316 · glow #ee2c4b · #fffdf9","background:radial-gradient(480px 240px at 50% -80px,rgba(249,115,22,.20),transparent 70%),radial-gradient(480px 240px at 50% 115%,rgba(238,44,75,.14),transparent 70%),#fffdf9;"],
+["G5","Aurora Weekend","universal","Full-app ✅",1,"3 glow: orange kiri-atas + merah kanan-bawah + teal samar tengah. Paling premium, nuansa sunset lengkap + trust. Render sedikit lebih mahal.","glow orange · glow rose · glow teal","background:radial-gradient(360px 220px at 12% -40px,rgba(249,115,22,.22),transparent 70%),radial-gradient(380px 230px at 88% 108%,rgba(238,44,75,.18),transparent 70%),radial-gradient(300px 200px at 50% 55%,rgba(14,116,144,.10),transparent 70%),#fffdf9;"],
+["G6","Peach Blush","universal","Full-app ✅",1,"Cream → rose muda → peach. Manis, Gen-Z, tetap terang. Netral (nggak memihak tempat/makan) jadi aman untuk semua page.","#fffdf9 · #ffe4e6 · #fed7aa","background:linear-gradient(180deg,#fffdf9 0%,#ffe4e6 55%,#fed7aa 100%);"],
+["G7","Kopi Susu","universal","Full-app ✅",1,"Cream → krem kopi → cokelat susu. Earthy, kalem, dewasa. Buat Wikendo yang mau kelihatan 'nongkrong santai', bukan teriak.","#fffdf9 · #ede6d8 · #dccfb8","background:linear-gradient(180deg,#fffdf9 0%,#ede6d8 60%,#dccfb8 100%);"],
+["G8","Kertas Dadu","universal","Full-app ✅",1,"Pola titik dadu samar (brand mark!) + tint krem. Tekstur fisik kayak kartu — beda dari semua kompetitor yang licin digital.","dot ink 7% · #faf5ec","background-color:#faf5ec;background-image:radial-gradient(rgba(24,24,27,.07) 1.2px,transparent 1.3px);background-size:22px 22px;"],
+["G9","Semangat Tempat","tempat","Quiz tempat ⭐",0,"Glow orange + cream → peach. User ngerasa 'masuk dunia tempat'. Pasangan serasi G13. Rekomendasi #3 (berpasangan).","glow #f97316 · #fff7ed · #fed7aa","background:radial-gradient(420px 200px at 50% -60px,rgba(249,115,22,.30),transparent 70%),linear-gradient(180deg,#fffdf9 0%,#fff7ed 60%,#fed7aa 100%);"],
+["G10","Hype Orange","tempat","Hero only ⚠️",0,"Peach → orange pekat. Paling berenergi, Gen-Z hype. Teks bawah wajib putih — pakai untuk hero result, JANGAN full-app.","#fff7ed · #fdba74 · #f97316","background:linear-gradient(180deg,#fff7ed 0%,#fdba74 72%,#f97316 100%);"],
+["G11","Golden Hour","tempat","Full-app ✅",0,"Krem terang → kuning mentega → peach. Sunset jam 5 sore, hangat optimis. Lebih kalem dari G10, tetap satu keluarga orange.","#fffbeb · #fef3c7 · #fed7aa","background:linear-gradient(180deg,#fffbeb 0%,#fef3c7 45%,#fed7aa 100%);"],
+["G12","Terracotta","tempat","Full-app ✅",0,"Krem → tanah liat → terakota. Dewasa, earthy, premium. Buat Wikendo versi 'kopi & rooftop', bukan 'hype & neon'.","#faf7f0 · #e9c9a8 · #c2703d","background:linear-gradient(180deg,#faf7f0 0%,#e9c9a8 60%,#c2703d 100%);"],
+["G13","Berry Pagi","makan","Quiz makan ⭐",0,"Glow merah + cream → pink muda. 'Masuk dunia makan'. Pasangan G9 — glow ikut flow, user nggak pernah nyasar dunia.","glow #ee2c4b · #fff1f2 · #fecdd3","background:radial-gradient(420px 200px at 50% -60px,rgba(238,44,75,.26),transparent 70%),linear-gradient(180deg,#fffdf9 0%,#fff1f2 60%,#fecdd3 100%);"],
+["G14","Dragonfruit","makan","Full-app ✅",0,"Pink muda → permen → magenta pastel. Paling playful, Gen-Z kulineran. Tetap terang, teks ink aman.","#fff1f2 · #fbcfe8 · #f9a8d4","background:linear-gradient(160deg,#fff1f2 0%,#fbcfe8 55%,#f9a8d4 115%);"],
+["G15","Ember Maroon","makan","Hero only ⚠️",2,"Maroon gelap → merah → pink. Dramatis kayak foto makanan low-light. Teks wajib putih — hero result makan ONLY.","#881337 · #ee2c4b · #fecdd3","background:linear-gradient(180deg,#881337 0%,#ee2c4b 62%,#fecdd3 135%);"],
+["G16","Rose Hangat","makan","Full-app ✅",0,"Cream → rose → pink muda. Versi kalem dari keluarga merah. Aman full-app, manis tanpa norak.","#fffdf9 · #ffe4e6 · #fecdd3","background:linear-gradient(180deg,#fffdf9 0%,#ffe4e6 60%,#fecdd3 100%);"],
+["G17","Teal Trust","dark","Quota/wallet ✅",0,"Cyan muda → teal pastel. Sejuk, terpercaya. Cocok untuk area quota/voucher (bahasa 'trust'), bukan full-app (dingin vs cream hangat).","#ecfeff · #cffafe · #99e3ee","background:linear-gradient(180deg,#ecfeff 0%,#cffafe 55%,#99e3ee 100%);"],
+["G18","Ocean Healing","dark","Full-app ✅",0,"Mint → teal muda. Healing, santai, 'weekend leyeh-leyeh'. Alternatif adem di tengah keluarga hangat Wikendo.","#f0fdfa · #ccfbf1 · #99f6e4","background:linear-gradient(180deg,#f0fdfa 0%,#ccfbf1 60%,#99f6e4 100%);"],
+["G19","Midnight Weekend","dark","Dark-mode 🌙",2,"Charcoal → ink → teal gelap. Dark-mode beneran + pasangannya D16-Night takeout. Teks putih. Buat toggle malam / event malam.","#27272a · #18181b · teal","background:linear-gradient(180deg,#27272a 0%,#18181b 60%,#0c4a5e 160%);"],
+["G20","Charcoal Premium","dark","Voucher/card 🌙",2,"Glow orange di atas charcoal. Kartu voucher berasa 'tiket eksklusif'. Teks putih — untuk kartu/hero, bukan full-app terang.","glow orange · #27272a · #18181b","background:radial-gradient(400px 200px at 50% 0%,rgba(249,115,22,.28),transparent 70%),linear-gradient(180deg,#27272a,#18181b);"]
+];
+var MODE={universal:"🏠 Universal",tempat:"🟧 Tempat",makan:"🟥 Makan",dark:"🌙 Dark/Trust"};
+var picks=[];
+try{picks=JSON.parse(localStorage.getItem('wikendo-grad-pick')||'[]');}catch(e){picks=[];}
+function card(d){
+  var id=d[0],name=d[1],mode=d[2],use=d[3],dark=d[4],desc=d[5],hex=d[6],css=d[7];
+  var pk=picks.indexOf(id)>=0?' picked':'';
+  return '<div class="gcard'+pk+'" data-mode="'+mode+'" id="c-'+id+'">'
+  +'<div class="gprev '+id.toLowerCase()+'"><div class="mini'+(dark==2?' dark':'')+'">'
+  +'<div class="m-head"><span>🎲 wikendo.</span><span>🔔</span></div>'
+  +'<div class="m-wallet">QUOTA HARI INI · 2 tempat · 5 makan</div>'
+  +'<div class="m-ctas"><span style="background:#f97316">Cari Tempat</span><span style="background:#ee2c4b">Cari Makan</span></div>'
+  +'<div class="m-txt">Weekend ini mau kemana? Teks contoh — cek keterbacaan di sini.</div>'
+  +'</div></div>'
+  +'<div class="gbody"><h3><span class="gnum">'+id+'</span>'+name+'</h3>'
+  +'<span class="tag t-'+(mode=='dark'?'d':mode[0])+'">'+MODE[mode]+'</span><span class="tag '+(use.indexOf('⭐')>=0?'t-u':'')+'" style="'+(use.indexOf('⭐')>=0?'':'background:#f5f1e8;color:#57534e')+'">'+use+'</span>'
+  +'<p>'+desc+'</p><div class="hexes">'+hex.split(' · ').map(function(h){return '<span class="hex">'+h+'</span>';}).join('')+'</div>'
+  +'<div class="cssbox">'+css.replace(/</g,'&lt;')+'</div>'
+  +'<div class="rowbtns"><button class="btn-copy" onclick="copyCss(\''+id+'\')">📋 Copy CSS</button><button class="btn-pick" onclick="toggle(\''+id+'\')">'+(picks.indexOf(id)>=0?'✅ Shortlisted':'＋ Shortlist')+'</button></div>'
+  +'</div></div>';
+}
+function render(){document.getElementById('grid').innerHTML=DATA.map(card).join('');label();}
+function label(){document.getElementById('pickLabel').textContent=picks.length?('👆 Shortlist ('+picks.length+'): '+picks.join(', ')+' — balas di chat "Gua suka '+picks.join(', ')+'"'):'👆 Shortlist: 0 — tap + Shortlist di kartu favorit lu';}
+function save(){try{localStorage.setItem('wikendo-grad-pick',JSON.stringify(picks));}catch(e){}}
+function toggle(id){var i=picks.indexOf(id);if(i>=0)picks.splice(i,1);else picks.push(id);save();render();}
+function clearPick(){picks=[];save();render();}
+function copyCss(id){var d=null;DATA.forEach(function(x){if(x[0]==id)d=x;});var t=d[7];if(navigator.clipboard)navigator.clipboard.writeText(t);else{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}ta.remove();}}
+function copyPick(){var t=picks.length?('Gua suka '+picks.join(', ')):'(belum ada shortlist)';if(navigator.clipboard)navigator.clipboard.writeText(t);document.getElementById('pickLabel').textContent='📋 Tersalin: "'+t+'" — paste di chat!';}
+document.getElementById('filters').addEventListener('click',function(e){
+  if(e.target.tagName!='BUTTON')return;
+  var f=e.target.getAttribute('data-f');
+  var bs=this.querySelectorAll('button');for(var i=0;i<bs.length;i++)bs[i].classList.remove('on');e.target.classList.add('on');
+  var cs=document.querySelectorAll('.gcard');for(var j=0;j<cs.length;j++){cs[j].style.display=(f=='all'||cs[j].getAttribute('data-mode')==f)?'':'none';}
+});
+render();
+</script>
+</body>
+</html>

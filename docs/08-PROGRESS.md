@@ -56,6 +56,13 @@
 
 ## 🧾 LOG (newest first)
 
+## 2026-10-08 — Board 20 gradasi background (biar Agesta bisa putusin pakai mata)
+- **Kenapa:** Agesta VERBATIM "Gua masih ga suka sama background color yang lu kasih. Gua mau gradasi color untuk background apps nya. Kasih gua 20 rekomendasi gradasi color untuk wikendo" + "Kasih gua html format, biar bisa gua cek".
+- **Dikerjain:** `design/background-gradients-20.html` self-contained (±20KB): 8 Universal (G1–G8) + 4 Tempat (G9–G12) + 4 Makan (G13–G16) + 4 Trust/Dark (G17–G20). Tiap kartu = preview UI asli (header + wallet + 2 CTA + teks) di atas gradasinya + hex chips + copy-CSS + shortlist localStorage + filter kategori + sticky bar salin pilihan.
+- **Rekomendasi:** 🥇 G4 Sunset Glow (signature arena dadu) · 🥈 G3 Duo Weekend (ceritain split di home) · 🥉 G9+G13 pasangan glow ikut flow.
+- **Files:** `design/background-gradients-20.html`, `docs/08-PROGRESS.md` — `app/` NOL diubah.
+- **Next:** tunggu "Gua suka Gx, Gy" / "gas Gx" → eksekusi ke `app/` via TDD.
+
 ## 2026-10-08 — Board polish UI v1 (biar Agesta bisa putusin pakai mata)
 - **Kenapa:** Agesta VERBATIM "Kasih gua file html, agar gua bisa lihat dan bisa ambil keputusan".
 - **Dikerjain:** `design/ui-polish-options-v1.html` self-contained (±27KB): diagnosa live 4 poin + palette review token final + tabel emoji→Lucide + preview guideline docs/18 + 3 opsi visual (A Warm Minimal S/~4jam, B Signature Cream ⭐ M/~8jam, C Bold Mesh L/~14jam, tiap opsi 3 mockup HP: Home + Quiz + Result dengan glow yang ikut flow) + head-to-head vs North Star + sticky approve bar (pilihan kesimpen localStorage).
