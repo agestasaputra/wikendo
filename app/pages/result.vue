@@ -49,7 +49,7 @@
 <script setup lang="ts">
 import type { TempatRecommendation } from '~/types'
 const route = useRoute()
-const { data, pending, error, refresh } = await useFetch<{ recommendations: TempatRecommendation[] }>('/api/tempat/recommend', {
+const { data, pending, error, refresh } = await useFetch<{ recommendations: TempatRecommendation[], quota_remaining?: number }>('/api/tempat/recommend', {
   method: 'POST',
   body: route.query
 })
@@ -59,7 +59,9 @@ const wallNote = ref(false)
 const errMsg = computed(() => (error.value as unknown as { data?: { message?: string }, message?: string })?.data?.message || (error.value as unknown as { message?: string })?.message || 'Gagal generate.')
 const errorMessage = computed(() => String(errMsg.value))
 const isWall = computed(() => /login/i.test(errorMessage.value) || (error.value as unknown as { statusCode?: number })?.statusCode === 403)
-const quotaLabel = computed(() => isWall.value ? '1/1 habis 🔒' : '1/2')
+// Quota real: sisa dari response POST (quota_remaining). Anon limit tempat 1x → sukses = 0/1 (habis hari ini, jujur).
+const quotaLeft = computed(() => data.value?.quota_remaining)
+const quotaLabel = computed(() => isWall.value ? '1/1 habis 🔒' : (quotaLeft.value ?? 1) + '/1')
 const hero = computed(() => {
   const r = list.value[idx.value] || ({} as TempatRecommendation)
   return { name: r.name || '—', category: r.category || 'tempat', reason: r.reason || '—', cost: (r as { estimated_cost?: string }).estimated_cost || '—', area: (r as { location_area?: string }).location_area || '—', time: (r as { best_time?: string }).best_time || '—', emoji: ['🏛️', '☕', '🌳', '🎡', '🌊'][idx.value % 5], bg: ['linear-gradient(140deg,#ffedd5,#fdba74)', 'linear-gradient(140deg,#fef3c7,#fcd34d)', 'linear-gradient(140deg,#dcfce7,#86efac)', 'linear-gradient(140deg,#e0e7ff,#a5b4fc)', 'linear-gradient(140deg,#cffafe,#67e8f9)'][idx.value % 5] }

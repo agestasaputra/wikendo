@@ -106,6 +106,20 @@ export interface QuotaStatus {
 }
 
 /**
+ * WalletLabel — KONTRAK wallet quota home (pages/index.vue).
+ * - headline: sisa per mode ("1 tempat • 2 makan") — jujur ikut GET /api/quota, bukan static.
+ * - tempatChip/makanChip: "sisa/limit mode" ("0/1 tempat", "2/5 makan").
+ * - exhausted: true = dua-duanya 0 → momen login CTA.
+ * Dipakai: buildWalletLabel() di utils/quiz-logic.
+ */
+export interface WalletLabel {
+  headline: string
+  tempatChip: string
+  makanChip: string
+  exhausted: boolean
+}
+
+/**
  * LoaderVariant — KONTRAK spinner fetching API (1 helper + 1 komponen, 3 pages).
  * - tempat = orange #f97316 (result.vue, POST /api/tempat/recommend, LLM 30-45 dtk)
  * - makan = merah #ee2c4b (result-makan.vue, POST /api/makan/recommend, rank tenant)

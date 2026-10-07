@@ -54,7 +54,7 @@
 import type { TenantRecommendation } from '~/types'
 import { getMallShortLabel } from '~/utils/quiz-logic'
 const route = useRoute()
-const { data, pending, error, refresh } = await useFetch<{ recommendations: TenantRecommendation[] }>('/api/makan/recommend', {
+const { data, pending, error, refresh } = await useFetch<{ recommendations: TenantRecommendation[], quota_remaining?: number }>('/api/makan/recommend', {
   method: 'POST',
   body: route.query
 })
@@ -65,7 +65,9 @@ const claimNote = ref('')
 const errMsg = computed(() => (error.value as unknown as { data?: { message?: string }, message?: string })?.data?.message || (error.value as unknown as { message?: string })?.message || 'Gagal generate.')
 const errorMessage = computed(() => String(errMsg.value))
 const isWall = computed(() => /login/i.test(errorMessage.value) || (error.value as unknown as { statusCode?: number })?.statusCode === 403)
-const quotaLabel = computed(() => isWall.value ? '0/2 habis 🔒' : '4/5')
+// Quota real: sisa dari response POST (quota_remaining). Anon limit makan 2x → "4/5" static yang lama itu bohong.
+const quotaLeft = computed(() => data.value?.quota_remaining)
+const quotaLabel = computed(() => isWall.value ? '0/2 habis 🔒' : (quotaLeft.value ?? 2) + '/2')
 const mallSlug = computed(() => String(route.query.mall_slug || route.query.mall || ''))
 const mallLabel = computed(() => (mallSlug.value ? getMallShortLabel(mallSlug.value) : 'Mall'))
 const hero = computed(() => {

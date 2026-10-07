@@ -13,12 +13,13 @@
 
 ---
 
-## 📌 BOARD — posisi per 8 Okt 2026 (Supabase DONE ✅, next quota real)
+## 📌 BOARD — posisi per 8 Okt 2026 (Supabase + quota real + button merah DONE ✅, next slice auth)
 
 ### 🔥 NOW (lagi dikerjain)
 - [x] Halaman index direktori `/mall` (DONE ✅ 8 Okt): nav header "🏬 Mall" tadinya hardcode GI → sekarang hub 5 mall (Lihat Tenant / Cariin yang cocok per kartu) + helper `getMallName/getMallShortLabel` hapus duplikat mapping di 2 files
 - [x] Loader/spinner fetching API (DONE ✅ 8 Okt): komponen `AppLoader` (variant tempat/makan/mall) + helper `getLoaderMeta` tested → pasang ke `result.vue` + `result-makan.vue` + `mall/[slug].vue` (sebelumnya direktori NOL loader pas ganti filter)
-- [ ] NEXT: wire quota real `GET /api/quota` → wallet 2-state + `POST /api/voucher/claim` klaim beneran (DB sudah live, tinggal wiring kuota)
+- [x] Quota real DONE ✅ 8 Okt: `GET /api/quota` (anon-only via `buildQuotaStatus`, helper SAMA dgn wallet) → wallet home jujur (anon 1 • 2, skeleton loading, fallback 1 • 2, login CTA pas exhausted) + label quota real di `result`/`result-makan` dari `quota_remaining` (ganti static bohong 1/2 & 4/5) + `POST /api/voucher/claim` DITUNDA ke slice auth (kontrak WAJIB login/401, belum ada session infra)
+- [x] Button Cari Makan solid merah DONE ✅ 8 Okt: temuan Agesta (screenshot board solid vs app outline) → `.cta2 .m` spec + `index.vue` jadi solid `#ee2c4b` teks putih + shadow (Dual Entry setara, CTR `/makan`)
 - [ ] NEXT: finalin lockup resmi (master mark + wordmark) + pasang ke header web & favicon + stamp voucher 1-warna
 - [x] UI kombo slice-1→4 (DONE ✅ 7 Okt): Home wallet + quiz swipe + result deck/voucher + direktori SEO (`e12be1b` live, prod 200 `QUOTA HARI INI` ✅)
 - [x] Logo board v1 30 opsi (DONE ✅ 7 Okt malam): `design/logo-wikendo-30.html` — campur wordmark, KURANG cocok (Agesta: prefer icon-first app icon)
@@ -27,6 +28,7 @@
 - [x] Push + Deploy Vercel AUTO via main (kombo `e12be1b` live, prod 200 `QUOTA HARI INI` ✅ 7 Okt malam)
 
 ### ⏳ NEXT (antrian dekat)
+- [ ] Slice auth (register/login/session, Google 1-tap primary) → baru `POST /api/voucher/claim` beneran (kontrak 401 anon)
 - [ ] 8.4 E2E (butuh DB seeded dulu)
 
 ### 📦 BACKLOG (nanti)
@@ -57,6 +59,13 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-08 — Button Makan solid merah + quota real DONE ✅ (Dual Entry setara + wallet jujur)
+- **Kenapa:** Agesta kirim screenshot (solid merah) vs app (putih outline) + "gas" → keputusan: Makan jadi solid `#ee2c4b` teks putih + shadow (dua pintu setara; outline bikin Makan keliatan non-aktif → CTR `/makan`/voucher ketekan). Sekalian beresin quota real yang nyangkut uncommitted (wallet static "2 • 5" = limit register, bohong buat 100% anon).
+- **Dikerjain:** spec `design/revamp-combo-5-10-15.html` (`.cta2 .m` solid + shadow) + `app/pages/index.vue` (button Makan solid, spec=app biar nggak split-brain) → quota TDD: `tests/wallet.test.ts` 4 test (MERAH 4 FAIL → HIJAU 4/4) → `WalletLabel` di `types` + `buildWalletLabel()` di `quiz-logic` → baru `server/api/quota.get.ts` (cookie anon via helper SAMA, anon-only) → wallet home wire `GET /api/quota` (skeleton, fallback 1 • 2, login CTA pas exhausted) → label `result`/`result-makan` baca `quota_remaining` (ganti static 1/2 & 4/5). `POST /api/voucher/claim` DITUNDA ke slice auth (kontrak WAJIB login/401, belum ada session infra — endpoint yang selalu 401 = sia-sia).
+- **Verifikasi:** test 68/68 (6 files) ✅ + lint 0 error ✅ + build 8.84s ✅. `AGENTS.md` §4 + §7 (68 test) diupdate.
+- **Files:** `design/revamp-combo-5-10-15.html`, `app/pages/index.vue`, `app/pages/result.vue`, `app/pages/result-makan.vue`, `app/types/index.ts`, `app/utils/quiz-logic.ts`, `app/server/api/quota.get.ts` (baru), `app/tests/wallet.test.ts` (baru), `app/AGENTS.md`, `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** commit + push + deploy Vercel → verify prod `/` + `/api/quota`.
 
 ## 2026-10-08 — Halaman index direktori `/mall` DONE ✅ (fix hardcode GI)
 - **Kenapa:** temuan Agesta "klik button mall di header, redirect ke mall/grand-indonesia? seharusnya ga langsung auto select" — benar, link header hardcode GI sisa slicing (dulu DB kosong). User non-GI ngerasa "cuma GI doang" → cabut.

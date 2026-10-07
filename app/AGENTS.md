@@ -50,12 +50,13 @@ app/
 ├── pages/                  # FILE-BASED ROUTING — nama file = URL, jangan bikin router manual
 │   ├── index.vue           # /
 │   ├── quiz.vue            # /quiz (5Q tempat) — state lokal step/answers, redirect /result?query
-│   ├── result.vue          # /result — useFetch POST /api/tempat/recommend, 3 state pending/error/data
+│   ├── result.vue          # /result — useFetch POST /api/tempat/recommend, label quota real dari quota_remaining
 │   ├── makan.vue           # /makan (4Q + toggle halal/kids + pre-fill ?mall=)
-│   ├── result-makan.vue    # /result-makan — kartu tenant + tombol Maps
+│   ├── result-makan.vue    # /result-makan — kartu tenant + tombol Maps + label quota real dari quota_remaining
 │   ├── mall/[slug].vue     # /mall/:slug — direktori, search client-side
 │   ├── mall/index.vue        # /mall — INDEX direktori (hub SEO 5 mall, fetch GET /api/malls)
 ├── server/api/             # BACKEND — secret & quota HANYA di sini, tidak pernah ke browser
+│   ├── quota.get.ts               # GET /api/quota — response via buildQuotaStatus (helper SAMA dgn wallet, anon-only)
 │   ├── tempat/recommend.post.ts   # *.post.ts = POST only (405 otomatis kalau salah method)
 │   ├── makan/recommend.post.ts
 │   └── malls/index.get.ts + [slug]/tenants.get.ts   # *.get.ts = GET only

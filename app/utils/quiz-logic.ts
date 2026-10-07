@@ -11,7 +11,7 @@
  * ATURAN: fungsi di sini harus PURE (input → output, tanpa side effect,
  * tanpa baca route/cookie/DB). Side effect tetap di pages/server.
  */
-import type { QuotaStatus, QuotaStatusInput, LoaderMeta, LoaderVariant } from '../types'
+import type { QuotaStatus, QuotaStatusInput, LoaderMeta, LoaderVariant, WalletLabel } from '../types'
 
 export function progressPercent(step: number, total: number): number {
   return ((step + 1) / total) * 100
@@ -96,6 +96,27 @@ export function isTempatLoginWall(used: number, isLoggedIn: boolean): boolean {
 /** Momen wall #1 makan: anon yang used>=2 (generate ke-3 dikunci). Register bukan wall. */
 export function isMakanLoginWall(used: number, isLoggedIn: boolean): boolean {
   return !isLoggedIn && used >= 2
+}
+
+/* ── Wallet label home (index.vue) ─────────────────────────────────
+ * KENAPA di sini (pure): wallet home tadinya static "2 tempat • 5 makan"
+ * (limit REGISTER) padahal user sekarang anon → scarcity bohong.
+ * QuotaStatus (dari GET /api/quota) → label jujur ikut sisa.
+ * exhausted = momen login CTA. Tanpa baca API/cookies langsung.
+ * Contoh: buildWalletLabel(buildQuotaStatus({tempatUsed:0,makanUsed:0,isLoggedIn:false}))
+ * → { headline: '1 tempat • 2 makan', ... }.
+ */
+
+/** QuotaStatus → label wallet: headline sisa + chip "sisa/limit" + flag habis. */
+export function buildWalletLabel(status: QuotaStatus): WalletLabel {
+  const t = status.tempat.remaining
+  const m = status.makan.remaining
+  return {
+    headline: `${t} tempat • ${m} makan`,
+    tempatChip: `${t}/${status.tempat.limit} tempat`,
+    makanChip: `${m}/${status.makan.limit} makan`,
+    exhausted: t <= 0 && m <= 0
+  }
 }
 
 /* ── Auth gate v1.3 (Addendum 09) ─────────────────────────────────
