@@ -133,3 +133,37 @@ export interface LoaderMeta {
   title: string
   hint: string
 }
+
+/**
+ * QuizFlow — KONTRAK header quiz Q2d/M3d (board v7, gas Q2d+M3d+V12).
+ * - tempat = QUIZ TEMPAT + dot ember-terang #FB923C, selected ember #EA580C/#FFF7ED
+ * - makan = QUIZ MAKAN + dot rose-terang #FDA4AF, selected rose #E11D48/#FFE4E6
+ * Label + question PUTIH #fff di atas ink #0C0A09 (AAA). Segmen blok lime #A3E635.
+ * Dipakai: getQuizHeaderMeta() di utils/quiz-logic + pages/quiz.vue + pages/makan.vue.
+ */
+export type QuizFlow = 'tempat' | 'makan'
+
+export interface QuizHeaderMeta {
+  label: string
+  dot: string
+  labelColor: string
+  questionColor: string
+  headBg: string
+  segOn: string
+  selBorder: string
+  selBg: string
+}
+
+/**
+ * VoucherStyle — KONTRAK kartu voucher result-makan (board v7, gas Q2d+M3d+V12).
+ * - gift = V12 gift surprise: bg grad cream-rose + border pink + pill rose.
+ * Dipakai: getVoucherCardMeta() di utils/quiz-logic + pages/result-makan.vue.
+ */
+export type VoucherStyle = 'gift'
+
+export interface VoucherCardMeta {
+  bg: string
+  border: string
+  goBg: string
+  goColor: string
+}

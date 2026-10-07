@@ -3,22 +3,28 @@
   KENAPA: 1 keputusan kecil per layar = completion >70% (PRD §4). Engine sama dipakai quiz makan → codebase 1x.
   Contoh: tap opsi langsung next (tanpa tombol Lanjut) — quota kepake pas Generate, bukan per tanya. -->
 <template>
-  <div class="max-w-md mx-auto px-4 pb-10 min-h-[80vh] flex flex-col" style="background:#fffdf9">
+  <div class="max-w-md mx-auto px-4 pb-10 min-h-[80vh] flex flex-col" style="background:#F5F5F4">
     <div class="flex justify-between items-center font-bold text-[13px] py-3">
       <NuxtLink to="/" class="text-ink">← 🗺️ Quiz tempat</NuxtLink>
       <span class="text-gray-500">{{ step + 1 }}/{{ questions.length }} • ⏱ 30 dtk</span>
     </div>
-    <div class="h-2 bg-[#ececec] rounded-full overflow-hidden">
-      <div class="h-full rounded-full transition-all" style="background:linear-gradient(90deg,#f97316,#fb923c)" :style="{ width: progress + '%' }" />
+    <!-- Q2d ink header: label PUTIH + dot ember-terang, question putih, segmen blok lime -->
+    <div class="rounded-[14px] p-[10px_12px]" :style="{ background: headMeta.headBg }">
+      <div class="text-[10px] font-extrabold tracking-wide" :style="{ color: headMeta.labelColor }">
+        <span :style="{ color: headMeta.dot }">●</span> {{ headMeta.label }} · {{ step + 1 }}/{{ questions.length }} · ⏱ 30 dtk
+      </div>
+      <div class="text-[19px] font-extrabold leading-snug mt-1" :style="{ color: headMeta.questionColor }">{{ q.question }}</div>
+      <div class="flex gap-[5px] mt-[10px]">
+        <i v-for="(on, i) in segState" :key="i" class="flex-1 h-2 rounded-full" :style="{ background: on ? headMeta.segOn : 'rgba(255,255,255,.22)' }" />
+      </div>
     </div>
-    <h3 class="text-[21px] font-extrabold mt-3">{{ q.question }}</h3>
-    <p class="text-[13px] text-gray-500 mb-2">Tap 1 — nggak ada jawaban salah</p>
+    <p class="text-[13px] text-gray-500 mb-2 mt-2">Tap 1 — nggak ada jawaban salah</p>
     <div class="flex flex-col gap-2 mt-1">
       <button
         v-for="o in q.options"
         :key="o.value"
         class="w-full bg-white rounded-[20px] p-[14px] font-bold text-sm flex gap-2.5 items-center cursor-pointer text-left border-2 transition-colors"
-        :style="answers[q.id] === o.value ? 'border-color:#f97316;background:#fff7ed' : 'border-color:#ececec'"
+        :style="answers[q.id] === o.value ? `border-color:${headMeta.selBorder};background:${headMeta.selBg}` : 'border-color:#ececec'"
         style="min-height:56px"
         @click="select(o.value)"
       >
@@ -33,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { progressPercent, isLastStep } from '~/utils/quiz-logic'
+import { isLastStep, getQuizHeaderMeta, getQuizSegState } from '~/utils/quiz-logic'
 const questions = [
   { id: 'mood', question: 'Weekend ini pengen yang gimana? 🧭', options: [
     { icon: '🧘', label: 'Santai / Healing', desc: 'Slow living, recharge', value: 'santai' },
@@ -67,7 +73,9 @@ const questions = [
 const step = ref(0)
 const answers = reactive<Record<string, string>>({})
 const q = computed(() => questions[step.value])
-const progress = computed(() => progressPercent(step.value, questions.length))
+// Q2d: header ink + label putih + dot ember, segmen blok lime (helper tested).
+const headMeta = getQuizHeaderMeta('tempat')
+const segState = computed(() => getQuizSegState(step.value, questions.length))
 const router = useRouter()
 function select(v: string) {
   answers[questions[step.value].id] = v

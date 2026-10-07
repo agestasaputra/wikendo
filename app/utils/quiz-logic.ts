@@ -11,7 +11,7 @@
  * ATURAN: fungsi di sini harus PURE (input → output, tanpa side effect,
  * tanpa baca route/cookie/DB). Side effect tetap di pages/server.
  */
-import type { QuotaStatus, QuotaStatusInput, LoaderMeta, LoaderVariant, WalletLabel } from '../types'
+import type { QuotaStatus, QuotaStatusInput, LoaderMeta, LoaderVariant, WalletLabel, QuizFlow, QuizHeaderMeta, VoucherStyle, VoucherCardMeta } from '../types'
 
 export function progressPercent(step: number, total: number): number {
   return ((step + 1) / total) * 100
@@ -226,4 +226,53 @@ export function getMallName(slug: string): string {
 /** Slug → label pendek chip (GI, CP, Kokas, PIM, Aeon). Ngaco = fallback slug. */
 export function getMallShortLabel(slug: string): string {
   return MALL_SHORT_LABELS[slug] || slug
+}
+
+/* ── Header quiz Q2d/M3d + voucher V12 (board v7, gas Q2d+M3d+V12) ──
+ * KENAPA di sini (pure): meta header quiz (label putih + dot ember/rose-terang,
+ * segmen lime, selected ember vs rose) dipakai 2 pages (quiz.vue + makan.vue)
+ * → 1 sumber kebenaran, bukan hardcode hex di tiap page.
+ * Tanpa baca route/state. Contoh: getQuizHeaderMeta('tempat').dot → '#FB923C'.
+ */
+
+/** Meta header quiz per flow: label putih + dot + segmen lime + selected split. */
+export function getQuizHeaderMeta(flow: QuizFlow): QuizHeaderMeta {
+  const base = {
+    labelColor: '#fff',
+    questionColor: '#fff',
+    headBg: '#0C0A09',
+    segOn: '#A3E635'
+  }
+  if (flow === 'makan') {
+    return {
+      ...base,
+      label: 'QUIZ MAKAN',
+      dot: '#FDA4AF',
+      selBorder: '#E11D48',
+      selBg: '#FFE4E6'
+    }
+  }
+  return {
+    ...base,
+    label: 'QUIZ TEMPAT',
+    dot: '#FB923C',
+    selBorder: '#EA580C',
+    selBg: '#FFF7ED'
+  }
+}
+
+/** Segmen blok quiz: index < step+1 = nyala. Contoh: getQuizSegState(0,5) → [T,F,F,F,F]. */
+export function getQuizSegState(step: number, total: number): boolean[] {
+  return Array.from({ length: total }, (_, i) => i <= step)
+}
+
+/** Meta kartu voucher: gift = V12 gift surprise (grad cream-rose + pill rose). */
+export function getVoucherCardMeta(style: VoucherStyle): VoucherCardMeta {
+  void style
+  return {
+    bg: 'linear-gradient(140deg,#FFF7ED,#FFE4E6)',
+    border: '#FECDD3',
+    goBg: '#E11D48',
+    goColor: '#fff'
+  }
 }

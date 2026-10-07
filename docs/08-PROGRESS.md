@@ -16,6 +16,7 @@
 ## 📌 BOARD — posisi per 8 Okt 2026 (Supabase + quota real + button merah DONE ✅, next slice auth)
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Eksekusi Q2d+M3d+V12 ke app/ DONE ✅ 8 Okt (TDD slice): Q2d quiz.vue (ink header + label PUTIH + dot ember `#FB923C` + segmen lime + selected ember) + M3d makan.vue (cermin: dot rose `#FDA4AF` + chip mall GI/CP/Kokas/PIM/Aeon + selected rose) + V12 gift result-makan.vue (grad cream-rose + border pink + pill rose Buka) + bg paper `#F5F5F4` kombo + helpers tested `getQuizHeaderMeta/getQuizSegState/getVoucherCardMeta` (types `QuizFlow/QuizHeaderMeta/VoucherStyle/VoucherCardMeta`) — verify: test 77/77 (7 files, +9 baru) ✅ lint ✅ build 10.0s ✅ — next: push + deploy + DESIGN.md v1
 - [x] Label putih Q2d M3d + 15 opsi voucher V1-V15 DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/revamp-options-v7.html` — Q2d+M3d label PUTIH + dot ember/rose-terang (tolak full merah/oranye: gagal AAA, label bukan aksi) + 15 voucher V1 tiket ramping/V2 soft wash ⭐/V3 ink/V4 lime/V5 link/V6 scarcity/V7 reveal/V8 QR/V9 sticky/V10 band/V11 steps/V12 gift/V13 price/V14 sheet/V15 proof, hero konteks SAMA — rekomendasi tunggal V2 — next: nunggu "gas Q2d+M3d+V2"
 - [x] Revisi lime touch Q2c M3c R3b F1b S2c DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/revamp-options-v6.html` — Q2c+M3c segmen blok LIME + question putih + label lime (input: SETUJU 100%) + R3b pill BEST lime + badge foto lime + F1b klaim solid → tiket dashed (off ink-lime) + S2c cariin solid → kartu asisten strip lime. Aturan: lime=kemajuan/nilai <10%, ember/rose tetap aksi — next: nunggu "gas Q2c+M3c+R3b+F1b+S2c"
 - [x] Revisi pick Q2 M3 R3 F1 S2 DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/revamp-options-v5.html` — Q2b+M3b segmen blok di ink header (5/4 blok, on ember/rose) + S2b infinity 10/page (skeleton + sticky count + spec API limit/offset backward-compat) + R3/F1 lock 3 lapis (hero+minis+full list 5). Jawab question: result = item list isi 5 (recommendations[5]) — next: nunggu "gas Q2b+M3b+R3+F1+S2b"
@@ -67,6 +68,13 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-08 — Eksekusi Q2d+M3d+V12 ke app/ DONE ✅ (TDD slice, gas approved)
+- **Kenapa:** Agesta VERBATIM "Gas Q2d+M3d+V12" — pick dari board v7 (Q2d/M3d label putih + V12 gift surprise). Eksekusi approved → `app/` BOLEH disentuh via TDD.
+- **Dikerjain (RED→GREEN→REFACTOR):** RED `app/tests/quiz-header-voucher.test.ts` 9 test gagal by design (helper belum ada) → GREEN helpers pure di `app/utils/quiz-logic.ts` (`getQuizHeaderMeta` label putih + dot ember/rose + segmen lime + selected split, `getQuizSegState`, `getVoucherCardMeta` gift grad cream-rose + pill rose) + types `QuizFlow/QuizHeaderMeta/VoucherStyle/VoucherCardMeta` → pasang Q2d `app/pages/quiz.vue` (ink header + segmen blok lime + selected ember, hapus progress gradasi + `progress` nganggur) + M3d `app/pages/makan.vue` (cermin + chip mall GI/CP/Kokas/PIM/Aeon via `getMallShortLabel`, selected rose) + V12 `app/pages/result-makan.vue` (gift 🎁 + "Ada −20% buat lu" + pill rose Buka, ganti tombol merah full-width) + bg paper `#F5F5F4` kombo 3 pages (ganti `#fffdf9`). REFACTOR: hapus import `progressPercent` nganggur (lint 2 error → bersih), rapiin komentar dobel.
+- **Files:** `app/tests/quiz-header-voucher.test.ts` (baru, +9), `app/utils/quiz-logic.ts`, `app/types/index.ts`, `app/pages/quiz.vue`, `app/pages/makan.vue`, `app/pages/result-makan.vue`, `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Verifikasi:** test 77/77 (7 files) ✅ lint bersih ✅ build 10.0s ✅ secrets scan bersih ✅. Kontrak dijaga: label/selected/split split tempat↔makan, quota/voucher wall tetap, dosis lime <10%.
+- **Next:** commit + push + deploy Vercel → DESIGN.md v1 root (token + komponen + do/don't).
 
 ## 2026-10-08 — Label putih Q2d M3d + 15 opsi voucher V1-V15 DONE ✅ (design-only)
 - **Kenapa:** Agesta VERBATIM "Q2c dan M3c: Tulisan 'Quiz tempat/makan' jangan warna lime lagi, mungkin bisa putih / merah / orang (sesuai color pallete wikendo). F1b: gua ga suka design card atau board sih voucher! tolong lu kasih gua 15 opsi card voucher itu."

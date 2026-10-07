@@ -3,16 +3,22 @@
   KENAPA: codebase 1x, bukan 2x (reuse engine ~10 jam hemat). Q1 mall wajib biar hasil murni tenant situ (Split PRD).
   Contoh: dibuka dari direktori (/makan?mall=gi) → Q1 di-skip otomatis via getMakanStartStep. -->
 <template>
-  <div class="max-w-md mx-auto px-4 pb-10 min-h-[80vh] flex flex-col" style="background:#fffdf9">
+  <div class="max-w-md mx-auto px-4 pb-10 min-h-[80vh] flex flex-col" style="background:#F5F5F4">
     <div class="flex justify-between items-center font-bold text-[13px] py-3">
       <NuxtLink to="/" class="text-ink">← 🍜 Quiz makan</NuxtLink>
       <span class="text-gray-500">{{ step + 1 }}/{{ questions.length }} • ⏱ 20 dtk</span>
     </div>
-    <div class="h-2 bg-[#ececec] rounded-full overflow-hidden">
-      <div class="h-full rounded-full transition-all" style="background:linear-gradient(90deg,#ee2c4b,#fb923c)" :style="{ width: progress + '%' }" />
+    <!-- M3d ink header: label PUTIH + dot rose-terang, question putih, segmen blok lime -->
+    <div class="rounded-[14px] p-[10px_12px]" :style="{ background: headMeta.headBg }">
+      <div class="text-[10px] font-extrabold tracking-wide" :style="{ color: headMeta.labelColor }">
+        <span :style="{ color: headMeta.dot }">●</span> {{ headMeta.label }}{{ mallShort ? ' · ' + mallShort + ' 📍' : '' }} · {{ step + 1 }}/{{ questions.length }}
+      </div>
+      <div class="text-[19px] font-extrabold leading-snug mt-1" :style="{ color: headMeta.questionColor }">{{ q.question }}</div>
+      <div class="flex gap-[5px] mt-[10px]">
+        <i v-for="(on, i) in segState" :key="i" class="flex-1 h-2 rounded-full" :style="{ background: on ? headMeta.segOn : 'rgba(255,255,255,.22)' }" />
+      </div>
     </div>
-    <h3 class="text-[21px] font-extrabold mt-3">{{ q.question }}</h3>
-    <p class="text-[13px] text-gray-500 mb-2">{{ q.id === 'mall_slug' ? 'Wajib 1 — biar hasil murni tenant situ' : q.id === 'companion' ? 'Terakhir, janji 😄' : 'Tap 1 — nggak ada jawaban salah' }}</p>
+    <p class="text-[13px] text-gray-500 mb-2 mt-2">{{ q.id === 'mall_slug' ? 'Wajib 1 — biar hasil murni tenant situ' : q.id === 'companion' ? 'Terakhir, janji 😄' : 'Tap 1 — nggak ada jawaban salah' }}</p>
 
     <!-- Q1 mall: chip mall horizontal (mockup E) + kartu terpilih -->
     <div v-if="q.id === 'mall_slug'" class="flex gap-2 overflow-x-auto py-3">
@@ -32,7 +38,7 @@
         v-for="o in q.options"
         :key="o.value"
         class="w-full bg-white rounded-[20px] p-[14px] font-bold text-sm flex gap-2.5 items-center cursor-pointer text-left border-2 transition-colors"
-        :style="answers[q.id] === o.value ? 'border-color:#ee2c4b;background:#fff1f2' : 'border-color:#ececec'"
+        :style="answers[q.id] === o.value ? `border-color:${headMeta.selBorder};background:${headMeta.selBg}` : 'border-color:#ececec'"
         style="min-height:56px"
         @click="select(o.value)"
       >
@@ -54,7 +60,7 @@
 </template>
 
 <script setup lang="ts">
-import { progressPercent, isLastStep, getMakanStartStep } from '~/utils/quiz-logic'
+import { isLastStep, getMakanStartStep, getQuizHeaderMeta, getQuizSegState, getMallShortLabel } from '~/utils/quiz-logic'
 const route = useRoute()
 const questions = [
   { id: 'mall_slug', question: 'Makan di mall mana? 📍', options: [
@@ -90,7 +96,10 @@ const answers = reactive<Record<string, string>>(
 const halalOnly = ref(false)
 const kidsFriendly = ref(false)
 const q = computed(() => questions[step.value])
-const progress = computed(() => progressPercent(step.value, questions.length))
+// M3d: header ink + label putih + dot rose, segmen blok lime + chip mall (helper tested).
+const headMeta = getQuizHeaderMeta('makan')
+const segState = computed(() => getQuizSegState(step.value, questions.length))
+const mallShort = computed(() => answers.mall_slug ? getMallShortLabel(answers.mall_slug) : '')
 const router = useRouter()
 function select(v: string) {
   answers[questions[step.value].id] = v
