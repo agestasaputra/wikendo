@@ -1,10 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
-  <!-- Wikendo D16-Night P4 (takeout transparan — web dark / header dark / splash dark).
-       JANGAN jadi app icon (iOS nolak transparan). -->
+  <!-- Wikendo D16-Night P3 FINAL (takeout transparan — web dark / header dark / splash dark). JANGAN jadi app icon. -->
   <g transform="rotate(-8 48 48)">
-    <rect x="18" y="18" width="60" height="60" rx="16" fill="#fffdf9"/>
-    <text x="48" y="61" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="30" font-weight="800" fill="#18181b">W</text>
-    <circle cx="28" cy="28" r="4" fill="#f97316"/>
-    <circle cx="68" cy="68" r="4" fill="#ee2c4b"/>
+    <rect x="20" y="20" width="56" height="56" rx="15" fill="#fffdf9"/>
+    <text x="48" y="60" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="29" font-weight="800" fill="#18181b">W</text>
+    <circle cx="30" cy="30" r="3.5" fill="#f97316"/>
+    <circle cx="66" cy="66" r="3.5" fill="#ee2c4b"/>
   </g>
 </svg>

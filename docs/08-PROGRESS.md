@@ -19,7 +19,7 @@
 - [x] UI kombo slice-1→4 (DONE ✅ 7 Okt): Home wallet + quiz swipe + result deck/voucher + direktori SEO (`e12be1b` live, prod 200 `QUOTA HARI INI` ✅)
 - [x] Logo board v1 30 opsi (DONE ✅ 7 Okt malam): `design/logo-wikendo-30.html` — campur wordmark, KURANG cocok (Agesta: prefer icon-first app icon)
 - [ ] Logo board v2 icon-first 30 opsi (DONE ✅ 7 Okt malam): `design/logo-wikendo-icon-30.html` — SEMUA icon-first app-icon ready + varian logo saja / logo+wordmark bawah
-- [x] D16 P4 FULL VERSION (DONE ✅ 8 Okt): Agesta "Gua suka p4. Coba bikin full version" → `design/logo-d16-full-version.html` brand sheet resmi + `design/assets/` 5 SVG master (d16-day/night/mono/lockup/lockup-horizontal, dadu 60 W30 rotasi -8°) — isi: master asset + warna/tipo + mock header light/dark + struk + brand police + paket rilis. Nunggu "gas pasang D16" (H-LOCK + favicon ke `app/`, butuh approval karena nyentuh `app/`)
+- [x] D16 P3 FINAL LOCK (DONE ✅ 8 Okt): Agesta "Eeh sorry ubah ke p3 aja, kali ini final lock" → 5 SVG master + `logo-d16-full-version.html` (16 inline) + board highlight P4→P3 semua direvisi P4(60)→P3(56: x20/y20/w56/h56/rx15 W29). Nunggu "gas pasang D16" (H-LOCK + favicon ke `app/`, butuh approval karena nyentuh `app/`)
 - [ ] NEXT: finalin lockup resmi (master mark + wordmark) + pasang ke header web & favicon + stamp voucher 1-warna
 - [ ] NEXT: wire quota real `GET /api/quota` → wallet 2-state + `POST /api/voucher/claim` klaim beneran
 - [x] Patch 5 docs downstream Addendum v1.3 (ADR v2.2 ✅ + Schema v1.1 ✅ + API v1.1 ✅ + Journey v2.1 ✅ + Checklist v1.2 ✅) — `app/` NOL diubah ✅ 5/5 GENAP
@@ -55,6 +55,12 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-08 — P3 FINAL LOCK 🔒 (✅ DONE, nunggu "gas pasang D16")
+- **Kenapa:** Agesta VERBATIM "Eeh sorry ubah ke p3 aja, kali ini final lock" — P4 (60) batal, P3 (56) final.
+- **Dikerjain:** 5 SVG master diregenerate P3 (`x20/y20/w56/h56/rx15`, W29, titik r3.5 cx30/cx66) + full-version 16 inline SVG direvisi (leftover P4 = 0 ✅) + badge "✅ FINAL LOCK P3" + board highlight `.cur` P4→P3 + catatan final. Verifikasi script: assets 5/5, P3-dadu 16/16, board `card cur` = 1 (P3).
+- **Files:** `design/assets/*.svg` (5), `design/logo-d16-full-version.html`, `design/logo-d16-padding-options.html`, `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** Agesta balas "gas pasang D16" → H-LOCK + favicon Day P3 ke `app/` via TDD + PNG 1024.
 
 ## 2026-10-08 — Fix full-version corrupt: SVG di-inline (self-contained)
 - **Kenapa:** Agesta VERBATIM "Gambarnya kok corrupt di file html nya" — akar: 16 `<img src="assets/...">` path relatif putus saat HTML dikirim single-file via Telegram (folder `assets/` tidak ikut). SVG master sehat (489–826 bytes), yang rusak link-nya.
