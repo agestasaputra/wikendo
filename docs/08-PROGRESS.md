@@ -17,7 +17,8 @@
 
 ### 🔥 NOW (lagi dikerjain)
 - [x] UI kombo slice-1→4 (DONE ✅ 7 Okt): Home wallet + quiz swipe + result deck/voucher + direktori SEO (`e12be1b` live, prod 200 `QUOTA HARI INI` ✅)
-- [x] Logo board 30 opsi (DONE ✅ 7 Okt malam): `design/logo-wikendo-30.html` 6 family + shortlist ⭐ + preview terang/gelap/mono, nunggu Top 3-5 Agesta
+- [x] Logo board v1 30 opsi (DONE ✅ 7 Okt malam): `design/logo-wikendo-30.html` — campur wordmark, KURANG cocok (Agesta: prefer icon-first app icon)
+- [ ] Logo board v2 icon-first 30 opsi (IN PROGRESS 🔨): `design/logo-wikendo-icon-30.html` — SEMUA icon-first app-icon ready + varian logo saja / logo+wordmark bawah, nunggu Top 3-5 Agesta
 - [ ] NEXT: finalin lockup resmi (master mark + wordmark) + pasang ke header web & favicon + stamp voucher 1-warna
 - [ ] NEXT: wire quota real `GET /api/quota` → wallet 2-state + `POST /api/voucher/claim` klaim beneran
 - [x] Patch 5 docs downstream Addendum v1.3 (ADR v2.2 ✅ + Schema v1.1 ✅ + API v1.1 ✅ + Journey v2.1 ✅ + Checklist v1.2 ✅) — `app/` NOL diubah ✅ 5/5 GENAP
@@ -53,6 +54,13 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-07 malam — Logo board v2 icon-first 30 opsi (✅ DONE, nunggu shortlist Top 3-5 Agesta)
+- **Kenapa:** revisi brief Agesta VERBATIM "Gua lebih prefer logo daripada wordmark. Dapat dipakai sebagai logo app di smartphone. Bahkan lebih bagus jika dibawah logo ada wordmark nya. Jadi punya 2 pilihan: logo saja atau logo + wordmark". Board v1 campur wordmark → generate ulang full icon-first.
+- **Dikerjain:** `design/logo-wikendo-icon-30.html` (self-contained, Plus Jakarta Sans, token kombo) — 6 family x 5 opsi SEMUA icon-first: A W Monogram (01-05) + B Pin/Lokasi (06-10) + C Weekend/Time (11-15) + D Keputusan (16-20) + E Mall/Kuliner (21-25) + F Maskot Icon (26-30). Tiap kartu = app icon 88px + lockup wordmark "wikendo." di bawah + simulasi favicon 16px. Fitur: filter family + toggle tampilan "icon + wordmark" vs "icon saja" (sesuai 2 pilihan Agesta) + shortlist ⭐ (localStorage `wikendo-logo-v2-shortlist` + salin) + klik → modal preview 96px + kecil 32px (home screen test) + 1-warna (tes struk fotokopi). Rekomendasi bisnis v2: #1 = 06 Pin W Jagoan (master icon), #2 = 02 W Gradient (cadangan store-ready), #3 = 21 Mangkok W (modul makan/B2B), #4 = 14 Tiket WKND (bahasa voucher), #5 = 28 Pin Senyum (evolusi maskot, nanti).
+- **Verifikasi:** file exists 46KB ✅, no linter HTML (skip) ✅, `app/` NOL diubah ✅ (design-only, no deploy UI impact).
+- **Files:** `design/logo-wikendo-icon-30.html` (baru), `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** Agesta shortlist Top 3-5 (⭐ → Salin shortlist → paste ke sini) → finalin lockup resmi 2 varian + export PNG/SVG + pasang header web & favicon + stamp voucher 1-warna.
 
 ## 2026-10-07 malam — Logo board 30 opsi (✅ DONE, nunggu shortlist Top 3-5 Agesta)
 - **Kenapa:** request Agesta "kita belum punya logo wikendo, generate 30 rekomendasi". Logo harus nempel ke bisnis: decision engine weekend (tempat + makan di mall), hidup di 4 tempat (app icon, favicon 16px, header web, struk voucher 1-warna).

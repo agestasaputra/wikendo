@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wikendo — 30 Logo Icon-First (v2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--base:#fffdf9;--tempat:#f97316;--makan:#ee2c4b;--wallet:#0e7490;--ink:#18181b;--mut:#71717a;--line:#e4e4e7;--card:#fff;--sun:#fbbf24}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--base);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+  .wrap{max-width:1180px;margin:0 auto;padding:24px 20px 80px}
+  header.hero{border:2px solid var(--ink);border-radius:24px;background:var(--card);padding:28px;position:relative;overflow:hidden}
+  h1{margin:0;font-size:28px;font-weight:800;letter-spacing:-.5px}
+  h1 .dot{color:var(--tempat)}
+  .sub{color:var(--mut);font-size:13.5px;margin:8px 0 0;max-width:780px;line-height:1.65}
+  .sub b{color:var(--ink)}
+  .tokens{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  .tok{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;border:1.5px solid var(--line);border-radius:999px;padding:5px 12px 5px 6px;background:#fff}
+  .tok i{width:18px;height:18px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.12)}
+  .bar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--base) 90%,transparent);backdrop-filter:blur(8px);padding:12px 0;margin:18px 0 6px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit}
+  .chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .view{margin-left:auto;display:flex;gap:6px;align-items:center;font-size:12.5px;font-weight:700}
+  .view button{border:1.5px solid var(--ink);border-radius:10px;padding:7px 12px;font-weight:800;cursor:pointer;font-family:inherit;font-size:12px;background:#fff}
+  .view button.on{background:var(--ink);color:#fff}
+  .short{font-size:13px;font-weight:700;display:flex;gap:8px;align-items:center}
+  .short button{border:1.5px solid var(--ink);background:var(--wallet);color:#fff;border-radius:12px;padding:8px 14px;font-weight:800;cursor:pointer;font-family:inherit;font-size:12.5px}
+  .fam{margin:28px 0 6px}
+  .fam h2{font-size:16.5px;margin:0;font-weight:800}
+  .fam p{margin:4px 0 12px;color:var(--mut);font-size:13px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px}
+  .card{background:var(--card);border:1.5px solid var(--line);border-radius:20px;padding:14px;position:relative;display:flex;flex-direction:column;gap:8px;transition:transform .15s,box-shadow .15s}
+  .card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(24,24,27,.10)}
+  .num{position:absolute;top:10px;left:10px;font-size:11px;font-weight:800;background:var(--ink);color:#fff;border-radius:8px;padding:2px 8px}
+  .star{position:absolute;top:8px;right:8px;border:1.5px solid var(--line);background:#fff;border-radius:10px;width:32px;height:32px;cursor:pointer;font-size:15px}
+  .star.on{background:var(--sun);border-color:var(--ink)}
+  .stage{background:var(--base);border:1px dashed var(--line);border-radius:14px;padding:14px 10px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:zoom-in;min-height:172px;justify-content:center}
+  .appicon{width:88px;height:88px;border-radius:22px;overflow:hidden;box-shadow:0 6px 18px rgba(24,24,27,.16);border:1px solid rgba(0,0,0,.08);flex:none}
+  .appicon svg{width:100%;height:100%;display:block}
+  .lockup{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .lockup .wm{font-weight:800;font-size:14px;letter-spacing:-.3px}
+  .lockup .wm i{font-style:normal;color:var(--tempat)}
+  .lockup .favrow{display:flex;align-items:center;gap:6px;margin-top:2px}
+  .lockup .fav{width:16px;height:16px;border-radius:4px;overflow:hidden;border:1px solid rgba(0,0,0,.12)}
+  .lockup .fav svg{width:100%;height:100%;display:block}
+  .lockup .favlabel{font-size:10.5px;color:var(--mut);font-weight:700}
+  body.hide-wm .lockup .wm{display:none}
+  .card h3{margin:0;font-size:14px;font-weight:800}
+  .why{margin:0;font-size:12px;color:var(--mut);line-height:1.55;flex:1}
+  .tags{display:flex;gap:6px;flex-wrap:wrap}
+  .tags span{font-size:10.5px;font-weight:700;background:#f4f4f5;border-radius:999px;padding:3px 9px;color:#3f3f46}
+  .tags span.hot{background:#fff7ed;color:#c2410c}
+  .reco{margin-top:36px;border:2px solid var(--ink);border-radius:24px;background:var(--ink);color:#fff;padding:26px}
+  .reco h2{margin:0 0 4px;font-size:20px}
+  .reco p.sub2{margin:0 0 16px;color:#d4d4d8;font-size:13px}
+  .podium{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+  .pod{background:#27272a;border-radius:16px;padding:14px;font-size:12.5px;line-height:1.6}
+  .pod b{font-size:13.5px}
+  .rank{font-size:11px;font-weight:800;background:var(--tempat);border-radius:8px;padding:2px 8px;margin-right:6px}
+  .check{margin-top:14px;font-size:12.5px;color:#d4d4d8;line-height:1.7}
+  .modal{position:fixed;inset:0;background:rgba(24,24,27,.6);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+  .modal.open{display:flex}
+  .sheet{background:#fff;border-radius:24px;max-width:660px;width:100%;padding:24px;max-height:88vh;overflow:auto}
+  .sheet h3{margin:0}
+  .sheet p{font-size:13px;color:var(--mut);line-height:1.6}
+  .x{float:right;border:1.5px solid var(--line);background:#fff;border-radius:10px;width:34px;height:34px;cursor:pointer;font-weight:800}
+  .prevrow{display:flex;gap:10px;margin:14px 0;align-items:stretch}
+  .pv{flex:1;border-radius:16px;min-height:190px;display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center;border:1.5px solid var(--line);padding:12px}
+  .pv .big{width:96px;height:96px;border-radius:24px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+  .pv .big svg{width:100%;height:100%}
+  .pv small{font-size:11px;font-weight:800;letter-spacing:.4px}
+  @media (prefers-reduced-motion:reduce){.card:hover{transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>wikendo<span class="dot">.</span> — 30 logo icon-first (v2)</h1>
+  <p class="sub"><b>Brief revisi (sesuai maumu):</b> SEMUA opsi = <b>logo icon</b> yang sah dipakai sebagai <b>app icon smartphone</b>. Tiap kartu nunjukin <b>2 pakai</b>: <b>icon saja</b> (app icon, favicon 16px, stamp voucher) + <b>icon + wordmark di bawahnya</b> (splash screen, header, kaos). Toggle di atas buat bandingin. Klik ⭐ buat shortlist, klik gambar buat preview ukuran + versi mono.</p>
+  <div class="tokens">
+    <span class="tok"><i style="background:#fffdf9"></i>base #fffdf9</span>
+    <span class="tok"><i style="background:#f97316"></i>tempat #f97316</span>
+    <span class="tok"><i style="background:#ee2c4b"></i>makan #ee2c4b</span>
+    <span class="tok"><i style="background:#0e7490"></i>wallet #0e7490</span>
+    <span class="tok"><i style="background:#18181b"></i>ink #18181b</span>
+  </div>
+</header>
+
+<div class="bar" id="bar">
+  <button class="chip on" data-f="all">Semua (30)</button>
+  <button class="chip" data-f="w">W Monogram</button>
+  <button class="chip" data-f="pin">Pin/Lokasi</button>
+  <button class="chip" data-f="time">Weekend/Time</button>
+  <button class="chip" data-f="decide">Keputusan</button>
+  <button class="chip" data-f="food">Mall/Kuliner</button>
+  <button class="chip" data-f="maskot">Maskot</button>
+  <div class="view">Tampilan: <button id="vBoth" class="on">icon + wordmark</button><button id="vIcon">icon saja</button></div>
+  <div class="short">⭐ <span id="count">0</span> <button id="copy">Salin shortlist</button></div>
+</div>
+
+<div id="board">
+
+<!-- ============ A · W MONOGRAM ============ -->
+<div class="fam" data-fam="w"><h2>A · W Monogram — 1 huruf, langsung app-icon</h2><p>Keluarga paling aman buat icon HP: terbaca 16px, murah dicetak, gampang diingat.</p><div class="grid">
+
+<div class="card" data-fam="w" data-name="01 · W Matahari Terbit">
+<span class="num">01</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#f97316"/><circle cx="48" cy="22" r="9" fill="#fffdf9"/><path d="M22 46 L36 74 L48 54 L60 74 L74 46" stroke="#fffdf9" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#f97316"/><circle cx="48" cy="22" r="9" fill="#fffdf9"/><path d="M22 46 L36 74 L48 54 L60 74 L74 46" stroke="#fffdf9" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>W Matahari Terbit</h3><p class="why">W + matahari = weekend dimulai. Kontras putih-oranye lolos 16px.</p>
+<div class="tags"><span class="hot">app-icon ready</span><span>1-warna OK</span></div></div>
+
+<div class="card" data-fam="w" data-name="02 · W Gradient Tempat→Makan">
+<span class="num">02</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><defs><linearGradient id="g02" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f97316"/><stop offset="1" stop-color="#ee2c4b"/></linearGradient></defs><rect width="96" height="96" rx="22" fill="url(#g02)"/><text x="48" y="68" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="48" font-weight="800" fill="#fff">W</text></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#f97316"/><text x="48" y="68" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="48" font-weight="800" fill="#fff">W</text></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>W Gradient Tempat→Makan</h3><p class="why">Oranye→merah = quiz tempat → quiz makan. Paling store-ready.</p>
+<div class="tags"><span class="hot">store-listing</span><span>split quiz</span></div></div>
+
+<div class="card" data-fam="w" data-name="03 · W Ink Premium">
+<span class="num">03</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#18181b"/><text x="48" y="66" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="46" font-weight="800" fill="#fffdf9">W</text><circle cx="68" cy="28" r="7" fill="#f97316"/></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#18181b"/><text x="48" y="66" text-anchor="middle" font-size="46" font-weight="800" fill="#fffdf9">W</text></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>W Ink Premium</h3><p class="why">Hitam premium + titik oranye. Kelihatan mahal di home screen.</p>
+<div class="tags"><span>premium</span><span>1-warna OK</span></div></div>
+
+<div class="card" data-fam="w" data-name="04 · W Jalur Weekend">
+<span class="num">04</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#0e7490"/><path d="M20 44 L34 72 L48 50 L62 72 L76 44" stroke="#fffdf9" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 82 Q48 70 82 82" stroke="#fbbf24" stroke-width="5" fill="none" stroke-linecap="round"/></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#0e7490"/><path d="M20 44 L34 72 L48 50 L62 72 L76 44" stroke="#fffdf9" stroke-width="8" fill="none" stroke-linecap="round"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>W Jalur Weekend</h3><p class="why">W teal + garis kuning = rute weekend. Beda dari semua kompetitor oranye.</p>
+<div class="tags"><span>wallet teal</span><span>beda sendiri</span></div></div>
+
+<div class="card" data-fam="w" data-name="05 · W Senyum">
+<span class="num">05</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#fffdf9"/><text x="48" y="60" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="46" font-weight="800" fill="#18181b">W</text><path d="M28 68 Q48 84 68 68" stroke="#f97316" stroke-width="6" fill="none" stroke-linecap="round"/></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#fffdf9"/><text x="48" y="60" text-anchor="middle" font-size="46" font-weight="800" fill="#18181b">W</text></svg></div><span class="favlabel">favicon 16px ~</span></div></div></div>
+<h3>W Senyum</h3><p class="why">Senyum di bawah W = "weekend beres". Termurah dicetak, friendly.</p>
+<div class="tags"><span>1-warna OK</span><span>friendly</span></div></div>
+
+</div></div>
+
+<!-- ============ B · PIN/LOKASI ============ -->
+<div class="fam" data-fam="pin"><h2>B · Pin &amp; Lokasi — jujur sama job-nya</h2><p>"Cari tempat" divisualin literal. Jadi marker Maps natural + stamp voucher.</p><div class="grid">
+
+<div class="card" data-fam="pin" data-name="06 · Pin W Jagoan">
+<span class="num">06</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#fffdf9"/><path d="M48 12 C30 12 20 25 20 41 C20 61 48 86 48 86 C48 86 76 61 76 41 C76 25 66 12 48 12 Z" fill="#f97316"/><circle cx="48" cy="40" r="16" fill="#fffdf9"/><text x="48" y="49" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="21" font-weight="800" fill="#18181b">W</text></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#fffdf9"/><path d="M48 12 C30 12 20 25 20 41 C20 61 48 86 48 86 C48 86 76 61 76 41 C76 25 66 12 48 12 Z" fill="#f97316"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>Pin W Jagoan</h3><p class="why">Pin + W: "tempatnya di sini, udah dipilihin". Rekomendasi #1 gue.</p>
+<div class="tags"><span class="hot">jagoan #1</span><span>app-icon ready</span></div></div>
+
+<div class="card" data-fam="pin" data-name="07 · Pin Ganda Split Quiz">
+<span class="num">07</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#18181b"/><path d="M32 18 C22 18 16 26 16 36 C16 50 32 64 32 64 C32 64 48 50 48 36 C48 26 42 18 32 18 Z" fill="#f97316"/><path d="M64 32 C54 32 48 40 48 50 C48 64 64 78 64 78 C64 78 80 64 80 50 C80 40 74 32 64 32 Z" fill="#ee2c4b"/><text x="48" y="90" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="13" font-weight="800" fill="#fffdf9">W</text></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#18181b"/><circle cx="32" cy="36" r="12" fill="#f97316"/><circle cx="64" cy="52" r="12" fill="#ee2c4b"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>Pin Ganda Split Quiz</h3><p class="why">Pin oranye (tempat) + pin merah (makan). Split quiz divisualin.</p>
+<div class="tags"><span class="hot">split quiz</span><span>B2C jelas</span></div></div>
+
+<div class="card" data-fam="pin" data-name="08 · Kompas W">
+<span class="num">08</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#0e7490"/><circle cx="48" cy="50" r="28" fill="#fffdf9"/><path d="M48 26 L55 50 L48 74 L41 50 Z" fill="#ee2c4b"/><path d="M24 50 L48 43 L72 50 L48 57 Z" fill="#18181b"/><text x="48" y="20" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="13" font-weight="800" fill="#fffdf9">W</text></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#0e7490"/><circle cx="48" cy="50" r="28" fill="#fffdf9"/></svg></div><span class="favlabel">favicon 16px ~</span></div></div></div>
+<h3>Kompas W</h3><p class="why">"Ikutin Wikendo aja". Kuat buat brand planner, detail hilang di 16px.</p>
+<div class="tags"><span>planner</span><span>detail &gt; 24px</span></div></div>
+
+<div class="card" data-fam="pin" data-name="09 · Peta Rute W">
+<span class="num">09</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#fffdf9"/><path d="M12 28 L36 20 L60 28 L84 20 L84 68 L60 76 L36 68 L12 76 Z" fill="#fff7ed" stroke="#18181b" stroke-width="4" stroke-linejoin="round"/><path d="M36 20 L36 68 M60 28 L60 76" stroke="#18181b" stroke-width="3"/><path d="M22 52 L32 62 L44 46 L56 58 L68 44" stroke="#f97316" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#fff7ed"/><path d="M22 52 L32 62 L44 46 L56 58 L68 44" stroke="#f97316" stroke-width="8" fill="none"/></svg></div><span class="favlabel">favicon 16px ~</span></div></div></div>
+<h3>Peta Rute W</h3><p class="why">Rute oranye di peta lipat = planner beneran, bukan direktori.</p>
+<div class="tags"><span>planner</span><span>detail &gt; 24px</span></div></div>
+
+<div class="card" data-fam="pin" data-name="10 · Target Ketemu">
+<span class="num">10</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#ee2c4b"/><circle cx="48" cy="48" r="26" fill="#fffdf9"/><circle cx="48" cy="48" r="16" fill="#ee2c4b"/><text x="48" y="55" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="17" font-weight="800" fill="#fff">W</text></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#ee2c4b"/><circle cx="48" cy="48" r="26" fill="#fffdf9"/><circle cx="48" cy="48" r="12" fill="#ee2c4b"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>Target Ketemu</h3><p class="why">Bullseye = "pilihan yang nancep". Berani, merah nyala di home screen.</p>
+<div class="tags"><span>berani</span><span>app-icon ready</span></div></div>
+
+</div></div>
+
+<!-- ============ C · WEEKEND/TIME ============ -->
+<div class="fam" data-fam="time"><h2>C · Weekend &amp; Waktu — own Sab-Ming</h2><p>Own momen weekend. Twist W wajib biar nggak jadi kalender generik.</p><div class="grid">
+
+<div class="card" data-fam="time" data-name="11 · Kalender WE">
+<span class="num">11</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#f97316"/><rect x="22" y="28" width="52" height="48" rx="10" fill="#fffdf9"/><rect x="22" y="28" width="52" height="14" rx="7" fill="#18181b"/><path d="M33 21 v10 M63 21 v10" stroke="#fffdf9" stroke-width="5" stroke-linecap="round"/><text x="48" y="66" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="22" font-weight="800" fill="#18181b">WE</text></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#f97316"/><rect x="22" y="28" width="52" height="48" rx="10" fill="#fffdf9"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>Kalender WE</h3><p class="why">"WE" ganda we/weekend. Paling jelas, tapi kalender pasaran.</p>
+<div class="tags"><span>jelas</span><span>pasaran</span></div></div>
+
+<div class="card" data-fam="time" data-name="12 · Matahari S·S">
+<span class="num">12</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#18181b"/><g stroke="#fbbf24" stroke-width="4" stroke-linecap="round"><path d="M48 12 v8 M48 76 v8 M12 48 h8 M76 48 h8 M23 23 l6 6 M67 67 l6 6 M73 23 l-6 6 M29 67 l-6 6"/></g><circle cx="48" cy="48" r="19" fill="#fbbf24"/><text x="48" y="55" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="16" font-weight="800" fill="#18181b">S·S</text></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#18181b"/><circle cx="48" cy="48" r="19" fill="#fbbf24"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>Matahari S·S</h3><p class="why">Sabtu-Minggu jadi matahari. Ceria, stiker-ready.</p>
+<div class="tags"><span>ceria</span><span>stiker</span></div></div>
+
+<div class="card" data-fam="time" data-name="13 · Jam 5 Sore">
+<span class="num">13</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#fffdf9"/><circle cx="48" cy="52" r="28" fill="#fff" stroke="#18181b" stroke-width="5"/><path d="M48 52 L48 34 M48 52 L62 58" stroke="#18181b" stroke-width="5" stroke-linecap="round"/><circle cx="48" cy="52" r="4" fill="#ee2c4b"/><text x="48" y="20" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="12" font-weight="800" fill="#ee2c4b">FRI 5PM</text></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#fffdf9"/><circle cx="48" cy="52" r="28" fill="#fff" stroke="#18181b" stroke-width="8"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>Jam 5 Sore</h3><p class="why">Jam pulang Jumat = jam Wikendo. Inside joke pekerja.</p>
+<div class="tags"><span class="hot">relatable</span><span>1-warna OK</span></div></div>
+
+<div class="card" data-fam="time" data-name="14 · Tiket WKND">
+<span class="num">14</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#ee2c4b"/><g transform="rotate(-8 48 48)"><rect x="14" y="32" width="68" height="32" rx="8" fill="#fffdf9"/><path d="M36 32 v32" stroke="#ee2c4b" stroke-width="3" stroke-dasharray="4 4"/><text x="59" y="54" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="15" font-weight="800" fill="#18181b">WKND</text></g></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#ee2c4b"/><rect x="14" y="32" width="68" height="32" rx="8" fill="#fffdf9"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>Tiket WKND</h3><p class="why">Tiket = weekend + voucher. Satu icon dua cerita (B2C+B2B).</p>
+<div class="tags"><span class="hot">voucher story</span><span>B2B</span></div></div>
+
+<div class="card" data-fam="time" data-name="15 · Siang→Malam">
+<span class="num">15</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#18181b"/><circle cx="48" cy="48" r="26" fill="#fbbf24"/><path d="M48 22 a26 26 0 0 1 0 52 a20 20 0 0 0 0 -52" fill="#fffdf9"/><text x="48" y="86" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="12" font-weight="800" fill="#fffdf9">W</text></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#18181b"/><circle cx="48" cy="48" r="26" fill="#fbbf24"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>Siang→Malam</h3><p class="why">Siang nongkrong → malam kuliner. Premium, tapi W kecil.</p>
+<div class="tags"><span>premium</span><span>tanpa W besar</span></div></div>
+
+</div></div>
+
+<!-- ============ D · KEPUTUSAN ============ -->
+<div class="fam" data-fam="decide"><h2>D · Keputusan — anti-bingung 30 detik</h2><p>Value prop divisualin: user bingung → Wikendo yang mutusin.</p><div class="grid">
+
+<div class="card" data-fam="decide" data-name="16 · Dadu W">
+<span class="num">16</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#18181b"/><g transform="rotate(-8 48 48)"><rect x="22" y="22" width="52" height="52" rx="14" fill="#fffdf9"/><text x="48" y="60" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="28" font-weight="800" fill="#18181b">W</text><circle cx="31" cy="31" r="3.5" fill="#f97316"/><circle cx="65" cy="65" r="3.5" fill="#ee2c4b"/></g></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#18181b"/><rect x="22" y="22" width="52" height="52" rx="14" fill="#fffdf9"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>Dadu W</h3><p class="why">"Cap-cip-cup biar AI yang mikir". Playful, decision engine banget.</p>
+<div class="tags"><span class="hot">decision engine</span><span>gen-z</span></div></div>
+
+<div class="card" data-fam="decide" data-name="17 · Bubble Quiz W">
+<span class="num">17</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#0e7490"/><path d="M16 20 h64 a8 8 0 0 1 8 8 v30 a8 8 0 0 1 -8 8 H44 l-12 12 v-12 h-16 a8 8 0 0 1 -8 -8 V28 a8 8 0 0 1 8 -8" fill="#fffdf9"/><text x="48" y="55" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="24" font-weight="800" fill="#18181b">W</text><circle cx="58" cy="44" r="3" fill="#ee2c4b"/></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#0e7490"/><rect x="16" y="20" width="64" height="46" rx="10" fill="#fffdf9"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>Bubble Quiz W</h3><p class="why">Quiz yang nanya dulu baru mutusin. Meta produk, buddy vibes.</p>
+<div class="tags"><span>quiz meta</span><span>buddy</span></div></div>
+
+<div class="card" data-fam="decide" data-name="18 · Deck Swipe">
+<span class="num">18</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#f97316"/><rect x="20" y="28" width="40" height="48" rx="9" fill="#fffdf9" transform="rotate(-8 40 52)"/><rect x="38" y="22" width="40" height="48" rx="9" fill="#18181b" transform="rotate(6 58 46)"/><text x="58" y="54" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="22" font-weight="800" fill="#fffdf9" transform="rotate(6 58 54)">W</text></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#f97316"/><rect x="38" y="22" width="40" height="48" rx="9" fill="#18181b"/></svg></div><span class="favlabel">favicon 16px ~</span></div></div></div>
+<h3>Deck Swipe</h3><p class="why">Kartu deck quiz = tulang punggung kombo 5. Meta &amp; jujur.</p>
+<div class="tags"><span>meta produk</span><span>detail &gt; 24px</span></div></div>
+
+<div class="card" data-fam="decide" data-name="19 · Spark Pilihan">
+<span class="num">19</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#fffdf9"/><path d="M48 10 C50 36 62 46 86 48 C62 50 50 60 48 86 C46 60 34 50 10 48 C34 46 46 36 48 10 Z" fill="#f97316"/><text x="48" y="58" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="22" font-weight="800" fill="#fff">W</text></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#fffdf9"/><path d="M48 10 C50 36 62 46 86 48 C62 50 50 60 48 86 C46 60 34 50 10 48 C34 46 46 36 48 10 Z" fill="#f97316"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>Spark Pilihan</h3><p class="why">Rekomendasi "ajaib" 30 detik. Modern, tapi tren AI generik.</p>
+<div class="tags"><span>AI vibes</span><span>pasaran AI</span></div></div>
+
+<div class="card" data-fam="decide" data-name="20 · Centang Beres">
+<span class="num">20</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#0e7490"/><circle cx="48" cy="48" r="28" fill="#fffdf9"/><path d="M36 48 l9 9 l16 -19" stroke="#0e7490" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="48" y="86" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="12" font-weight="800" fill="#fffdf9">W</text></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#0e7490"/><circle cx="48" cy="48" r="28" fill="#fffdf9"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>Centang Beres</h3><p class="why">"Weekend plan: beres". Trust + kelar, cocok buat splash success.</p>
+<div class="tags"><span>trust</span><span>success</span></div></div>
+
+</div></div>
+
+<!-- ============ E · MALL/KULINER ============ -->
+<div class="fam" data-fam="food"><h2>E · Mall &amp; Kuliner — jangkar tenant</h2><p>Bikin tenant ngerasa "ini app gue juga". Amunisi B2B &amp; stiker kasir.</p><div class="grid">
+
+<div class="card" data-fam="food" data-name="21 · Mangkok W">
+<span class="num">21</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#ee2c4b"/><path d="M28 20 L64 52 M40 16 L72 46" stroke="#fffdf9" stroke-width="5" stroke-linecap="round"/><path d="M18 56 h60 c0 13 -13 22 -30 22 c-17 0 -30 -9 -30 -22" fill="#fffdf9"/><text x="48" y="73" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="15" font-weight="800" fill="#ee2c4b">W</text></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#ee2c4b"/><path d="M18 56 h60 c0 13 -13 22 -30 22 c-17 0 -30 -9 -30 -22" fill="#fffdf9"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>Mangkok W</h3><p class="why">Emosi "laper" paling instan. Beda dari kompetitor travel.</p>
+<div class="tags"><span class="hot">F&amp;B banget</span><span>B2B</span></div></div>
+
+<div class="card" data-fam="food" data-name="22 · Kopi W">
+<span class="num">22</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#fff7ed"/><path d="M28 32 h38 v22 a17 17 0 0 1 -17 17 h-4 a17 17 0 0 1 -17 -17 Z" fill="#fff" stroke="#18181b" stroke-width="4"/><path d="M66 38 h5 a8 8 0 0 1 0 15 h-7" fill="none" stroke="#18181b" stroke-width="4"/><text x="47" y="60" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="19" font-weight="800" fill="#f97316">W</text><path d="M60 76 h-26" stroke="#18181b" stroke-width="4" stroke-linecap="round"/></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#fff7ed"/><rect x="28" y="32" width="38" height="39" rx="8" fill="#fff" stroke="#18181b" stroke-width="6"/></svg></div><span class="favlabel">favicon 16px ~</span></div></div></div>
+<h3>Kopi W</h3><p class="why">Anak kopi langsung disapa. Nongkrong banget.</p>
+<div class="tags"><span>nongkrong</span><span>kafe</span></div></div>
+
+<div class="card" data-fam="food" data-name="23 · Ruko W">
+<span class="num">23</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#18181b"/><path d="M14 32 h68 l-6 12 H20 Z" fill="#ee2c4b"/><rect x="24" y="44" width="48" height="30" rx="6" fill="#fffdf9"/><text x="48" y="67" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="22" font-weight="800" fill="#18181b">W</text></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#18181b"/><path d="M14 32 h68 l-6 12 H20 Z" fill="#ee2c4b"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>Ruko W</h3><p class="why">Awning tenant + papan W. Paling gampang jadi stiker kaca.</p>
+<div class="tags"><span class="hot">stiker tenant</span><span>B2B</span></div></div>
+
+<div class="card" data-fam="food" data-name="24 · Tas Mall W">
+<span class="num">24</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#0e7490"/><path d="M26 34 h44 l-4 44 a8 8 0 0 1 -8 8 H38 a8 8 0 0 1 -8 -8 Z" fill="#fffdf9"/><path d="M37 34 a11 11 0 0 1 22 0" fill="none" stroke="#18181b" stroke-width="4" stroke-linecap="round"/><text x="48" y="68" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="24" font-weight="800" fill="#0e7490">W</text></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#0e7490"/><rect x="26" y="34" width="44" height="52" rx="8" fill="#fffdf9"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>Tas Mall W</h3><p class="why">Shopping bag = direktori mall. Paling "mall" dari semua opsi.</p>
+<div class="tags"><span>direktori</span><span>wallet teal</span></div></div>
+
+<div class="card" data-fam="food" data-name="25 · Kupon W">
+<span class="num">25</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#fbbf24"/><rect x="14" y="30" width="68" height="36" rx="9" fill="#fffdf9"/><path d="M48 30 v36" stroke="#18181b" stroke-width="3" stroke-dasharray="5 4"/><text x="31" y="55" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="19" font-weight="800" fill="#ee2c4b">W</text><circle cx="65" cy="47" r="4.5" fill="none" stroke="#0e7490" stroke-width="3"/><circle cx="65" cy="59" r="4.5" fill="none" stroke="#0e7490" stroke-width="3"/></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#fbbf24"/><rect x="14" y="30" width="68" height="36" rx="9" fill="#fffdf9"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>Kupon W</h3><p class="why">"WIK-XXXXX tunjukin ke kasir". Umpan B2B paling literal.</p>
+<div class="tags"><span class="hot">klaim voucher</span><span>B2B</span></div></div>
+
+</div></div>
+
+<!-- ============ F · MASKOT ============ -->
+<div class="fam" data-fam="maskot"><h2>F · Maskot Icon — temen yang bisa disayang</h2><p>Tetap icon-first: wajah simpel yang lolos 16px. Stiker WA + merch + TikTok.</p><div class="grid">
+
+<div class="card" data-fam="maskot" data-name="26 · Blob Weken">
+<span class="num">26</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#f97316"/><path d="M48 14 C68 14 80 28 78 48 C76 68 64 82 48 82 C32 82 20 68 18 48 C16 28 28 14 48 14 Z" fill="#fffdf9"/><circle cx="40" cy="46" r="5" fill="#18181b"/><circle cx="56" cy="46" r="5" fill="#18181b"/><path d="M40 58 Q48 65 56 58" stroke="#18181b" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#f97316"/><circle cx="40" cy="46" r="7" fill="#18181b"/><circle cx="56" cy="46" r="7" fill="#18181b"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>Blob Weken</h3><p class="why">Gumpalan ceria. Bisa pegang pin/mangkok di versi lanjutan.</p>
+<div class="tags"><span>merch</span><span>butuh sistem</span></div></div>
+
+<div class="card" data-fam="maskot" data-name="27 · Matahari Gaul">
+<span class="num">27</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#18181b"/><g stroke="#fbbf24" stroke-width="4" stroke-linecap="round"><path d="M48 12 v7 M48 77 v7 M12 48 h7 M77 48 h7 M23 23 l5 5 M68 68 l5 5 M73 23 l-5 5 M28 68 l-5 5"/></g><circle cx="48" cy="48" r="20" fill="#fbbf24"/><rect x="31" y="42" width="34" height="11" rx="5.5" fill="#18181b"/><path d="M41 60 Q48 65 55 60" stroke="#18181b" stroke-width="3" fill="none" stroke-linecap="round"/></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#18181b"/><circle cx="48" cy="48" r="20" fill="#fbbf24"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>Matahari Gaul</h3><p class="why">Matahari berkacamata = weekend mode ON. Konten-ready.</p>
+<div class="tags"><span class="hot">konten TikTok</span><span>stiker WA</span></div></div>
+
+<div class="card" data-fam="maskot" data-name="28 · Pin Senyum">
+<span class="num">28</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#fffdf9"/><path d="M48 12 C30 12 20 25 20 41 C20 61 48 86 48 86 C48 86 76 61 76 41 C76 25 66 12 48 12 Z" fill="#0e7490"/><circle cx="41" cy="39" r="4.5" fill="#fffdf9"/><circle cx="55" cy="39" r="4.5" fill="#fffdf9"/><path d="M40 50 Q48 57 56 50" stroke="#fffdf9" stroke-width="3" fill="none" stroke-linecap="round"/></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#fffdf9"/><path d="M48 12 C30 12 20 25 20 41 C20 61 48 86 48 86 C48 86 76 61 76 41 C76 25 66 12 48 12 Z" fill="#0e7490"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>Pin Senyum</h3><p class="why">Evolusi #06 kalau nanti butuh maskot. Serius dulu, lucu belakangan.</p>
+<div class="tags"><span class="hot">evolusi #06</span><span>friendly</span></div></div>
+
+<div class="card" data-fam="maskot" data-name="29 · Mangkok Lahap">
+<span class="num">29</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#ee2c4b"/><path d="M18 56 h60 c0 13 -13 22 -30 22 c-17 0 -30 -9 -30 -22" fill="#fffdf9"/><circle cx="40" cy="63" r="4" fill="#18181b"/><circle cx="56" cy="63" r="4" fill="#18181b"/><path d="M40 30 C40 42 54 42 49 54" stroke="#fffdf9" stroke-width="4" fill="none" stroke-linecap="round"/></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#ee2c4b"/><path d="M18 56 h60 c0 13 -13 22 -30 22 c-17 0 -30 -9 -30 -22" fill="#fffdf9"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>Mangkok Lahap</h3><p class="why">Mangkok bermata. Absurd dikit = diingat Gen-Z.</p>
+<div class="tags"><span>absurd+</span><span>F&amp;B</span></div></div>
+
+<div class="card" data-fam="maskot" data-name="30 · Balon Weekend">
+<span class="num">30</span><button class="star">☆</button>
+<div class="stage"><div class="appicon"><svg viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#0e7490"/><ellipse cx="48" cy="40" rx="24" ry="28" fill="#fffdf9"/><path d="M48 68 l-4 8 h8 Z" fill="#fffdf9"/><text x="48" y="51" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="24" font-weight="800" fill="#f97316">W</text><path d="M48 78 v8" stroke="#fffdf9" stroke-width="3"/></svg></div><div class="lockup"><div class="wm">wikendo<i>.</i></div><div class="favrow"><div class="fav"><svg viewBox="0 0 96 96"><rect width="96" height="96" fill="#0e7490"/><ellipse cx="48" cy="40" rx="24" ry="28" fill="#fffdf9"/></svg></div><span class="favlabel">favicon 16px ✓</span></div></div></div>
+<h3>Balon Weekend</h3><p class="why">Balon = "weekend dibawa terbang". Ringan, optimis, beda.</p>
+<div class="tags"><span>ringan</span><span>beda</span></div></div>
+
+</div></div>
+
+</div><!-- /board -->
+
+<section class="reco">
+<h2>🏆 Rekomendasi gue (icon-first, kacamata bisnis)</h2>
+<p class="sub2">Sistemnya tetap: <b>1 master icon + wordmark "wikendo." di bawahnya</b>. Dipakai 2 mode: <b>icon saja</b> (app icon HP, favicon, stamp voucher) + <b>icon + wordmark</b> (splash, header web, kaos tenant). Podium v2:</p>
+<div class="podium">
+<div class="pod"><span class="rank">#1</span><b>06 · Pin W Jagoan</b><br>Master icon. Jujur (cari tempat), marker Maps natural, lolos 16px + 1-warna. Risiko terkecil, guna terbesar.</div>
+<div class="pod"><span class="rank">#2</span><b>02 · W Gradient</b><br>Cadangan master. Paling store-ready, oranye→merah cerita split quiz. Kalau #06 kerasa "ojek", ini jawabannya.</div>
+<div class="pod"><span class="rank">#3</span><b>21 · Mangkok W</b><br>Amunisi modul makan/B2B. Halaman makan + stiker tenant kuliner, tanpa ngotorin master.</div>
+<div class="pod"><span class="rank">#4</span><b>14 · Tiket WKND</b><br>Bahasa voucher "WIK-XXXXX tunjukin ke kasir" + materi jualan tenant.</div>
+<div class="pod"><span class="rank">#5</span><b>28 · Pin Senyum</b><br>Evolusi maskot nanti (stiker WA/merch). Jangan sekarang — kunci serius dulu.</div>
+</div>
+<div class="check">✅ <b>Tes wajib sebelum kunci:</b> 1) tiap kartu udah ada simulasi 16px di bawah wordmark — yang tulisannya "~" wajib cek ulang di HP beneran. 2) klik gambar → cek versi mono (tes struk fotokopi). 3) screenshot 5 favorit dijejerin di home screen — mana yang paling mencolok? 4) PDKI manual kelas 9/35/42 (nama "Wikendo" udah BERSIH, logo tinggal hindari mirip visual).<br>👉 <b>Next:</b> shortlist Top 3–5 versi lu (klik ⭐ → Salin shortlist → paste ke sini). Gue finalin lockup resmi + export PNG/SVG + pasang ke header web &amp; favicon.</div>
+</section>
+
+</div>
+
+<div class="modal" id="modal"><div class="sheet">
+<button class="x" id="close">✕</button>
+<h3 id="mTitle"></h3>
+<p id="mWhy"></p>
+<div class="prevrow">
+<div class="pv" style="background:#fffdf9"><small>APP ICON 96px</small><div class="big" id="pvBig"></div><small id="pvWm" style="font-size:15px">wikendo.</small></div>
+<div class="pv" style="background:#18181b;color:#fff"><small>KECIL 32px</small><div class="big" id="pvSmall" style="width:48px;height:48px;border-radius:12px"></div><small>HOME SCREEN TEST</small></div>
+<div class="pv" style="background:#fff"><small>1-WARNA (STRUK)</small><div class="big" id="pvMono" style="border:1px solid #e4e4e7"></div><small>LOLOS JIKA KEBACA</small></div>
+</div>
+<p style="font-size:12px">Kiri: icon + wordmark (mode splash/header). Tengah: icon dikecilin (simulasi di home screen HP). Kanan: versi 1-warna (tes stamp voucher &amp; fotokopi). Kalau kanan masih kebaca = lolos.</p>
+</div></div>
+
+<script>
+const chips=[...document.querySelectorAll('.chip')];
+const fams=[...document.querySelectorAll('.fam')];
+chips.forEach(c=>c.onclick=()=>{
+chips.forEach(x=>x.classList.remove('on'));c.classList.add('on');
+const f=c.dataset.f;
+fams.forEach(fm=>fm.style.display=(f==='all'||fm.dataset.fam===f)?'':'none');
+});
+const vBoth=document.getElementById('vBoth'),vIcon=document.getElementById('vIcon');
+vBoth.onclick=()=>{document.body.classList.remove('hide-wm');vBoth.classList.add('on');vIcon.classList.remove('on')};
+vIcon.onclick=()=>{document.body.classList.add('hide-wm');vIcon.classList.add('on');vBoth.classList.remove('on')};
+const KEY='wikendo-logo-v2-shortlist';
+let short=new Set(JSON.parse(localStorage.getItem(KEY)||'[]'));
+const count=document.getElementById('count');
+function paint(){count.textContent=short.size;
+document.querySelectorAll('.star').forEach(s=>{
+const n=s.closest('.card').dataset.name;
+const on=short.has(n);s.classList.toggle('on',on);s.textContent=on?'★':'☆';
+});
+localStorage.setItem(KEY,JSON.stringify([...short]));
+}
+document.querySelectorAll('.star').forEach(s=>s.onclick=e=>{e.stopPropagation();
+const n=s.closest('.card').dataset.name;
+short.has(n)?short.delete(n):short.add(n);paint();
+});
+document.getElementById('copy').onclick=()=>{
+const t=[...short].join('\n')||'(shortlist masih kosong — klik ☆ di kartu favorit)';
+navigator.clipboard.writeText('Shortlist logo Wikendo v2 (icon-first):\n'+t).then(()=>alert('Shortlist disalin ✅'));
+};
+paint();
+const modal=document.getElementById('modal');
+document.querySelectorAll('.stage').forEach(m=>m.onclick=()=>{
+const card=m.closest('.card');
+const svg=m.querySelector('.appicon').innerHTML;
+document.getElementById('mTitle').textContent=card.dataset.name+' · '+card.querySelector('h3').textContent;
+document.getElementById('mWhy').textContent=card.querySelector('.why').textContent;
+document.getElementById('pvBig').innerHTML=svg;
+document.getElementById('pvSmall').innerHTML=svg;
+const mono=svg.replaceAll('#f97316','#18181b').replaceAll('#ee2c4b','#18181b').replaceAll('#0e7490','#18181b').replaceAll('#fbbf24','#18181b').replaceAll('#fff7ed','#ffffff').replaceAll('#fffdf9','#ffffff').replaceAll('#fff','#ffffff');
+document.getElementById('pvMono').innerHTML=mono;
+modal.classList.add('open');
+});
+document.getElementById('close').onclick=()=>modal.classList.remove('open');
+modal.onclick=e=>{if(e.target===modal)modal.classList.remove('open')};
+</script>
+</body>
+</html>
