@@ -11,7 +11,7 @@
  * ATURAN: fungsi di sini harus PURE (input → output, tanpa side effect,
  * tanpa baca route/cookie/DB). Side effect tetap di pages/server.
  */
-import type { QuotaStatus, QuotaStatusInput } from '../types'
+import type { QuotaStatus, QuotaStatusInput, LoaderMeta, LoaderVariant } from '../types'
 
 export function progressPercent(step: number, total: number): number {
   return ((step + 1) / total) * 100
@@ -154,4 +154,22 @@ export function isHistoryLoginWall(isLoggedIn: boolean): boolean {
 /** Momen wall #4: klaim voucher WAJIB login (anon → 401, anti-farming). */
 export function isVoucherClaimWall(isLoggedIn: boolean): boolean {
   return !isLoggedIn
+}
+
+/* ── Loader spinner fetching API ───────────────────────────────────
+ * KENAPA di sini (pure): warna aksen + pesan per variant dipakai komponen
+ * AppLoader di 3 pages (result, result-makan, mall/[slug]) → 1 sumber
+ * kebenaran, bukan hardcode warna di tiap page. Tanpa baca route/state.
+ * Contoh: getLoaderMeta('makan').accent → '#ee2c4b'.
+ */
+
+/** Meta spinner per variant: warna aksen + judul + hint. Variant ngaco = fallback mall (aman). */
+export function getLoaderMeta(variant: LoaderVariant): LoaderMeta {
+  if (variant === 'tempat') {
+    return { accent: '#f97316', title: 'Lagi cariin tempat yang cocok…', hint: 'LLM lagi ranking 5 tempat • 30–45 detik' }
+  }
+  if (variant === 'makan') {
+    return { accent: '#ee2c4b', title: 'Lagi cariin tenant yang cocok…', hint: 'Filter tenant + ranking LLM • 20 detik' }
+  }
+  return { accent: '#0e7490', title: 'Lagi muat tenant…', hint: 'Direktori mall • tanpa LLM, bentar doang' }
 }

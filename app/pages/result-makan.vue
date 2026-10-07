@@ -9,7 +9,7 @@
       <span class="text-gray-500">{{ quotaLabel }} tersisa</span>
     </div>
 
-    <div v-if="pending" class="text-center py-16"><div class="text-6xl animate-pulse mb-4">🍜✨</div><p>Filter tenant + ranking LLM...</p></div>
+    <AppLoader v-if="pending" variant="makan" />
     <div v-else-if="error" class="rounded-2xl p-4 text-sm font-bold" :style="isWall ? 'background:#fff7ed;border:2px solid #f97316;color:#9a3412' : 'background:#fef2f2;border:1px solid #fecaca;color:#991b1b'">
       <template v-if="isWall">🔒 Quota makan anon habis (2x/hari). Login 10 detik → quota jadi 5x/hari, gratis.<br><NuxtLink to="/" class="underline">Login / balik Home →</NuxtLink></template>
       <template v-else>{{ errorMessage }}<br><button class="underline mt-1" @click="refresh()">Coba lagi → (quota nggak kepotong)</button></template>

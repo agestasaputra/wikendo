@@ -16,6 +16,7 @@
 ## 📌 BOARD — posisi per 8 Okt 2026 (Supabase DONE ✅, next quota real)
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Loader/spinner fetching API (DONE ✅ 8 Okt): komponen `AppLoader` (variant tempat/makan/mall) + helper `getLoaderMeta` tested → pasang ke `result.vue` + `result-makan.vue` + `mall/[slug].vue` (sebelumnya direktori NOL loader pas ganti filter)
 - [ ] NEXT: wire quota real `GET /api/quota` → wallet 2-state + `POST /api/voucher/claim` klaim beneran (DB sudah live, tinggal wiring kuota)
 - [ ] NEXT: finalin lockup resmi (master mark + wordmark) + pasang ke header web & favicon + stamp voucher 1-warna
 - [x] UI kombo slice-1→4 (DONE ✅ 7 Okt): Home wallet + quiz swipe + result deck/voucher + direktori SEO (`e12be1b` live, prod 200 `QUOTA HARI INI` ✅)
@@ -55,6 +56,13 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-08 — Loader/spinner fetching API DONE ✅ (AppLoader 3 pages)
+- **Kenapa:** request Agesta VERBATIM "tolong tambahin loader atau spinner ketika melakukan fetching data dari api" — temuan audit: `result` + `result-makan` cuma emoji pulse, `mall/[slug]` NOL loader pas ganti filter (user kira hang).
+- **Dikerjain (TDD RED→GREEN):** kontrak `LoaderVariant/LoaderMeta` di `types/index.ts` → helper pure `getLoaderMeta()` di `utils/quiz-logic.ts` → `tests/loader.test.ts` 4 test (MERAH dulu `getLoaderMeta is not a function`, lalu HIJAU 4/4) → komponen `components/AppLoader.vue` (cincin spin + judul + hint, aksen #f97316/#ee2c4b/#0e7490, `role=status` a11y) → pasang `variant="tempat"` ke `result.vue`, `variant="makan"` ke `result-makan.vue`, `variant="mall"` ke `[slug].vue` (+ ambil `pending` dari useFetch yang tadinya nggak diambil).
+- **Verifikasi:** test 60/60 (4 files) ✅ + lint 0 error ✅ + build 10.3s ✅. `AGENTS.md` §4 + §7 diupdate (AppLoader + 60 test).
+- **Files:** `app/types/index.ts`, `app/utils/quiz-logic.ts`, `app/tests/loader.test.ts` (baru), `app/components/AppLoader.vue` (baru), `app/pages/result.vue`, `app/pages/result-makan.vue`, `app/pages/mall/[slug].vue`, `app/AGENTS.md`, `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** commit + push + deploy Vercel → verify prod.
 
 ## 2026-10-08 — Integrasi Supabase DONE ✅ (DB live, prod baca DB beneran)
 - **Kenapa:** lanjut todolist Agesta VERBATIM "Gua mau integrate database dengan supabase".

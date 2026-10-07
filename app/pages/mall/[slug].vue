@@ -30,7 +30,8 @@
     </NuxtLink>
 
     <!-- Kartu tenant (mockup H): emoji + promo + nama + meta halal -->
-    <div class="flex flex-col gap-2.5 mt-3">
+    <AppLoader v-if="pending" variant="mall" />
+    <div v-else class="flex flex-col gap-2.5 mt-3">
       <div v-for="t in filtered" :key="t.name" class="border border-gray-100 rounded-2xl p-2.5 bg-white flex gap-2.5 items-center">
         <div class="w-[62px] h-[62px] flex-none rounded-xl flex items-center justify-center text-3xl" style="background:#fff7ed">🍜</div>
         <div class="text-[13px]">
@@ -77,7 +78,7 @@ const query = computed(() => ({
   ...(fKids.value ? { kids: 'true' } : {}),
   ...(fMission.value ? { mission: 'nongkrong_lama' } : {})
 }))
-const { data, refresh } = await useFetch<TenantItem[]>(() => `/api/malls/${slug}/tenants`, { query })
+const { data, pending, refresh } = await useFetch<TenantItem[]>(() => `/api/malls/${slug}/tenants`, { query })
 function reload() { refresh() }
 // SEO direktori: title + description per-mall (funnel Google → tenant → quiz).
 useHead({

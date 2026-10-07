@@ -104,3 +104,18 @@ export interface QuotaStatus {
   reset_at: string | null
   login_cta?: string
 }
+
+/**
+ * LoaderVariant — KONTRAK spinner fetching API (1 helper + 1 komponen, 3 pages).
+ * - tempat = orange #f97316 (result.vue, POST /api/tempat/recommend, LLM 30-45 dtk)
+ * - makan = merah #ee2c4b (result-makan.vue, POST /api/makan/recommend, rank tenant)
+ * - mall = teal #0e7490 (mall/[slug].vue, GET tenants filter, tanpa LLM)
+ * Dipakai: getLoaderMeta() di utils/quiz-logic + components/AppLoader.vue.
+ */
+export type LoaderVariant = 'tempat' | 'makan' | 'mall'
+
+export interface LoaderMeta {
+  accent: string
+  title: string
+  hint: string
+}

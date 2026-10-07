@@ -63,8 +63,11 @@ app/
 │   └── llm.ts              # callLLM() + generateTempat() + rankTenants() — timeout 15 dtk
 ├── utils/
 │   └── quiz-logic.ts       # FUNGSI PURE (progressPercent, isLastStep, getMakanStartStep,
-│                           # filterTenantsByKeyword, buildMapsUrl) — dipakai pages + server,
+│                           # filterTenantsByKeyword, buildMapsUrl, getLoaderMeta) — dipakai pages + server,
 │                           # di-test di tests/. Nambah logic baru? Taruh sini kalau pure.
+├── components/
+│   └── AppLoader.vue       # SPINNER fetching API (variant tempat/makan/mall, warna aksen
+│                           # #f97316/#ee2c4b/#0e7490) — dipakai result.vue + result-makan.vue + mall/[slug].vue
 ├── types/index.ts          # KONTRAK DATA — ubah interface di sini DULU sebelum pages/server
 ├── tests/quiz-logic.test.ts# Unit test vitest (12 test). Nambah fungsi pure → nambah test.
 └── nuxt.config.ts          # runtimeConfig: secret (server) vs public.* (boleh ke browser)
@@ -117,8 +120,8 @@ dalam `pages/mall/[slug].vue`. Tidak perlu endpoint baru.
 ## 7. Testing
 
 - Runner: **Vitest 5** + happy-dom. Config: `vitest.config.ts` (`tests/**/*.test.ts`).
-- Yang di-test sekarang: 5 fungsi pure di `utils/quiz-logic.ts` (12 test: progress, last-step,
-  pre-fill valid/invalid, search case-insensitive/kosong/tidak-ketemu, Maps URL).
+- Yang di-test sekarang: fungsi pure di `utils/quiz-logic.ts` (60 test, 4 files: quiz-logic,
+  quota-auth, auth-gate, loader 4 variant tempat/makan/mall/fallback).
 - API routes & pages BELUM ada test (butuh mock `useRuntimeConfig`/`$fetch`/Supabase) —
   jangan klaim coverage penuh. Kalau nambah: mock di level `callLLM`, bukan HTTP sungguhan.
 - TDD: test gagal dulu (MERAH) → kode minimal (HIJAU) → refactor. Satu perilaku per test.
