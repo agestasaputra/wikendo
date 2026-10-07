@@ -16,6 +16,7 @@
 ## 📌 BOARD — posisi per 8 Okt 2026 (Supabase + quota real + button merah DONE ✅, next slice auth)
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Label putih Q2d M3d + 15 opsi voucher V1-V15 DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/revamp-options-v7.html` — Q2d+M3d label PUTIH + dot ember/rose-terang (tolak full merah/oranye: gagal AAA, label bukan aksi) + 15 voucher V1 tiket ramping/V2 soft wash ⭐/V3 ink/V4 lime/V5 link/V6 scarcity/V7 reveal/V8 QR/V9 sticky/V10 band/V11 steps/V12 gift/V13 price/V14 sheet/V15 proof, hero konteks SAMA — rekomendasi tunggal V2 — next: nunggu "gas Q2d+M3d+V2"
 - [x] Revisi lime touch Q2c M3c R3b F1b S2c DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/revamp-options-v6.html` — Q2c+M3c segmen blok LIME + question putih + label lime (input: SETUJU 100%) + R3b pill BEST lime + badge foto lime + F1b klaim solid → tiket dashed (off ink-lime) + S2c cariin solid → kartu asisten strip lime. Aturan: lime=kemajuan/nilai <10%, ember/rose tetap aksi — next: nunggu "gas Q2c+M3c+R3b+F1b+S2c"
 - [x] Revisi pick Q2 M3 R3 F1 S2 DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/revamp-options-v5.html` — Q2b+M3b segmen blok di ink header (5/4 blok, on ember/rose) + S2b infinity 10/page (skeleton + sticky count + spec API limit/offset backward-compat) + R3/F1 lock 3 lapis (hero+minis+full list 5). Jawab question: result = item list isi 5 (recommendations[5]) — next: nunggu "gas Q2b+M3b+R3+F1+S2b"
 - [x] Board 20 opsi Revamp Pages Non-Index DONE ✅ 8 Okt (design-only, `app/` NOL sentuh): `design/revamp-options-v4.html` — audit existing 6 page vs rule V2 (vonis: semua langgar token lama) → 20 opsi komparasi apple-to-apple: Quiz Tempat 4 (Q1-Q4) + Quiz Makan 4 (M1-M4) + Result Tempat 4 (R1-R4) + Result Makan 4 (F1-F4) + Mall 2+2 (D1-D2+S1-S2), semua ikut V2 Ember P1 (paper/ink/lime/ember/rose, kartu 24px, tombol 56px, strip 5px, hero netral, cyan mati), filter 5 keluarga + shortlist `wikendo-pages20-pick`, Top sistem Q1+M1+R1+F1+D1+S1 — nunggu "Gua suka Xx" / "gas sistem"
@@ -66,6 +67,13 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-08 — Label putih Q2d M3d + 15 opsi voucher V1-V15 DONE ✅ (design-only)
+- **Kenapa:** Agesta VERBATIM "Q2c dan M3c: Tulisan 'Quiz tempat/makan' jangan warna lime lagi, mungkin bisa putih / merah / orang (sesuai color pallete wikendo). F1b: gua ga suka design card atau board sih voucher! tolong lu kasih gua 15 opsi card voucher itu."
+- **Input gue (tegas):** label → PUTIH `#fff` + dot ember-terang `#FB923C` (Tempat) / rose-terang `#FDA4AF` (Makan) — TOLAK full merah/oranye (teks 10px gagal AAA, label bukan aksi, split dijaga via dot + selected + CTA). F1b tiket dibedah jujur: metafora tiket fisik mismatch (voucher = kode digital + login), dashed 3 kolom berat di 360px, kotak hitam saingan pill BEST → 15 opsi benefit-first + 1 focal. Rekomendasi tunggal: V2 Soft Wash (wash `#FFE4E6` tanpa border/solid, benefit + panah rose, S 2 jam, risiko rendah).
+- **Dikerjain:** `design/revamp-options-v7.html` 17 kartu (Q2d + M3d + V1-V15) hero konteks SAMA, filter label/voucher + shortlist `wikendo-voucher15-pick`. Verifikasi node COUNT=17 + HAS_SHORTLIST=1 ✅.
+- **Files:** `design/revamp-options-v7.html` (baru), `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** nunggu "gas Q2d+M3d+V2" (atau V-pick lain) → eksekusi via TDD.
 
 ## 2026-10-08 — Revisi lime touch Q2c M3c R3b F1b S2c DONE ✅ (design-only)
 - **Kenapa:** Agesta VERBATIM "Gua butuh sentuhin warna lime di tiap halamannya. Q2b dan M3b: segmen blok diubah warna jadi lime (gua minta input dari lu?) dan question text diubah jadi warna cenderung putih (gua minta input dari lu?). R3: butuh sentuhan lime. F1: butuh lime + card klaim voucher terlalu solid dan bold. S2b: butuh lime + card Cariin terlalu solid dan bold".

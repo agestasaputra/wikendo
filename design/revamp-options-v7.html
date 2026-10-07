@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wikendo — Label Q2d/M3d + 15 Opsi Voucher F1</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#f5f1e8;color:#18181b;padding:24px 16px 140px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto}
+.hero{background:#0C0A09;color:#fff;border-radius:24px;padding:28px 24px;border-left:5px solid #A3E635}
+.hero h1{font-size:23px;font-weight:800}.hero h1 .dot{color:#A3E635}
+.hero p{color:#d6d3d1;font-size:13px;margin-top:8px;max-width:940px}.hero p b{color:#fff}
+.hero code{background:rgba(255,255,255,.14);padding:1px 7px;border-radius:6px;font-size:11.5px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.badge{font-size:11.5px;font-weight:800;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2)}
+.badge.ok{background:#A3E635;border-color:#A3E635;color:#0C0A09}
+.qa{background:rgba(163,230,53,.08);border:1px solid rgba(163,230,53,.4);border-radius:16px;padding:14px 16px;margin-top:14px;font-size:12.5px;color:#e7e5e4}
+.qa b{color:#D9F99D}.qa li{margin:6px 0 6px 18px}.qa code{background:rgba(255,255,255,.14);padding:1px 7px;border-radius:6px;font-size:11px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.filters button{border:1.5px solid rgba(255,255,255,.35);background:transparent;color:#fff;border-radius:999px;padding:8px 16px;font-weight:800;font-size:12.5px;cursor:pointer;font-family:inherit}
+.filters button.on{background:#A3E635;border-color:#A3E635;color:#0C0A09}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.gcard{background:#fff;border:1.5px solid #ece7dd;border-radius:20px;overflow:hidden}
+.gcard.picked{border-color:#A3E635;box-shadow:0 0 0 2px #A3E635}
+.gprev{padding:14px;background:#e9e2d3;overflow:hidden}
+.mini{max-width:300px;margin:0 auto;border-radius:18px;padding:12px 14px 14px;min-height:560px;color:#18181b;background:#F5F5F4}
+.m-top{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:800}
+.m-inkhead{background:#0C0A09;color:#fff;border-radius:14px;padding:10px 12px;margin-top:10px}
+.m-inkhead .lbl{font-size:10px;font-weight:800;letter-spacing:.5px;color:#fff}
+.m-inkhead .lbl .dT{color:#FB923C}.m-inkhead .lbl .dM{color:#FDA4AF}
+.m-inkhead .n{font-size:19px;font-weight:800;color:#fff;line-height:1.25}
+.m-seg{display:flex;gap:5px;margin-top:10px}
+.m-seg i{flex:1;height:8px;border-radius:99px;background:rgba(255,255,255,.22)}
+.m-seg i.on-lime{background:#A3E635}
+.m-opt{background:#fff;border-radius:16px;padding:11px 12px;font-size:11.5px;font-weight:800;display:flex;gap:8px;align-items:center;margin-top:7px;border:2px solid #E7E5E4}
+.m-opt small{display:block;font-weight:700;color:#78716c;font-size:10px}
+.m-opt.sel-t{border-color:#EA580C;background:#FFF7ED}
+.m-opt.sel-m{border-color:#E11D48;background:#FFE4E6}
+.m-opt .em{font-size:20px;flex:none}
+.m-tog{display:flex;gap:6px;margin-top:8px}
+.m-tog span{flex:1;border-radius:99px;padding:8px 4px;text-align:center;font-size:10px;font-weight:800;background:#fff;border:1.5px solid #E7E5E4}
+.m-tog span.on{background:#0C0A09;color:#fff;border-color:#0C0A09}
+.m-hero{background:#fff;border-radius:18px;padding:12px;margin-top:10px;box-shadow:0 6px 16px -8px rgba(0,0,0,.2);border-left:5px solid #EA580C}
+.m-hero .nm{font-size:14px;font-weight:800;margin-top:4px;line-height:1.3}
+.m-hero .meta{font-size:10px;font-weight:700;opacity:.7;margin-top:2px}
+.m-pill{display:inline-block;font-size:10px;font-weight:800;padding:4px 10px;border-radius:99px;margin:6px 4px 0 0}
+.m-cta{display:flex;gap:6px;margin-top:10px}
+.m-cta span{flex:1;border-radius:12px;padding:11px 4px;text-align:center;font-size:10.5px;font-weight:800}
+.m-cta .p-ink{background:#0C0A09;color:#fff}
+.m-cta .g{background:#fff;border:2px solid #E7E5E4;color:#0C0A09}
+.m-back{margin-top:10px;font-size:11px;font-weight:700;color:#A8A29E;text-align:center}
+.m-foot{margin-top:8px;font-size:9.5px;font-weight:700;opacity:.55;text-align:center}
+/* voucher variants */
+.v{border-radius:14px;padding:10px;margin-top:10px;font-size:10.5px;font-weight:800}
+.v small{display:block;font-weight:700;font-size:9.5px;opacity:.75}
+.v-tiket{background:#fff;border:1.5px dashed #E11D48;display:flex;gap:10px;align-items:center}
+.v-tiket .off{flex:none;background:#0C0A09;color:#A3E635;border-radius:10px;padding:8px 10px;text-align:center;font-size:15px}
+.v-tiket .off small{color:#fff;opacity:1;font-size:9px}
+.v-tiket .go{flex:none;background:#E11D48;color:#fff;border-radius:10px;padding:9px 12px}
+.v-soft{background:#FFE4E6;color:#881337;display:flex;gap:8px;align-items:center;border:none}
+.v-soft .arr{margin-left:auto;background:#E11D48;color:#fff;border-radius:99px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;flex:none}
+.v-ink{background:#0C0A09;color:#fff;display:flex;gap:10px;align-items:center}
+.v-ink .off{color:#A3E635;font-size:17px}
+.v-ink .go{background:#E11D48;color:#fff;border-radius:9px;padding:8px 11px;flex:none}
+.v-lime{background:#D9F99D;color:#0C0A09;display:flex;gap:8px;align-items:center}
+.v-lime .go{background:#0C0A09;color:#fff;border-radius:9px;padding:8px 11px;flex:none;margin-left:auto}
+.v-link{background:transparent;border-top:1px solid #E7E5E4;border-radius:0;padding:10px 2px;color:#E11D48;display:flex;justify-content:space-between;align-items:center}
+.v-scar{background:#fff;border:1px solid #E7E5E4}
+.v-scar .bar{height:6px;border-radius:99px;background:#E7E5E4;margin-top:6px;overflow:hidden}
+.v-scar .bar i{display:block;height:100%;width:75%;background:#A3E635;border-radius:99px}
+.v-scar .go{background:#E11D48;color:#fff;border-radius:9px;padding:8px;text-align:center;margin-top:8px}
+.v-blur{background:#fff;border:1px solid #E7E5E4;text-align:center}
+.v-blur .code{font-size:14px;letter-spacing:2px;filter:blur(4px);background:#F5F5F4;border-radius:8px;padding:6px;margin:6px 0}
+.v-blur .go{background:#0C0A09;color:#fff;border-radius:9px;padding:8px}
+.v-qr{background:#fff;border:1px solid #E7E5E4;display:flex;gap:10px;align-items:center}
+.v-qr .q{width:52px;height:52px;flex:none;border-radius:10px;background:repeating-linear-gradient(45deg,#0C0A09 0 4px,#fff 4px 8px);border:2px solid #0C0A09}
+.v-qr .go{color:#E11D48}
+.v-sticky{background:#0C0A09;color:#fff;border-radius:12px;display:flex;gap:8px;align-items:center;position:sticky;bottom:0}
+.v-sticky .go{background:#A3E635;color:#0C0A09;border-radius:9px;padding:8px 12px;flex:none}
+.v-band{background:#fff;border:1px solid #E7E5E4;border-left:6px solid #E11D48;display:flex;gap:8px;align-items:center}
+.v-band .go{background:#0C0A09;color:#fff;border-radius:9px;padding:8px 11px;flex:none;margin-left:auto}
+.v-steps{background:#fff;border:1px solid #E7E5E4;display:flex;gap:4px;align-items:center;text-align:center}
+.v-steps div{flex:1;font-size:9px}
+.v-steps b{display:block;font-size:10px}
+.v-steps .on{color:#E11D48}
+.v-gift{background:linear-gradient(140deg,#FFF7ED,#FFE4E6);border:1px solid #FECDD3;display:flex;gap:8px;align-items:center}
+.v-gift .go{background:#E11D48;color:#fff;border-radius:99px;padding:8px 14px;flex:none}
+.v-price{background:#fff;border:1px solid #E7E5E4;display:flex;gap:8px;align-items:center}
+.v-price .pr s{opacity:.5;font-size:10px}.v-price .pr b{font-size:15px}
+.v-price .go{margin-left:auto;color:#E11D48}
+.v-sheet{background:#fff;border:1px solid #E7E5E4;text-align:center}
+.v-sheet .pill{display:inline-block;background:#F5F5F4;border:1px solid #E7E5E4;border-radius:99px;padding:7px 14px}
+.v-sheet .peek{margin-top:8px;background:#0C0A09;color:#fff;border-radius:10px;padding:8px}
+.v-proof{background:#fff;border:1px solid #E7E5E4}
+.v-proof .avs{display:flex;margin:6px 0}
+.v-proof .avs i{width:22px;height:22px;border-radius:99px;background:#D9F99D;border:2px solid #fff;margin-left:-6px;display:block}
+.v-proof .go{background:#E11D48;color:#fff;border-radius:9px;padding:8px;text-align:center;margin-top:6px}
+.gbody{padding:14px 16px 16px}.gbody h3{font-size:15px;font-weight:800}
+.gnum{display:inline-block;background:#0C0A09;color:#A3E635;font-size:11px;font-weight:800;border-radius:8px;padding:2px 9px;margin-right:6px}
+.tag{display:inline-block;font-size:10.5px;font-weight:800;padding:3px 10px;border-radius:999px;margin:6px 4px 0 0}
+.gbody p{font-size:12.5px;color:#44403c;margin-top:6px}
+.pro{font-size:12px;color:#166534;margin-top:6px}.con{font-size:12px;color:#991b1b;margin-top:2px}
+.hexes{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.hex{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;background:#f5f1e8;border:1px solid #e7e0d2;border-radius:8px;padding:3px 9px}
+.cssbox{font-family:'JetBrains Mono',monospace;font-size:10.5px;background:#0C0A09;color:#D9F99D;border-radius:10px;padding:9px 11px;margin-top:8px;overflow-x:auto;white-space:nowrap}
+.rowbtns{display:flex;gap:8px;margin-top:10px}
+.rowbtns button{flex:1;border-radius:11px;padding:10px;font-weight:800;font-size:12.5px;cursor:pointer;font-family:inherit;border:1.5px solid #0C0A09}
+.btn-copy{background:#fff;color:#0C0A09}.btn-pick{background:#0C0A09;color:#fff}
+.gcard.picked .btn-pick{background:#A3E635;border-color:#A3E635;color:#0C0A09}
+.sec{background:#fff;border:1px solid #ece7dd;border-radius:20px;padding:22px;margin-top:18px}
+.sec h2{font-size:18px;font-weight:800;margin-bottom:4px}.sec .sub{font-size:13px;color:#78716c;margin-bottom:12px}
+.sec p,.sec li{font-size:13px;color:#44403c}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:10px}
+th,td{border:1px solid #ece7dd;padding:9px 10px;text-align:left;vertical-align:top}
+th{background:#faf7f0;font-size:11.5px}td.win{background:#ecfdf5;font-weight:700}td.lose{background:#fef2f2}
+.bar{position:fixed;bottom:0;left:0;right:0;background:rgba(12,10,9,.97);color:#fff;padding:13px 16px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;z-index:50;font-size:13px}
+.bar button{border:none;border-radius:12px;padding:12px 18px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit}
+.btnGo{background:#A3E635;color:#0C0A09}.btnGhost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hero">
+<h1>Label putih + 15 voucher <span class="dot">.</span></h1>
+<p>Revisi dari <b>Q2c + M3c + F1b</b> → <b>Q2d + M3d</b> label <b>putih + dot ember/rose</b> (bukan lime, bukan full merah/oranye) + <b>15 opsi voucher V1–V15</b> pengganti tiket F1b yang lu nggak suka. Konteks hero tiap voucher SAMA (putih + strip ember + BEST lime + Kopi Kekinian GI L2 + Maps ink) — yang dibandingin cuma kartunya. <b>Design-only — <code>app/</code> NOL diubah.</b></p>
+<div class="badges"><span class="badge ok">⭐ Rekom gue: Q2d + M3d + V2</span><span class="badge">label → putih + dot</span><span class="badge">15 voucher V1–V15</span><span class="badge">hero konteks sama</span></div>
+<div class="qa"><b>Input gue (tegas):</b>
+<li><b>Label "QUIZ TEMPAT / MAKAN" → PUTIH <code>#fff</code> + dot ember/rose, JANGAN full merah/oranye.</b> 3 alasan: ① teks 10px full <code>#EA580C/#E11D48</code> di atas ink gagal AAA + capek dibaca (label bukan aksi, jangan teriak); ② putih = hierarki bersih (label putih kecil → question putih besar → segmen lime); ③ split Tempat vs Makan tetap kebaca via <b>dot</b> (<code>#FB923C</code> Tempat / <code>#FDA4AF</code> Makan — tint terang dari token biar lolos kontras) + selected border + CTA. Full merah/oranye cuma buat CTA, bukan label.</li>
+<li><b>Kenapa F1b tiket lu nggak suka (gue bedah jujur):</b> ① metafora tiket fisik = benda, tapi voucher Wikendo = <i>kode digital + klaim login</i> → otak user mismatch; ② dashed border + 3 kolom (off/tx/go) = berat di layar 360px; ③ kotak hitam <code>-20%</code> saingan sama pill BEST lime → 2 focal point. Solusi di 15 opsi: benefit-first + 1 focal + CTA kecil/secondary.</li>
+<li><b>Rekomendasi tunggal voucher: V2 Soft Wash.</b> Benefit <code>−20%</code> + nama tenant kebaca 1 tatap, NOL tombol solid (panah rose kecil), rasa promo <i>nempel</i> bukan <i>iklan</i>. Paling murah (S, 2 jam), risiko paling rendah, CTR klaim naik karena nggak pushy. Runner-up: V6 Scarcity (kalau mau urgensi) / V5 Text link (kalau mau paling minimal).</li>
+</div>
+<div class="filters" id="filters"><button class="on" data-f="all">Semua 17</button><button data-f="label">🏷️ Label Q2d/M3d</button><button data-f="voucher">🎟️ Voucher V1–V15</button></div>
+</div>
+<div class="grid" id="grid"></div>
+<div class="sec"><h2>⚔️ Head-to-head voucher vs F1b</h2><p class="sub">North Star: voucher claim ↑ · CTR Maps tetap · tanpa login friction (klaim tetap WAJIB login).</p>
+<table><tr><th>Opsi</th><th>Claim jelas?</th><th>Berat visual</th><th>Effort</th></tr>
+<tr><td>F1b tiket dashed</td><td class="lose">Ya tapi 2 focal (off hitam vs pill rose)</td><td class="lose">Berat: dashed + 3 kolom di 360px</td><td>S</td></tr>
+<tr><td class="win"><b>🥇 V2 Soft Wash</b></td><td class="win">Ya — benefit + panah, 1 focal</td><td class="win">Ringan: wash tanpa border/solid</td><td class="win">S · 2 jam</td></tr>
+<tr><td>🥈 V6 Scarcity bar</td><td>Ya + urgensi sisa 3/20</td><td>Sedang (butuh count real)</td><td>S · 3 jam</td></tr>
+<tr><td>🥉 V5 Text link</td><td>Lembut (link, bukan tombol)</td><td>Paling ringan</td><td>S · 1 jam</td></tr>
+</table>
+<p style="margin-top:10px"><b>Paket gas gue: Q2d + M3d + V2.</b> Label putih+dot (AAA, split via dot + selected + CTA) + voucher soft wash (menggoda tanpa teriak). V6/V5 jadi P1 kalau V2 live kurang urgensi/minimal.</p></div>
+<div class="sec"><h2>🔧 Spec eksekusi (nanti, setelah gas)</h2>
+<li><b>Q2d/M3d:</b> <code>.lbl → #fff</code>, dot <code>#FB923C</code> (Tempat) / <code>#FDA4AF</code> (Makan); question <code>#fff</code> tetap; segmen lime tetap.</li>
+<li><b>V2:</b> <code>.v-soft (bg #FFE4E6 + ink-rose text + panah #E11D48)</code> ganti <code>.m-ticket</code> di <code>result-makan.vue</code>; klaim flow + login wall tetap.</li>
+<li><b>TDD:</b> label render (dot per flow) → voucher V-pick render + klaim tap → token layout → hijau → lint → build → deploy. <code>app/</code> NOL sampai <b>gas</b>.</li>
+</div>
+<div class="sec"><h2>✅ Cara putusin</h2><p>Tap <b>+ Shortlist</b>, atau balas: <code>"gas Q2d+M3d+V2"</code> (atau V-pick lain, mis. <code>"gas Q2d+M3d+V6"</code>) → gue eksekusi via TDD. Tanpa gas = <code>app/</code> NOL sentuh.</p></div>
+</div>
+<div class="bar"><span id="pickLabel">👆 Shortlist: 0</span><button class="btnGo" onclick="copyPick()">📋 Salin pilihan</button><button class="btnGhost" onclick="clearPick()">Reset</button></div>
+<script>
+var TOK='--pg:#F5F5F4;--card:#fff;--ink:#0C0A09;--ember:#EA580C;--rose:#E11D48;--lime:#A3E635;';
+var DATA=[
+["Q2d","Quiz Tempat · Label Putih + Dot ⭐","label","Label Putih","Label QUIZ TEMPAT → putih + dot ember terang. Question putih + segmen lime tetap.","#0C0A09 · #fff · #FB923C","lbl:#fff+dot #FB923C;q:#fff;seg:#A3E635","S · 1 jam","Rendah","AAA; split via dot+selected+CTA","Dot kecil — sengaja, label bukan aksi"],
+["M3d","Quiz Makan · Label Putih + Dot ⭐","label","Label Putih","Cermin Q2d: label putih + dot rose-terang. Toggle ink + selected rose tetap.","#0C0A09 · #fff · #FDA4AF","lbl:#fff+dot #FDA4AF;q:#fff;seg:#A3E635","S · 1 jam","Rendah","Seragam Q2d; AAA","Sama — dot kecil sengaja"],
+["V1","Voucher · Tiket Ramping","voucher","Tiket","Evolusi F1b: dashed lebih tipis, 2 kolom (benefit+klaim), off lebih kecil.","#fff · #E11D48","ticket:dashed thin;off sm;go pill","S · 2 jam","Rendah","Ringan dari F1b; familiar","Masih metafora tiket fisik"],
+["V2","Voucher · Soft Wash ⭐","voucher","Soft","Wash rose tanpa border/solid: benefit + tenant + panah. Rekomendasi tunggal.","#FFE4E6 · #E11D48","wash:#FFE4E6;arr:#E11D48","S · 2 jam","Rendah","1 focal; menggoda tanpa teriak","Butuh panah jelas tap-able"],
+["V3","Voucher · Ink Kupon","voucher","Bold","Kartu hitam: -20% lime gede + klaim rose mini. Premium malam.","#0C0A09 · #A3E635","card:#0C0A09;off:#A3E635;go:#E11D48","S · 2 jam","Sedang","Premium; benefit nyala","Ink dobel hero+voucher kalau hero gelap"],
+["V4","Voucher · Lime Value","voucher","Bold","Lime = nilai: bg lime-soft + klaim ink. Voucher berasa hadiah.","#D9F99D · #0C0A09","bg:#D9F99D;go:#0C0A09","S · 2 jam","Sedang","Hadiah, bukan iklan","Lime dobel BEST+voucher, dosis jaga"],
+["V5","Voucher · Text Link","voucher","Minimal","Tanpa kartu: divider + link Klaim −20% →. Paling ringan.","netral · #E11D48","link:#E11D48;no-card","S · 1 jam","Rendah","Paling ringan; elegan","Gampang ke-skip kalau list panjang"],
+["V6","Voucher · Scarcity Bar","voucher","Urgensi","Soft + sisa 3/20 + bar lime. Urgensi jujur (butuh count real).","#fff · #A3E635","bar:#A3E635;go:#E11D48","S · 3 jam","Sedang","Urgensi → claim naik","Butuh sisa real (slice voucher)"],
+["V7","Voucher · Tap to Reveal","voucher","Playful","Kode blur KOPI-GI-20 + tap untuk buka. Game-like.","#F5F5F4 · #0C0A09","blur:4px;go:#0C0A09","M · 4 jam","Sedang","Playful; penasaran → tap","1 tap ekstra sebelum klaim"],
+["V8","Voucher · QR First","voucher","Util","QR + kode + klaim link. Buat kasir scan.","#fff · #0C0A09","qr:52px;go link:#E11D48","M · 4 jam","Sedang","Kasir-ready; util","Butuh QR real (slice auth)"],
+["V9","Voucher · Sticky Mini-bar","voucher","Sticky","Bar nempel bawah: −20% + Klaim lime. Selalu kelihatan.","#0C0A09 · #A3E635","sticky;go:#A3E635","M · 4 jam","Sedang","Selalu visible pas scroll list","Sticky + CTA Maps = 2 bar nempel"],
+["V10","Voucher · Tenant Band","voucher","Brand","Strip kiri rose + klaim ink. Rasa tenant, bukan Wikendo.","#fff · #E11D48","band:6px #E11D48;go:#0C0A09","S · 2 jam","Rendah","Brand tenant kuat","Band + strip hero = 2 aksen kiri"],
+["V11","Voucher · Steps 1-2-3","voucher","Edukasi","Klaim → Tunjukin → Hemat. Buat first-timer.","#fff · #E11D48","steps:3;on:#E11D48","S · 2 jam","Rendah","Edukasi; nurunin takut klaim","Makan vertikal di HP kecil"],
+["V12","Voucher · Gift Surprise","voucher","Playful","Hadiah −20% + tombol Buka. Emosi surprise.","#FFF7ED · #E11D48","bg grad;go pill:#E11D48","S · 3 jam","Sedang","Emosi; shareable","Playful ≠ semua tenant cocok"],
+["V13","Voucher · Price Strike","voucher","Value","Rp50rb → Rp40rb gede + klaim link. Angka yang jualan.","#fff · #0C0A09","price:strike;go link","S · 2 jam","Rendah","Value konkret; hemat berasa","Butuh harga real per tenant"],
+["V14","Voucher · Pill → Sheet","voucher","Interaksi","Pill −20% tap → sheet peek. Modern app pattern.","#F5F5F4 · #0C0A09","pill+sheet:#0C0A09","M · 5 jam","Sedang","Modern; list tetap bersih","Butuh sheet infra + 1 tap ekstra"],
+["V15","Voucher · Social Proof","voucher","Trust","128 klaim hari ini + avatar + klaim. FOMO jujur.","#fff · #E11D48","proof:avs;go:#E11D48","M · 4 jam","Sedang","Trust → claim (FOMO)","Butuh count real; privasi"]
+];
+function topHTML(fam){
+if(fam=='label')return '<div class="m-top"><span>← 🎲/🍜 Quiz</span><span style="color:#A8A29E">step · ⏱</span></div>';
+return '<div class="m-top"><span>← Hasil · GI 📍</span><span style="color:#A8A29E">2/2 tersisa</span></div>';
+}
+function heroOpen(){return '<div class="m-hero"><div><span class="m-pill" style="background:#A3E635;color:#0C0A09">★ BEST MATCH</span><span class="m-pill" style="background:#ECFDF5;color:#047857">✅ Halal</span></div><div class="nm">🍜 Kopi Kekinian — GI L2</div><div class="meta">💰 50-100rb · 👶 kids · 📍 L2 · kopi susu + colokan</div>';}
+function heroClose(){return '<div class="m-cta"><span class="p-ink">📍 Maps tenant →</span><span class="g">💾</span></div></div>';}
+function bodyHTML(id){
+var O='<div class="m-opt"><span class="em">🧘</span><span>Santai / Healing<small>Slow living, recharge</small></span></div><div class="m-opt SEL"><span class="em">🎉</span><span>Seru / Hype<small>Ramai, FOMO, viral</small></span></div><div class="m-opt"><span class="em">🍜</span><span>Kulineran<small>Makan enak</small></span></div>';
+if(id=='Q2d')return '<div class="m-inkhead"><div class="lbl"><span class="dT">●</span> QUIZ TEMPAT · 1/5 · ⏱ 30 dtk</div><div class="n">Weekend ini pengen yang gimana?</div><div class="m-seg"><i class="on-lime"></i><i></i><i></i><i></i><i></i></div></div>'+O.split('SEL').join('sel-t')+'<div class="m-back">Label putih + dot ember · question putih · segmen lime</div>';
+if(id=='M3d')return '<div class="m-inkhead"><div class="lbl"><span class="dM">●</span> QUIZ MAKAN · GI 📍 · 2/4</div><div class="n">Misi makan kali ini?</div><div class="m-seg"><i class="on-lime"></i><i class="on-lime"></i><i></i><i></i></div></div>'+O.split('SEL').join('sel-m')+'<div class="m-tog"><span class="on">✅ Halal only</span><span>👶 Kids</span></div><div class="m-back">Label putih + dot rose · question putih · segmen lime</div>';
+var v='';
+if(id=='V1')v='<div class="v v-tiket"><div class="off">−20%<small>VOUCHER</small></div><div style="flex:1">Kopi Kekinian · GI L2<small>Sisa hari ini · tunjukin ke kasir</small></div><div class="go">Klaim →</div></div>';
+if(id=='V2')v='<div class="v v-soft"><div>🎟️ <b>−20%</b> Kopi Kekinian · GI L2<small>Sisa hari ini · tap untuk klaim · login pas klaim</small></div><div class="arr">→</div></div>';
+if(id=='V3')v='<div class="v v-ink"><div class="off">−20%</div><div style="flex:1">Kopi Kekinian · GI L2<small>Sisa hari ini · tunjukin ke kasir</small></div><div class="go">Klaim →</div></div>';
+if(id=='V4')v='<div class="v v-lime"><div>🎁 <b>−20% buat lu</b><small>Kopi Kekinian · GI L2 · hari ini aja</small></div><div class="go">Klaim →</div></div>';
+if(id=='V5')v='<div class="v v-link"><span>🎟️ Klaim voucher <b>−20%</b></span><span>→</span></div>';
+if(id=='V6')v='<div class="v v-scar"><div>🎟️ <b>−20%</b> · Sisa 3/20 hari ini<small>Klaim sebelum habis · login pas klaim</small></div><div class="bar"><i></i></div><div class="go">Klaim →</div></div>';
+if(id=='V7')v='<div class="v v-blur"><div>🎟️ Kode voucher lu<small>Tap untuk buka · sisa hari ini</small></div><div class="code">KOPI-GI-20</div><div class="go">Buka kode →</div></div>';
+if(id=='V8')v='<div class="v v-qr"><div class="q"></div><div style="flex:1">Scan di kasir<small>KOPI-GI-20 · GI L2</small></div><div class="go">Klaim →</div></div>';
+if(id=='V9')v='<div class="v v-sticky"><div style="flex:1">🎟️ <b>−20%</b> Kopi Kekinian<small>Sisa hari ini</small></div><div class="go">Klaim →</div></div>';
+if(id=='V10')v='<div class="v v-band"><div>🎟️ <b>−20%</b> Kopi Kekinian<small>GI L2 · tunjukin ke kasir</small></div><div class="go">Klaim →</div></div>';
+if(id=='V11')v='<div class="v v-steps"><div class="on"><b>1</b>Klaim</div><div>→</div><div><b>2</b>Tunjukin</div><div>→</div><div><b>3</b>Hemat</div></div>';
+if(id=='V12')v='<div class="v v-gift"><div style="font-size:26px">🎁</div><div style="flex:1">Ada <b>−20%</b> buat lu<small>Kopi Kekinian · GI L2 · hari ini</small></div><div class="go">Buka →</div></div>';
+if(id=='V13')v='<div class="v v-price"><div class="pr"><s>Rp50rb</s><br><b>Rp40rb</b><small>−20% · GI L2</small></div><div class="go">Klaim →</div></div>';
+if(id=='V14')v='<div class="v v-sheet"><div class="pill">🎟️ −20% · Kopi Kekinian · tap →</div><div class="peek">Klaim −20% → tunjukin ke kasir</div></div>';
+if(id=='V15')v='<div class="v v-proof"><div>🔥 <b>128 klaim</b> hari ini<small>Kopi Kekinian · GI L2 · rame yang pakai</small></div><div class="avs"><i></i><i></i><i></i><i></i></div><div class="go">Ikut klaim →</div></div>';
+return heroOpen()+v+heroClose()+'<div class="m-foot">Konteks hero sama semua · list 5 tetap di bawah · klaim WAJIB login</div>';
+}
+function card(d){
+var id=d[0],name=d[1],fam=d[2],use=d[3],desc=d[4],hex=d[5],css=d[6],eff=d[7],risk=d[8],pro=d[9],con=d[10];
+var pk=picks.indexOf(id)>=0?' picked':'';
+var famLabel={label:'🏷️ Label',voucher:'🎟️ Voucher'}[fam];
+return '<div class="gcard'+pk+'" data-f="'+fam+'"><div class="gprev"><div class="mini">'+topHTML(fam)+bodyHTML(id)+'</div></div><div class="gbody"><h3><span class="gnum">'+id+'</span>'+name+'</h3><span class="tag" style="background:#f5f1e8;color:#57534e">'+famLabel+'</span><span class="tag" style="background:#f5f1e8;color:#57534e">'+use+'</span><span class="tag" style="background:#0C0A09;color:#A3E635">'+eff+'</span><span class="tag" style="background:#FFF7ED;color:#9a3412">risk: '+risk+'</span><p>'+desc+'</p><p class="pro">✅ '+pro+'</p><p class="con">⚠️ '+con+'</p><div class="hexes">'+hex.split(' · ').map(function(h){return '<span class="hex">'+h+'</span>';}).join('')+'</div><div class="cssbox">'+css.replace(/</g,'&lt;')+'</div><div class="rowbtns"><button class="btn-copy" onclick="copyCss(\''+id+'\')">📋 Copy CSS</button><button class="btn-pick" onclick="toggle(\''+id+'\')">'+(picks.indexOf(id)>=0?'✅ Shortlisted':'＋ Shortlist')+'</button></div></div></div>';
+}
+var picks=[];
+try{picks=JSON.parse(localStorage.getItem('wikendo-voucher15-pick')||'[]');}catch(e){picks=[];}
+function render(){document.getElementById('grid').innerHTML=DATA.map(card).join('');label();}
+function label(){document.getElementById('pickLabel').textContent=picks.length?('👆 Shortlist ('+picks.length+'): '+picks.join(', ')+' — balas "Gua suka '+picks.join(', ')+'" atau "gas '+picks.join('+')+'"'):'👆 Shortlist: 0 — tap + Shortlist, atau balas "gas Q2d+M3d+V2"';}
+function save(){try{localStorage.setItem('wikendo-voucher15-pick',JSON.stringify(picks));}catch(e){}}
+function toggle(id){var i=picks.indexOf(id);if(i>=0)picks.splice(i,1);else picks.push(id);save();render();}
+function clearPick(){picks=[];save();render();}
+function copyCss(id){var d=null;DATA.forEach(function(x){if(x[0]==id)d=x;});var t=d[6]+' /* '+TOK+' */';if(navigator.clipboard)navigator.clipboard.writeText(t);else{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}ta.remove();}}
+function copyPick(){var t=picks.length?('Gua suka '+picks.join(', ')):('gas Q2d+M3d+V2');if(navigator.clipboard)navigator.clipboard.writeText(t);document.getElementById('pickLabel').textContent='📋 Tersalin: "'+t+'" — paste di chat!';}
+document.getElementById('filters').addEventListener('click',function(e){if(e.target.tagName!='BUTTON')return;var f=e.target.getAttribute('data-f');var bs=this.querySelectorAll('button');for(var i=0;i<bs.length;i++)bs[i].classList.remove('on');e.target.classList.add('on');var cs=document.querySelectorAll('.gcard');for(var j=0;j<cs.length;j++){cs[j].style.display=(f=='all'||cs[j].getAttribute('data-f')==f)?'':'none';}});
+render();
+</script>
+</body>
+</html>
