@@ -19,7 +19,7 @@
 - [x] Auth slice tracer-1 (TDD GREEN ✅ 18/18): `tests/quota-auth.test.ts` — quota split anon 1+2 vs register 2+5 + login wall momen #1 (pure, tanpa mock DB) — test 30/30 + lint bersih + build 9.09s ✅
 - [ ] Auth slice tracer-2 (TDD): phone optional + voucher code `WIK-XXXXX` + wall momen #2-4 (Simpan/Wishlist/voucher)
 - [x] Patch 5 docs downstream Addendum v1.3 (ADR v2.2 ✅ + Schema v1.1 ✅ + API v1.1 ✅ + Journey v2.1 ✅ + Checklist v1.2 ✅) — `app/` NOL diubah ✅ 5/5 GENAP
-- [ ] Redeploy Vercel (commit 481f82c sudah ter-push, nunggu build hijau di Vercel)
+- [x] Push + Deploy Vercel AUTO via main (commit `a36c6e0` live, prod 200 `Wikendo — Bingung Weekend Mau Kemana?` ✅ 7 Okt sore)
 
 ### ⏳ NEXT (antrian dekat)
 - [ ] Run migration + seed ke Supabase beneran (butuh dashboard user)
@@ -51,6 +51,13 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-07 sore — Push + Deploy Vercel AUTO (✅ live, prod HTTP 200)
+- **Kenapa:** Agesta: "tiap ada perubahan jangan lupa langsung commit+push+deploy Vercel" → kunci ke global memory + SOP §5 (`agesta-app-workflow`).
+- **Dikerjain:** `git status` bersih (tracer-1 `a36c6e0` sudah di `origin/main`, 0 pending) → verifikasi auto-deploy: `curl -sI https://wikendo-web-app.vercel.app/` = HTTP 200 `server: Vercel` + `x-powered-by: Nuxt` + title `Wikendo — Bingung Weekend Mau Kemana?` ✅. Jadi TIDAK perlu `vercel --prod` manual — tiap push main = deploy otomatis.
+- **Verifikasi:** `git log origin/main..HEAD` kosong (in-sync) ✅ + prod 200 ✅.
+- **Files:** `docs/08-PROGRESS.md` (BOARD deploy ✅ + LOG ini).
+- **Next:** tracer-2 TDD (phone optional + voucher `WIK-XXXXX` + wall momen #2-4).
 
 ## 2026-10-07 sore — Auth slice tracer-1 (✅ GREEN 18/18, test 30/30 + lint + build)
 - **Kenapa:** Addendum v1.3 sudah LOCKED + Agesta "Perfect! Lanjut eksekusi". Tracer-1 = fondasi quota split pure biar API `GET /api/quota` v1.1 + wallet 2-state 1 interpretasi.
