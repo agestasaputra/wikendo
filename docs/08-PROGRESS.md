@@ -13,12 +13,13 @@
 
 ---
 
-## 📌 BOARD — posisi per 7 Okt 2026 siang (patch downstream v1.3 jalan)
+## 📌 BOARD — posisi per 7 Okt 2026 sore (auth slice TDD jalan)
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Auth slice tracer-1 (TDD GREEN ✅ 18/18): `tests/quota-auth.test.ts` — quota split anon 1+2 vs register 2+5 + login wall momen #1 (pure, tanpa mock DB) — test 30/30 + lint bersih + build 9.09s ✅
+- [ ] Auth slice tracer-2 (TDD): phone optional + voucher code `WIK-XXXXX` + wall momen #2-4 (Simpan/Wishlist/voucher)
 - [x] Patch 5 docs downstream Addendum v1.3 (ADR v2.2 ✅ + Schema v1.1 ✅ + API v1.1 ✅ + Journey v2.1 ✅ + Checklist v1.2 ✅) — `app/` NOL diubah ✅ 5/5 GENAP
 - [ ] Redeploy Vercel (commit 481f82c sudah ter-push, nunggu build hijau di Vercel)
-- [ ] Auth slice: login/register/callback/middleware (0 file = blocker quota login + Simpan/history)
 
 ### ⏳ NEXT (antrian dekat)
 - [ ] Run migration + seed ke Supabase beneran (butuh dashboard user)
@@ -50,6 +51,15 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-07 sore — Auth slice tracer-1 (✅ GREEN 18/18, test 30/30 + lint + build)
+- **Kenapa:** Addendum v1.3 sudah LOCKED + Agesta "Perfect! Lanjut eksekusi". Tracer-1 = fondasi quota split pure biar API `GET /api/quota` v1.1 + wallet 2-state 1 interpretasi.
+- **Dikerjain (TDD RED→GREEN):**
+  - RED: `app/tests/quota-auth.test.ts` (18 test) — parse cookie anon `quota_used` 0|1 + `makan_quota_used` 0|1|2 clamp, `buildQuotaStatus` split anon 1+2 vs register 2+5 + `login_cta`, wall momen #1 `isTempatLoginWall`/`isMakanLoginWall`. RED valid 18/18 fail (fungsi belum ada).
+  - GREEN: `app/types/index.ts` + tipe kontrak `QuotaSlice`/`QuotaStatusInput`/`QuotaStatus` (kontrak `GET /api/quota` v1.1) + `app/utils/quiz-logic.ts` 5 fungsi pure (parse x2 + build + wall x2) + fix lint `import/first` (import tipe ke atas).
+- **Verifikasi:** `pnpm vitest run` 2 files 30/30 ✅ (12 lama + 18 baru, no regresi) + `pnpm lint` bersih ✅ + `pnpm build` 9.09s 3.23MB ✅.
+- **Files:** `app/tests/quota-auth.test.ts` (baru), `app/utils/quiz-logic.ts`, `app/types/index.ts`, `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Next:** tracer-2 TDD (phone optional + voucher `WIK-XXXXX` + wall momen #2-4) → `server/api/quota.get.ts` pakai fungsi pure ini.
 
 ## 2026-10-07 siang — Patch downstream v1.3 (✅ BERES, 5/5 docs genap)
 - **Kenapa:** Agesta "Approve" Addendum v1.3 → kunci downstream biar eksekusi Nuxt 1 interpretasi. PRD Final TIDAK diutak-atik (aturan Addendum).

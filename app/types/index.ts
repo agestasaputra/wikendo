@@ -77,3 +77,30 @@ export interface RankResult {
 export interface LLMChatResponse {
   choices: { message: { content: string } }[]
 }
+
+/**
+ * QuotaStatus — KONTRAK GET /api/quota v1.1 (Addendum 09 v1.3, split tempat+makan).
+ * - Anon: tempat limit 1 + makan limit 2 + reset_at null + login_cta (wallet 2-state).
+ * - Register: tempat limit 2 + makan limit 5 + reset_at 00:00 WIB, TANPA login_cta.
+ * Dipakai: buildQuotaStatus() di utils/quiz-logic + server/api/quota.get.ts.
+ */
+export interface QuotaSlice {
+  used: number
+  limit: number
+  remaining: number
+}
+
+export interface QuotaStatusInput {
+  tempatUsed: number
+  makanUsed: number
+  isLoggedIn: boolean
+  resetAt?: string | null
+}
+
+export interface QuotaStatus {
+  tempat: QuotaSlice
+  makan: QuotaSlice
+  is_logged_in: boolean
+  reset_at: string | null
+  login_cta?: string
+}
