@@ -56,6 +56,13 @@
 
 ## 🧾 LOG (newest first)
 
+## 2026-10-08 — Semua dokumentasi nyebar dimirror ke docs/ (10–17)
+- **Kenapa:** Agesta VERBATIM "Btw tolong semua dokumentasi yang udah dibuat, ditaruh juga di folder docs di repo. Agar terdokumentasi dengan baik."
+- **Dikerjain:** 7 file nyebar dimirror utuh ke `docs/` (skema: file asli = source of truth, mirror cuma salinan + banner sync): 10-App-Guide ← `app/README.md`, 11-AGENTS-App ← `app/AGENTS.md`, 12-Supabase-Guide ← `supabase/README.md`, 13-Data-Audit-Tenant-V1 ← `supabase/AUDIT.md`, 14-Prototype-Guide ← `design/prototype/README.md`, 15-Wireframes ← `design/wikendo-wireframes.md`, 16-Repo-Overview ← `README.md` (root). Plus 17-Design-Index (indeks aset `design/`: 5 SVG master D16 P3 + 6 board HTML + 3 arsip revamp). Plus update struktur folder di `README.md` root (docs 01–17).
+- **Verifikasi:** script compare body mirror == sumber: 7/7 MATCH ✅ (16 sempat MISMATCH karena README root ke-patch duluan, re-sync → MATCH).
+- **Files:** `docs/10-*.md` … `docs/17-*.md` (8 baru), `README.md` (root, struktur folder), `docs/08-PROGRESS.md` (LOG ini).
+- **Aturan:** edit file ASLI-nya, jangan edit mirror (nanti re-sync). Board HTML tetap di `design/` (interaktif), indeksnya di 17.
+
 ## 2026-10-08 — P3 FINAL LOCK 🔒 (✅ DONE, nunggu "gas pasang D16")
 - **Kenapa:** Agesta VERBATIM "Eeh sorry ubah ke p3 aja, kali ini final lock" — P4 (60) batal, P3 (56) final.
 - **Dikerjain:** 5 SVG master diregenerate P3 (`x20/y20/w56/h56/rx15`, W29, titik r3.5 cx30/cx66) + full-version 16 inline SVG direvisi (leftover P4 = 0 ✅) + badge "✅ FINAL LOCK P3" + board highlight `.cur` P4→P3 + catatan final. Verifikasi script: assets 5/5, P3-dadu 16/16, board `card cur` = 1 (P3).

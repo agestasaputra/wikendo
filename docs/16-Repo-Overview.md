@@ -1,3 +1,8 @@
+> **MIRROR (salinan dokumentasi)** — sumber asli: `../README.md` (tetap jadi source of truth).
+> Disalin ke `docs/` pada 8 Okt 2026 agar semua dokumentasi terdokumentasi di satu folder. Jangan edit file ini — edit sumber aslinya lalu re-sync.
+
+---
+
 # Wikendo — Project Repository (`wikendo-web-app`)
 
 **Status:** Planning & Design Phase  

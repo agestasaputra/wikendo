@@ -1,0 +1,219 @@
+> **MIRROR (salinan dokumentasi)** — sumber asli: `../design/prototype/README.md` (tetap jadi source of truth).
+> Disalin ke `docs/` pada 8 Okt 2026 agar semua dokumentasi terdokumentasi di satu folder. Jangan edit file ini — edit sumber aslinya lalu re-sync.
+
+---
+
+# Weekend Planner - HTML Prototype
+
+## 📱 Cara Test di HP Android
+
+### Method 1: Via File Manager (Recommended)
+1. Download file `wikendo-prototype.tar.gz`
+2. Extract menggunakan file manager (RAR, ZArchiver, dll)
+3. Buka `index.html` dengan browser (Chrome/Firefox)
+4. Test flow: Landing → Quiz → Result
+
+### Method 2: Via Python Server (Jika punya laptop)
+```bash
+cd wikendo-prototype
+python3 -m http.server 8000
+```
+Akses dari HP: `http://[IP-laptop]:8000`
+
+### Method 3: Upload ke Hosting Gratis
+Upload ke Netlify/Vercel/GitHub Pages untuk testing via URL
+
+---
+
+## 📄 File Structure
+
+```
+wikendo-prototype/
+├── index.html          # Landing page + login/register modal
+├── quiz.html           # Interactive quiz (5-6 questions)
+├── result.html         # Recommendation results (5 cards)
+└── README.md          # This file
+```
+
+---
+
+## ✨ Features Implemented
+
+### 1. Landing Page (index.html)
+✅ Hero section with background image  
+✅ "Mulai Quiz" CTA button  
+✅ How it works (3 steps)  
+✅ Benefits section (4 points)  
+✅ Login modal (email + Google OAuth)  
+✅ Register modal (email, password, phone)  
+✅ Mobile-responsive design  
+
+### 2. Quiz Flow (quiz.html)
+✅ Progress bar (updates per question)  
+✅ 5 required questions + 1 conditional  
+✅ Auto-advance after selection  
+✅ Back button (go to previous question)  
+✅ Skip button (optional questions only)  
+✅ Loading animation before results  
+✅ Question types:
+   - Q1: Mood (5 options)
+   - Q2: Companion (5 options)
+   - Q3: Budget (3 options)
+   - Q4: Location (3 options)
+   - Q5: Time (3 options, optional)
+   - Q6: Children age (conditional, if keluarga)
+
+### 3. Result Page (result.html)
+✅ 5 recommendation cards with:
+   - Photo (16:9 ratio)
+   - Category badge
+   - Name & description
+   - Estimated cost
+   - Location area
+   - Best time
+   - "Lihat di Maps" button (opens Google Maps)
+   - "Simpan" button (prompts login)
+✅ Regenerate button with quota indicator  
+✅ Quota status card with countdown  
+✅ Share button (native share API)  
+✅ Scroll animations  
+
+---
+
+## 🎨 Design System
+
+### Colors
+- **Primary:** Teal (#0891b2) - Trust, fresh
+- **Accent:** Orange (#f97316) - Energy, CTA
+- **Neutral:** Gray scale
+
+### Typography
+- Font: System default (-apple-system, Segoe UI, Roboto)
+- H1: 32-40px bold
+- H2: 24-32px bold
+- Body: 16px regular
+- Small: 14px regular
+
+### Components
+- **Button Primary:** Orange bg, white text, rounded-xl
+- **Button Secondary:** Teal border, teal text, transparent bg
+- **Card:** White bg, rounded-2xl, shadow-md
+- **Modal:** Centered, max-width 400px, rounded-2xl
+
+### Spacing
+- Mobile: 16px padding (px-4)
+- Section: 64px vertical spacing (py-16)
+- Cards: 16px gap (space-y-4)
+
+---
+
+## 🧪 Test Checklist
+
+### Landing Page
+- [ ] Hero image loads correctly
+- [ ] CTA button goes to quiz
+- [ ] Login modal opens/closes
+- [ ] Register modal opens/closes
+- [ ] Modal backdrop click closes
+- [ ] Switch between login/register works
+- [ ] All links clickable
+
+### Quiz Flow
+- [ ] Progress bar updates correctly
+- [ ] All 5 questions display
+- [ ] Options are tap-friendly (44px min)
+- [ ] Auto-advance after selection works
+- [ ] Back button goes to previous question
+- [ ] Skip button only on Q5 (optional)
+- [ ] Conditional Q6 appears if keluarga selected
+- [ ] Loading animation shows
+- [ ] Redirects to result page
+
+### Result Page
+- [ ] 5 cards display correctly
+- [ ] Images load (Unsplash CDN)
+- [ ] "Lihat di Maps" opens Google Maps
+- [ ] "Simpan" shows login prompt
+- [ ] Regenerate confirms before action
+- [ ] Quota countdown updates
+- [ ] Share button works (or copies link)
+- [ ] Scroll smooth on mobile
+
+---
+
+## 🐛 Known Limitations (Prototype)
+
+1. **No Backend:** Quiz answers not actually sent to API
+2. **Static Data:** Recommendations are hardcoded (not AI-generated)
+3. **No Auth:** Login/register forms don't submit
+4. **No Database:** Favorites/history not saved
+5. **Placeholder Images:** Using Unsplash random images
+6. **No Real Quota:** Quota system is simulated
+7. **No Analytics:** GA4 not implemented
+
+---
+
+## 🚀 Next Steps (Production)
+
+### Phase 1: Backend Integration
+- [ ] Setup Nuxt 3 project
+- [ ] Connect Supabase (database + auth)
+- [ ] Integrate Hermes-combo API
+- [ ] Implement quota system
+- [ ] Add session management
+
+### Phase 2: Real Data
+- [ ] Replace static recommendations with AI
+- [ ] Implement actual Google Maps integration
+- [ ] Add favorites persistence
+- [ ] Add history tracking
+- [ ] Implement photo service or placeholder
+
+### Phase 3: Polish
+- [ ] Add loading states
+- [ ] Add error handling
+- [ ] Improve animations
+- [ ] Add toast notifications
+- [ ] Optimize images
+- [ ] Add SEO meta tags
+
+### Phase 4: Launch
+- [ ] Deploy to Vercel
+- [ ] Setup custom domain (optional)
+- [ ] Configure GA4
+- [ ] Test end-to-end
+- [ ] Soft launch to 30-50 users
+
+---
+
+## 💡 Business Notes
+
+### Target Metrics (2 weeks post-launch)
+- **Minimum:** 50+ users, 60%+ completion, 20%+ day-2 return
+- **Strong:** 100+ users, 75%+ completion, 30%+ day-2 return
+
+### Monetization
+- **MVP:** Pure free (no premium)
+- **Add premium after:** 500+ users + 30%+ retention
+
+### Cost
+- **MVP:** $0/month (Vercel + Supabase free tiers)
+- **LLM:** Hermes-combo via 9router (assumed free/internal)
+
+---
+
+## 📞 Feedback & Questions
+
+Test prototype ini di HP Anda dan berikan feedback:
+1. Apakah quiz flow lancar?
+2. Apakah loading time cepat?
+3. Apakah button mudah di-tap?
+4. Apakah text mudah dibaca?
+5. Apakah design menarik?
+6. Apa yang perlu diperbaiki?
+
+---
+
+**Version:** 1.0  
+**Date:** 2026-10-05  
+**Created by:** Kiro + Agesta
