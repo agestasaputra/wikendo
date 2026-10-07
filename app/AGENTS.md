@@ -48,7 +48,7 @@ Urutan verifikasi setiap ubah kode: `test` → `lint` → `build`.
 ```text
 app/
 ├── pages/                  # FILE-BASED ROUTING — nama file = URL, jangan bikin router manual
-│   ├── index.vue           # /
+│   ├── index.vue           # / — 2 CTA SOLID (Tempat #f97316 + Makan #ee2c4b, teks putih) + wallet ikut GET /api/quota
 │   ├── quiz.vue            # /quiz (5Q tempat) — state lokal step/answers, redirect /result?query
 │   ├── result.vue          # /result — useFetch POST /api/tempat/recommend, label quota real dari quota_remaining
 │   ├── makan.vue           # /makan (4Q + toggle halal/kids + pre-fill ?mall=)
@@ -124,8 +124,8 @@ ada di `app.vue` — jangan duplikat di tiap page.
 ## 7. Testing
 
 - Runner: **Vitest 5** + happy-dom. Config: `vitest.config.ts` (`tests/**/*.test.ts`).
-- Yang di-test sekarang: fungsi pure di `utils/quiz-logic.ts` (64 test, 5 files: quiz-logic,
-  quota-auth, auth-gate, loader 4 variant, mall 4 nama/label).
+- Yang di-test sekarang: fungsi pure di `utils/quiz-logic.ts` (68 test, 6 files: quiz-logic,
+  quota-auth, auth-gate, loader 4 variant, mall 4 nama/label, wallet 4 label).
 - API routes & pages BELUM ada test (butuh mock `useRuntimeConfig`/`$fetch`/Supabase) —
   jangan klaim coverage penuh. Kalau nambah: mock di level `callLLM`, bukan HTTP sungguhan.
 - TDD: test gagal dulu (MERAH) → kode minimal (HIJAU) → refactor. Satu perilaku per test.

@@ -60,6 +60,12 @@
 
 ## 🧾 LOG (newest first)
 
+## 2026-10-08 — Patch AGENTS.md susulan DONE ✅ (2 baris keblokir proteksi, approved Agesta)
+- **Kenapa:** patch AGENTS.md kemarin ke-BLOCK proteksi file instruksi-agen (approval timeout) → Agesta jawab "gas AGENTS" = approval eksplisit.
+- **Dikerjain:** §4 `index.vue` + catatan 2 CTA solid + wallet quota + §7 angka test 64/5 files → 68/6 files (+wallet 4 label).
+- **Verifikasi:** `git diff` 2 baris tepat ✅ (cuma komentar .md, tanpa ubah kode → tanpa test/lint/build ulang). Next: commit + push.
+- **Files:** `app/AGENTS.md`, `docs/08-PROGRESS.md` (BOARD + LOG ini).
+
 ## 2026-10-08 — Button Makan solid merah + quota real DONE ✅ (Dual Entry setara + wallet jujur)
 - **Kenapa:** Agesta kirim screenshot (solid merah) vs app (putih outline) + "gas" → keputusan: Makan jadi solid `#ee2c4b` teks putih + shadow (dua pintu setara; outline bikin Makan keliatan non-aktif → CTR `/makan`/voucher ketekan). Sekalian beresin quota real yang nyangkut uncommitted (wallet static "2 • 5" = limit register, bohong buat 100% anon).
 - **Dikerjain:** spec `design/revamp-combo-5-10-15.html` (`.cta2 .m` solid + shadow) + `app/pages/index.vue` (button Makan solid, spec=app biar nggak split-brain) → quota TDD: `tests/wallet.test.ts` 4 test (MERAH 4 FAIL → HIJAU 4/4) → `WalletLabel` di `types` + `buildWalletLabel()` di `quiz-logic` → baru `server/api/quota.get.ts` (cookie anon via helper SAMA, anon-only) → wallet home wire `GET /api/quota` (skeleton, fallback 1 • 2, login CTA pas exhausted) → label `result`/`result-makan` baca `quota_remaining` (ganti static 1/2 & 4/5). `POST /api/voucher/claim` DITUNDA ke slice auth (kontrak WAJIB login/401, belum ada session infra — endpoint yang selalu 401 = sia-sia).
