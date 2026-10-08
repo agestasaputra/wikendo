@@ -16,6 +16,7 @@
 ## 📌 BOARD — posisi per 8 Okt 2026 (Supabase + quota real + button merah DONE ✅, next slice auth)
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Infinity scroll S2b list+detail mall DONE ✅ 8 Okt (TDD): helper `parsePaginationParams/hasMorePages/mergePageItems` + type `InfinitePage/InfiniteFetchPage` + composable `useInfiniteList` (start/loadMore/reset, array legacy safe) + API paging `?limit&?offset` backward-compat (tanpa limit = array lama) + `mall/index.vue` + `mall/[slug].vue` (sentinel IntersectionObserver + skeleton 2 row + sticky count + sticky search/chips/CTA detail) — verify: test 92/92 (9 files, +11 baru) ✅ lint ✅ build 9.19s ✅ — next: push + deploy + MEDIA
 - [x] Slicing full index.vue I17 V2 dari screenshot DONE ✅ 8 Okt (TDD): helper `getHomeHeroMeta` tested (ink/strip/angka/pill/CTA/paper/badge) + `index.vue` rewrite 1:1 screenshot (header sapaan + hero ink strip ember + headline quota real + chip + pill lime + watermark dadu + 2 CTA ink + 4 ikon + rekomendasi + AI + riwayat) — verify: test 81/81 (8 files, +4 baru) ✅ lint ✅ build 9.15s ✅ — next: deploy Vercel + MEDIA
 - [x] Eksekusi Q2d+M3d+V12 ke app/ DONE ✅ 8 Okt (TDD slice): Q2d quiz.vue (ink header + label PUTIH + dot ember `#FB923C` + segmen lime + selected ember) + M3d makan.vue (cermin: dot rose `#FDA4AF` + chip mall GI/CP/Kokas/PIM/Aeon + selected rose) + V12 gift result-makan.vue (grad cream-rose + border pink + pill rose Buka) + bg paper `#F5F5F4` kombo + helpers tested `getQuizHeaderMeta/getQuizSegState/getVoucherCardMeta` (types `QuizFlow/QuizHeaderMeta/VoucherStyle/VoucherCardMeta`) — verify: test 77/77 (7 files, +9 baru) ✅ lint ✅ build 10.0s ✅ — next: push + deploy + DESIGN.md v1
 - [x] R3b S2c lime touch — best-badge lime + strip lime di result-makan DONE ✅ 8 Okt (TDD): result-makan.vue strip `#A3E635` ganti `#ee2c4b` lama + badge best lime — verify: test 77/77 ✅ lint ✅ build 8.67s ✅ — next: DESIGN.md push + MEDIA
@@ -75,6 +76,11 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-08 — Infinity scroll S2b list+detail mall DONE ✅ (TDD)
+- **Kenapa:** Agesta VERBATIM "Untuk halaman list mall dan detail mall, tolong implementasi fitur infinity scroll" — spec S2b (board v5): 10/page, skeleton 2 row, sticky count, SSR page-1, API limit/offset backward-compat.
+- **Dikerjain (RED→GREEN):** RED `app/tests/infinite-scroll.test.ts` 11 test (import helper + composable belum ada) → GREEN type `InfinitePage/InfiniteFetchPage` + helper `parsePaginationParams/hasMorePages/mergePageItems` + composable `useInfiniteList` (start/loadMore/reset, array legacy safe) → API paging `GET /api/malls` + `GET /api/malls/:slug/tenants` (tanpa ?limit = array lama; dengan limit = { items, total, hasMore }) → `mall/index.vue` + `mall/[slug].vue` (sentinel IntersectionObserver rootMargin 320px + skeleton 2 row + sticky count + sticky search/chips/CTA di detail + error retry).
+- **Verify:** test 92/92 (9 files, +11 baru) ✅ lint 0 error ✅ build 9.19s ✅ — commit `7be2c1c` + push main ✅ — next: deploy Vercel + MEDIA.
 
 ## 2026-10-08 — Slicing full index.vue I17 V2 dari screenshot DONE ✅ (TDD)
 - **Kenapa:** Agesta attach screenshot V2 Ember P1 `#EA580C` + VERBATIM "gua mau lu eksekusi ui slicing design satu halaman ini ke index.vue" — rewrite 1:1 screenshot, bukan cuma hero.
