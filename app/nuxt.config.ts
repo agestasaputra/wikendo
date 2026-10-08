@@ -19,6 +19,9 @@ export default defineNuxtConfig({
   tailwindcss: {
     configPath: 'tailwind.config'
   },
+  future: {
+    compatibilityVersion: 4
+  },
   app: {
     head: {
       title: 'Wikendo — Bingung Weekend Mau Kemana?',
