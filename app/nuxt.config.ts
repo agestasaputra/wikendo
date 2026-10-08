@@ -36,9 +36,5 @@ export default defineNuxtConfig({
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap' }
       ]
     }
-  },
-  routeRules: {
-    '/login': { redirect: '/login' },
-    '/register': { redirect: '/register' }
   }
 })
