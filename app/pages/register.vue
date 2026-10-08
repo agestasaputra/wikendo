@@ -56,14 +56,26 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import { supabase } from '@/supabase/client' // <-- add this
+
 const router = useRouter()
 
 // TODO: integrasi Supabase auth signUp nanti
 // const { data, error } = await supabase.auth.signUp({ email, password })
 
 // Mock register — redirect ke home setelah submit
-const _handleSubmit = (e: Event) => {
+const _handleSubmit = async (e: Event) => {
   e.preventDefault()
+  // Real Supabase register — ganti mock di bawah baris ini kalau udah punya Supabase config
+  const { data, error } = await supabase.auth.signUp({
+    email, password,
+    options: { data: { nama: (document.querySelector('input[type="text"]') as HTMLInputElement).value } }
+  })
+  if (error) {
+    // TODO: tampilkan error di UI
+    alert(error.message)
+    return
+  }
   // Mock auth success — redirect ke home
   router.push('/')
 }

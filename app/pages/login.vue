@@ -46,6 +46,8 @@
 
 <script setup lang="ts">
 import { useRouter, useRoute } from 'vue-router'
+import { supabase } from '@/supabase/client' // <-- add this
+
 const router = useRouter()
 const route = useRoute()
 
@@ -56,8 +58,15 @@ const redirect = (route.query.redirect as string) || '/'
 // const { data, error } = await supabase.auth.signInWithPassword({ email, password })
 
 // Mock login — redirect ke home atau URL yang diminta
-const _handleSubmit = (e: Event) => {
+const _handleSubmit = async (e: Event) => {
   e.preventDefault()
+  // Real Supabase login — ganti mock di bawah baris ini kalau udah punya Supabase config
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+  if (error) {
+    // TODO: tampilkan error di UI
+    alert(error.message)
+    return
+  }
   // Mock auth success — redirect ke home
   router.push(redirect)
 }
