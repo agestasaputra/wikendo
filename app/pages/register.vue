@@ -21,37 +21,39 @@
   </div>
 
   <main class="px-6 py-8">
-  <form class="space-y-4" @submit="handleSubmit">
-    <div>
-      <label class="block text-sm font-medium text-gray-700 mb-2">Nama</label>
-      <input type="text" required class="w-full rounded-[20px] p-[14px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors" placeholder="Nama lengkap" />
-    </div>
-    <div>
-      <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-      <input type="email" required class="w-full rounded-[20px] p-[14px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors" placeholder="contoh@email.com" />
-    </div>
-    <div>
-      <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-      <input type="password" required class="w-full rounded-[20px] p-[14px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors" placeholder="•••••••••••••••" />
-    </div>
-    <div class="flex items-start">
-      <input type="checkbox" id="terms" required class="w-4 h-4 rounded border-gray-300 focus:ring-orange-500 transform hover:scale-125 transition duration-150 ms-4" />
-      <label for="terms" class="ml-2 text-sm font-medium text-gray-700">
-        Setuju Syarat & Privasi
-      </label>
-    </div>
-    <button type="submit" class="w-full bg-orange-600 text-white rounded-[20px] p-[14px] font-bold text-sm py-3 transition-colors hover:bg-orange-500">
-      Daftar →
-    </button>
-    <p class="text-center text-xs text-gray-500">
-      Sudah punya akun? <NuxtLink to="/login" class="font-medium text-red-600 hover:text-orange-500">Masuk sekarang</NuxtLink>
-    </p>
-  </form>
+    <form class="space-y-4" @submit="handleSubmit">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Nama</label>
+        <input type="text" required class="w-full rounded-[20px] p-[14px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors" placeholder="Nama lengkap" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+        <input type="email" required class="w-full rounded-[20px] p-[14px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors" placeholder="contoh@email.com" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+        <input type="password" required class="w-full rounded-[20px] p-[14px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors" placeholder="•••••••••••••••" />
+      </div>
+      <div class="flex items-start">
+        <input type="checkbox" id="terms" required class="w-4 h-4 rounded border-gray-300 focus:ring-orange-500 transform hover:scale-125 transition duration-150 ms-4" />
+        <label for="terms" class="ml-2 text-sm font-medium text-gray-700">
+          Setuju Syarat & Privasi
+        </label>
+      </div>
+      <button type="submit" class="w-full bg-orange-600 text-white rounded-[20px] p-[14px] font-bold text-sm py-3 transition-colors hover:bg-orange-500">
+        Daftar →
+      </button>
+      <p class="text-center text-xs text-gray-500">
+        Sudah punya akun? <NuxtLink to="/login" class="font-medium text-red-600 hover:text-orange-500">Masuk sekarang</NuxtLink>
+      </p>
+    </form>
+  </main>
+
+  <footer class="mt-6 text-center text-xs text-gray-400">
+    10 detik • quota reset tiap hari • gratis
+  </footer>
 </div>
-<div class="mt-6 text-center text-xs text-gray-400">
-  © 2026 Wikendo MVP • Nuxt 4 + Supabase + Hermes-combo
-</div>
-</template>
+
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 const router = useRouter()
