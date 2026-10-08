@@ -87,6 +87,12 @@
 
 ## 🧾 LOG (newest first)
 
+## 2026-10-08 — Fix 404 /login + /register DONE ✅ (typo placeholder + file hantu + header dupe)
+- **Kenapa:** Agesta lapor 404 buka /login di prod. ChatGPT diagnosa Root Directory/app-reserved — SALAH (bukti: /quiz dari folder sama = 200). Rootcause real: (1) typo `placeholder"•••"` (kurang `=`) di login.vue:24 + register.vue:24 → Vue compiler "Duplicate attribute" → build gagal → route tak ke-generate; (2) file hantu `app/login.vue` (untracked) konflik routing Nuxt 4; (3) `server/api/login.get.ts` dummy tak perlu; (4) header `v-else-if="!isLoggedIn"` duplikat kondisi (lint error) → bungkus div.
+- **Dikerjain:** patch `placeholder="•••"` di 2 files + bungkus komentar APA/KENAPA ke 1 comment block + `rm app/login.vue + server/api/login.get.ts` + header jadi `<div v-if="!isLoggedIn">` (Login+Register sejajar) + `v-else` 🔔.
+- **Files:** `app/pages/login.vue`, `app/pages/register.vue`, `app/app.vue`, `app/tests/header-layout.test.ts` (cek Login+Register+🔔), `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Verifikasi:** test 125/125 (13 files) ✅ lint 0 error (1 warning img bawaan) ✅ build 10.1s ✅ secrets scan 0 ✅ — next: commit + push + cek prod /login /register 200.
+
 ## 2026-10-09 — Entrypoint Mall M1+M3 DONE ✅ (lock Agesta, Addendum 19)
 - **Kenapa:** /mall yatim (nol pintu dari Home). Board v8 (M1/M2/M3 + head-to-head + rekomendasi M1+M3) → Agesta lock `Gua suka M1+M3`.
 - **Dikerjain:** `docs/19-PRD-Addendum-Mall-Entry.md` v1.0 LOCKED (M1 P0 + M3 P1, M2 ditolak) + `pages/index.vue` (M1: Event→Mall link, M3: kartu Mall Terdekat) + TDD `mall-entry.test.ts` + board `design/revamp-options-v8.html`.

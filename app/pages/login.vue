@@ -1,6 +1,6 @@
-<!-- pages/login.vue → GET /login (Auth page, Addendum 09 v1.3 APPROVED) -->
-<APA: 1 halaman formulir login + tombol Continue, base #fffdf9 + font Plus Jakarta Sans.>
-<KENAPA: User blum login klik button Login di header → harus bisa akses /login tanpa 404.>
+<!-- pages/login.vue → GET /login (Auth page, Addendum 09 v1.3 APPROVED).
+  APA: 1 halaman formulir login + tombol Continue, base #fffdf9 + font Plus Jakarta Sans.
+  KENAPA: User blum login klik button Login di header → harus bisa akses /login tanpa 404. -->
 
 <template>
   <div class="max-w-md mx-auto px-4 pb-10 min-h-[80vh] flex flex-col" style="background:#F5F5F4">
@@ -21,7 +21,7 @@
 
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-          <input type="password" required class="w-full rounded-[20px] p-[14px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors" placeholder"•••••••••••••••" />
+          <input type="password" required class="w-full rounded-[20px] p-[14px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors" placeholder="•••••••••••••••" />
         </div>
 
         <button type="submit" class="w-full bg-orange-600 text-white rounded-[20px] p-[14px] font-bold text-sm py-3 transition-colors hover:bg-orange-500">

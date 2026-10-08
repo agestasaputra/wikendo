@@ -26,9 +26,12 @@ describe('header global (app.vue)', () => {
     expect(s).not.toContain('to="/mall"')
   })
 
-  it('icon notifikasi 🔔 ada di kanan header global', () => {
+  it('icon notifikasi 🔔 ada di kanan header global (ketika sudah login)', () => {
     const s = fs.readFileSync(APP_VUE, 'utf-8')
+    // Cek 🔔 ada di file (ada di header block) + button Login/Register ada buat user blum login
     expect(s).toContain('🔔')
+    expect(s).toContain('Login')
+    expect(s).toContain('Register')
   })
 })
 

@@ -7,8 +7,10 @@
     <header class="bg-white sticky top-0 z-40 shadow-sm">
       <div class="container mx-auto px-4 py-3 flex justify-between items-center max-w-md">
         <NuxtLink to="/" class="flex items-center" aria-label="Wikendo — beranda"><img src="/brand-icon-day.png" alt="Wikendo" width="32" height="32" class="rounded-lg" /></NuxtLink>
-        <button v-if="!isLoggedIn" type="button" aria-label="Login" class="text-lg leading-none text-red-600 hover:text-orange-500" @click="$router.push('/login')">Login</button>
-        <button v-else-if="!isLoggedIn" type="button" aria-label="Register" class="text-lg leading-none text-orange-600 hover:text-red-500" @click="$router.push('/register')">Register</button>
+        <div v-if="!isLoggedIn" class="flex gap-3 items-center">
+          <button type="button" aria-label="Login" class="text-sm font-bold leading-none text-red-600 hover:text-orange-500" @click="$router.push('/login')">Login</button>
+          <button type="button" aria-label="Register" class="text-sm font-bold leading-none text-orange-600 hover:text-red-500" @click="$router.push('/register')">Register</button>
+        </div>
         <button v-else type="button" aria-label="Notifikasi" class="text-lg leading-none">🔔</button>
       </div>
     </header>
