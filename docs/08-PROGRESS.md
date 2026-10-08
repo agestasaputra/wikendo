@@ -16,6 +16,7 @@
 ## 📌 BOARD — posisi per 8 Okt 2026 (Supabase + quota real + button merah DONE ✅, next slice auth)
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Review + improve workflow revamp halaman DONE ✅ 9 Okt: SOP §9 versi simpel 5 langkah dikunci ke skill `agesta-app-workflow` (refs → analisis → OK → 20 opsi HTML ID gede → `Gua suka [ID]` = lock → tanya deploy → iya = eksekusi sampe deploy verified sama dengan [ID])
 - [x] Takeout pill nav 🍜/🏢 dari /mall + fix search kontras Aeon DONE ✅ 8 Okt (`41e6569` + `08083a2`): hapus tab pill ink (5 baris) dari `mall/index.vue` + search `[slug].vue` `bg-[#f4f4f5]` → `bg-white + border #e4e4e7` (bedah image: nyatu 100% vs page `#F5F5F4`, sekarang kontras kayak chips/kartu) — verify: test 111/111 ✅ lint ✅ build 9.7s ✅ prod 4 URL 200 ✅ marker live (`bg-white border` TRUE, `bg-[#f4f4f5]` GONE, `Result Makan` GONE dari /mall) ✅
 - [x] Slicing 1:1 5 halaman dari screenshot DONE ✅ 8 Okt (batch-1 `8345d1e` + batch-2 `f927d19` + batch-3 `6770ecf` + batch-4 `26ae7dd`): Home separator • + R3b badge `★ #1 BEST · JAKSEL · 4.8 ★` spasi + F1b header/judul 🍜 + D1 tab Mall + tombol `🏢 Lihat Tenant →` + S2c h1 🏢/chips 💰☕/rating spasi — verify: test 111/111 (10 files) ✅ lint ✅ build 11.7s ✅ prod 5 URL 200 ✅ marker live ✅ — next: kabari Agesta 100% kelar
 - [x] Slicing 1:1 result tempat R3b + result makan F1b dari screenshot DONE ✅ 8 Okt (TDD): helper `getResultTempatMeta/getResultMakanMeta` tested + types `ResultTempatMeta/ResultMakanMeta` + `result.vue` R3b (hero photo + badge BEST lime + strip ember + Navigasi ink + chips + rank #1-3 + quota label real) + `result-makan.vue` F1b (deck BEST MATCH + tiket dashed −20% VOUCHER lime + Klaim rose + Maps tenant + chips + rank #1-3) — verify: test 98/98 (10 files, +6 baru) ✅ lint ✅ build 10.2s ✅ — next: deploy Vercel + MEDIA
@@ -79,6 +80,12 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-09 — Review workflow revamp halaman DONE ✅ (§9 versi simpel 5 langkah)
+- **Kenapa:** Agesta: revamp kemarin miss-kom + iterasi berulang, rootcause di cara pilih desain. Minta workflow simpel.
+- **Dikerjain:** kunci SOP §9 versi simpel ke skill `agesta-app-workflow`: (1) upload refs → analisis → OK, (2) 20 opsi HTML ID gede, (3) `Gua suka [ID]` = lock, (4) AI tanya deploy?, (5) iya = eksekusi sampe deploy verified sama dengan [ID].
+- **Files:** skill `agesta-app-workflow` (§9), `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Verifikasi:** skill patched ✅ — next: commit docs + kirim.
 
 ## 2026-10-08 — Takeout pill nav /mall + fix search kontras Aeon DONE ✅ + deploy verified live
 - **Kenapa:** Agesta VERBATIM kirim crop pill `🍜 Result Makan / 🏢 Mall` → "tolong takeout component ini di /mall" + kirim screenshot Aeon → "background input search menyatu dengan background apps".
