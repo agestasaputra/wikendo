@@ -15,6 +15,7 @@
 
 ## 📌 BOARD — posisi per 8 Okt 2026 (Supabase + quota real + button merah DONE ✅, next slice auth)
 
+
 ### 🔥 NOW (lagi dikerjain)
 - [x] Entrypoint Mall M1+M3 DONE ✅ 9 Okt (`77de277`): M1 ikon Event→Mall 🏬 link /mall + M3 kartu Mall Terdekat (5 mall • 200 tenant → tanpa login) — TDD: mall-entry.test.ts RED 3 gagal → GREEN 3/3, full 125/125 (13 files) ✅ lint 0 error ✅ build 9.01s ✅ prod `/ /mall` 200 + marker (2× /mall link, Mall Terdekat TRUE, Event GONE) ✅ + Addendum `docs/19-PRD-Addendum-Mall-Entry.md` v1.0 LOCKED
 - [x] Header rapi DONE ✅ 9 Okt (`a79f380`): lebar disamain max-w-md (= content) + nav Tempat/Makan/Mall dihapus + bell 🔔 pindah dari Home ke kanan header global — TDD: header-layout.test.ts RED 4 gagal → GREEN 4/4, full 122/122 (12 files) ✅ lint 0 error ✅ build 9.28s ✅ prod `/ /quiz /mall` 200 + marker (bell TRUE, no-quiz-nav TRUE) ✅
@@ -561,3 +562,4 @@
 ## 2026-10-05 — Docs awal (✅ BERES)
 - **Dikerjain:** `01-PRD.md`, `02-ADR.md` (monolit Nuxt+Supabase, $0), `03-User-Journey.md` (616 baris, 3 journey), `05-API-Spec`, `06-MVP-Checklist.md` v1.0, `07-Addendum-Mall-F&B` v1.1 (split quiz total), CSV 200 rows (5 mall x 40, AI-dummy).
 - **Next:** Eksekusi Phase 1 (mulai dari scaffold — sudah dikerjain 6 Okt).
+## LOG ENTRY 2026-10-08
