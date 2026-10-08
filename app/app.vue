@@ -6,7 +6,7 @@
   <div class="min-h-screen bg-base text-ink" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif">
     <header class="bg-white sticky top-0 z-40 shadow-sm">
       <div class="container mx-auto px-4 py-3 flex justify-between items-center max-w-4xl">
-        <NuxtLink to="/" class="font-extrabold text-ink text-lg">Wikendo<span class="text-tempat">.</span></NuxtLink>
+        <NuxtLink to="/" class="flex items-center" aria-label="Wikendo — beranda"><img src="/brand-icon-day.png" alt="Wikendo" width="32" height="32" class="rounded-lg" /></NuxtLink>
         <nav class="flex gap-4 text-sm font-bold">
           <NuxtLink to="/quiz" class="text-tempat">🗺️ Tempat</NuxtLink>
           <NuxtLink to="/makan" class="text-makan">🍜 Makan</NuxtLink>
