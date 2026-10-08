@@ -16,6 +16,7 @@
 ## 📌 BOARD — posisi per 8 Okt 2026 (Supabase + quota real + button merah DONE ✅, next slice auth)
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Workflow revamp halaman LOCKED ✅ 9 Okt: `docs/18-Workflow-Revamp.md` (baru, 5 langkah + 2 template lock) + SOP §9 🔒 LOCKED di skill `agesta-app-workflow` (cuma 2 template sah, di luar itu AI wajib minta ID dulu)
 - [x] Review + improve workflow revamp halaman DONE ✅ 9 Okt: SOP §9 versi simpel 5 langkah dikunci ke skill `agesta-app-workflow` (refs → analisis → OK → 20 opsi HTML ID gede → `Gua suka [ID]` = lock → tanya deploy → iya = eksekusi sampe deploy verified sama dengan [ID])
 - [x] Takeout pill nav 🍜/🏢 dari /mall + fix search kontras Aeon DONE ✅ 8 Okt (`41e6569` + `08083a2`): hapus tab pill ink (5 baris) dari `mall/index.vue` + search `[slug].vue` `bg-[#f4f4f5]` → `bg-white + border #e4e4e7` (bedah image: nyatu 100% vs page `#F5F5F4`, sekarang kontras kayak chips/kartu) — verify: test 111/111 ✅ lint ✅ build 9.7s ✅ prod 4 URL 200 ✅ marker live (`bg-white border` TRUE, `bg-[#f4f4f5]` GONE, `Result Makan` GONE dari /mall) ✅
 - [x] Slicing 1:1 5 halaman dari screenshot DONE ✅ 8 Okt (batch-1 `8345d1e` + batch-2 `f927d19` + batch-3 `6770ecf` + batch-4 `26ae7dd`): Home separator • + R3b badge `★ #1 BEST · JAKSEL · 4.8 ★` spasi + F1b header/judul 🍜 + D1 tab Mall + tombol `🏢 Lihat Tenant →` + S2c h1 🏢/chips 💰☕/rating spasi — verify: test 111/111 (10 files) ✅ lint ✅ build 11.7s ✅ prod 5 URL 200 ✅ marker live ✅ — next: kabari Agesta 100% kelar
@@ -80,6 +81,12 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-09 — Workflow revamp halaman LOCKED ✅ (anti miskom)
+- **Kenapa:** Agesta: "masukin dokumentasi dan lock! agar tidak ada miskom lagi" — template lock 2 bentuk (`Gua suka [ID]` / + feedback list).
+- **Dikerjain:** tulis `docs/18-Workflow-Revamp.md` (baru: 5 langkah + 2 template + aturan kunci) + patch skill `agesta-app-workflow` §9 jadi 🔒 LOCKED (cuma 2 template sah, di luar itu AI wajib minta ID dulu) + BOARD + LOG ini.
+- **Files:** `docs/18-Workflow-Revamp.md` (baru), skill `agesta-app-workflow` (§9), `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Verifikasi:** skill patched ✅ docs written ✅ — next: commit + push + kirim.
 
 ## 2026-10-09 — Review workflow revamp halaman DONE ✅ (§9 versi simpel 5 langkah)
 - **Kenapa:** Agesta: revamp kemarin miss-kom + iterasi berulang, rootcause di cara pilih desain. Minta workflow simpel.
