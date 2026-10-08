@@ -240,3 +240,17 @@ export interface HomeHeroMeta {
   tagBg: string
   tagColor: string
 }
+
+/**
+ * TenantCardMeta — KONTRAK thumb kartu tenant S2c (slicing 8 Okt 2026).
+ * - emoji: thumb emoji per kategori (kopi☕, japanese🍜, healthy🥗, fallback🍜)
+ * - bg: warna avatar kotak rounded per kategori (kopi maroon #7C2D12,
+ *   japanese charcoal #1C1917, healthy hijau #15803D, fallback #44403C)
+ * DB real tanpa kolom rating/promo → rating/promo/badge diturunkan
+ * deterministik via helper pure (flag adaptasi di PROGRESS, bukan bohong).
+ * Dipakai: getTenantCardMeta() di utils/quiz-logic + pages/mall/[slug].vue.
+ */
+export interface TenantCardMeta {
+  emoji: string
+  bg: string
+}

@@ -5,10 +5,10 @@ Contoh: hero Kopi Kekinian — GI L2 Halal 50-100rb kids → tiket Klaim → Map
 <template>
 <div class="max-w-md mx-auto px-4 pb-10" :style="{ background: meta.pageBg }">
   <div class="flex justify-between items-center font-bold text-[13px] py-3">
-    <NuxtLink to="/" class="font-extrabold">← Hasil 📍</NuxtLink>
+    <NuxtLink to="/" class="font-extrabold">← Hasil 🍜/📍</NuxtLink>
     <span class="text-gray-500">{{ list.length || 5 }} rekomendasi</span>
   </div>
-  <p class="text-[11.5px] text-gray-500 -mt-1 mb-2">Quota makan {{ quotaLabel }} tersisa • {{ mallLabel }}</p>
+  <p class="text-[11.5px] text-gray-500 -mt-1 mb-2">Quota makan {{ quotaLabel }} tersisa · {{ mallLabel }}</p>
 
   <AppLoader v-if="pending" variant="makan" />
   <div v-else-if="error" class="rounded-2xl p-4 text-sm font-bold" :style="isWall ? {background:'#fff7ed',border:'2px solid #f97316',color:'#9a3412'} : {background:'#fef2f2',border:'1px solid #fecaca',color:'#991b1b'}">
@@ -25,14 +25,14 @@ Contoh: hero Kopi Kekinian — GI L2 Halal 50-100rb kids → tiket Klaim → Map
           <span v-else-if="hero.halal === false" class="text-[11px] font-extrabold px-2.5 py-1 rounded-full" style="background:#fef2f2;color:#991b1b">⚠️ Non-halal</span>
           <span v-else class="text-[11px] font-extrabold px-2.5 py-1 rounded-full" style="background:#f4f4f5;color:#71717a">❓ Belum verifikasi</span>
         </div>
-        <div class="font-extrabold text-[17px]">☕ {{ hero.name }} — {{ mallLabel }} L{{ hero.floor }}</div>
+        <div class="font-extrabold text-[17px]">🍲 {{ hero.name }} — {{ mallLabel }} L{{ hero.floor }}</div>
         <p class="text-[12.5px] text-gray-600 my-1.5">Kenapa: {{ hero.reason }}</p>
-        <p class="text-[12.5px]">💰 {{ hero.price }} • {{ hero.kids }} • 📍 L{{ hero.floor }}</p>
+        <p class="text-[12.5px]">💰 {{ hero.price }} · {{ hero.kids }} · 📍 L{{ hero.floor }}</p>
 
         <!-- F1b tiket dashed: kiri tiket ink + diskon lime, tengah info, kanan Klaim rose -->
         <div class="mt-3 flex gap-2 items-center p-3 bg-white" :style="{ border: '2px dashed ' + meta.ticketBorder, borderRadius: '14px' }">
           <div class="flex-none text-center rounded-xl px-3 py-2" :style="{ background: meta.ticketBg }">
-            <div class="font-extrabold text-[16px] leading-none" :style="{ color: meta.discountColor }">−20%</div>
+            <div class="font-extrabold text-[16px] leading-none" :style="{ color: meta.discountColor }">-20%</div>
             <div class="text-[9px] font-extrabold tracking-widest text-white">VOUCHER</div>
           </div>
           <div class="flex-1 text-[12px] leading-tight">
@@ -71,11 +71,11 @@ Contoh: hero Kopi Kekinian — GI L2 Halal 50-100rb kids → tiket Klaim → Map
     <!-- V12 gift surprise -->
     <div class="rounded-[14px] p-3 flex gap-2 items-center mt-2.5" :style="{ background: vGift.bg, border: '1px solid ' + vGift.border }">
       <div class="text-[26px]">🎁</div>
-      <div class="flex-1 text-[13px] font-bold">Ada <b>−20%</b> buat lu<br><small class="font-normal text-gray-500">{{ hero.name }} · {{ mallLabel }} L{{ hero.floor }} · hari ini</small></div>
+      <div class="flex-1 text-[13px] font-bold">Ada <b>-20%</b> buat lu<br><small class="font-normal text-gray-500">{{ hero.name }} · {{ mallLabel }} L{{ hero.floor }} · hari ini</small></div>
       <button class="font-extrabold text-[13px] rounded-full px-[14px] py-2 cursor-pointer" :style="{ background: vGift.goBg, color: vGift.goColor }" @click="claim()">Buka →</button>
     </div>
 
-    <p class="text-[11.5px] text-gray-500 mt-2 text-center"><u>Lapor tutup/buka</u> • <u>Share ke temen</u> • Quota makan {{ quotaLabel }} tersisa</p>
+    <p class="text-[11.5px] text-gray-500 mt-2 text-center"><u>Lapor tutup/buka</u> · <u>Share ke temen</u> · Quota makan {{ quotaLabel }} tersisa</p>
   </div>
 </div>
 </template>
@@ -108,10 +108,10 @@ const hero = computed(() => {
   const r = list.value[idx.value] || ({} as TenantRecommendation)
   return { name: r.name || '—', reason: r.reason || '—', price: r.price_range || '—', floor: (r as { lantai?: string }).lantai || '?', halal: (r as { halal?: boolean | null }).halal ?? null, kids: (r as { kids_friendly?: boolean }).kids_friendly ? '👶 kids' : '—', maps: r.maps_url || '#' }
 })
-const chips = computed(() => list.value.slice(1, 3).map(r => (r.name || '').slice(0, 10)))
+const chips = computed(() => list.value.slice(1, 3).map(r => (r.name || '').slice(0, 6).trim() + '...'))
 const rankItems = computed(() => list.value.slice(0, 3).map(r => ({
   name: r.name || '—',
-  tags: `${r.halal === true ? 'Halal' : r.halal === false ? 'Non-halal' : '❓'} · L${(r as { lantai?: string }).lantai || '?'} · ${r.price_range || ''} · ${(r.reason || '').slice(0, 28)}`
+  tags: `${r.halal === true ? 'Halal' : r.halal === false ? 'Non-halal' : '❓'} · L${(r as { lantai?: string }).lantai || '?'} · -20% · ${(r.reason || '').slice(0, 28)}`
 })))
 function next() { if (list.value.length) idx.value = (idx.value + 1) % list.value.length }
 // F1b ticket-based claim: solid Klaim, anon → wall login (anti-farming).

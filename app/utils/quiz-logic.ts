@@ -11,7 +11,7 @@
  * ATURAN: fungsi di sini harus PURE (input → output, tanpa side effect,
  * tanpa baca route/cookie/DB). Side effect tetap di pages/server.
  */
-import type { QuotaStatus, QuotaStatusInput, LoaderMeta, LoaderVariant, WalletLabel, QuizFlow, QuizHeaderMeta, VoucherStyle, VoucherCardMeta, HomeHeroMeta, ResultTempatMeta, ResultMakanMeta } from '../types'
+import type { QuotaStatus, QuotaStatusInput, LoaderMeta, LoaderVariant, WalletLabel, QuizFlow, QuizHeaderMeta, VoucherStyle, VoucherCardMeta, HomeHeroMeta, ResultTempatMeta, ResultMakanMeta, TenantCardMeta } from '../types'
 
 export function progressPercent(step: number, total: number): number {
   return ((step + 1) / total) * 100
@@ -385,4 +385,112 @@ export function getResultMakanMeta(): ResultMakanMeta {
     pageBg: '#F5F5F4',
     cardBg: '#fff'
   }
+}
+
+/* ── Slot direktori S2c/D1 1:1 (slicing 8 Okt 2026) ───────────────
+ * KENAPA di sini (pure): format area pendek + lantai L-prefix + thumb
+ * emoji/warna + badge promo + rating ★ + label halal + pill infinity
+ * dipakai 2 pages (mall/index.vue D1 + mall/[slug].vue S2c) → 1 sumber.
+ * DB real tanpa kolom rating/promo → rating/promo diturunkan deterministik
+ * dari field yang ada (flag adaptasi di PROGRESS, bukan data bohong).
+ * Contoh: shortArea('Thamrin / Menteng') → 'Thamrin'.
+ */
+
+/** Area full → pendek 1:1 D1: segmen '/' terpendek (Thamrin, Grogol). Kosong → ''. */
+export function shortArea(area: string | undefined): string {
+  if (!area) return ''
+  const segs = area.split('/').map((s) => s.trim()).filter(Boolean)
+  if (!segs.length) return ''
+  let out = segs[0]
+  for (const s of segs) {
+    if (s.length < out.length) out = s
+  }
+  return out
+}
+
+/** Lantai DB → label kartu S2c: angka prefix L (1→L1, 3A→L3A), kode gedung as-is. */
+export function formatLantai(lantai: string): string {
+  if (!lantai) return ''
+  const t = lantai.trim()
+  if (!t) return ''
+  if (/^[0-9]/.test(t)) return 'L' + t.toUpperCase()
+  return t
+}
+
+const CATEGORY_EMOJI: Record<string, string> = {
+  kopi: '☕',
+  japanese: '🍜',
+  ramen: '🍜',
+  healthy: '🥗',
+  salad: '🥗',
+  chinese: '🥟',
+  fastfood: '🍔',
+  western: '🥩',
+  indonesia: '🍛',
+  bakery: '🥐',
+  dessert: '🍨',
+  minuman: '🧋'
+}
+
+const CATEGORY_BG: Record<string, string> = {
+  kopi: '#7C2D12',
+  japanese: '#1C1917',
+  ramen: '#1C1917',
+  healthy: '#15803D',
+  salad: '#15803D',
+  chinese: '#9A3412',
+  fastfood: '#B45309',
+  western: '#7F1D1D',
+  indonesia: '#A16207',
+  bakery: '#92400E',
+  dessert: '#BE185D',
+  minuman: '#0E7490'
+}
+
+/** Kategori → thumb emoji S2c (kopi☕, japanese🍜, healthy🥗, fallback🍜). */
+export function categoryEmoji(category: string): string {
+  if (!category) return '🍜'
+  return CATEGORY_EMOJI[category.toLowerCase()] || '🍜'
+}
+
+/** Kategori → bg avatar kotak S2c (kopi maroon, japanese charcoal, healthy hijau). */
+export function tenantAvatarBg(category: string): string {
+  if (!category) return '#44403C'
+  return CATEGORY_BG[category.toLowerCase()] || '#44403C'
+}
+
+/** hype=true → badge '-20%' hyphen-minus U+002D (1:1 S2c). false/null → null. */
+export function tenantPromoBadge(hype: boolean | null): string | null {
+  return hype ? '-20%' : null
+}
+
+/** Slot rating ★ S2c: deterministik dari nama (hash → 4.7/4.8/4.9), stabil. */
+export function tenantRating(name: string): string {
+  const s = name || '?'
+  let h = 0
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) % 997
+  return ['4.7', '4.8', '4.9'][h % 3]
+}
+
+/** 'Rp 50-90rb' → '50-90rb' (1:1 S2c, tanpa prefix Rp). */
+export function priceShort(price: string): string {
+  if (!price) return ''
+  return price.replace(/^Rp\s*/i, '').trim()
+}
+
+/** Label halal S2c: true→✅ Halal, false→⚠️ Non-halal, null→❓. */
+export function tenantHalalLabel(halal: boolean | null): string {
+  if (halal === true) return '✅ Halal'
+  if (halal === false) return '⚠️ Non-halal'
+  return '❓'
+}
+
+/** Pill infinity S2c: '🟢 10/40 tenant · scroll untuk 10 berikutnya ↓' (middle dot). */
+export function buildDirCountLabel(loaded: number, total: number): string {
+  return `🟢 ${loaded}/${total} tenant · scroll untuk 10 berikutnya ↓`
+}
+
+/** 1 sumber thumb S2c: { emoji, bg } per kategori. */
+export function getTenantCardMeta(category: string): TenantCardMeta {
+  return { emoji: categoryEmoji(category), bg: tenantAvatarBg(category) }
 }

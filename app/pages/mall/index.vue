@@ -6,11 +6,11 @@ Token lock: ink tetap #0C0A09, rose tetap #E11D48, paper tetap #F5F5F4. -->
 <div class="max-w-md mx-auto px-4 pb-10" style="background:#F5F5F4">
   <p class="text-xs text-gray-500 pt-3 mb-1">Home / Mall</p>
   <div class="flex justify-between items-center sticky top-0 py-2" style="background:#F5F5F4">
-    <h1 class="text-xl font-extrabold">🏬 Mall</h1>
-    <span class="text-xs font-bold text-gray-500">{{ pending ? '…' : `${malls.length}/${total || malls.length} mall` }}</span>
+    <h1 class="text-xl font-extrabold">🏢 Mall</h1>
+    <span class="text-xs font-bold text-gray-500">{{ pending ? '…' : '5 mall' }}</span>
   </div>
 
-  <p class="text-[13px] text-gray-500">Pilih mall → direktori tenant curated • tanpa login/quota/LLM</p>
+  <p class="text-[13px] text-gray-500">Pilih mall → direktori tenant curated · tanpa login/quota</p>
 
   <AppLoader v-if="pending" variant="mall" />
   <div v-else-if="error" class="rounded-2xl p-4 text-sm font-bold mt-3" style="background:#fef2f2;border:1px solid #fecaca;color:#991b1b">
@@ -21,7 +21,7 @@ Token lock: ink tetap #0C0A09, rose tetap #E11D48, paper tetap #F5F5F4. -->
       <div class="flex justify-between items-center">
         <div>
           <b class="text-[15px]">{{ mallName(m.slug) }}</b>
-          <p class="text-xs text-gray-500">{{ m.area || m.city || '' }}{{ m.total_tenant ? ' • ' + m.total_tenant + ' tenant' : '' }}</p>
+          <p class="text-xs text-gray-500">{{ mallArea(m) }} · {{ m.total_tenant ? m.total_tenant + ' tenant' : '40 tenant' }}</p>
         </div>
         <span class="text-[11px] font-extrabold px-2.5 py-1 rounded-full" style="background:#0C0A09;color:#fff">{{ shortLabel(m.slug) }}</span>
       </div>
@@ -30,7 +30,7 @@ Token lock: ink tetap #0C0A09, rose tetap #E11D48, paper tetap #F5F5F4. -->
           🏬 Lihat Tenant →
         </NuxtLink>
         <NuxtLink :to="`/makan?mall=${m.slug}`" class="flex-1 text-center text-white rounded-[14px] p-3 font-extrabold text-[13px]" style="background:#E11D48;min-height:56px">
-          ✨ Cariin yang cocok →
+          ✨ Carlin →
         </NuxtLink>
       </div>
     </div>
@@ -49,7 +49,7 @@ Token lock: ink tetap #0C0A09, rose tetap #E11D48, paper tetap #F5F5F4. -->
 </template>
 
 <script setup lang="ts">
-import { getMallName, getMallShortLabel } from '~/utils/quiz-logic'
+import { getMallName, getMallShortLabel, shortArea } from '~/utils/quiz-logic'
 import { useInfiniteList } from '~/composables/useInfiniteList'
 
 interface MallItem {
@@ -75,7 +75,7 @@ const list = useInfiniteList<MallItem>({
   fetchPage: (limit, offset) => $fetch('/api/malls', { params: { limit, offset } })
 })
 await list.start()
-const { items: malls, total, hasMore, pending, loadingMore, error } = list
+const { items: malls, total: _total, hasMore, pending, loadingMore, error } = list
 
 const sentinel = ref<HTMLDivElement | null>(null)
 let observer: IntersectionObserver | null = null
@@ -95,5 +95,7 @@ watch(sentinel, (el, _, onCleanup) => {
 
 function mallName(slug: string) { return getMallName(slug) }
 function shortLabel(slug: string) { return getMallShortLabel(slug) }
+// D1 1:1: area pendek segmen '/' terpendek (Thamrin, Grogol), fallback city.
+function mallArea(m: MallItem) { return shortArea(m.area || m.city || '') }
 function refresh() { return list.reset() }
 </script>

@@ -20,8 +20,8 @@ Token via getHomeHeroMeta(): ink #0C0A09 + strip ember #EA580C + angka #D9F99D +
     <p class="text-2xl font-extrabold leading-tight mt-0.5" :style="{ color: hero.numColor }">{{ quotaPending ? '…' : wallet.headline }}</p>
     <p class="text-[11px] font-bold opacity-80 mt-0.5">Gratis hari ini — login buka 2 + 5</p>
     <div class="flex gap-1.5 mt-2">
-      <span class="flex-1 rounded-lg px-1 py-1.5 text-center text-[10px] font-extrabold bg-white/10">🎡 {{ quotaPending ? '…' : wallet.tempatChip }}</span>
-      <span class="flex-1 rounded-lg px-1 py-1.5 text-center text-[10px] font-extrabold bg-white/10">🍲 {{ quotaPending ? '…' : wallet.makanChip }}</span>
+      <span class="flex-1 rounded-lg px-1 py-1.5 text-center text-[10px] font-extrabold bg-white/10">👥 {{ quotaPending ? '…' : wallet.tempatChip }}</span>
+      <span class="flex-1 rounded-lg px-1 py-1.5 text-center text-[10px] font-extrabold bg-white/10">🍜 {{ quotaPending ? '…' : wallet.makanChip }}</span>
     </div>
     <NuxtLink to="/quiz" class="inline-block mt-2.5 rounded-full px-3.5 py-[7px] text-[11px] font-extrabold" :style="{ background: hero.pillBg, color: hero.pillColor }">Mulai Quiz →</NuxtLink>
     <span class="absolute -right-2 top-1/2 -translate-y-1/2 text-[70px] opacity-20 pointer-events-none">🎲</span>
@@ -43,7 +43,7 @@ Token via getHomeHeroMeta(): ink #0C0A09 + strip ember #EA580C + angka #D9F99D +
     <span class="text-center text-[9.5px] font-extrabold"><i class="flex items-center justify-center w-[38px] h-[38px] rounded-full mx-auto mb-[3px] not-italic text-base bg-white shadow">🎡</i>Event</span>
     <span class="text-center text-[9.5px] font-extrabold"><i class="flex items-center justify-center w-[38px] h-[38px] rounded-full mx-auto mb-[3px] not-italic text-base bg-white shadow">🎁</i>Promo</span>
     <span class="text-center text-[9.5px] font-extrabold"><i class="flex items-center justify-center w-[38px] h-[38px] rounded-full mx-auto mb-[3px] not-italic text-base bg-white shadow">❤️</i>Wishlist</span>
-    <span class="text-center text-[9.5px] font-extrabold"><i class="flex items-center justify-center w-[38px] h-[38px] rounded-full mx-auto mb-[3px] not-italic text-base bg-white shadow">🕘</i>Riwayat</span>
+    <span class="text-center text-[9.5px] font-extrabold"><i class="flex items-center justify-center w-[38px] h-[38px] rounded-full mx-auto mb-[3px] not-italic text-base bg-white shadow">🕒</i>Riwayat</span>
   </div>
 
   <!-- Rekomendasi buatmu -->
@@ -53,11 +53,11 @@ Token via getHomeHeroMeta(): ink #0C0A09 + strip ember #EA580C + angka #D9F99D +
       <small class="opacity-55 font-bold">Lihat Semua →</small>
     </div>
     <div class="flex justify-between items-center text-[10.5px] font-extrabold px-2 py-[7px] rounded-lg bg-[#FAFAF9] mt-1">
-      <span>🗺️ Rooftop Senayan<small class="block font-bold opacity-60 text-[9.5px]">Senayan · 4.8 ★</small></span>
-      <b class="text-[9px] rounded-full px-2 py-0.5" :style="{ background: hero.tagBg, color: hero.tagColor }">−20%</b>
+      <span>🗺️ Rooftop Senayan<small class="block font-bold opacity-60 text-[9.5px]">Senayan · 4,8 ★</small></span>
+      <b class="text-[9px] rounded-full px-2 py-0.5" :style="{ background: hero.tagBg, color: hero.tagColor }">-20%</b>
     </div>
     <div class="flex justify-between items-center text-[10.5px] font-extrabold px-2 py-[7px] rounded-lg bg-[#FAFAF9] mt-1">
-      <span>🍜 Kopi Kekinian<small class="block font-bold opacity-60 text-[9.5px]">GI · 4.9 ★</small></span>
+      <span>☕ Kopi Kekinian<small class="block font-bold opacity-60 text-[9.5px]">GI · 4,9 ★</small></span>
       <b class="text-[9px] rounded-full px-2 py-0.5" :style="{ background: hero.tagBg, color: hero.tagColor }">Voucher</b>
     </div>
   </div>
