@@ -75,6 +75,11 @@
 
 ## 🧾 LOG (newest first)
 
+## 2026-10-08 — Full-page slicing index.vue I17 V2 ember DONE ✅ (TDD, gas approved)
+- **Kenapa:** Agesta VERBATIM "Gas implementasi slicing ui satu halaman penuh di index.vue, bukan hanya card hero saja!" — eksekusi penuh halaman dari `design/i17-border-sweep.html` V2 ember `#EA580C` ⭐.
+- **Dikerjain:** `app/pages/index.vue` full-page slice I17 V2 (hero ink `#0C0A09` + border-left 5px ember + wallet quota real + 2 CTA gede Tempat `#f97316`/Makan `#ee2c4b` 56px + grid Event/Promo/Wishlist/Riwayat 2x2 + banner hype + riwayat singkat) + bg paper `#F5F5F4` kombo + fix div unclosed (lint 1 warning → bersih).
+- **Verify:** test 77/77 (7 files) ✅ lint 0 error ✅ build 9.11s ✅ — commit `a0a841d` + push main ✅ — next: deploy Vercel + MEDIA.
+
 ## 2026-10-08 — Eksekusi Q2d+M3d+V12 ke app/ DONE ✅ (TDD slice, gas approved)
 - **Kenapa:** Agesta VERBATIM "Gas Q2d+M3d+V12" — pick dari board v7 (Q2d/M3d label putih + V12 gift surprise). Eksekusi approved → `app/` BOLEH disentuh via TDD.
 - **Dikerjain (RED→GREEN→REFACTOR):** RED `app/tests/quiz-header-voucher.test.ts` 9 test gagal by design (helper belum ada) → GREEN helpers pure di `app/utils/quiz-logic.ts` (`getQuizHeaderMeta` label putih + dot ember/rose + segmen lime + selected split, `getQuizSegState`, `getVoucherCardMeta` gift grad cream-rose + pill rose) + types `QuizFlow/QuizHeaderMeta/VoucherStyle/VoucherCardMeta` → pasang Q2d `app/pages/quiz.vue` (ink header + segmen blok lime + selected ember, hapus progress gradasi + `progress` nganggur) + M3d `app/pages/makan.vue` (cermin + chip mall GI/CP/Kokas/PIM/Aeon via `getMallShortLabel`, selected rose) + V12 `app/pages/result-makan.vue` (gift 🎁 + "Ada −20% buat lu" + pill rose Buka, ganti tombol merah full-width) + bg paper `#F5F5F4` kombo 3 pages (ganti `#fffdf9`). REFACTOR: hapus import `progressPercent` nganggur (lint 2 error → bersih), rapiin komentar dobel.
