@@ -1,12 +1,25 @@
 <!-- pages/login.vue → GET /login (Auth page, Addendum 09 v1.3 APPROVED).
-  Design L1-inspired: hero ink #0C0A09 + ember #EA580C strip + lime #A3E635 CTA,
-  quota info 1:1 screen, font Plus Jakarta Sans, mobile max-w-md.
+  Design L1 PENUH dari revamp-options-v9.html: hero ink #0C0A09 + ember #EA580C strip + lime #A3E635 CTA,
+  quota info 1:1 screen, font Plus Jakarta Sans, mobile max-w-md, mutual-exclusive topbar 🔔/Login,
   KENAPA: User blum login klik button Login di header → harus bisa akses /login tanpa 404. -->
-<h1 class="text-2xl font-bold text-ink mb-4">Selamat Datang</h1>
-<div class="hero" style="background:#0C0A09;border-left:4px solid #EA580C;border-radius:12px;color:#fff;padding:8px;font-size:10px;font-weight:800;margin-bottom:12px">
-  QUOTA HABIS • reset 00.00<div class="big">0 • 0</div>Login gratis → buka 2 + 5
-</div>
-<div class="px-6 py-8">
+<div class="max-w-md mx-auto px-4 pb-10" style="background:#F5F5F4;">
+  <header class="bg-white sticky top-0 z-40 shadow-sm max-w-md mx-auto px-4 py-3 flex justify-between items-center">
+    <a href="/" class="flex items-center" aria-label="Wikendo — beranda">
+      <img src="/brand-icon-day.png" alt="Wikendo" width="32" height="32" class="rounded-lg">
+    </a>
+    <div class="flex gap-3 items-center">
+      <!-- Mutual-exclusive: show bell when logged in, Login button when not -->
+      <button type="button" aria-label="Notifikasi" class="text-sm font-bold leading-none text-ink hover:text-orange-600">🔔</button>
+      <button type="button" aria-label="Login" class="text-sm font-bold leading-none text-red-600 hover:text-orange-500">Login</button>
+    </div>
+  </header>
+
+  <!-- Hero strip L1: ink #0C0A09 + ember #EA580C border + CTA lime -->
+  <div class="hero" style="background:#0C0A09;border-left:4px solid #EA580C;border-radius:12px;color:#fff;padding:10px;font-size:10px;font-weight:800;margin-bottom:16px;text-align:center">
+    QUOTA HABIS • reset 00.00<div class="big" style="font-size:24px;font-weight:800;margin:4px 0">0 • 0</div>Login gratis → buka 2 + 5
+  </div>
+
+  <main class="px-6 py-8">
   <form class="space-y-4" @submit="handleSubmit">
     <div>
       <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>

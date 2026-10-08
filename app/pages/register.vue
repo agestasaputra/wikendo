@@ -1,13 +1,26 @@
 <!-- pages/register.vue → GET /register (Auth page, Addendum 09 v1.3 APPROVED).
-  Design R1-inspired: hero rose #E11D48 + ink #0C0A09, paired with L1,
+  Design R1 PENUH dari revamp-options-v9.html: hero rose #E11D48 + ink #0C0A09 border,
   field 3 (Nama/Email/Password), checkbox Syarat & Privasi,
   CTA ink, footer mini 10 detik, font Plus Jakarta Sans,
-  mobile max-w-md, base #fffdf9.
-  KENAPA: User klik button Register di header → harus bisa akses /register tanpa 404. -->
-<div class="hero" style="background:#E11D48;border-left:4px solid #0C0A09;border-radius:12px;color:#fff;padding:8px;font-size:10px;font-weight:800;margin-bottom:12px">
-  DAFTAR GRATIS<div class="big">2 • 5</div>quota full + voucher 🎟️
-</div>
-<div class="px-6 py-8">
+  mobile max-w-md, base #fffdf9, KENAPA: User klik button Register di header → harus bisa akses /register tanpa 404. -->
+<div class="max-w-md mx-auto px-4 pb-10" style="background:#fffdf9;">
+  <header class="bg-white sticky top-0 z-40 shadow-sm max-w-md mx-auto px-4 py-3 flex justify-between items-center">
+    <a href="/" class="flex items-center" aria-label="Wikendo — beranda">
+      <img src="/brand-icon-day.png" alt="Wikendo" width="32" height="32" class="rounded-lg">
+    </a>
+    <div class="flex gap-3 items-center">
+      <!-- Mutual-exclusive: show bell when logged in, Register button when not -->
+      <button type="button" aria-label="Notifikasi" class="text-sm font-bold leading-none text-ink hover:text-orange-600">🔔</button>
+      <button type="button" aria-label="Register" class="text-sm font-bold leading-none text-orange-600 hover:text-red-500">Register</button>
+    </div>
+  </header>
+
+  <!-- Hero strip R1: rose #E11D48 + ink #0C0A09 border -->
+  <div class="hero" style="background:#E11D48;border-left:4px solid #0C0A09;border-radius:12px;color:#fff;padding:10px;font-size:10px;font-weight:800;margin-bottom:16px;text-align:center">
+    DAFTAR GRATIS<div class="big" style="font-size:24px;font-weight:800;margin:4px 0">2 • 5</div>quota full + voucher 🎟️
+  </div>
+
+  <main class="px-6 py-8">
   <form class="space-y-4" @submit="handleSubmit">
     <div>
       <label class="block text-sm font-medium text-gray-700 mb-2">Nama</label>
