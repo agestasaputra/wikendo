@@ -22,6 +22,9 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4
   },
+  dir: {
+    pages: 'app'
+  },
   app: {
     head: {
       title: 'Wikendo — Bingung Weekend Mau Kemana?',
