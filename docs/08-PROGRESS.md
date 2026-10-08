@@ -16,6 +16,7 @@
 ## 📌 BOARD — posisi per 8 Okt 2026 (Supabase + quota real + button merah DONE ✅, next slice auth)
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Slicing 1:1 result tempat R3b + result makan F1b dari screenshot DONE ✅ 8 Okt (TDD): helper `getResultTempatMeta/getResultMakanMeta` tested + types `ResultTempatMeta/ResultMakanMeta` + `result.vue` R3b (hero photo + badge BEST lime + strip ember + Navigasi ink + chips + rank #1-3 + quota label real) + `result-makan.vue` F1b (deck BEST MATCH + tiket dashed −20% VOUCHER lime + Klaim rose + Maps tenant + chips + rank #1-3) — verify: test 98/98 (10 files, +6 baru) ✅ lint ✅ build 10.2s ✅ — next: deploy Vercel + MEDIA
 - [x] Infinity scroll S2b list+detail mall DONE ✅ 8 Okt (TDD): helper `parsePaginationParams/hasMorePages/mergePageItems` + type `InfinitePage/InfiniteFetchPage` + composable `useInfiniteList` (start/loadMore/reset, array legacy safe) + API paging `?limit&?offset` backward-compat (tanpa limit = array lama) + `mall/index.vue` + `mall/[slug].vue` (sentinel IntersectionObserver + skeleton 2 row + sticky count + sticky search/chips/CTA detail) — verify: test 92/92 (9 files, +11 baru) ✅ lint ✅ build 9.19s ✅ — next: push + deploy + MEDIA
 - [x] Slicing full index.vue I17 V2 dari screenshot DONE ✅ 8 Okt (TDD): helper `getHomeHeroMeta` tested (ink/strip/angka/pill/CTA/paper/badge) + `index.vue` rewrite 1:1 screenshot (header sapaan + hero ink strip ember + headline quota real + chip + pill lime + watermark dadu + 2 CTA ink + 4 ikon + rekomendasi + AI + riwayat) — verify: test 81/81 (8 files, +4 baru) ✅ lint ✅ build 9.15s ✅ — next: deploy Vercel + MEDIA
 - [x] Eksekusi Q2d+M3d+V12 ke app/ DONE ✅ 8 Okt (TDD slice): Q2d quiz.vue (ink header + label PUTIH + dot ember `#FB923C` + segmen lime + selected ember) + M3d makan.vue (cermin: dot rose `#FDA4AF` + chip mall GI/CP/Kokas/PIM/Aeon + selected rose) + V12 gift result-makan.vue (grad cream-rose + border pink + pill rose Buka) + bg paper `#F5F5F4` kombo + helpers tested `getQuizHeaderMeta/getQuizSegState/getVoucherCardMeta` (types `QuizFlow/QuizHeaderMeta/VoucherStyle/VoucherCardMeta`) — verify: test 77/77 (7 files, +9 baru) ✅ lint ✅ build 10.0s ✅ — next: push + deploy + DESIGN.md v1
@@ -76,6 +77,12 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-08 — Slicing 1:1 result tempat R3b + result makan F1b dari screenshot DONE ✅ (TDD)
+- **Kenapa:** Agesta attach 3 screenshot (Rooftop Senayan R3b + Kopi Kekinian F1b + direktori GI S2c) + VERBATIM gas via clarify "Gas result makan + result tempat (TDD full)" + kunci token R3b lime / F1b tiket dashed / paper #F5F5F4 / ink #0C0A09.
+- **Dikerjain (RED→GREEN):** RED `app/tests/result-cards.test.ts` 6 test gagal by design (helper belum ada) → GREEN types `ResultTempatMeta/ResultMakanMeta` + helper `getResultTempatMeta/getResultMakanMeta` di `app/utils/quiz-logic.ts` (strip ember #EA580C + best lime #A3E635 + aksi ink, tiket ink + diskon lime + border dashed pink #FECDD3 + Klaim rose #E11D48 + BEST lime + halal mint) → slice `app/pages/result.vue` R3b 1:1 (hero photo 150px + badge BEST lime + strip ember 5px + Navigasi ink 56px + Simpan wall login momen #2 + Share + chips 2 preview + Lainnya ink/lime + rank #1-3 abu + full list + quota label real) + slice `app/pages/result-makan.vue` F1b 1:1 (deck BEST MATCH + Halal mint + tiket dashed + Klaim rose + Maps tenant + chips + rank #1-3). REFACTOR: hapus `void quotaLabel` nganggur → quota ditampilin di template result.vue (konsisten kayak result-makan).
+- **Files:** `app/tests/result-cards.test.ts` (baru, +6), `app/types/index.ts`, `app/utils/quiz-logic.ts`, `app/pages/result.vue`, `app/pages/result-makan.vue`, `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Verifikasi:** test 98/98 (10 files) ✅ lint bersih ✅ build 10.2s ✅ secrets scan bersih ✅ — commit `1a0e436` + push main ✅ — next: deploy Vercel + MEDIA.
 
 ## 2026-10-08 — Infinity scroll S2b list+detail mall DONE ✅ (TDD)
 - **Kenapa:** Agesta VERBATIM "Untuk halaman list mall dan detail mall, tolong implementasi fitur infinity scroll" — spec S2b (board v5): 10/page, skeleton 2 row, sticky count, SSR page-1, API limit/offset backward-compat.
