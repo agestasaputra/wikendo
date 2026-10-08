@@ -16,6 +16,7 @@
 ## 📌 BOARD — posisi per 8 Okt 2026 (Supabase + quota real + button merah DONE ✅, next slice auth)
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Logo Day dipasang DONE ✅ 9 Okt (`1556f64`): app icon PWA (192/512 + apple-touch + manifest) + header icon-only Day 32px tanpa tulisan (pilihan Agesta) + favicon 32 — TDD: brand-assets.test.ts RED 7 gagal → GREEN 7/7, full 118/118 (11 files) ✅ lint 0 error ✅ build 10.2s ✅ prod 4 URL 200 + marker HTML (`brand-icon-day`, `favicon-32`, `apple-touch-icon`, `site.webmanifest` TRUE) ✅
 - [x] Workflow revamp + feedback loop LOCKED ✅ 9 Okt: `docs/18-Workflow-Revamp.md` v2 (5 langkah + loop iterasi, revisi nempel ID sama) + SOP §9 🔒 di skill `agesta-app-workflow` (`iya` bersih = eksekusi deploy, `iya` + feedback = balik revisi HTML)
 - [x] Workflow revamp halaman LOCKED ✅ 9 Okt: `docs/18-Workflow-Revamp.md` (baru, 5 langkah + 2 template lock) + SOP §9 🔒 LOCKED di skill `agesta-app-workflow` (cuma 2 template sah, di luar itu AI wajib minta ID dulu)
 - [x] Review + improve workflow revamp halaman DONE ✅ 9 Okt: SOP §9 versi simpel 5 langkah dikunci ke skill `agesta-app-workflow` (refs → analisis → OK → 20 opsi HTML ID gede → `Gua suka [ID]` = lock → tanya deploy → iya = eksekusi sampe deploy verified sama dengan [ID])
@@ -82,6 +83,12 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-09 — Logo Day dipasang DONE ✅ (app icon + header icon-only)
+- **Kenapa:** Agesta: pasang logo Day di app icon + header pakai Day icon-only (tanpa tulisan). Rekomendasi visual Opsi 1 vs 2 dikirim, Agesta pilih icon-only.
+- **Dikerjain:** render SVG→PNG (day/night/mono/lockup+horizontal, fix crop lockup) + `app/public/` (brand-icon-day, favicon-32, apple-touch, icon-192/512, site.webmanifest) + `app.vue` header icon-only 32px + `nuxt.config.ts` head (icon/manifest) + TDD `brand-assets.test.ts`.
+- **Files:** `app/public/*` (baru), `app/app.vue`, `app/nuxt.config.ts`, `app/tests/brand-assets.test.ts`, `design/assets/*.png` (preview).
+- **Verifikasi:** RED 7 gagal → GREEN 7/7, full 118/118 (11 files) ✅ lint 0 error (1 warning --fix-able) ✅ build 10.2s ✅ prod `/ + brand-icon-day + manifest + favicon` 200 ✅ marker HTML 4/4 TRUE ✅ — next: commit docs + kirim.
 
 ## 2026-10-09 — Workflow revamp + feedback loop LOCKED ✅ v2 (anti miskom)
 - **Kenapa:** Agesta kunci loop iterasi: `iya` bersih = eksekusi deploy, `iya` + feedback = balik revisi HTML hingga `iya` bersih. Revisi nempel ID sama, tidak ganti ID.
