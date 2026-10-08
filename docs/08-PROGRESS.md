@@ -16,6 +16,7 @@
 ## 📌 BOARD — posisi per 8 Okt 2026 (Supabase + quota real + button merah DONE ✅, next slice auth)
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Slicing full index.vue I17 V2 dari screenshot DONE ✅ 8 Okt (TDD): helper `getHomeHeroMeta` tested (ink/strip/angka/pill/CTA/paper/badge) + `index.vue` rewrite 1:1 screenshot (header sapaan + hero ink strip ember + headline quota real + chip + pill lime + watermark dadu + 2 CTA ink + 4 ikon + rekomendasi + AI + riwayat) — verify: test 81/81 (8 files, +4 baru) ✅ lint ✅ build 9.15s ✅ — next: deploy Vercel + MEDIA
 - [x] Eksekusi Q2d+M3d+V12 ke app/ DONE ✅ 8 Okt (TDD slice): Q2d quiz.vue (ink header + label PUTIH + dot ember `#FB923C` + segmen lime + selected ember) + M3d makan.vue (cermin: dot rose `#FDA4AF` + chip mall GI/CP/Kokas/PIM/Aeon + selected rose) + V12 gift result-makan.vue (grad cream-rose + border pink + pill rose Buka) + bg paper `#F5F5F4` kombo + helpers tested `getQuizHeaderMeta/getQuizSegState/getVoucherCardMeta` (types `QuizFlow/QuizHeaderMeta/VoucherStyle/VoucherCardMeta`) — verify: test 77/77 (7 files, +9 baru) ✅ lint ✅ build 10.0s ✅ — next: push + deploy + DESIGN.md v1
 - [x] R3b S2c lime touch — best-badge lime + strip lime di result-makan DONE ✅ 8 Okt (TDD): result-makan.vue strip `#A3E635` ganti `#ee2c4b` lama + badge best lime — verify: test 77/77 ✅ lint ✅ build 8.67s ✅ — next: DESIGN.md push + MEDIA
 - [x] Index.vue v2 ember p1 border-left #EA580C DONE ✅ 8 Okt (TDD): border-left 5px solid ember di hero + palette 60-30-10 + token --ember:#EA580C --line:#E7E5E4 --lime:#A3E635 — verify: test 77/77 ✅ lint ✅ build 8.83s ✅ — next: DESIGN.md push + MEDIA
@@ -74,6 +75,11 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-08 — Slicing full index.vue I17 V2 dari screenshot DONE ✅ (TDD)
+- **Kenapa:** Agesta attach screenshot V2 Ember P1 `#EA580C` + VERBATIM "gua mau lu eksekusi ui slicing design satu halaman ini ke index.vue" — rewrite 1:1 screenshot, bukan cuma hero.
+- **Dikerjain (RED→GREEN→REFACTOR):** RED `app/tests/home-hero.test.ts` 4 test gagal by design (helper belum ada) → GREEN type `HomeHeroMeta` + helper `getHomeHeroMeta()` di `app/utils/quiz-logic.ts` (ink/strip/angka/pill/CTA/paper/badge 1 sumber) → pasang `app/pages/index.vue` rewrite full (header sapaan avatar+lonceng + hero ink strip ember + headline quota real + chip tempat/makan + pill lime Mulai Quiz + watermark dadu + 2 CTA ink + 4 ikon Event/Promo/Wishlist/Riwayat + rekomendasi Rooftop/Kopi + badge mint + kartu Wikendo AI + Terakhir dilihat + disclaimer split).
+- **Verify:** test 81/81 (8 files, +4 baru) ✅ lint 0 error ✅ build 9.15s ✅ — commit `be90ed4` + push main ✅ — next: deploy Vercel + MEDIA.
 
 ## 2026-10-08 — Full-page slicing index.vue I17 V2 ember DONE ✅ (TDD, gas approved)
 - **Kenapa:** Agesta VERBATIM "Gas implementasi slicing ui satu halaman penuh di index.vue, bukan hanya card hero saja!" — eksekusi penuh halaman dari `design/i17-border-sweep.html` V2 ember `#EA580C` ⭐.
