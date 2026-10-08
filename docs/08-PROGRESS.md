@@ -16,6 +16,7 @@
 ## 📌 BOARD — posisi per 8 Okt 2026 (Supabase + quota real + button merah DONE ✅, next slice auth)
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Slicing 1:1 5 halaman dari screenshot DONE ✅ 8 Okt (batch-1 `8345d1e` + batch-2 `f927d19` + batch-3 `6770ecf` + batch-4 `26ae7dd`): Home separator • + R3b badge `★ #1 BEST · JAKSEL · 4.8 ★` spasi + F1b header/judul 🍜 + D1 tab Mall + tombol `🏢 Lihat Tenant →` + S2c h1 🏢/chips 💰☕/rating spasi — verify: test 111/111 (10 files) ✅ lint ✅ build 11.7s ✅ prod 5 URL 200 ✅ marker live ✅ — next: kabari Agesta 100% kelar
 - [x] Slicing 1:1 result tempat R3b + result makan F1b dari screenshot DONE ✅ 8 Okt (TDD): helper `getResultTempatMeta/getResultMakanMeta` tested + types `ResultTempatMeta/ResultMakanMeta` + `result.vue` R3b (hero photo + badge BEST lime + strip ember + Navigasi ink + chips + rank #1-3 + quota label real) + `result-makan.vue` F1b (deck BEST MATCH + tiket dashed −20% VOUCHER lime + Klaim rose + Maps tenant + chips + rank #1-3) — verify: test 98/98 (10 files, +6 baru) ✅ lint ✅ build 10.2s ✅ — next: deploy Vercel + MEDIA
 - [x] Infinity scroll S2b list+detail mall DONE ✅ 8 Okt (TDD): helper `parsePaginationParams/hasMorePages/mergePageItems` + type `InfinitePage/InfiniteFetchPage` + composable `useInfiniteList` (start/loadMore/reset, array legacy safe) + API paging `?limit&?offset` backward-compat (tanpa limit = array lama) + `mall/index.vue` + `mall/[slug].vue` (sentinel IntersectionObserver + skeleton 2 row + sticky count + sticky search/chips/CTA detail) — verify: test 92/92 (9 files, +11 baru) ✅ lint ✅ build 9.19s ✅ — next: push + deploy + MEDIA
 - [x] Slicing full index.vue I17 V2 dari screenshot DONE ✅ 8 Okt (TDD): helper `getHomeHeroMeta` tested (ink/strip/angka/pill/CTA/paper/badge) + `index.vue` rewrite 1:1 screenshot (header sapaan + hero ink strip ember + headline quota real + chip + pill lime + watermark dadu + 2 CTA ink + 4 ikon + rekomendasi + AI + riwayat) — verify: test 81/81 (8 files, +4 baru) ✅ lint ✅ build 9.15s ✅ — next: deploy Vercel + MEDIA
@@ -77,6 +78,12 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-08 — Audit 1:1 batch-4 (R3b ★ spasi + D1 🏢) DONE ✅ + deploy verified live
+- **Kenapa:** SOP §8 — bedah 5 image via vision_analyze dulu (Home ecd0 / R3b 01f2 / F1b 510b / D1 7076 / S2c 1b98), bandingkan verbatim vs kode aktual → ketemu 2 gap pasti: R3b badge `4.8★` rapat vs desain `4.8 ★` spasi; D1 tombol `Lihat Tenant →` polos vs desain `🏢 Lihat Tenant →`.
+- **Dikerjain:** patch `app/pages/result.vue` (`{{ hero.rating }}★` → `{{ hero.rating }} ★`) + patch `app/pages/mall/index.vue` (tombol tambah 🏢). Test pengunci dicek dulu (search `Lihat Tenant|rating.*★|BEST ·` → 0 lock di tests, aman).
+- **Files:** `app/pages/result.vue`, `app/pages/mall/index.vue`, `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Verifikasi:** test 111/111 (10 files) ✅ lint bersih ✅ build 11.7s ✅ secrets scan 0 ✅ — commit `26ae7dd` + push main ✅ — deploy: 5 URL prod 200 (`/` `/mall` `/result` `/result-makan` `/mall/grand-indonesia`) ✅ — marker live: `🏢 Lihat Tenant` TRUE, `Carlin` TRUE, `QUOTA HARI INI` TRUE ✅ — next: kabari Agesta 100% kelar.
 
 ## 2026-10-08 — Slicing 1:1 result tempat R3b + result makan F1b dari screenshot DONE ✅ (TDD)
 - **Kenapa:** Agesta attach 3 screenshot (Rooftop Senayan R3b + Kopi Kekinian F1b + direktori GI S2c) + VERBATIM gas via clarify "Gas result makan + result tempat (TDD full)" + kunci token R3b lime / F1b tiket dashed / paper #F5F5F4 / ink #0C0A09.
