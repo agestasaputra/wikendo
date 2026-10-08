@@ -11,7 +11,7 @@
  * ATURAN: fungsi di sini harus PURE (input → output, tanpa side effect,
  * tanpa baca route/cookie/DB). Side effect tetap di pages/server.
  */
-import type { QuotaStatus, QuotaStatusInput, LoaderMeta, LoaderVariant, WalletLabel, QuizFlow, QuizHeaderMeta, VoucherStyle, VoucherCardMeta, HomeHeroMeta } from '../types'
+import type { QuotaStatus, QuotaStatusInput, LoaderMeta, LoaderVariant, WalletLabel, QuizFlow, QuizHeaderMeta, VoucherStyle, VoucherCardMeta, HomeHeroMeta, ResultTempatMeta, ResultMakanMeta } from '../types'
 
 export function progressPercent(step: number, total: number): number {
   return ((step + 1) / total) * 100
@@ -346,4 +346,43 @@ export function mergePageItems<T>(prev: T[], next: T[], keyOf: (item: T) => stri
     }
   }
   return out
+}
+
+/* ── Meta kartu result R3b + F1b (slicing 1:1 dari 3 screenshot) ──
+ * KENAPA di sini (pure): token kartu result dipakai 2 pages (result.vue R3b
+ * photo+lime + result-makan.vue F1b tiket) → 1 sumber kebenaran, bukan
+ * hardcode hex di template. Token lock Agesta: lime=nilai, ember=strip,
+ * ink=aksi, F1b tiket dashed + benefit gede + pill Klaim kecil.
+ * Contoh: getResultTempatMeta().strip → '#EA580C'.
+ */
+
+/** Meta kartu result tempat R3b: strip ember + best lime + aksi ink. */
+export function getResultTempatMeta(): ResultTempatMeta {
+  return {
+    strip: '#EA580C',
+    bestBg: '#A3E635',
+    bestColor: '#0C0A09',
+    actionBg: '#0C0A09',
+    actionColor: '#fff',
+    pageBg: '#F5F5F4',
+    cardBg: '#fff',
+    moreBg: '#0C0A09',
+    moreColor: '#A3E635'
+  }
+}
+
+/** Meta kartu result makan F1b: tiket ink + diskon lime + Klaim rose + halal mint. */
+export function getResultMakanMeta(): ResultMakanMeta {
+  return {
+    ticketBg: '#0C0A09',
+    discountColor: '#A3E635',
+    ticketBorder: '#FECDD3',
+    claimBg: '#E11D48',
+    claimColor: '#fff',
+    bestBg: '#A3E635',
+    halalBg: '#ECFDF5',
+    halalColor: '#047857',
+    pageBg: '#F5F5F4',
+    cardBg: '#fff'
+  }
 }

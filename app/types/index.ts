@@ -189,6 +189,38 @@ export interface InfinitePage<T> {
 export type InfiniteFetchPage<T> = InfinitePage<T> | T[]
 
 /**
+ * ResultCardMeta — KONTRAK meta kartu result R3b (tempat photo+lime) + F1b (makan tiket).
+ * - R3b: strip ember #EA580C + best lime #A3E635 teks ink + aksi ink + chip Lainnya ink/lime.
+ * - F1b: tiket ink + diskon lime + border dashed pink #FECDD3 + Klaim rose #E11D48 + BEST lime + halal mint.
+ * - Page paper #F5F5F4 + kartu putih (token lock Agesta).
+ * Dipakai: getResultTempatMeta()/getResultMakanMeta() di utils/quiz-logic + pages/result.vue + pages/result-makan.vue.
+ */
+export interface ResultTempatMeta {
+  strip: string
+  bestBg: string
+  bestColor: string
+  actionBg: string
+  actionColor: string
+  pageBg: string
+  cardBg: string
+  moreBg: string
+  moreColor: string
+}
+
+export interface ResultMakanMeta {
+  ticketBg: string
+  discountColor: string
+  ticketBorder: string
+  claimBg: string
+  claimColor: string
+  bestBg: string
+  halalBg: string
+  halalColor: string
+  pageBg: string
+  cardBg: string
+}
+
+/**
  * HomeHeroMeta — KONTRAK hero home I17 V2 Ember P1 (slicing full dari screenshot V2).
  * - headBg ink #0C0A09 + strip ember #EA580C (V2, bukan orange I2 #F97316)
  * - angka lime-di-gelap #D9F99D + pill lime #A3E635 teks ink
