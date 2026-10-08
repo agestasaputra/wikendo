@@ -167,3 +167,24 @@ export interface VoucherCardMeta {
   goBg: string
   goColor: string
 }
+
+/**
+ * HomeHeroMeta — KONTRAK hero home I17 V2 Ember P1 (slicing full dari screenshot V2).
+ * - headBg ink #0C0A09 + strip ember #EA580C (V2, bukan orange I2 #F97316)
+ * - angka lime-di-gelap #D9F99D + pill lime #A3E635 teks ink
+ * - CTA Tempat/Makan ink (I17), page paper #F5F5F4, kartu putih, badge mint
+ * Dipakai: getHomeHeroMeta() di utils/quiz-logic + pages/index.vue.
+ */
+export interface HomeHeroMeta {
+  headBg: string
+  strip: string
+  numColor: string
+  pillBg: string
+  pillColor: string
+  ctaBg: string
+  ctaColor: string
+  pageBg: string
+  cardBg: string
+  tagBg: string
+  tagColor: string
+}

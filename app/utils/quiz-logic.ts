@@ -11,7 +11,7 @@
  * ATURAN: fungsi di sini harus PURE (input → output, tanpa side effect,
  * tanpa baca route/cookie/DB). Side effect tetap di pages/server.
  */
-import type { QuotaStatus, QuotaStatusInput, LoaderMeta, LoaderVariant, WalletLabel, QuizFlow, QuizHeaderMeta, VoucherStyle, VoucherCardMeta } from '../types'
+import type { QuotaStatus, QuotaStatusInput, LoaderMeta, LoaderVariant, WalletLabel, QuizFlow, QuizHeaderMeta, VoucherStyle, VoucherCardMeta, HomeHeroMeta } from '../types'
 
 export function progressPercent(step: number, total: number): number {
   return ((step + 1) / total) * 100
@@ -274,5 +274,29 @@ export function getVoucherCardMeta(style: VoucherStyle): VoucherCardMeta {
     border: '#FECDD3',
     goBg: '#E11D48',
     goColor: '#fff'
+  }
+}
+
+/* ── Hero home I17 V2 Ember P1 (slicing full dari screenshot V2) ────
+ * KENAPA di sini (pure): token hero home (ink + strip ember + angka lime
+ * + pill lime + CTA ink + page paper + badge mint) dipakai pages/index.vue
+ * → 1 sumber kebenaran, bukan hardcode hex di template.
+ * Tanpa baca route/state. Contoh: getHomeHeroMeta().strip → '#EA580C'.
+ */
+
+/** Meta hero home: I17 V2 Ember P1 lock (strip ember, bukan orange I2). */
+export function getHomeHeroMeta(): HomeHeroMeta {
+  return {
+    headBg: '#0C0A09',
+    strip: '#EA580C',
+    numColor: '#D9F99D',
+    pillBg: '#A3E635',
+    pillColor: '#0C0A09',
+    ctaBg: '#0C0A09',
+    ctaColor: '#fff',
+    pageBg: '#F5F5F4',
+    cardBg: '#fff',
+    tagBg: '#ECFDF5',
+    tagColor: '#047857'
   }
 }
