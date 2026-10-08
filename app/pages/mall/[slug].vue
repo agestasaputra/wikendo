@@ -14,7 +14,7 @@ Token lock: ink tetap #0C0A09, rose tetap #E11D48, paper tetap #F5F5F4. -->
 
   <!-- Sticky: search + chips + CTA (S2b spec: nggak kelempar scroll) -->
   <div class="sticky top-0 pt-2 pb-2" style="background:#F5F5F4">
-    <div class="bg-[#f4f4f5] rounded-xl px-3.5 py-2.5 text-[13px] text-gray-500 flex gap-2 items-center">
+    <div class="bg-white border border-[#e4e4e7] rounded-xl px-3.5 py-2.5 text-[13px] text-gray-500 flex gap-2 items-center">
       🔍 <input v-model="keyword" placeholder="Cari tenant... mis. kopi, ramen" class="bg-transparent outline-none flex-1 text-ink placeholder:text-gray-400">
     </div>
 
