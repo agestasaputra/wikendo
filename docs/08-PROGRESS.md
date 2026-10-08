@@ -16,6 +16,7 @@
 ## 📌 BOARD — posisi per 8 Okt 2026 (Supabase + quota real + button merah DONE ✅, next slice auth)
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Header rapi DONE ✅ 9 Okt (`a79f380`): lebar disamain max-w-md (= content) + nav Tempat/Makan/Mall dihapus + bell 🔔 pindah dari Home ke kanan header global — TDD: header-layout.test.ts RED 4 gagal → GREEN 4/4, full 122/122 (12 files) ✅ lint 0 error ✅ build 9.28s ✅ prod `/ /quiz /mall` 200 + marker (bell TRUE, no-quiz-nav TRUE) ✅
 - [x] Logo Day dipasang DONE ✅ 9 Okt (`1556f64`): app icon PWA (192/512 + apple-touch + manifest) + header icon-only Day 32px tanpa tulisan (pilihan Agesta) + favicon 32 — TDD: brand-assets.test.ts RED 7 gagal → GREEN 7/7, full 118/118 (11 files) ✅ lint 0 error ✅ build 10.2s ✅ prod 4 URL 200 + marker HTML (`brand-icon-day`, `favicon-32`, `apple-touch-icon`, `site.webmanifest` TRUE) ✅
 - [x] Workflow revamp + feedback loop LOCKED ✅ 9 Okt: `docs/18-Workflow-Revamp.md` v2 (5 langkah + loop iterasi, revisi nempel ID sama) + SOP §9 🔒 di skill `agesta-app-workflow` (`iya` bersih = eksekusi deploy, `iya` + feedback = balik revisi HTML)
 - [x] Workflow revamp halaman LOCKED ✅ 9 Okt: `docs/18-Workflow-Revamp.md` (baru, 5 langkah + 2 template lock) + SOP §9 🔒 LOCKED di skill `agesta-app-workflow` (cuma 2 template sah, di luar itu AI wajib minta ID dulu)
@@ -83,6 +84,12 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-09 — Header rapi DONE ✅ (sejajar content + nav hapus + bell pindah)
+- **Kenapa:** Agesta lapor header lebih lebar dari content di desktop + minta nav dihapus + bell pindah ke kanan header.
+- **Dikerjain:** `app.vue` (max-w-4xl → max-w-md, nav dihapus, bell button kanan) + `pages/index.vue` (bell di sapaan dihapus) + TDD `header-layout.test.ts`.
+- **Files:** `app/app.vue`, `app/pages/index.vue`, `app/tests/header-layout.test.ts`.
+- **Verifikasi:** RED 4 gagal → GREEN 4/4, full 122/122 (12 files) ✅ lint 0 error ✅ build 9.28s ✅ prod `/ /quiz /mall` 200 + marker (bell TRUE, no-quiz-nav TRUE) ✅ — next: commit docs + kirim.
 
 ## 2026-10-09 — Logo Day dipasang DONE ✅ (app icon + header icon-only)
 - **Kenapa:** Agesta: pasang logo Day di app icon + header pakai Day icon-only (tanpa tulisan). Rekomendasi visual Opsi 1 vs 2 dikirim, Agesta pilih icon-only.
