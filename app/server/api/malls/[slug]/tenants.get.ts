@@ -1,12 +1,16 @@
 /**
- * GET /api/malls/:slug/tenants — List tenant 1 mall + filter server-side.
- * Query: ?halal=true ?budget=hemat|menengah|leluasa ?kids=true ?search=kopi ?mission=nongkrong_lama
- * Filter kolom dikerjakan di SQL Supabase; filter mission (array) di-memory setelah fetch.
+ * GET /api/malls/:slug/tenants — List tenant 1 mall + filter server-side + paging S2b.
+ * Query filter: ?halal=true ?budget=hemat|menengah|leluasa ?kids=true ?search=kopi ?mission=nongkrong_lama
+ * Tanpa ?limit = array legacy (backward-compat, 40 tenant sekaligus seperti sekarang).
+ * Dengan ?limit&?offset = objek { items, total, hasMore } (10/page default, max 50).
+ * Filter kolom di SQL Supabase; mission (array) di-memory; paging di-slice setelah
+ * semua filter (benar untuk 40 row/mall, total = pasca-filter buat sticky count "10/40").
  * Tanpa login/quota/LLM. 404 kalau slug mall tidak ada.
  * ATURAN NULL (tri-state): ?halal=true pakai .eq('halal', true) → row halal=NULL otomatis
  * ke-exclude (belum riset ≠ halal). Direktori tampil apa adanya + badge ❓ di UI.
  */
 import { supabaseAdmin } from '../../../utils/db'
+import { parsePaginationParams, hasMorePages } from '../../../../utils/quiz-logic'
 import type { TenantRow } from '~/types'
 
 export default defineEventHandler(async (event) => {
@@ -26,5 +30,11 @@ export default defineEventHandler(async (event) => {
 
   let list = (tenants || []) as TenantRow[]
   if (query.mission) list = list.filter((t: TenantRow) => (t.mission || []).includes(query.mission as string))
-  return list
+
+  // Legacy: tanpa ?limit → array penuh (kontrak lama).
+  if (query.limit === undefined) return list
+
+  const { limit, offset } = parsePaginationParams(query as Record<string, unknown>)
+  const items = list.slice(offset, offset + limit)
+  return { items, total: list.length, hasMore: hasMorePages(offset + items.length, list.length) }
 })

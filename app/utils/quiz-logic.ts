@@ -300,3 +300,50 @@ export function getHomeHeroMeta(): HomeHeroMeta {
     tagColor: '#047857'
   }
 }
+
+/* ── Infinity scroll S2b (list mall + detail mall) ────────────────
+ * KENAPA di sini (pure): math paging limit/offset + hasMore +
+ * append-dedupe dipakai 2 pages (mall/index, mall/[slug]) + 2 API
+ * (malls, tenants) + composable useInfiniteList → 1 sumber kebenaran,
+ * bukan duplikat math di tiap file. Tanpa baca route/DB.
+ * Spec S2b: 10/page, backward-compat (tanpa ?limit = array legacy 40).
+ * Contoh: parsePaginationParams({ limit: '10', offset: '20' }) → { limit: 10, offset: 20 }.
+ */
+
+/** Default 10/page (S2b) + max 50 (anti-abuse full dump). */
+export const INFINITE_DEFAULT_LIMIT = 10
+export const INFINITE_MAX_LIMIT = 50
+
+/** ?limit & ?offset (string|array|absen) → angka aman. Ngaco/negatif/nol → default/0. */
+export function parsePaginationParams(
+  query: Record<string, unknown>,
+  defaultLimit: number = INFINITE_DEFAULT_LIMIT
+): { limit: number; offset: number } {
+  const rawLimit = Array.isArray(query.limit) ? query.limit[0] : query.limit
+  const rawOffset = Array.isArray(query.offset) ? query.offset[0] : query.offset
+  let limit = parseInt(String(rawLimit ?? ''), 10)
+  if (Number.isNaN(limit) || limit <= 0) limit = defaultLimit
+  limit = Math.min(limit, INFINITE_MAX_LIMIT)
+  let offset = parseInt(String(rawOffset ?? ''), 10)
+  if (Number.isNaN(offset) || offset < 0) offset = 0
+  return { limit, offset }
+}
+
+/** Masih ada page berikut? loaded < total. Contoh: hasMorePages(10, 40) → true. */
+export function hasMorePages(loaded: number, total: number): boolean {
+  return loaded < total
+}
+
+/** Gabung page baru ke list lama, dedupe by key (overlap refetch tidak ganda). */
+export function mergePageItems<T>(prev: T[], next: T[], keyOf: (item: T) => string | number): T[] {
+  const seen = new Set<string | number>(prev.map(keyOf))
+  const out = [...prev]
+  for (const item of next) {
+    const k = keyOf(item)
+    if (!seen.has(k)) {
+      seen.add(k)
+      out.push(item)
+    }
+  }
+  return out
+}

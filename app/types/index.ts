@@ -169,6 +169,26 @@ export interface VoucherCardMeta {
 }
 
 /**
+ * InfinitePage — KONTRAK paging S2b infinity scroll (list mall + detail mall).
+ * - items: potongan page ini (10/page tenant, mall future-proof)
+ * - total: jumlah penuh pasca-filter (sticky count "10/40")
+ * - hasMore: loaded < total → sentinel masih dipantau
+ * API backward-compat: tanpa ?limit = array legacy (bukan objek ini).
+ * Dipakai: useInfiniteList() + GET /api/malls + GET /api/malls/:slug/tenants.
+ */
+export interface InfinitePage<T> {
+  items: T[]
+  total: number
+  hasMore: boolean
+}
+
+/**
+ * InfiniteFetchPage — fetch 1 page: boleh objek InfinitePage ATAU array legacy.
+ * Array legacy = API lama tanpa ?limit (40 tenant sekaligus) → hasMore false.
+ */
+export type InfiniteFetchPage<T> = InfinitePage<T> | T[]
+
+/**
  * HomeHeroMeta — KONTRAK hero home I17 V2 Ember P1 (slicing full dari screenshot V2).
  * - headBg ink #0C0A09 + strip ember #EA580C (V2, bukan orange I2 #F97316)
  * - angka lime-di-gelap #D9F99D + pill lime #A3E635 teks ink
