@@ -6,7 +6,7 @@ Token lock: ink tetap #0C0A09, rose tetap #E11D48, paper tetap #F5F5F4. -->
 <div class="max-w-md mx-auto px-4 pb-10" style="background:#F5F5F4">
   <p class="text-xs text-gray-500 pt-3 mb-1">Home / Mall / {{ mallShort }}</p>
   <div class="flex justify-between items-center">
-    <h1 class="text-xl font-extrabold">{{ mallName }}</h1>
+    <h1 class="text-xl font-extrabold">🏢 {{ mallName }}</h1>
     <span class="text-xs font-bold text-gray-500">{{ pending ? '…' : `${total || tenants.length} tenant` }}</span>
   </div>
 
@@ -21,8 +21,8 @@ Token lock: ink tetap #0C0A09, rose tetap #E11D48, paper tetap #F5F5F4. -->
     <!-- Filter chip (S2c 1:1 = 3 chip): halal + budget + nongkrong. Server-side via query, ganti filter = reset page. -->
     <div class="flex gap-1.5 flex-wrap my-2.5">
       <button class="text-[11.5px] font-bold rounded-full px-3 py-1.5 bg-white border-[1.5px]" :style="fHalal ? 'background:#18181b;color:#fff;border-color:#18181b' : 'border-color:#e4e4e7'" @click="fHalal = !fHalal; reload()">✅ Halal</button>
-      <button class="text-[11.5px] font-bold rounded-full px-3 py-1.5 bg-white border-[1.5px]" :style="fBudget ? 'background:#18181b;color:#fff;border-color:#18181b' : 'border-color:#e4e4e7'" @click="fBudget = !fBudget; reload()">50-100rb</button>
-      <button class="text-[11.5px] font-bold rounded-full px-3 py-1.5 bg-white border-[1.5px]" :style="fMission ? 'background:#18181b;color:#fff;border-color:#18181b' : 'border-color:#e4e4e7'" @click="fMission = !fMission; reload()">Nongkrong</button>
+      <button class="text-[11.5px] font-bold rounded-full px-3 py-1.5 bg-white border-[1.5px]" :style="fBudget ? 'background:#18181b;color:#fff;border-color:#18181b' : 'border-color:#e4e4e7'" @click="fBudget = !fBudget; reload()">💰 50-100rb</button>
+      <button class="text-[11.5px] font-bold rounded-full px-3 py-1.5 bg-white border-[1.5px]" :style="fMission ? 'background:#18181b;color:#fff;border-color:#18181b' : 'border-color:#e4e4e7'" @click="fMission = !fMission; reload()">☕ Nongkrong</button>
     </div>
 
     <!-- CTA jembatan direktori → quiz (S2c KARTU ASISTEN: strip lime + avatar ink-lime + 2 baris + panah) -->
@@ -54,7 +54,7 @@ Token lock: ink tetap #0C0A09, rose tetap #E11D48, paper tetap #F5F5F4. -->
       <div class="text-[13px]">
         <b>{{ t.name }} {{ tenantFloor(t) }}</b><br>
         <span v-if="tenantPromo(t)" class="inline-block text-white text-[10.5px] font-extrabold px-2 py-0.5 rounded-md my-0.5" :style="{ background: '#E11D48', color: '#fff' }">{{ tenantPromo(t) }}</span>
-        <p class="text-xs text-gray-500">{{ tenantRate(t) }}★ · {{ tenantFloor(t) }} · {{ tenantHalal(t) }}</p>
+        <p class="text-xs text-gray-500">{{ tenantRate(t) }} ★ · {{ tenantFloor(t) }} · {{ tenantHalal(t) }}</p>
       </div>
     </div>
     <p v-if="!filtered.length" class="text-center text-sm text-gray-500 py-8">Tidak ada tenant cocok. Coba ubah filter.</p>

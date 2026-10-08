@@ -16,7 +16,7 @@ Token via getHomeHeroMeta(): ink #0C0A09 + strip ember #EA580C + angka #D9F99D +
 
   <!-- Hero QUOTA HARI INI — ink + strip ember V2 + watermark dadu -->
   <div class="rounded-2xl p-3 text-white relative overflow-hidden" :style="{ background: hero.headBg, borderLeft: '5px solid ' + hero.strip }">
-    <p class="text-[10px] font-extrabold tracking-wide opacity-75">QUOTA HARI INI · reset 00.00</p>
+    <p class="text-[10px] font-extrabold tracking-wide opacity-75">QUOTA HARI INI • reset 00.00</p>
     <p class="text-2xl font-extrabold leading-tight mt-0.5" :style="{ color: hero.numColor }">{{ quotaPending ? '…' : wallet.headline }}</p>
     <p class="text-[11px] font-bold opacity-80 mt-0.5">Gratis hari ini — login buka 2 + 5</p>
     <div class="flex gap-1.5 mt-2">
@@ -53,11 +53,11 @@ Token via getHomeHeroMeta(): ink #0C0A09 + strip ember #EA580C + angka #D9F99D +
       <small class="opacity-55 font-bold">Lihat Semua →</small>
     </div>
     <div class="flex justify-between items-center text-[10.5px] font-extrabold px-2 py-[7px] rounded-lg bg-[#FAFAF9] mt-1">
-      <span>🗺️ Rooftop Senayan<small class="block font-bold opacity-60 text-[9.5px]">Senayan · 4,8 ★</small></span>
+      <span>🗺️ Rooftop Senayan<small class="block font-bold opacity-60 text-[9.5px]">Senayan • 4,8 ★</small></span>
       <b class="text-[9px] rounded-full px-2 py-0.5" :style="{ background: hero.tagBg, color: hero.tagColor }">-20%</b>
     </div>
     <div class="flex justify-between items-center text-[10.5px] font-extrabold px-2 py-[7px] rounded-lg bg-[#FAFAF9] mt-1">
-      <span>☕ Kopi Kekinian<small class="block font-bold opacity-60 text-[9.5px]">GI · 4,9 ★</small></span>
+      <span>☕ Kopi Kekinian<small class="block font-bold opacity-60 text-[9.5px]">GI • 4,9 ★</small></span>
       <b class="text-[9px] rounded-full px-2 py-0.5" :style="{ background: hero.tagBg, color: hero.tagColor }">Voucher</b>
     </div>
   </div>

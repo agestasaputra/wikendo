@@ -5,7 +5,7 @@ Contoh: hero Kopi Kekinian — GI L2 Halal 50-100rb kids → tiket Klaim → Map
 <template>
 <div class="max-w-md mx-auto px-4 pb-10" :style="{ background: meta.pageBg }">
   <div class="flex justify-between items-center font-bold text-[13px] py-3">
-    <NuxtLink to="/" class="font-extrabold">← Hasil 🎉/📍</NuxtLink>
+    <NuxtLink to="/" class="font-extrabold">← Hasil 🍜/📍</NuxtLink>
     <span class="text-gray-500">{{ list.length || 5 }} rekomendasi</span>
   </div>
   <p class="text-[11.5px] text-gray-500 -mt-1 mb-2">Quota makan {{ quotaLabel }} tersisa · {{ mallLabel }}</p>
@@ -25,7 +25,7 @@ Contoh: hero Kopi Kekinian — GI L2 Halal 50-100rb kids → tiket Klaim → Map
           <span v-else-if="hero.halal === false" class="text-[11px] font-extrabold px-2.5 py-1 rounded-full" style="background:#fef2f2;color:#991b1b">⚠️ Non-halal</span>
           <span v-else class="text-[11px] font-extrabold px-2.5 py-1 rounded-full" style="background:#f4f4f5;color:#71717a">❓ Belum verifikasi</span>
         </div>
-        <div class="font-extrabold text-[17px]">{{ hero.name }} — {{ mallLabel }} L{{ hero.floor }}</div>
+        <div class="font-extrabold text-[17px]">🍜 {{ hero.name }} — {{ mallLabel }} L{{ hero.floor }}</div>
         <p class="text-[12.5px] text-gray-600 my-1.5">Kenapa: {{ hero.reason }}</p>
         <p class="text-[12.5px]">💰 {{ hero.price }} · {{ hero.kids }} · 📍 L{{ hero.floor }}</p>
 

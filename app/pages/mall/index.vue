@@ -32,7 +32,7 @@ Token lock: ink tetap #0C0A09, rose tetap #E11D48, paper tetap #F5F5F4. -->
       </div>
       <div class="flex gap-2 mt-3">
         <NuxtLink :to="`/mall/${m.slug}`" class="flex-1 text-center bg-white rounded-[14px] p-3 font-extrabold text-[13px] border-2 border-gray-200" style="min-height:56px">
-          🏬 Lihat Tenant →
+          Lihat Tenant →
         </NuxtLink>
         <NuxtLink :to="`/makan?mall=${m.slug}`" class="flex-1 text-center text-white rounded-[14px] p-3 font-extrabold text-[13px]" style="background:#E11D48;min-height:56px">
           ✨ Carlin →
