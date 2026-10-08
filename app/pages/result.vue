@@ -21,7 +21,7 @@ Contoh: hero Rooftop Senayan — Senayan 4.8 sunset+live music → Navigasi → 
         <div class="absolute left-0 top-0 bottom-0 w-[5px]" :style="{ background: meta.strip }" />
         <div class="h-[150px] flex items-center justify-center text-[56px] relative" :style="'background:' + hero.bg">
           <span>{{ hero.emoji }}</span>
-          <span class="absolute bottom-2 left-1/2 -translate-x-1/2 text-[11px] font-extrabold px-3 py-1 rounded-full whitespace-nowrap" :style="{ background: meta.bestBg, color: meta.bestColor }">★ #1 BEST · {{ hero.areaLabel }} · {{ hero.rating }}★</span>
+          <span class="absolute bottom-2 left-1/2 -translate-x-1/2 text-[11px] font-extrabold px-3 py-1 rounded-full whitespace-nowrap" :style="{ background: meta.bestBg, color: meta.bestColor }">★ #1 BEST · {{ hero.areaLabel }} · {{ hero.rating }} ★</span>
         </div>
         <div class="p-[14px_16px]">
           <span class="inline-block text-[11px] font-extrabold px-2.5 py-1 rounded-full mr-1.5 mb-2" :style="{ background: meta.bestBg, color: meta.bestColor }">★ #{{ idx + 1 }}{{ idx === 0 ? ' BEST' : '' }}</span>
