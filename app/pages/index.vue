@@ -11,7 +11,6 @@ Token via getHomeHeroMeta(): ink #0C0A09 + strip ember #EA580C + angka #D9F99D +
       <span class="w-6 h-6 rounded-full flex items-center justify-center text-[13px] text-white" :style="{ background: hero.headBg }">👦</span>
       <span>Halo, teman Wikendo</span>
     </span>
-    <span>🔔</span>
   </div>
 
   <!-- Hero QUOTA HARI INI — ink + strip ember V2 + watermark dadu -->
