@@ -13,7 +13,7 @@
 
       <p class="text-gray-600 text-sm mb-6">Masukkan alamat email untuk membuat akun</p>
 
-      <form class="space-y-4">
+      <form class="space-y-4" @submit="handleSubmit">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
           <input type="email" required class="w-full rounded-[20px] p-[14px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors" placeholder="contoh@email.com" />

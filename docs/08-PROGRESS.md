@@ -87,6 +87,12 @@
 
 ## 🧾 LOG (newest first)
 
+## 2026-10-08 — Fix 500 /login SSR DONE ✅ (router.currentRoute → useRoute + wire form submit)
+- **Kenapa:** Setelah typo placeholder fixed, prod: /register 200 tapi /login 500 `Cannot read properties of undefined (reading 'redirect')`. Rootcause: `router.currentRoute.query.redirect` — `currentRoute` undefined pas SSR di Vercel. Register lolos karena tak ada baris itu. Plus lint 3 error: `redirect` + `handleSubmit` nganggur (form belum `@submit`).
+- **Dikerjain:** login.vue → `useRoute()` SSR-safe + `router.push(redirect)` + `@submit="handleSubmit"` di login+register.
+- **Files:** `app/pages/login.vue`, `app/pages/register.vue`, `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Verifikasi:** test 125/125 (13 files) ✅ lint 0 error (5 warning img/input bawaan) ✅ build 11.9s ✅ secrets scan 0 ✅ — next: commit + push + cek prod /login /register 200.
+
 ## 2026-10-08 — Fix 404 /login + /register DONE ✅ (typo placeholder + file hantu + header dupe)
 - **Kenapa:** Agesta lapor 404 buka /login di prod. ChatGPT diagnosa Root Directory/app-reserved — SALAH (bukti: /quiz dari folder sama = 200). Rootcause real: (1) typo `placeholder"•••"` (kurang `=`) di login.vue:24 + register.vue:24 → Vue compiler "Duplicate attribute" → build gagal → route tak ke-generate; (2) file hantu `app/login.vue` (untracked) konflik routing Nuxt 4; (3) `server/api/login.get.ts` dummy tak perlu; (4) header `v-else-if="!isLoggedIn"` duplikat kondisi (lint error) → bungkus div.
 - **Dikerjain:** patch `placeholder="•••"` di 2 files + bungkus komentar APA/KENAPA ke 1 comment block + `rm app/login.vue + server/api/login.get.ts` + header jadi `<div v-if="!isLoggedIn">` (Login+Register sejajar) + `v-else` 🔔.

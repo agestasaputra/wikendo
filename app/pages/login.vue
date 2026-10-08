@@ -13,7 +13,7 @@
 
       <p class="text-gray-600 text-sm mb-6">Masuk akun kamu untuk melanjutkan</p>
 
-      <form class="space-y-4">
+      <form class="space-y-4" @submit="handleSubmit">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
           <input type="email" required class="w-full rounded-[20px] p-[14px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors" placeholder="contoh@email.com" />
@@ -41,19 +41,20 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
+const route = useRoute()
 
 // Simpan redirect URL dari query agar bisa kembali ke halaman yang diminta
-const redirect = router.currentRoute.query.redirect || '/'
+const redirect = (route.query.redirect as string) || '/'
 
 // TODO: integrasi Supabase auth signInWithPassword nanti
 // const { data, error } = await supabase.auth.signInWithPassword({ email, password })
 
-// Mock login — redirect ke home setelah submit
+// Mock login — redirect ke home atau URL yang diminta
 const handleSubmit = (e: Event) => {
   e.preventDefault()
   // Mock auth success — redirect ke home
-  router.push('/')
+  router.push(redirect)
 }
 </script>
