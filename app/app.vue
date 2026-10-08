@@ -9,6 +9,7 @@
         <NuxtLink to="/" class="flex items-center" aria-label="Wikendo — beranda"><img src="/brand-icon-day.png" alt="Wikendo" width="32" height="32" class="rounded-lg" /></NuxtLink>
         <button v-if="!isLoggedIn" type="button" aria-label="Login" class="text-lg leading-none text-red-600 hover:text-orange-500" @click="$router.push('/login')">Login</button>
         <button v-else-if="!isLoggedIn" type="button" aria-label="Register" class="text-lg leading-none text-orange-600 hover:text-red-500" @click="$router.push('/register')">Register</button>
+        <button v-else type="button" aria-label="Notifikasi" class="text-lg leading-none">🔔</button>
       </div>
     </header>
     <NuxtPage />
