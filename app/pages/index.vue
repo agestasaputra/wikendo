@@ -39,7 +39,7 @@ Token via getHomeHeroMeta(): ink #0C0A09 + strip ember #EA580C + angka #D9F99D +
 
   <!-- 4 ikon cepat -->
   <div class="grid grid-cols-4 gap-1.5 mt-2">
-    <span class="text-center text-[9.5px] font-extrabold"><i class="flex items-center justify-center w-[38px] h-[38px] rounded-full mx-auto mb-[3px] not-italic text-base bg-white shadow">🎡</i>Event</span>
+    <NuxtLink to="/mall" class="text-center text-[9.5px] font-extrabold"><i class="flex items-center justify-center w-[38px] h-[38px] rounded-full mx-auto mb-[3px] not-italic text-base bg-white shadow">🏬</i>Mall</NuxtLink>
     <span class="text-center text-[9.5px] font-extrabold"><i class="flex items-center justify-center w-[38px] h-[38px] rounded-full mx-auto mb-[3px] not-italic text-base bg-white shadow">🎁</i>Promo</span>
     <span class="text-center text-[9.5px] font-extrabold"><i class="flex items-center justify-center w-[38px] h-[38px] rounded-full mx-auto mb-[3px] not-italic text-base bg-white shadow">❤️</i>Wishlist</span>
     <span class="text-center text-[9.5px] font-extrabold"><i class="flex items-center justify-center w-[38px] h-[38px] rounded-full mx-auto mb-[3px] not-italic text-base bg-white shadow">🕒</i>Riwayat</span>
@@ -67,6 +67,13 @@ Token via getHomeHeroMeta(): ink #0C0A09 + strip ember #EA580C + angka #D9F99D +
     <span class="flex-1 text-[10.5px] font-extrabold">Wikendo AI<small class="block font-bold opacity-65 text-[9.5px]">Ceritain mood → rekomendasi instan</small></span>
     <span class="text-sm font-extrabold">→</span>
   </div>
+
+  <!-- Mall Terdekat (M3 entrypoint direktori, lock M1+M3 9 Okt) -->
+  <NuxtLink to="/mall" class="flex gap-2 items-center mt-2 rounded-[14px] p-2.5 bg-white shadow" :style="{ background: hero.cardBg }">
+    <span class="w-[30px] h-[30px] rounded-full flex items-center justify-center text-[15px] text-white flex-none" :style="{ background: hero.headBg }">🏬</span>
+    <span class="flex-1 text-[10.5px] font-extrabold">Mall Terdekat<small class="block font-bold opacity-65 text-[9.5px]">5 mall • 200 tenant → tanpa login</small></span>
+    <span class="text-sm font-extrabold">→</span>
+  </NuxtLink>
 
   <!-- Terakhir dilihat -->
   <div class="mt-2 rounded-xl px-2.5 py-2.5 bg-white shadow text-[10.5px]" :style="{ background: hero.cardBg }">

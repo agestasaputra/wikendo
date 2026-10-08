@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wikendo — Opsi Entrypoint Mall di Home (M1–M3)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:#e7e5e4;color:#18181b;padding:16px 12px 120px}
+.wrap{max-width:1100px;margin:0 auto}
+h1{font-size:22px;font-weight:800}
+.sub{font-size:13px;color:#52525b;margin-top:4px}
+.card{background:#fff;border-radius:16px;padding:14px;margin-top:12px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.card h2{font-size:15px;font-weight:800;margin-bottom:6px}
+.card p,.card li{font-size:12.5px;line-height:1.55}
+.card ul{padding-left:18px}
+.sw{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:4px;border:1px solid #d4d4d8}
+.filters{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.filters button{border:2px solid #d4d4d8;background:#fff;border-radius:999px;padding:7px 14px;font-size:12.5px;font-weight:800;cursor:pointer}
+.filters button.on{border-color:#f97316;color:#f97316}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-top:12px}
+.opt{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.08);border:3px solid transparent}
+.opt.short{border-color:#f97316}
+.oid{font-size:40px;font-weight:800;background:#18181b;color:#fff;text-align:center;padding:6px}
+.oid small{display:block;font-size:11px;font-weight:700;color:#a3e635}
+.phone{width:300px;margin:12px auto;border:2px solid #d4d4d8;border-radius:24px;overflow:hidden;background:#F5F5F4}
+.prow{padding:8px 10px}
+.sap{font-size:11px;font-weight:800;display:flex;justify-content:space-between}
+.hero{background:#0C0A09;border-left:4px solid #EA580C;border-radius:12px;color:#fff;padding:8px;font-size:10px;font-weight:800}
+.hero .big{color:#D9F99D;font-size:18px}
+.cta2{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}
+.cta3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:6px}
+.ct{background:#0C0A09;color:#fff;border-radius:10px;text-align:center;font-size:9.5px;font-weight:800;padding:8px 2px}
+.ct small{font-weight:400}
+.icons{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:6px;text-align:center;font-size:8.5px;font-weight:800}
+.ic{width:32px;height:32px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 2px;box-shadow:0 1px 2px rgba(0,0,0,.12);font-size:15px}
+.entry{outline:3px solid #f97316;position:relative}
+.badge{position:absolute;top:-9px;right:-4px;background:#f97316;color:#fff;font-size:8px;font-weight:800;border-radius:999px;padding:1px 7px}
+.mini{background:#fff;border-radius:10px;padding:7px;margin-top:6px;font-size:9.5px;font-weight:800;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.meta{padding:10px 12px;font-size:12px}
+.meta .row{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.pill{font-size:10.5px;font-weight:800;border-radius:999px;padding:2px 10px;background:#f4f4f5}
+.pill.rec{background:#A3E635}
+.proscons{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}
+.proscons div{background:#f4f4f5;border-radius:8px;padding:6px;font-size:11px}
+.shortbtn{width:100%;margin-top:8px;border:2px solid #18181b;background:#fff;border-radius:10px;padding:8px;font-weight:800;font-size:12.5px;cursor:pointer}
+.opt.short .shortbtn{background:#18181b;color:#fff}
+table{width:100%;border-collapse:collapse;font-size:11.5px;margin-top:8px}
+th,td{border:1px solid #e4e4e7;padding:6px;text-align:left}
+th{background:#18181b;color:#fff}
+td.win{background:#ecfccb;font-weight:800}
+.banner{background:#18181b;color:#fff;border-radius:16px;padding:14px;margin-top:12px}
+.banner b{color:#A3E635}
+.pickbar{position:fixed;bottom:0;left:0;right:0;background:#18181b;color:#fff;padding:10px 12px;display:flex;gap:8px;align-items:center;z-index:50}
+.pickbar code{flex:1;background:#27272a;border-radius:8px;padding:8px;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pickbar button{background:#A3E635;border:none;border-radius:8px;padding:8px 14px;font-weight:800;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>🏬 Entrypoint Mall di Home — M1 vs M2 vs M3</h1>
+<p class="sub">Board visual. Pilih 1 dengan format <b>Gua suka [ID]</b>. Tanpa ID = belum eksekusi.</p>
+
+<div class="card"><h2>🔍 Diagnosis homepage sekarang</h2>
+<ul>
+<li><b>4 ikon cepat mati</b> (Event/Promo/Wishlist/Riwayat = &lt;span&gt;, tanpa link) — zona jempol kebuang, CTR 0.</li>
+<li><b>/mall ada tapi tak terlihat</b> — 5 mall • 200 tenant, tanpa login/quota (friksi terendah), tapi nol entry dari Home.</li>
+<li><b>2 CTA cuma Tempat + Makan</b> — tugas Home (landing→quiz &gt;40%, PRD §4) aman, tapi Mall tak dapat trafik.</li>
+<li><b>Slop verdict:</b> bukan soal warna — hierarki aksi lemah: 1 warna aksi per flow (ember Tempat, rose Makan) + kartu quota ink netral = OK, yang hilang cuma pintu Mall.</li>
+</ul></div>
+
+<div class="card"><h2>🔒 Batasan + token (berlaku semua opsi)</h2>
+<p>Mobile-first 375px • content <b>max-w-md</b> • header icon Day + bell kanan • Dual Entry Split never mix • /mall tanpa quota •
+<span class="sw" style="background:#F5F5F4"></span>paper #F5F5F4
+<span class="sw" style="background:#0C0A09"></span>ink #0C0A09
+<span class="sw" style="background:#A3E635"></span>lime #A3E635
+<span class="sw" style="background:#EA580C"></span>ember #EA580C
+<span class="sw" style="background:#E11D48"></span>rose #E11D48</p></div>
+
+<div class="filters">
+<button data-f="all" class="on">Semua</button>
+<button data-f="above">Above-fold</button>
+<button data-f="inflow">In-flow</button>
+<button data-f="below">Below-fold</button>
+</div>
+
+<div class="opts">
+<!-- M1 -->
+<div class="opt" data-cat="above" id="opt-M1">
+<div class="oid">M1<small>QUICK ICON MALL</small></div>
+<div class="phone"><div class="prow">
+<div class="sap"><span>👦 Halo, teman Wikendo</span></div>
+<div class="hero">QUOTA HARI INI<div class="big">1 • 2</div></div>
+<div class="cta2"><div class="ct">🗺️<br>Cari Tempat<br><small>quiz 30 dtk</small></div><div class="ct">🍜<br>Cari Makan<br><small>quiz 20 dtk</small></div></div>
+<div class="icons">
+<div><div class="ic entry">🏬<span class="badge">ENTRY</span></div>Mall</div>
+<div><div class="ic">🎁</div>Promo</div>
+<div><div class="ic">❤️</div>Wishlist</div>
+<div><div class="ic">🕒</div>Riwayat</div>
+</div>
+<div class="mini">Rekomendasi buatmu…</div>
+</div></div>
+<div class="meta">
+<div class="row"><span class="pill">Effort: S ±1 jam</span><span class="pill">Risiko: rendah</span><span class="pill">Above-fold</span></div>
+<div class="proscons"><div>✅ <b>Plus:</b> nol geser layout; jempol sama; ikon mati → hidup; quiz CTR aman.</div><div>⚠️ <b>Minus:</b> target kecil; numpang baris ikon mati lain.</div></div>
+<button class="shortbtn" data-id="M1">＋ Shortlist M1</button>
+</div></div>
+<!-- M2 -->
+<div class="opt" data-cat="inflow" id="opt-M2">
+<div class="oid">M2<small>CTA KETIGA MALL</small></div>
+<div class="phone"><div class="prow">
+<div class="sap"><span>👦 Halo, teman Wikendo</span></div>
+<div class="hero">QUOTA HARI INI<div class="big">1 • 2</div></div>
+<div class="cta3"><div class="ct">🗺️<br>Tempat</div><div class="ct">🍜<br>Makan</div><div class="ct entry">🏬<br>Mall<span class="badge">ENTRY</span></div></div>
+<div class="icons">
+<div><div class="ic">🎡</div>Event</div>
+<div><div class="ic">🎁</div>Promo</div>
+<div><div class="ic">❤️</div>Wishlist</div>
+<div><div class="ic">🕒</div>Riwayat</div>
+</div>
+<div class="mini">Rekomendasi buatmu…</div>
+</div></div>
+<div class="meta">
+<div class="row"><span class="pill">Effort: S ±2 jam</span><span class="pill">Risiko: sedang</span><span class="pill">In-flow</span></div>
+<div class="proscons"><div>✅ <b>Plus:</b> jempol 56px; bobot setara quiz; jelas.</div><div>⚠️ <b>Minus:</b> dorong konten turun; Mall setara quiz → risiko kanibalisasi target &gt;40%.</div></div>
+<button class="shortbtn" data-id="M2">＋ Shortlist M2</button>
+</div></div>
+<!-- M3 -->
+<div class="opt" data-cat="below" id="opt-M3">
+<div class="oid">M3<small>MALL DIRECTORY CARD</small></div>
+<div class="phone"><div class="prow">
+<div class="sap"><span>👦 Halo, teman Wikendo</span></div>
+<div class="hero">QUOTA HARI INI<div class="big">1 • 2</div></div>
+<div class="cta2"><div class="ct">🗺️<br>Cari Tempat</div><div class="ct">🍜<br>Cari Makan</div></div>
+<div class="mini">Rekomendasi buatmu…</div>
+<div class="mini entry">🏬 Mall Terdekat<span class="badge">ENTRY</span><br><small>5 mall • 200 tenant → tanpa login</small></div>
+<div class="mini">🤖 Wikendo AI…</div>
+</div></div>
+<div class="meta">
+<div class="row"><span class="pill">Effort: M ±3 jam</span><span class="pill">Risiko: rendah</span><span class="pill">Below-fold</span></div>
+<div class="proscons"><div>✅ <b>Plus:</b> informatif (count nyata); pola pull; quiz aman; sinyal SEO hub.</div><div>⚠️ <b>Minus:</b> perlu scroll; butuh count API.</div></div>
+<button class="shortbtn" data-id="M3">＋ Shortlist M3</button>
+</div></div>
+</div><!-- /opts -->
+
+<div class="card"><h2>⚔️ Head-to-head (North Star: landing→quiz &gt;40%)</h2>
+<table>
+<tr><th>Kriteria</th><th>M1 Icon</th><th>M2 CTA</th><th>M3 Card</th></tr>
+<tr><td>Quiz CTR aman</td><td class="win">Ya ★</td><td>Tidak</td><td class="win">Ya ★</td></tr>
+<tr><td>Visibility Mall</td><td>Sedang</td><td class="win">Tinggi ★</td><td>Sedang</td></tr>
+<tr><td>Effort</td><td class="win">S ★</td><td>S</td><td>M</td></tr>
+<tr><td>Monetisasi (tenant/voucher)</td><td> Rendah</td><td>Sedang</td><td class="win">Tinggi ★</td></tr>
+<tr><td>Risiko layout</td><td class="win">Nol ★</td><td>Sedang</td><td>Rendah</td></tr>
+</table></div>
+
+<div class="banner"><h2>🏆 Rekomendasi: <b>M1 + M3 (paket)</b></h2>
+<p style="font-size:12.5px;margin-top:6px">M1 dulu (P0, ±1 jam): ikon Event mati → <b>Mall 🏬</b>, above-fold, nol risiko quiz. M3 nyusul (P1): kartu direktori informatif sebagai pintu pull ke /mall. M2 ditolak — CTA ketiga setara quiz kanibalisasi target &gt;40%. Bisnis: Mall friksi terendah (tanpa login/quota) → entry ganda kecil + informatif naikin trafik direktori tanpa korbankan quiz.</p></div>
+
+<div class="banner"><h2>✅ Approval gate</h2>
+<p style="font-size:12.5px;margin-top:6px">Balas <b>Gua suka [ID]</b> (contoh: <b>Gua suka M1</b>) atau paket <b>Gua suka M1+M3</b>. Setelah lock → AI tulis Addendum + eksekusi TDD sampe deploy. Tanpa ID = belum eksekusi. Produksi belum disentuh.</p></div>
+</div>
+
+<div class="pickbar"><code id="picktext">Gua suka …</code><button onclick="copyPick()">Salin</button></div>
+<script>
+var KEY='wikendo-mall-entry-v1';
+function get(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return[]}}
+function set(v){localStorage.setItem(KEY,JSON.stringify(v))}
+function paint(){
+var s=get();
+document.querySelectorAll('.opt').forEach(function(o){
+var id=o.id.replace('opt-','');
+var on=s.indexOf(id)>-1;
+o.classList.toggle('short',on);
+var b=o.querySelector('.shortbtn');
+b.textContent=(on?'✓ Shortlisted ':'＋ Shortlist ')+id;
+});
+document.getElementById('picktext').textContent=s.length?('Gua suka '+s.join('+')):'Gua suka …';
+}
+document.querySelectorAll('.shortbtn').forEach(function(b){
+b.onclick=function(){var id=b.getAttribute('data-id');var s=get();var i=s.indexOf(id);if(i>-1)s.splice(i,1);else s.push(id);set(s);paint();};
+});
+document.querySelectorAll('.filters button').forEach(function(b){
+b.onclick=function(){
+document.querySelectorAll('.filters button').forEach(function(x){x.classList.remove('on')});
+b.classList.add('on');
+var f=b.getAttribute('data-f');
+document.querySelectorAll('.opt').forEach(function(o){
+o.style.display=(f==='all'||o.getAttribute('data-cat')===f)?'':'none';
+});
+};
+});
+function copyPick(){var t=document.getElementById('picktext').textContent;if(navigator.clipboard)navigator.clipboard.writeText(t);alert(t);}
+paint();
+</script>
+</body>
+</html>
