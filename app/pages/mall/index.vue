@@ -4,11 +4,6 @@ KENAPA: D1 "Mall Hub · Netral" + S2b infinity — 5 mall sekarang ringan, tapi 
 Token lock: ink tetap #0C0A09, rose tetap #E11D48, paper tetap #F5F5F4. -->
 <template>
 <div class="max-w-md mx-auto px-4 pb-10" style="background:#F5F5F4">
-  <!-- Tab header D1 1:1: pill ink, kiri outline Result Makan, kanan aktif orange Mall -->
-  <div class="flex gap-1.5 p-1.5 rounded-full mt-3" style="background:#0C0A09">
-    <NuxtLink to="/result-makan" class="flex-1 text-center text-[11px] font-extrabold rounded-full px-2 py-1.5 text-white border border-white/40">🍜 Result Makan</NuxtLink>
-    <span class="flex-1 text-center text-[11px] font-extrabold rounded-full px-2 py-1.5" style="background:#EA580C;color:#fff">🏢 Mall</span>
-  </div>
   <p class="text-xs text-gray-500 pt-3 mb-1">Home / Mall</p>
   <div class="flex justify-between items-center sticky top-0 py-2" style="background:#F5F5F4">
     <h1 class="text-xl font-extrabold">🏢 Mall</h1>
