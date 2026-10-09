@@ -13,10 +13,11 @@
 
 ---
 
-## 📌 BOARD — posisi per 8 Okt 2026 (Supabase + quota real + button merah DONE ✅, next slice auth)
+## 📌 BOARD — posisi per 9 Okt 2026 (custom domain wikendo.id LIVE ✅, next slice auth)
 
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Custom domain wikendo.id LIVE DONE ✅ 9 Okt: Vercel Domains Add `wikendo.id` + `www.wikendo.id` (Production + ☑️ redirect apex→www 308) + Domainesia DNS A `@`→`216.198.79.1` + CNAME `www`→Vercel — verify: `dig` ✅ `https://wikendo.id` 308 ✅ `https://www.wikendo.id` 200 + konten Wikendo ✅ SSL valid ✅ (DNS-only, nol sentuh `app/`)
 - [x] Entrypoint Mall M1+M3 DONE ✅ 9 Okt (`77de277`): M1 ikon Event→Mall 🏬 link /mall + M3 kartu Mall Terdekat (5 mall • 200 tenant → tanpa login) — TDD: mall-entry.test.ts RED 3 gagal → GREEN 3/3, full 125/125 (13 files) ✅ lint 0 error ✅ build 9.01s ✅ prod `/ /mall` 200 + marker (2× /mall link, Mall Terdekat TRUE, Event GONE) ✅ + Addendum `docs/19-PRD-Addendum-Mall-Entry.md` v1.0 LOCKED
 - [x] Header rapi DONE ✅ 9 Okt (`a79f380`): lebar disamain max-w-md (= content) + nav Tempat/Makan/Mall dihapus + bell 🔔 pindah dari Home ke kanan header global — TDD: header-layout.test.ts RED 4 gagal → GREEN 4/4, full 122/122 (12 files) ✅ lint 0 error ✅ build 9.28s ✅ prod `/ /quiz /mall` 200 + marker (bell TRUE, no-quiz-nav TRUE) ✅
 - [x] Logo Day dipasang DONE ✅ 9 Okt (`1556f64`): app icon PWA (192/512 + apple-touch + manifest) + header icon-only Day 32px tanpa tulisan (pilihan Agesta) + favicon 32 — TDD: brand-assets.test.ts RED 7 gagal → GREEN 7/7, full 118/118 (11 files) ✅ lint 0 error ✅ build 10.2s ✅ prod 4 URL 200 + marker HTML (`brand-icon-day`, `favicon-32`, `apple-touch-icon`, `site.webmanifest` TRUE) ✅
@@ -87,13 +88,31 @@
 
 ## 🧾 LOG (newest first)
 
+## 2026-10-09 — Custom domain wikendo.id LIVE DONE ✅ (Vercel + Domainesia)
+- **Kenapa:** Agesta beli `wikendo.id` di Domainesia, minta cara pasang ke Vercel. Vercel minta A `@` → `216.198.79.1` + CNAME `www` → `56aeceec0233f8e1.vercel-dns-017.com` + redirect apex→www (308).
+- **Dikerjain:** panduan 2 sisi (Vercel Settings→Domains Add `wikendo.id` + `www.wikendo.id` Production + ☑️ redirect apex→www; Domainesia DNS Management A + CNAME, nameserver default). Agesta pasang sendiri, lapor live.
+- **Files:** `docs/08-PROGRESS.md` (BOARD + LOG ini). Nol sentuh `app/` (DNS-only, no deploy).
+- **Verifikasi:** `dig` A `216.198.79.1` ✅ CNAME live ✅ `https://wikendo.id` 308→`https://www.wikendo.id/` ✅ `https://www.wikendo.id` 200 + konten Wikendo/quota ✅ SSL valid ✅ — next: pastiin domain card Vercel `Valid Configuration`.
+
 ## 2026-10-08 — Fix 500 /login SSR DONE ✅ (router.currentRoute → useRoute + wire form submit)
 - **Kenapa:** Setelah typo placeholder fixed, prod: /register 200 tapi /login 500 `Cannot read properties of undefined (reading 'redirect')`. Rootcause: `router.currentRoute.query.redirect` — `currentRoute` undefined pas SSR di Vercel. Register lolos karena tak ada baris itu. Plus lint 3 error: `redirect` + `handleSubmit` nganggur (form belum `@submit`).
-- **Dikerjain:** login.vue → `useRoute()` SSR-safe + `router.push(redirect)` + `@submit="handleSubmit"` di login+register.
+- **Dikerjain:** login.vue → `useRoute()` SSR-safe + `router.push(redirect)` + `@submit="handleSubmit"` + prefix `_` biar match lint no-unused-vars; register.vue → `@submit="handleSubmit"` + prefix `_`.
 - **Files:** `app/pages/login.vue`, `app/pages/register.vue`, `docs/08-PROGRESS.md` (BOARD + LOG ini).
-- **Verifikasi:** test 125/125 (13 files) ✅ lint 0 error (5 warning img/input bawaan) ✅ build 11.9s ✅ secrets scan 0 ✅ — next: commit + push + cek prod /login /register 200.
+- **Verifikasi:** test 125/125 (13 files) ✅ lint 0 error (1 warning input bawaan) ✅ build 11.9s ✅ secrets scan 0 ✅ — next: commit + push + cek prod /login /register 200.
 
 ## 2026-10-08 — Fix 404 /login + /register DONE ✅ (typo placeholder + file hantu + header dupe)
+- **Kenapa:** Agesta lapor 404 buka /login di prod. ChatGPT diagnosa Root Directory/app-reserved — SALAH (bukti: /quiz dari folder sama = 200). Rootcause real: (1) typo `placeholder"•••"` (kurang `=`) di login.vue:24 + register.vue:24 → Vue compiler "Duplicate attribute" → build gagal → route tak ke-generate; (2) file hantu `app/login.vue` (untracked) konflik routing Nuxt 4; (3) `server/api/login.get.ts` dummy tak perlu; (4) header `v-else-if="!isLoggedIn"` duplikat kondisi (lint error) → bungkus div.
+- **Dikerjain:** patch `placeholder="•••"` di 2 files + bungkus komentar APA/KENAPA ke 1 comment block + `rm app/login.vue + server/api/login.get.ts` + header jadi `<div v-if="!isLoggedIn">` (Login+Register sejajar) + `v-else` 🔔.
+- **Files:** `app/pages/login.vue`, `app/pages/register.vue`, `app/app.vue`, `app/tests/header-layout.test.ts` (cek Login+Register+🔔), `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Verifikasi:** test 125/125 (13 files) ✅ lint 0 error (5 warning img/input bawaan) ✅ build 10.1s ✅ secrets scan 0 ✅ — next: commit + push + cek prod /login /register 200.
+
+## 2026-10-08 — Design L1+R1 DONE ✅ (hero strip, 3 field, checkbox, footer mini)
+- **Kenapa:** Agesta feedback: design halaman login tidak sama dengan L1 di file revamp-options-v9.html; design register tidak sama dengan R1. Struktur sekarang berbeda: login pakai h2 "Selamat Datang" tanpa hero strip + quota; register pakai 2 field cuma email+password tanpa nama/checkbox/footer.
+- **Dikerjain:** login.vue → hero ink #0C0A09 + ember #EA580C strip + lime #A3E635 CTA + info quota "QUOTA HABIS • reset 00.00 0 • 0 Login gratis → buka 2 + 5"; register.vue → hero rose #E11D48 + ink #0C0A09 + field 3 (Nama/Email/Password) + checkbox Syarat & Privasi + footer mini "© 2026 Wikendo MVP" + CTA ink + login link nuarkan. Semua 1:1 kayak design board v9 (L1-L10 + R1-R10) tapi still compatible Nuxt 4 + TDD.
+- **Files:** `app/pages/login.vue`, `app/pages/register.vue`, `docs/08-PROGRESS.md` (BOARD + LOG ini).
+- **Verifikasi:** test 125/125 ✅ lint 0 error ✅ build 11.9s ✅ secrets scan 0 ✅ cek prod: /login 200 ✅ /register 200 ✅ — next: commit + push + kirim PROGRESS.
+
+## 2026-10-09 — Entrypoint Mall M1+M3 DONE ✅ (lock Agesta, Addendum 19)
 - **Kenapa:** Agesta lapor 404 buka /login di prod. ChatGPT diagnosa Root Directory/app-reserved — SALAH (bukti: /quiz dari folder sama = 200). Rootcause real: (1) typo `placeholder"•••"` (kurang `=`) di login.vue:24 + register.vue:24 → Vue compiler "Duplicate attribute" → build gagal → route tak ke-generate; (2) file hantu `app/login.vue` (untracked) konflik routing Nuxt 4; (3) `server/api/login.get.ts` dummy tak perlu; (4) header `v-else-if="!isLoggedIn"` duplikat kondisi (lint error) → bungkus div.
 - **Dikerjain:** patch `placeholder="•••"` di 2 files + bungkus komentar APA/KENAPA ke 1 comment block + `rm app/login.vue + server/api/login.get.ts` + header jadi `<div v-if="!isLoggedIn">` (Login+Register sejajar) + `v-else` 🔔.
 - **Files:** `app/pages/login.vue`, `app/pages/register.vue`, `app/app.vue`, `app/tests/header-layout.test.ts` (cek Login+Register+🔔), `docs/08-PROGRESS.md` (BOARD + LOG ini).
