@@ -17,6 +17,7 @@
 
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Claude Startup Program SUBMITTED ✅ 9 Okt: apply dari Console Organization `Wikendo` pakai `founder@wikendo.id` (Company `Wikendo`, web `https://www.wikendo.id`, Founder, Indonesia, founded Oct 2026, Bootstrapped, AI spend kecil-jujur, 2 esai pendek live+quota+direct-API-next) — status "Thanks for submitting", keputusan ≤72 jam — next: pantau email + siapin pilot direct API + traction 50-100 quiz
 - [x] Email domain wikendo.id DONE ✅ 9 Okt: NS pindah Domainesia → Cloudflare (`ali` + `leonard`) + DNS `@ A 216.198.79.1` + `www CNAME Vercel` tetap live 200 + inbound Cloudflare Routing (`founder@` + `contact@` → Gmail, Active, test masuk ✅) + DMARC `p=none` ✅ MX route1/2/3 ✅ SPF Cloudflare ✅ + outbound Brevo (`wikendo.id` Authenticated, SMTP `smtp-relay.brevo.com:587` key `gmail-send-as` 1yr, Gmail Send-As `founder@` + `contact@` verified, test kirim ✅) — next: Console account + draft esai Claude Startup Program
 - [x] Fix banner /login 1:1 L1 EMBER HERO LIVE ✅ 9 Okt (`4960b66`): strip ember #EA580C 4px + radius 12px + angka #D9F99D 17px + font 10px kiri (token SAMA dgn `getHomeHeroMeta()` index) — TDD: login-revamp 14/14 ✅ full 139/139 ✅ lint 0 ✅ build 11.2s ✅ prod `/ /login /register /quiz` 200 + marker 18/18 (EA580C:1 D9F99D:1 border-left:1 radius12:1, rounded-3xl:0 FBBF24:0 text-3xl:0) ✅
 - [x] Revamp /login 100% screenshot DONE ✅ 9 Okt: slicing 1:1 image (banner hitam quota real via GET /api/quota + fallback 0 • 0 + angka oranye/lime + Google putih pill + Email + Password•Lupa? underline + Masuk → hitam + pill 10 detik + Daftar /register, bg #F2F2F2, tanpa header lokal) + fitur nyambung (signInWithPassword ?redirect=, signInWithOAuth google, resetPasswordForEmail, error inline) + `utils/supabase.ts` browser client (anon key) ganti import hantu `@/supabase/client` + fix `register.vue` invalid (tambah `<template>`, ganti import hantu, bungkus try/finally) — TDD: login-revamp.test.ts RED 8 gagal → GREEN 11/11, full 136/136 (14 files) ✅ lint 0 error (5 warning void) ✅ build 10.7s ✅ — next: push + deploy + audit prod 1:1
@@ -90,6 +91,11 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-09 — Claude Startup Program SUBMITTED ✅ (apply dari Org Wikendo, nunggu ≤72 jam)
+- **Kenapa:** syarat email domain + Console Org company udah beres semua, momentum apply pas ekspansi — gratis, gagal pun bisa re-apply dengan traction lebih berat.
+- **Dikerjain:** onboarding Console (Organization, bukan Individual) → top-up $100 di-Skip → form program: Company `Wikendo`, `Founder`, web `https://www.wikendo.id`, Indonesia, founded Oct 2026 (patokan brainstorming weekend-planner 4 Okt), Bootstrapped no-outside-funding, AI spend kecil-jujur, 2 esai pendek (live+quota+Claude-central+direct-next, support credits+limits+office-hours) — status layar "Thanks for submitting".
+- **Verifikasi:** screenshot konfirmasi review ≤72 jam ✅ — next: pantau inbox `founder@wikendo.id` (via forward) + siapin pilot 1 endpoint direct API + kumpulin 50-100 quiz completion.
 
 ## 2026-10-09 — Email domain wikendo.id DONE ✅ (inbound Cloudflare + outbound Brevo, $0)
 - **Kenapa:** syarat daftar Claude Startup Program = email company domain sama kayak website + dicek domain match. Tanpa ini aplikasi mental.
