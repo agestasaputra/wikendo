@@ -73,6 +73,33 @@ describe('login revamp 100% image — struktur + teks persis', () => {
   })
 })
 
+describe('login revamp — banner 1:1 L1 EMBER HERO (token lock v9)', () => {
+  it('banner ink #0C0A09 + strip kiri ember #EA580C + radius 12px (bukan rounded-3xl)', () => {
+    const s = readLogin()
+    expect(s).toContain('#0C0A09')
+    expect(s).toContain('#EA580C')
+    expect(s).toContain('border-left')
+    expect(s).toContain('border-radius:12px')
+    expect(s).not.toContain('rounded-3xl')
+  })
+
+  it('angka sisa warna lime-muda L1 #D9F99D 17px (bukan #FBBF24 / text-3xl)', () => {
+    const s = readLogin()
+    expect(s).toContain('#D9F99D')
+    expect(s).toContain('17px')
+    expect(s).not.toContain('#FBBF24')
+    expect(s).not.toContain('text-3xl')
+  })
+
+  it('copy hero 10px extrabold (QUOTA HABIS • reset 00.00 / Login gratis → buka 2 + 5)', () => {
+    const s = readLogin()
+    expect(s).toContain('QUOTA HABIS')
+    expect(s).toContain('reset 00.00')
+    expect(s).toContain('Login gratis')
+    expect(s).toContain('buka 2 + 5')
+  })
+})
+
 describe('login revamp — wiring fitur app (bukan mock)', () => {
   it('login email+password via Supabase signInWithPassword + hormati ?redirect=', () => {
     const s = readLogin()

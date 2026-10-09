@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audit Banner — L1 vs Live (9 Okt 2026)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:#e7e5e4;color:#18181b;padding:16px 12px 120px}
+.wrap{max-width:900px;margin:0 auto}
+h1{font-size:20px;font-weight:800}
+.sub{font-size:13px;color:#52525b;margin-top:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-top:12px}
+.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.08);border:3px solid transparent}
+.card.win{border-color:#EA580C}
+.oid{font-size:22px;font-weight:800;background:#0C0A09;color:#fff;text-align:center;padding:8px}
+.oid small{display:block;font-size:11px;font-weight:700;color:#A3E635}
+.phone{width:300px;margin:12px auto;border:2px solid #d4d4d8;border-radius:24px;overflow:hidden;background:#F2F2F2}
+.prow{padding:8px 10px;min-height:200px}
+/* L1 ASLI — token lock v9 */
+.hero-l1{background:#0C0A09;border-left:4px solid #EA580C;border-radius:12px;color:#fff;padding:8px;font-size:10px;font-weight:800}
+.hero-l1 .big{color:#D9F99D;font-size:17px;margin:2px 0}
+/* LIVE sekarang — fb23da8 (ikut screenshot) */
+.hero-live{background:#0C0A09;border-radius:24px;color:#fff;padding:20px;font-size:11px;font-weight:800;text-align:center}
+.hero-live .big{font-size:30px;font-weight:800;margin:4px 0}
+.hero-live .big .y{color:#FBBF24}
+.hero-live .cta{color:#A3E635;font-size:12px;margin-top:4px}
+.meta{padding:10px 12px;font-size:12px}
+.meta .row{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.pill{font-size:10.5px;font-weight:800;border-radius:999px;padding:2px 10px;background:#f4f4f5}
+.pill.bad{background:#fecaca}
+.pill.good{background:#ecfccb}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-top:12px;background:#fff;border-radius:12px;overflow:hidden}
+th,td{border:1px solid #e4e4e7;padding:8px;text-align:left;vertical-align:top}
+th{background:#0C0A09;color:#fff}
+td.diff{background:#fef3c7;font-weight:700}
+.banner{background:#0C0A09;color:#fff;border-radius:16px;padding:14px;margin-top:12px;font-size:13px}
+.banner b{color:#A3E635}
+.pickbar{position:fixed;bottom:0;left:0;right:0;background:#0C0A09;color:#fff;padding:10px 12px;display:flex;gap:8px;align-items:center;z-index:50;font-size:13px}
+.pickbar button{background:#A3E635;border:none;border-radius:8px;padding:8px 14px;font-weight:800;cursor:pointer}
+.sw{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:4px;border:1px solid #d4d4d8}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>🔍 Audit Banner — L1 vs Live</h1>
+<p class="sub">L1 = baseline LOCKED dari <b>design/revamp-options-v9.html</b> (baris 29+31+96). Live = <b>app/pages/login.vue @ fb23da8</b> + prod <b>www.wikendo.id/login</b> (cek 9 Okt 2026). Produksi belum disentuh di ronde ini.</p>
+
+<div class="grid">
+<div class="card win">
+<div class="oid">A — L1 ASLI<small>LOGIN • EMBER HERO ★ • LOCKED</small></div>
+<div class="phone"><div class="prow">
+<div class="hero-l1">QUOTA HABIS • reset 00.00<div class="big">0 • 0</div>Login gratis → buka 2 + 5</div>
+</div></div>
+<div class="meta">
+<div class="row"><span class="pill good">ink #0C0A09</span><span class="pill good">strip ember #EA580C 4px</span><span class="pill good">radius 12px</span><span class="pill good">angka #D9F99D 17px</span><span class="pill good">padding 8px / font 10px</span></div>
+<p>Sumber: v9 baris 29 (.hero) + baris 31 (.big) + baris 96 (markup).</p>
+</div>
+</div>
+
+<div class="card">
+<div class="oid">B — LIVE SEKARANG<small>fb23da8 • ikut screenshot • BUKAN L1</small></div>
+<div class="phone"><div class="prow">
+<div class="hero-live">QUOTA HABIS • reset 00.00<div class="big"><span class="y">0</span> • 0</div><div class="cta">Login gratis → buka 2 + 5</div></div>
+</div></div>
+<div class="meta">
+<div class="row"><span class="pill">ink #0C0A09 ✅ sama</span><span class="pill bad">strip HILANG</span><span class="pill bad">rounded-3xl 24px</span><span class="pill bad">angka #FBBF24 30px</span><span class="pill bad">padding 20px / center</span></div>
+<p>Sumber: login.vue baris 8–13 + prod grep: rounded-3xl:1, FBBF24:1, EA580C:0, D9F99D:0.</p>
+</div>
+</div>
+</div>
+
+<table>
+<tr><th>Item</th><th>A — L1 asli</th><th>B — Live sekarang</th><th>Status</th></tr>
+<tr><td>1. Strip kiri</td><td>4px solid <b>#EA580C</b> (ember)</td><td>tidak ada (full hitam)</td><td class="diff">❌ BEDA — paling kasat mata</td></tr>
+<tr><td>2. Radius</td><td><b>12px</b> (.hero v9:29)</td><td><b>rounded-3xl ≈24px</b> (login.vue:8, prod:1)</td><td class="diff">❌ BEDA — live 2× lebih bulat</td></tr>
+<tr><td>3. Warna angka</td><td><b>#D9F99D</b> lime-muda 17px (v9:31)</td><td><b>#FBBF24</b> kuning-amber ~30px (text-3xl, prod:1)</td><td class="diff">❌ BEDA — sumber fb23da8</td></tr>
+<tr><td>4. Ukuran/padding</td><td>padding 8px, font 10px, big 17px</td><td>padding 20px (p-5), font 11–12px, big 30px</td><td class="diff">❌ BEDA — live lebih besar</td></tr>
+<tr><td>5. Alignment</td><td>kiri (default .hero, tanpa center)</td><td>tengah (text-center)</td><td class="diff">⚠️ BEDA kecil</td></tr>
+<tr><td>6. Copy teks</td><td>QUOTA HABIS • reset 00.00 / 0 • 0 / Login gratis → buka 2 + 5</td><td>sama persis (prod 12/12 marker ✅)</td><td>✅ SAMA — teks aman</td></tr>
+</table>
+
+<div class="card" style="margin-top:12px"><div class="meta">
+<h2 style="font-size:14px">🧾 Kenapa bisa beda? (trace sumber, bukan tebakan)</h2>
+<ul style="padding-left:18px;font-size:12.5px;line-height:1.6;margin-top:6px">
+<li>Commit <b>fb23da8</b> yang ngenalin <b>FBBF24 + rounded-3xl</b> (git log -S, 9 Okt) — ronde itu slicing ikut <b>screenshot</b>, bukan L1. Screenshot kiriman lu emang banner-nya bulet gede + angka kuning, jadi kebawa.</li>
+<li>L1 lock-nya di <b>design/revamp-options-v9.html</b>: <span class="sw" style="background:#0C0A09"></span>ink #0C0A09 <span class="sw" style="background:#EA580C"></span>ember #EA580C <span class="sw" style="background:#D9F99D"></span>lime-muda #D9F99D — tidak pernah diubah, jadi L1-nya yang bener.</li>
+<li>Test baru <b>login-revamp.test.ts</b> (27 baris, belum di-push) sekarang RED by design — assert strip ember + radius 12 + #D9F99D. Fix = bikin GREEN.</li>
+</ul>
+</div></div>
+
+<div class="banner">✅ Rekomendasi: <b>balikin banner ke L1 1:1</b> (strip ember + radius 12 + angka #D9F99D 17px + padding 8px). Teks/copy + fitur (quota real, Google, Lupa?, redirect) tetap — cuma kulit banner yang dibenerin. Effort S ±1 jam, risiko rendah.</div>
+</div>
+
+<div class="pickbar"><code>Balas: Gas fix L1</code><button onclick="navigator.clipboard&&navigator.clipboard.writeText('Gas fix L1')">📋</button></div>
+</body>
+</html>

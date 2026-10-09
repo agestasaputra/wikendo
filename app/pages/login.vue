@@ -1,16 +1,16 @@
 <!-- pages/login.vue → GET /login (Auth page, Addendum 09 v1.3 APPROVED).
-  APA: slicing 100% screenshot 9 Okt 2026 — banner hitam quota + Google + Email + Password•Lupa? + Masuk + pill + Daftar.
+  APA: slicing 100% L1 EMBER HERO — banner hitam quota + Google + Email + Password•Lupa? + Masuk + pill + Daftar.
   KENAPA: user anon quota habis klik Login di topbar global → harus lihat angka real + bisa masuk via Supabase.
+  Banner 1:1 L1 lock v9 (ink #0C0A09 + strip ember #EA580C + angka #D9F99D 17px + radius 12px + font 10px)
+  + referensi hero index.vue (getHomeHeroMeta — 1 sumber token, bukan hardcode beda).
   Contoh: anon habis lihat 0 • 0 → Lanjut dengan Google / isi Email+Password → Masuk → balik ke ?redirect=. -->
 <template>
   <div class="max-w-md mx-auto px-4 pb-10 min-h-screen" style="background:#F2F2F2;font-family:'Plus Jakarta Sans',system-ui,sans-serif">
-    <!-- 1. Banner hitam quota — teks persis image -->
-    <div class="rounded-3xl p-5 text-center text-white mt-4" style="background:#0C0A09">
-      <p class="text-[11px] font-extrabold tracking-wide">QUOTA HABIS • reset 00.00</p>
-      <p class="text-3xl font-extrabold leading-tight mt-1">
-        <span style="color:#FBBF24">{{ tempatSisa }}</span><span class="text-white"> • </span><span class="text-white">{{ makanSisa }}</span>
-      </p>
-      <p class="text-[12px] font-extrabold mt-1" style="color:#A3E635">Login gratis → buka 2 + 5</p>
+    <!-- 1. Banner hitam quota — 1:1 L1 EMBER HERO (strip ember + radius 12 + angka lime-muda) -->
+    <div class="p-2 text-white mt-4" style="background:#0C0A09;border-left:4px solid #EA580C;border-radius:12px;font-size:10px;font-weight:800">
+      QUOTA HABIS • reset 00.00
+      <div style="color:#D9F99D;font-size:17px;font-weight:800;margin:2px 0">{{ tempatSisa }} • {{ makanSisa }}</div>
+      Login gratis → buka 2 + 5
       <!-- fallback literal ikut image 0 • 0 -->
       <span class="hidden">0 • 0</span>
     </div>

@@ -89,6 +89,11 @@
 
 ## 🧾 LOG (newest first)
 
+## 2026-10-09 — Fix banner /login 1:1 L1 EMBER HERO DONE ✅ (strip ember + radius 12 + angka lime-muda)
+- **Kenapa:** Agesta lapor "design banner tidak mirip L1" + tunjuk hero index.vue sebagai referensi. Audit trace: token L1 lock v9 (ink #0C0A09 + strip ember #EA580C 4px + angka #D9F99D 17px + radius 12px + font 10px) = SAMA persis dengan helper `getHomeHeroMeta()` quiz-logic.ts:288-302 yang dipakai index.vue — commit `fb23da8` yang nyimpang (ikut screenshot: rounded-3xl + #FBBF24 30px + strip hilang).
+- **Dikerjain:** `app/pages/login.vue` banner rewrite 1:1 L1 (border-left 4px #EA580C, radius 12px, angka #D9F99D 17px, font 10px extrabold, alignment kiri) — teks/copy + fitur (quota real, Google, Lupa?, redirect) tetap. Test L1 (27 baris, RED 2 gagal by design) → GREEN.
+- **Verifikasi:** login-revamp 14/14 ✅ full 139/139 (14 files) ✅ lint 0 error ✅ build 11.2s ✅ — next: commit + push + deploy Vercel + audit prod 1:1 L1 + kirim visual.
+
 ## 2026-10-09 — Revamp /login 100% screenshot DONE ✅ (slicing 1:1 + fitur nyambung)
 - **Kenapa:** Agesta kirim screenshot + perintah "revamp 100% + slicing persis + sesuaikan fitur". Bedah vision: 9 teks persis (banner hitam quota, Google, Email, Password•Lupa?, Masuk →, pill 10 detik, Daftar).
 - **Dikerjain:** `app/tests/login-revamp.test.ts` (baru, RED 8 gagal by design) → `app/pages/login.vue` rewrite 1:1 (bg #F2F2F2, tanpa header lokal, quota real GET /api/quota fallback 0 • 0, Google OAuth, resetPasswordForEmail, error inline) + `app/utils/supabase.ts` (baru, browser client anon key — import lama `@/supabase/client` file-nya TIDAK ADA) + `app/pages/register.vue` fix invalid (tambah `<template>`, ganti import hantu, querySelector email/password/nama).
