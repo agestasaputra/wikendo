@@ -17,6 +17,7 @@
 
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Email domain wikendo.id DONE ✅ 9 Okt: NS pindah Domainesia → Cloudflare (`ali` + `leonard`) + DNS `@ A 216.198.79.1` + `www CNAME Vercel` tetap live 200 + inbound Cloudflare Routing (`founder@` + `contact@` → Gmail, Active, test masuk ✅) + DMARC `p=none` ✅ MX route1/2/3 ✅ SPF Cloudflare ✅ + outbound Brevo (`wikendo.id` Authenticated, SMTP `smtp-relay.brevo.com:587` key `gmail-send-as` 1yr, Gmail Send-As `founder@` + `contact@` verified, test kirim ✅) — next: Console account + draft esai Claude Startup Program
 - [x] Fix banner /login 1:1 L1 EMBER HERO LIVE ✅ 9 Okt (`4960b66`): strip ember #EA580C 4px + radius 12px + angka #D9F99D 17px + font 10px kiri (token SAMA dgn `getHomeHeroMeta()` index) — TDD: login-revamp 14/14 ✅ full 139/139 ✅ lint 0 ✅ build 11.2s ✅ prod `/ /login /register /quiz` 200 + marker 18/18 (EA580C:1 D9F99D:1 border-left:1 radius12:1, rounded-3xl:0 FBBF24:0 text-3xl:0) ✅
 - [x] Revamp /login 100% screenshot DONE ✅ 9 Okt: slicing 1:1 image (banner hitam quota real via GET /api/quota + fallback 0 • 0 + angka oranye/lime + Google putih pill + Email + Password•Lupa? underline + Masuk → hitam + pill 10 detik + Daftar /register, bg #F2F2F2, tanpa header lokal) + fitur nyambung (signInWithPassword ?redirect=, signInWithOAuth google, resetPasswordForEmail, error inline) + `utils/supabase.ts` browser client (anon key) ganti import hantu `@/supabase/client` + fix `register.vue` invalid (tambah `<template>`, ganti import hantu, bungkus try/finally) — TDD: login-revamp.test.ts RED 8 gagal → GREEN 11/11, full 136/136 (14 files) ✅ lint 0 error (5 warning void) ✅ build 10.7s ✅ — next: push + deploy + audit prod 1:1
 - [x] Custom domain wikendo.id LIVE DONE ✅ 9 Okt: Vercel Domains Add `wikendo.id` + `www.wikendo.id` (Production + ☑️ redirect apex→www 308) + Domainesia DNS A `@`→`216.198.79.1` + CNAME `www`→Vercel — verify: `dig` ✅ `https://wikendo.id` 308 ✅ `https://www.wikendo.id` 200 + konten Wikendo ✅ SSL valid ✅ (DNS-only, nol sentuh `app/`)
@@ -89,6 +90,11 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-09 — Email domain wikendo.id DONE ✅ (inbound Cloudflare + outbound Brevo, $0)
+- **Kenapa:** syarat daftar Claude Startup Program = email company domain sama kayak website + dicek domain match. Tanpa ini aplikasi mental.
+- **Dikerjain:** NS Domainesia → Cloudflare (`ali` + `leonard`), DNS `@ A 216.198.79.1` + `www CNAME Vercel` dipertahankan. Inbound: Email Routing Onboard + 2 rule Active (`founder@` + `contact@` → Gmail) + DMARC `p=none`. Outbound: Brevo `wikendo.id` Authenticated + SMTP key `gmail-send-as` (1yr, `smtp-relay.brevo.com:587`) + Gmail Send-As 2 identitas.
+- **Verifikasi:** `dig` MX route1/2/3 ✅ SPF ✅ DMARC ✅ NS Cloudflare ✅ web `/ /login` 200 ✅ test inbound 2 masuk ✅ test outbound kirim ✅ — next: Console account + draft 2 esai Inggris.
 
 ## 2026-10-09 — Fix banner /login 1:1 L1 EMBER HERO DONE ✅ (strip ember + radius 12 + angka lime-muda)
 - **Kenapa:** Agesta lapor "design banner tidak mirip L1" + tunjuk hero index.vue sebagai referensi. Audit trace: token L1 lock v9 (ink #0C0A09 + strip ember #EA580C 4px + angka #D9F99D 17px + radius 12px + font 10px) = SAMA persis dengan helper `getHomeHeroMeta()` quiz-logic.ts:288-302 yang dipakai index.vue — commit `fb23da8` yang nyimpang (ikut screenshot: rounded-3xl + #FBBF24 30px + strip hilang).
