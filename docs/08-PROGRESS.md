@@ -17,6 +17,7 @@
 
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Revamp /login 100% screenshot DONE ✅ 9 Okt: slicing 1:1 image (banner hitam quota real via GET /api/quota + fallback 0 • 0 + angka oranye/lime + Google putih pill + Email + Password•Lupa? underline + Masuk → hitam + pill 10 detik + Daftar /register, bg #F2F2F2, tanpa header lokal) + fitur nyambung (signInWithPassword ?redirect=, signInWithOAuth google, resetPasswordForEmail, error inline) + `utils/supabase.ts` browser client (anon key) ganti import hantu `@/supabase/client` + fix `register.vue` invalid (tambah `<template>`, ganti import hantu, bungkus try/finally) — TDD: login-revamp.test.ts RED 8 gagal → GREEN 11/11, full 136/136 (14 files) ✅ lint 0 error (5 warning void) ✅ build 10.7s ✅ — next: push + deploy + audit prod 1:1
 - [x] Custom domain wikendo.id LIVE DONE ✅ 9 Okt: Vercel Domains Add `wikendo.id` + `www.wikendo.id` (Production + ☑️ redirect apex→www 308) + Domainesia DNS A `@`→`216.198.79.1` + CNAME `www`→Vercel — verify: `dig` ✅ `https://wikendo.id` 308 ✅ `https://www.wikendo.id` 200 + konten Wikendo ✅ SSL valid ✅ (DNS-only, nol sentuh `app/`)
 - [x] Entrypoint Mall M1+M3 DONE ✅ 9 Okt (`77de277`): M1 ikon Event→Mall 🏬 link /mall + M3 kartu Mall Terdekat (5 mall • 200 tenant → tanpa login) — TDD: mall-entry.test.ts RED 3 gagal → GREEN 3/3, full 125/125 (13 files) ✅ lint 0 error ✅ build 9.01s ✅ prod `/ /mall` 200 + marker (2× /mall link, Mall Terdekat TRUE, Event GONE) ✅ + Addendum `docs/19-PRD-Addendum-Mall-Entry.md` v1.0 LOCKED
 - [x] Header rapi DONE ✅ 9 Okt (`a79f380`): lebar disamain max-w-md (= content) + nav Tempat/Makan/Mall dihapus + bell 🔔 pindah dari Home ke kanan header global — TDD: header-layout.test.ts RED 4 gagal → GREEN 4/4, full 122/122 (12 files) ✅ lint 0 error ✅ build 9.28s ✅ prod `/ /quiz /mall` 200 + marker (bell TRUE, no-quiz-nav TRUE) ✅
@@ -87,6 +88,11 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-09 — Revamp /login 100% screenshot DONE ✅ (slicing 1:1 + fitur nyambung)
+- **Kenapa:** Agesta kirim screenshot + perintah "revamp 100% + slicing persis + sesuaikan fitur". Bedah vision: 9 teks persis (banner hitam quota, Google, Email, Password•Lupa?, Masuk →, pill 10 detik, Daftar).
+- **Dikerjain:** `app/tests/login-revamp.test.ts` (baru, RED 8 gagal by design) → `app/pages/login.vue` rewrite 1:1 (bg #F2F2F2, tanpa header lokal, quota real GET /api/quota fallback 0 • 0, Google OAuth, resetPasswordForEmail, error inline) + `app/utils/supabase.ts` (baru, browser client anon key — import lama `@/supabase/client` file-nya TIDAK ADA) + `app/pages/register.vue` fix invalid (tambah `<template>`, ganti import hantu, querySelector email/password/nama).
+- **Verifikasi:** test RED 8 gagal → GREEN 11/11 ✅ full 136/136 (14 files) ✅ lint 0 error (5 warning void) ✅ build 10.7s ✅ — next: commit + push + deploy Vercel + audit prod 1:1 vs screenshot.
 
 ## 2026-10-09 — Custom domain wikendo.id LIVE DONE ✅ (Vercel + Domainesia)
 - **Kenapa:** Agesta beli `wikendo.id` di Domainesia, minta cara pasang ke Vercel. Vercel minta A `@` → `216.198.79.1` + CNAME `www` → `56aeceec0233f8e1.vercel-dns-017.com` + redirect apex→www (308).

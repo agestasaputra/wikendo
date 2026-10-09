@@ -3,6 +3,7 @@
   field 3 (Nama/Email/Password), checkbox Syarat & Privasi,
   CTA ink, footer mini 10 detik, font Plus Jakarta Sans,
   mobile max-w-md, base #fffdf9, KENAPA: User klik button Register di header → harus bisa akses /register tanpa 404. -->
+<template>
 <div class="max-w-md mx-auto px-4 pb-10" style="background:#fffdf9;">
   <header class="bg-white sticky top-0 z-40 shadow-sm max-w-md mx-auto px-4 py-3 flex justify-between items-center">
     <a href="/" class="flex items-center" aria-label="Wikendo — beranda">
@@ -53,30 +54,31 @@
     10 detik • quota reset tiap hari • gratis
   </footer>
 </div>
+</template>
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { supabase } from '@/supabase/client' // <-- add this
+import { supabaseBrowser } from '~/utils/supabase'
 
 const router = useRouter()
 
-// TODO: integrasi Supabase auth signUp nanti
-// const { data, error } = await supabase.auth.signUp({ email, password })
-
-// Mock register — redirect ke home setelah submit
-const _handleSubmit = async (e: Event) => {
+// Register via Supabase signUp — redirect ke home setelah submit.
+// KENAPA querySelector (bukan v-model): form ini belum di-revamp; wiring minimal
+// biar build hijau + submit jalan. Revamp register 100% nyusul slice berikutnya.
+async function handleSubmit(e: Event) {
   e.preventDefault()
-  // Real Supabase register — ganti mock di bawah baris ini kalau udah punya Supabase config
-  const { data, error } = await supabase.auth.signUp({
+  const email = (document.querySelector('input[type="email"]') as HTMLInputElement)?.value ?? ''
+  const password = (document.querySelector('input[type="password"]') as HTMLInputElement)?.value ?? ''
+  const nama = (document.querySelector('input[type="text"]') as HTMLInputElement)?.value ?? ''
+  const sb = supabaseBrowser()
+  const { error } = await sb.auth.signUp({
     email, password,
-    options: { data: { nama: (document.querySelector('input[type="text"]') as HTMLInputElement).value } }
+    options: { data: { nama } }
   })
   if (error) {
-    // TODO: tampilkan error di UI
     alert(error.message)
     return
   }
-  // Mock auth success — redirect ke home
   router.push('/')
 }
 </script>
