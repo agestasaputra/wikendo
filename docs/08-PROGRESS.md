@@ -104,7 +104,7 @@
 ## 2026-10-10 — Opsi B magic-link DONE ✅ (`7d8a8fa`, lock Agesta "Gas B")
 - **Kenapa:** best practice verifikasi — signUp langsung masuk = bot sedot quota 2•5 + typo email = reset gagal.
 - **Dikerjain:** `app/pages/register.vue` (signUp + `emailRedirectTo → /`, sukses → `/check-email?email=`) + `app/pages/check-email.vue` BARU (banner HAMPIR SELESAI 1:1 + kartu Cek email + Kirim ulang via resend signup + pesan inline + balik login) + `app/tests/register-verify.test.ts` BARU 7 assert + selarasin `register-revamp.test.ts` + gambar opsi `design/register-verify-options-2026-10-10.png`.
-- **Verifikasi:** verify RED 6 gagal → GREEN 7/7 ✅ revamp 14/14 ✅ full 160/160 (16 files) ✅ lint 0 error ✅ build 9.94s ✅ prod `/ /register /check-email /login` 200 ✅ marker check-email 7/7 ✅ bundle JS prod nyangkut check-email + emailRedirectTo ✅ re-verify 10 Okt malam: prod 4/4 200 + verify+revamp 21/21 ✅.
+- **Verifikasi:** verify RED 6 gagal → GREEN 7/7 ✅ revamp 14/14 ✅ full 160/160 (16 files) ✅ lint 0 error ✅ build 9.94s ✅ prod `/ /register /check-email /login` 200 ✅ marker check-email 7/7 ✅ bundle JS prod nyangkut check-email + emailRedirectTo ✅ re-verify 10 Okt malam: prod 4/4 200 + verify+revamp 21/21 ✅ + pre-E2E re-run: full 160/160 ✅ lint 0 error (5 warning) ✅ build 9.37s ✅ git clean (code = prod `7d8a8fa`) ✅.
 - **Next:** setting server 1x — Supabase Dashboard → Authentication → Sign In/Up → ON Confirm email + SMTP Brevo (`smtp-relay.brevo.com:587`) biar link beneran kekirim; test daftar 1 email asli.
 
 ## 2026-10-10 — Takeout field Nama /register DONE ✅ (`25de1d2`, user isi Email+Password saja)
