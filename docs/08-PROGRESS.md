@@ -17,6 +17,7 @@
 
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Toggle 👁️ + meter bawah DONE ✅ 11 Okt: toggle intip password login+register (👁️/🙈 type=button + aria-label, input type dinamis) + meter register pindah bawah field (bar full-width + label Lemah/Sedang/Kuat/Sangat kuat + warna merah→hijau, v-if password.length), login tanpa meter (recall ≠ create) — TDD: password-toggle RED 7 gagal → GREEN 11/11 ✅ revamp+login+button 47/47 ✅ full 179/179 (18 files) ✅ lint 0 error ✅ build 9.38s ✅ SCAN-CLEAN ✅ — next: push + deploy + E2E email pribadi
 - [x] Spinner + disable semua tombol API DONE ✅ 10 Okt: anti double-klik (register Daftar+Google, login Masuk+Google+Lupa?, check-email Kirim ulang spinner SVG animate-spin + :disabled + early-return guard, result/result-makan/mall Coba lagi + chip filter :disabled="pending") — TDD: button-loading RED 8 gagal → GREEN 8/8 ✅ full 168/168 (17 files) ✅ lint 0 error (5 warning kosmetik) ✅ build 9.83s ✅ SCAN-CLEAN ✅ — next: push + deploy + E2E email pribadi
 - [x] Opsi B magic-link DONE ✅ 10 Okt (`7d8a8fa`): signUp + `emailRedirectTo → /` + sukses → `/check-email?email=` (bukan langsung HOME) + halaman `check-email.vue` 1:1 register (banner HAMPIR SELESAI + kartu Cek email + Kirim ulang via resend signup + pesan inline + fallback daftar-ulang) + Google OAuth tetap langsung — TDD: verify RED 6 gagal → GREEN 7/7 ✅ revamp selaras 14/14 ✅ full 160/160 (16 files) ✅ lint 0 error ✅ build 9.94s ✅ prod `/ /register /check-email /login` 200 ✅ marker check-email 7/7 ✅ wiring bundle JS prod (check-email + emailRedirectTo nyangkut) ✅
 - [x] Takeout field Nama /register DONE ✅ 10 Okt (`25de1d2`): form tinggal Email + Password (input 👤 dihapus, `nama` ref + user_metadata dibersihin) — test takeout RED 1 gagal → GREEN 14/14 ✅ full 153/153 ✅ lint 0 error ✅ build ~9.6s ✅ prod `/register /login /` 200 ✅ audit prod: Nama 0, Email 1, Password 1, Google 1, kuat? 1, Daftar→ 1 ✅
@@ -95,6 +96,13 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-11 — Toggle 👁️ + meter bawah DONE ✅ (request Agesta, pre-E2E UX)
+- **Kenapa:** user harus bisa cek typo password sebelum submit (turunin gagal login → beban reset email turun) + meter inline 5 kotak di dalem pill sesak & nggak informatif (tanpa label) → pindah bawah field jadi bar + label kata.
+- **Keputusan expert:** toggle di ujung kanan DALAM field (standar Android/iOS/Chrome, hemat tempat mobile, type=button anti-submit + aria-label a11y) + meter HANYA di register (create password), login cukup toggle (recall — meter malah bikin ragu).
+- **Dikerjain:** `app/tests/password-toggle.test.ts` BARU 11 assert (toggle state+type dinamis+aria di dua halaman, Lupa? login utuh, meter bawah register label+warna+v-if, login tanpa meter) + `app/pages/register.vue` (input `:type` dinamis + tombol 👁️/🙈 + bongkar 5 kotak inline → bar + `strengthLabel` Lemah/Sedang/Kuat/Sangat kuat + `strengthColor` merah→hijau + `v-if="password.length"`) + `app/pages/login.vue` (input `:type` dinamis + tombol 👁️/🙈 sebelum `•`, Lupa? utuh) + selarasin `register-revamp.test.ts` (assert meter bawah, bukan inline).
+- **Verifikasi:** password-toggle RED 7 gagal by design → GREEN 11/11 ✅ revamp+login+button 47/47 ✅ full 179/179 (18 files) ✅ lint 0 error (5 warning kosmetik) ✅ build 9.38s ✅ SCAN-CLEAN ✅.
+- **Next:** push + deploy Vercel + E2E email pribadi (`/register → /check-email?email= → klik link → HOME`).
 
 ## 2026-10-10 — Spinner + disable semua tombol API DONE ✅ (pre-E2E UX, anti double-klik)
 - **Kenapa:** request Agesta pre-E2E — semua tombol yang request API wajib ada indikator spinner + disabled saat loading agar UX bagus + cegah double-submit (double signUp = user ganda, double OAuth = popup ganda, double resend = spam, double chip = race reset list).

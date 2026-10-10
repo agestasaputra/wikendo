@@ -30,7 +30,8 @@
       </div>
       <div class="bg-white rounded-full flex items-center gap-2 px-4 py-3.5 shadow-sm">
         <span class="text-gray-400 text-base">🔒</span>
-        <input v-model="password" type="password" required placeholder="Password" class="flex-1 bg-transparent outline-none text-sm font-bold text-black placeholder:text-gray-400">
+        <input v-model="password" :type="showPassword ? 'text' : 'password'" required placeholder="Password" class="flex-1 bg-transparent outline-none text-sm font-bold text-black placeholder:text-gray-400">
+        <button type="button" :aria-label="showPassword ? 'Sembunyikan password' : 'Tampilkan password'" class="text-gray-400 text-base leading-none" @click="showPassword = !showPassword">{{ showPassword ? '🙈' : '👁️' }}</button>
         <span class="text-gray-300 text-sm">•</span>
         <button type="button" :disabled="loading || googleLoading || forgotLoading" class="text-sm font-bold text-black underline disabled:opacity-60 inline-flex items-center gap-1" @click="handleForgot"><svg v-if="forgotLoading" class="animate-spin w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="#0C0A09" stroke-opacity=".25" stroke-width="4"/><path d="M22 12a10 10 0 0 0-10-10" stroke="#0C0A09" stroke-width="4" stroke-linecap="round"/></svg>{{ forgotLoading ? 'Mengirim…' : 'Lupa?' }}</button>
       </div>
@@ -74,6 +75,7 @@ const redirect = (route.query.redirect as string) || '/'
 
 const email = ref('')
 const password = ref('')
+const showPassword = ref(false)
 const errorMsg = ref('')
 const loading = ref(false)
 const googleLoading = ref(false)

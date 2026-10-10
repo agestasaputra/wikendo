@@ -28,12 +28,16 @@
       </div>
       <div class="bg-white rounded-full flex items-center gap-2 px-4 py-3.5 shadow-sm">
         <span class="text-gray-400 text-base">🔒</span>
-        <input v-model="password" type="password" required placeholder="Password" class="flex-1 bg-transparent outline-none text-sm font-bold text-black placeholder:text-gray-400">
+        <input v-model="password" :type="showPassword ? 'text' : 'password'" required placeholder="Password" class="flex-1 bg-transparent outline-none text-sm font-bold text-black placeholder:text-gray-400">
         <span class="text-gray-300 text-sm">•</span>
-        <span class="flex gap-0.5" aria-hidden="true">
-          <span v-for="i in 5" :key="i" class="inline-block w-2 h-2 rounded-[2px]" :style="{ background: i <= strength ? '#4B5563' : '#E5E7EB' }"></span>
-        </span>
-        <span class="text-[11px] font-bold text-gray-400">kuat?</span>
+        <button type="button" :aria-label="showPassword ? 'Sembunyikan password' : 'Tampilkan password'" class="text-gray-400 text-base leading-none" @click="showPassword = !showPassword">{{ showPassword ? '🙈' : '👁️' }}</button>
+      </div>
+      <!-- Meter kekuatan di bawah field: bar + label kata, cuma muncul setelah user ngetik -->
+      <div v-if="password.length" class="px-4">
+        <div class="h-1.5 rounded-full overflow-hidden" style="background:#E5E7EB">
+          <div class="h-full rounded-full transition-all" :style="{ width: (strength * 20) + '%', background: strengthColor }"></div>
+        </div>
+        <p class="text-[11px] font-bold mt-1" :style="{ color: strengthColor }">Password {{ strengthLabel }}</p>
       </div>
       <div class="flex items-center gap-2 px-1">
         <input v-model="agree" type="checkbox" id="terms" required checked class="w-4 h-4 rounded border-gray-300">
@@ -58,12 +62,13 @@ const router = useRouter()
 
 const email = ref('')
 const password = ref('')
+const showPassword = ref(false)
 const agree = ref(true)
 const errorMsg = ref('')
 const loading = ref(false)
 const googleLoading = ref(false)
 
-// Meter kuat? 0-5 ikut panjang + variasi huruf/angka — visual ikut image (4/5 solid contoh).
+// Meter kuat? 0-5 ikut panjang + variasi huruf/angka — render bar + label kata di bawah field.
 const strength = computed(() => {
   const p = password.value
   let s = 0
@@ -73,6 +78,23 @@ const strength = computed(() => {
   if (/[A-Z]/.test(p) && /[a-z]/.test(p)) s += 1
   if (/\d/.test(p) && /[^A-Za-z0-9]/.test(p)) s += 1
   return Math.min(5, s)
+})
+
+// Label kata + warna skala merah→hijau biar user paham tanpa nebak arti kotak.
+const strengthLabel = computed(() => {
+  const s = strength.value
+  if (s <= 1) return 'Lemah'
+  if (s === 2) return 'Sedang'
+  if (s === 3) return 'Kuat'
+  if (s === 4) return 'Kuat'
+  return 'Sangat kuat'
+})
+const strengthColor = computed(() => {
+  const s = strength.value
+  if (s <= 1) return '#DC2626'
+  if (s === 2) return '#EA580C'
+  if (s === 3) return '#CA8A04'
+  return '#16A34A'
 })
 
 // Daftar email+password via Supabase signUp → /check-email (Opsi B magic-link, lock 10 Okt 2026).

@@ -55,9 +55,9 @@ describe('register revamp 100% image — struktur + teks persis', () => {
     expect(s).toContain('🔒')
   })
 
-  it('strength meter inline di password: • + kuat?', () => {
+  it('meter kekuatan di bawah field password: • pemisah + label kata (bukan inline sesak)', () => {
     const s = readRegister()
-    expect(s).toContain('kuat?')
+    expect(s).toContain('strengthLabel')
     expect(s).toContain('•')
   })
 
