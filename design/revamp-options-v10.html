@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wikendo /register — Opsi bedain tombol Google (v10)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; background: #fafaf9; color: #1c1917; padding: 20px 16px 120px; }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  .approve { background: #0C0A09; color: #fff; border-radius: 16px; padding: 16px 18px; margin-bottom: 18px; border-left: 4px solid #EA580C; }
+  .approve b { color: #D9F99D; }
+  h1 { font-size: 22px; margin-bottom: 6px; }
+  .sub { color: #78716c; font-size: 13px; margin-bottom: 14px; }
+  .diag { background: #fff; border: 1px solid #e7e5e4; border-radius: 16px; padding: 16px 18px; margin-bottom: 14px; }
+  .diag h2, .sec h2 { font-size: 15px; margin-bottom: 8px; }
+  .diag p, .diag li { font-size: 13px; line-height: 1.65; color: #44403c; }
+  .diag ul { padding-left: 18px; }
+  .tokens { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .tok { font-size: 11px; font-weight: 700; background: #f5f5f4; border: 1px solid #e7e5e4; border-radius: 999px; padding: 4px 10px; }
+  .tok i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: baseline; }
+  .filters { display: flex; gap: 8px; margin: 14px 0; flex-wrap: wrap; }
+  .filters button { border: 1.5px solid #d6d3d1; background: #fff; border-radius: 999px; padding: 7px 14px; font-size: 12px; font-weight: 800; cursor: pointer; }
+  .filters button.on { background: #0C0A09; color: #fff; border-color: #0C0A09; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .card { background: #fff; border: 1px solid #e7e5e4; border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; }
+  .card.base { opacity: .92; border-style: dashed; }
+  .card.rec { border: 2px solid #16A34A; }
+  .cardhead { padding: 14px 16px 10px; }
+  .cardhead .id { font-size: 11px; font-weight: 800; letter-spacing: .06em; color: #fff; background: #0C0A09; display: inline-block; padding: 3px 10px; border-radius: 999px; }
+  .card.rec .cardhead .id { background: #16A34A; }
+  .card.base .cardhead .id { background: #a8a29e; }
+  .cardhead h3 { font-size: 16px; margin: 8px 0 2px; }
+  .cardhead p { font-size: 12px; color: #78716c; }
+  .phonewrap { background: #f5f5f4; padding: 14px; display: flex; justify-content: center; }
+  .phone { width: 272px; background: #F5F5F4; border: 1px solid #e7e5e4; border-radius: 26px; padding: 12px 12px 16px; }
+  .banner { background: #0C0A09; border-left: 4px solid #EA580C; border-radius: 12px; color: #fff; font-size: 10px; font-weight: 800; padding: 8px; }
+  .banner .n { color: #D9F99D; font-size: 17px; font-weight: 800; margin: 2px 0; }
+  .gbtn { border-radius: 999px; margin-top: 12px; padding: 13px 14px; font-size: 13px; font-weight: 800; color: #000; display: flex; align-items: center; justify-content: center; gap: 8px; background: #fff; }
+  .pill { background: #fff; border-radius: 999px; display: flex; align-items: center; gap: 8px; padding: 13px 14px; margin-top: 12px; font-size: 13px; font-weight: 700; }
+  .cta { border-radius: 999px; margin-top: 12px; padding: 13px; text-align: center; color: #fff; background: #0C0A09; font-size: 13px; font-weight: 800; }
+  .divi { display: flex; align-items: center; gap: 10px; margin: 14px 2px 0; color: #a8a29e; font-size: 10px; font-weight: 800; letter-spacing: .08em; }
+  .divi::before, .divi::after { content: ''; flex: 1; height: 1px; background: #d6d3d1; }
+  .seclabel { font-size: 10px; font-weight: 800; letter-spacing: .08em; color: #78716c; margin: 14px 2px 0; }
+  .formcard { background: #fff; border: 1px solid #e7e5e4; border-radius: 18px; padding: 4px 12px 12px; margin-top: 8px; }
+  .formcard .pill { box-shadow: none; border: 1px solid #f0efed; }
+  .meter { height: 6px; border-radius: 999px; background: #E5E7EB; margin: 8px 14px 0; overflow: hidden; }
+  .meter i { display: block; height: 100%; width: 60%; background: #16A34A; border-radius: 999px; }
+  .mlabel { font-size: 10px; font-weight: 800; color: #16A34A; margin: 3px 14px 0; }
+  .micro { font-size: 10px; color: #78716c; font-weight: 600; }
+  .tagbad { color: #DC2626; font-size: 11px; font-weight: 800; margin-top: 8px; }
+  .tagok { color: #16A34A; font-size: 11px; font-weight: 800; margin-top: 8px; }
+  .meta { padding: 12px 16px; font-size: 12px; }
+  .meta .row { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+  .chip { font-size: 10px; font-weight: 800; border-radius: 999px; padding: 3px 9px; background: #f5f5f4; border: 1px solid #e7e5e4; }
+  .chip.ok { background: #dcfce7; border-color: #86efac; color: #166534; }
+  .chip.warn { background: #fef9c3; border-color: #fde047; color: #854d0e; }
+  .chip.bad { background: #fee2e2; border-color: #fca5a5; color: #991b1b; }
+  .pros { padding: 0 16px 14px; font-size: 12px; line-height: 1.7; color: #44403c; }
+  .pros ul { padding-left: 16px; }
+  .pickrow { display: flex; gap: 8px; padding: 0 16px 16px; }
+  .pickrow button { flex: 1; border-radius: 999px; padding: 10px; font-size: 12px; font-weight: 800; cursor: pointer; border: 1.5px solid #0C0A09; background: #fff; }
+  .pickrow button.go { background: #0C0A09; color: #fff; }
+  .pickrow button.in { border-color: #16A34A; color: #166534; }
+  table.h2h { width: 100%; border-collapse: collapse; background: #fff; border-radius: 16px; overflow: hidden; font-size: 12px; margin-top: 14px; }
+  table.h2h th, table.h2h td { border: 1px solid #e7e5e4; padding: 9px 10px; text-align: center; }
+  table.h2h th { background: #0C0A09; color: #fff; font-size: 11px; }
+  table.h2h td:first-child, table.h2h th:first-child { text-align: left; }
+  .sec { background: #fff; border: 1px solid #e7e5e4; border-radius: 16px; padding: 16px 18px; margin-top: 14px; }
+  .sec p, .sec li { font-size: 13px; line-height: 1.7; color: #44403c; }
+  .sec ul { padding-left: 18px; }
+  .pickbar { position: fixed; bottom: 0; left: 0; right: 0; background: #0C0A09; color: #fff; padding: 12px 16px; display: flex; gap: 10px; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; z-index: 50; }
+  .pickbar button { background: #D9F99D; border: none; border-radius: 999px; padding: 8px 16px; font-weight: 800; font-size: 12px; cursor: pointer; }
+  .refs { font-size: 12px; }
+  .refs a { color: #1d4ed8; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="approve">✅ <b>APPROVAL GATE</b> — pilih 1 opsi (balas <b>A / B / C</b>). Kode produksi (<span style="font-family:monospace">app/</span>) belum diubah sama sekali — file ini cuma mock di <span style="font-family:monospace">design/</span>. Setelah Agesta pilih → Addendum kecil → TDD slice → push + deploy.</div>
+
+  <h1>Tombol Google vs Form — Opsi Pembedaan</h1>
+  <p class="sub">Halaman /register · v10 · 11 Okt 2026 · semua mock full-page (banner + Google + form + CTA), bukan komponen lepas</p>
+
+  <div class="diag">
+    <h2>🔍 Diagnosis — kenapa terlihat "mirip sekali"</h2>
+    <ul>
+      <li><b>Token identik:</b> tombol Google = <span style="font-family:monospace">bg-white + rounded-full + px-4 py-3.5 + shadow-sm</span> — <b>persis sama</b> dengan pill Email &amp; Password di bawahnya. Mata user membaca Google sebagai "field pertama", bukan aksi.</li>
+      <li><b>Tanpa pemisah:</b> tidak ada divider/label antara login-sosial vs form-email → dua grup berbeda tercampur (prinsip Gestalt: yang berdekatan &amp; mirip dianggap satu grup).</li>
+      <li><b>Logo "G" tidak resmi:</b> lingkaran biru berisi huruf G putih — menyalahi aturan brand Google (wajib logo "G" 4-warna standar di atas putih) dan terlihat generik.</li>
+      <li><b>Dampak bisnis:</b> social login menurunkan abandonment form s/d <b>45%</b> (LoginRadius 2025) &amp; konversi <b>2–3x</b> vs email+password (Google) — kalau tombolnya "tenggelam", lift itu hilang.</li>
+    </ul>
+    <div class="tokens">
+      <span class="tok"><i style="background:#F5F5F4;border:1px solid #ccc"></i>bg #F5F5F4</span>
+      <span class="tok"><i style="background:#0C0A09"></i>ink #0C0A09 (CTA+banner)</span>
+      <span class="tok"><i style="background:#EA580C"></i>ember #EA580C</span>
+      <span class="tok"><i style="background:#D9F99D"></i>lime #D9F99D</span>
+      <span class="tok"><i style="background:#DADCE0"></i>outline Google #DADCE0</span>
+      <span class="tok">radius full (tetap) · Plus Jakarta Sans (tetap)</span>
+    </div>
+  </div>
+
+  <div class="filters">
+    <button data-f="all" class="on">Semua</button>
+    <button data-f="p0">P0 baseline</button>
+    <button data-f="outline">Outline+divider</button>
+    <button data-f="grouped">Grouped card</button>
+    <button data-f="reorder">Reorder</button>
+  </div>
+
+  <div class="grid">
+
+    <!-- P0 BASELINE -->
+    <div class="card base" data-cat="p0" id="opt-P0">
+      <div class="cardhead"><span class="id">P0 · BASELINE (saat ini, bukan pilihan)</span>
+        <h3>Sekarang — Google = kembaran form</h3>
+        <p>Acuan apel-ke-apel. Jangan dipilih.</p></div>
+      <div class="phonewrap"><div class="phone">
+        <div class="banner">DAFTAR GRATIS<div class="n">2 • 5</div>quota full + voucher 🎟️</div>
+        <div class="gbtn" style="box-shadow:0 1px 2px rgba(0,0,0,.06)"><span style="width:20px;height:20px;border-radius:50%;background:#4285F4;color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center">G</span>Daftar via Google</div>
+        <div class="pill" style="box-shadow:0 1px 2px rgba(0,0,0,.06)"><span>✉️</span><span style="color:#a8a29e">Email</span></div>
+        <div class="pill" style="box-shadow:0 1px 2px rgba(0,0,0,.06)"><span>🔒</span><span style="color:#a8a29e">Password</span></div>
+        <div class="pill" style="box-shadow:0 1px 2px rgba(0,0,0,.06);font-size:11px"><span>☑</span> Setuju Syarat &amp; Privasi</div>
+        <div class="cta">Daftar →</div>
+        <div class="tagbad">❌ Putih + rounded-full + shadow — ketiganya kembar</div>
+      </div></div>
+    </div>
+
+    <!-- OPSI A -->
+    <div class="card rec" data-cat="outline" id="opt-A">
+      <div class="cardhead"><span class="id">OPSI A · REKOMENDASI ⭐</span>
+        <h3>Outline Google + divider "ATAU" + logo G resmi</h3>
+        <p>Persis gaya default tombol Google (tema outline) + garis pemisah tegas.</p></div>
+      <div class="phonewrap"><div class="phone">
+        <div class="banner">DAFTAR GRATIS<div class="n">2 • 5</div>quota full + voucher 🎟️</div>
+        <div class="gbtn" style="border:1.5px solid #DADCE0;box-shadow:none"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>Daftar via Google</div>
+        <div class="divi">ATAU</div>
+        <div class="pill"><span>✉️</span><span style="color:#a8a29e">Email</span></div>
+        <div class="pill"><span>🔒</span><span style="color:#a8a29e">Password</span><span style="margin-left:auto;color:#a8a29e">👁</span></div>
+        <div class="meter"><i></i></div><div class="mlabel">Password Kuat</div>
+        <div class="pill" style="font-size:11px"><span>☑</span> Setuju Syarat &amp; Privasi</div>
+        <div class="cta">Daftar →</div>
+        <div class="tagok">✅ Border abu + divider + G resmi — beda grup sekilas</div>
+      </div></div>
+      <div class="meta"><div class="row"><span class="chip">Effort S · ±1 jam</span><span class="chip ok">Risiko RENDAH</span><span class="chip ok">Google-compliant</span></div></div>
+      <div class="pros"><ul>
+        <li><b>Pro:</b> border #DADCE0 = tema <i>outline</i> resmi Google → patuh brand guideline; divider ATAU memisah grup sosial vs form; CTA hitam tetap satu-satunya solid → hierarki aman.</li>
+        <li><b>Pro:</b> perubahan terkecil (1 border + 1 divider + tukar logo) → TDD ±1 jam, risiko regresi nol.</li>
+        <li><b>Kontra:</b> masih sama-sama putih — bedanya garis tepi, bukan warna blok.</li>
+      </ul></div>
+      <div class="pickrow"><button class="in" data-short="A">☆ Shortlist</button><button class="go" data-pick="A">Pilih A</button></div>
+    </div>
+
+    <!-- OPSI B -->
+    <div class="card" data-cat="grouped" id="opt-B">
+      <div class="cardhead"><span class="id">OPSI B</span>
+        <h3>Google elevated + form dikartu "pakai email"</h3>
+        <p>Form dibungkus kartu berlabel — dua grup mustahil tertukar.</p></div>
+      <div class="phonewrap"><div class="phone">
+        <div class="banner">DAFTAR GRATIS<div class="n">2 • 5</div>quota full + voucher 🎟️</div>
+        <div class="gbtn" style="border:1.5px solid #DADCE0;box-shadow:0 2px 8px rgba(0,0,0,.10);flex-direction:column;gap:2px"><span style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>Daftar via Google</span><span class="micro">1-klik · tanpa password baru</span></div>
+        <div class="seclabel">ATAU DAFTAR PAKAI EMAIL</div>
+        <div class="formcard">
+          <div class="pill"><span>✉️</span><span style="color:#a8a29e">Email</span></div>
+          <div class="pill"><span>🔒</span><span style="color:#a8a29e">Password</span></div>
+          <div class="meter"><i></i></div><div class="mlabel">Password Kuat</div>
+          <div class="pill" style="font-size:11px"><span>☑</span> Setuju Syarat &amp; Privasi</div>
+          <div class="cta">Daftar →</div>
+        </div>
+        <div class="tagok">✅ Dua "kawasan" jelas: atas sosial, bawah kartu email</div>
+      </div></div>
+      <div class="meta"><div class="row"><span class="chip">Effort M · ±2–3 jam</span><span class="chip warn">Risiko SEDANG</span><span class="chip ok">Google-compliant</span></div></div>
+      <div class="pros"><ul>
+        <li><b>Pro:</b> pemisahan paling tegas; microcopy "tanpa password baru" menjual keunggulan 1-klik → dorong CTR Google.</li>
+        <li><b>Pro:</b> kartu form = pola standar (Linear/Vercel) → terlihat premium.</li>
+        <li><b>Kontra:</b> restruktur markup lebih besar; halaman jadi lebih panjang di layar kecil.</li>
+      </ul></div>
+      <div class="pickrow"><button class="in" data-short="B">☆ Shortlist</button><button class="go" data-pick="B">Pilih B</button></div>
+    </div>
+
+    <!-- OPSI C -->
+    <div class="card" data-cat="reorder" id="opt-C">
+      <div class="cardhead"><span class="id">OPSI C · KONTRARIAN</span>
+        <h3>Email-first — Google jadi opsi kedua</h3>
+        <p>Form + CTA dulu, Google kecil di bawah. (Tidak disarankan.)</p></div>
+      <div class="phonewrap"><div class="phone">
+        <div class="banner">DAFTAR GRATIS<div class="n">2 • 5</div>quota full + voucher 🎟️</div>
+        <div class="pill"><span>✉️</span><span style="color:#a8a29e">Email</span></div>
+        <div class="pill"><span>🔒</span><span style="color:#a8a29e">Password</span></div>
+        <div class="meter"><i></i></div><div class="mlabel">Password Kuat</div>
+        <div class="pill" style="font-size:11px"><span>☑</span> Setuju Syarat &amp; Privasi</div>
+        <div class="cta">Daftar →</div>
+        <div class="divi">atau 1-klik</div>
+        <div class="gbtn" style="border:1.5px solid #DADCE0;box-shadow:none;padding:10px 14px;font-size:12px"><svg width="16" height="16" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>Lanjut dengan Google</div>
+        <div class="tagbad">⚠️ Google tenggelam — lift sosial (+15–25pp) terancam</div>
+      </div></div>
+      <div class="meta"><div class="row"><span class="chip">Effort S · ±1 jam</span><span class="chip bad">Risiko TINGGI (konversi)</span></div></div>
+      <div class="pros"><ul>
+        <li><b>Pro:</b> alur baca linear (isi → Daftar); Google tetap ada sebagai jalan pintas.</li>
+        <li><b>Kontra:</b> menyembunyikan opsi berkonversi tertinggi; melanggar semangat aturan Google (tombol Google min. sama prominennya dengan opsi pihak ketiga lain — di sini jadi anak tiri).</li>
+      </ul></div>
+      <div class="pickrow"><button class="in" data-short="C">☆ Shortlist</button><button class="go" data-pick="C">Pilih C</button></div>
+    </div>
+
+  </div>
+
+  <div class="sec">
+    <h2>⚔️ Head-to-head vs North Star (penyelesaian daftar)</h2>
+    <div style="overflow-x:auto"><table class="h2h">
+      <tr><th>Metrik</th><th>P0 kini</th><th>A outline+ATAU ⭐</th><th>B grouped card</th><th>C email-first</th></tr>
+      <tr><td>Google gampang ketemu</td><td>⭐⭐</td><td>⭐⭐⭐⭐</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐</td></tr>
+      <tr><td>Form tetap jelas</td><td>⭐⭐⭐</td><td>⭐⭐⭐⭐</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐⭐</td></tr>
+      <tr><td>Kepatuhan brand Google</td><td>❌ (G imitasi)</td><td>✅</td><td>✅</td><td>✅</td></tr>
+      <tr><td>Effort / risiko</td><td>—</td><td>S / rendah</td><td>M / sedang</td><td>S / konversi ↓</td></tr>
+      <tr><td>Proyeksi penyelesaian daftar</td><td>baseline</td><td>▲ (+klik Google naik)</td><td>▲▲ (tertinggi)</td><td>▼ (risiko turun)</td></tr>
+    </table></div>
+  </div>
+
+  <div class="sec">
+    <h2>🏆 Rekomendasi: OPSI A</h2>
+    <p>Alasan bisnis, bukan selera: <b>(1)</b> memperbaiki akar masalah (token identik + tanpa pemisah + logo imitasi) dengan perubahan terkecil → ROI/jam tertinggi; <b>(2)</b> patuh guideline Google (outline + G 4-warna + teks jelas) → aman verifikasi app; <b>(3)</b> CTA hitam tetap satu-satunya elemen solid → hierarki "Google = jalan pintas, Daftar = aksi utama" terbaca sekilas; <b>(4)</b> kalau nanti data bilang CTR Google kurang, upgrade ke B tanpa buang kerjaan A (divider &amp; logo tetap dipakai).</p>
+  </div>
+
+  <div class="sec refs">
+    <h2>📚 Referensi</h2>
+    <ul>
+      <li>Google — <a href="https://developers.google.com/identity/branding-guidelines">Sign in with Google Branding Guidelines</a>: wajib logo "G" warna standar di atas putih; tema <i>outline</i> (border #DADCE0) adalah gaya default; teks CTA "Sign up with Google / Continue with Google"; tombol Google min. sama prominennya dengan opsi pihak ketiga lain.</li>
+      <li>LoginRadius 2025 via Heurilens — <a href="https://heurilens.com/blog/interaction-flow/form-ux-design-rules-reduce-abandonment">Form UX: 12 rules</a>: opsi social login menurunkan abandonment s/d 45%; Google One Tap konversi 2–3x vs form email+password.</li>
+      <li>SignupDrop 2026 — <a href="https://signupdrop.com/research">Signup research</a>: lift social-login/OAuth +15–25pp pada penyelesaian signup B2C (sintesis studi Auth0 dkk).</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="pickbar"><span id="picklabel">Pilihan: — (balas A / B / C)</span><button id="copypick">Salin pilihan</button></div>
+
+<script>
+(function(){
+  var KEY='wikendo-v10-shortlist', PICK='wikendo-v10-pick';
+  function get(k,d){ try{ var v=JSON.parse(localStorage.getItem(k)); return v==null?d:v; }catch(e){ return d; } }
+  function set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+  // filters
+  var btns=document.querySelectorAll('.filters button');
+  btns.forEach(function(b){ b.addEventListener('click', function(){
+    btns.forEach(function(x){x.classList.remove('on')}); b.classList.add('on');
+    var f=b.getAttribute('data-f');
+    document.querySelectorAll('.grid .card').forEach(function(c){
+      c.style.display=(f==='all'||c.getAttribute('data-cat')===f)?'':'none';
+    });
+  });});
+  // shortlist
+  var sl=get(KEY,[]);
+  function paintShort(){ document.querySelectorAll('[data-short]').forEach(function(b){
+    var id=b.getAttribute('data-short');
+    b.textContent=sl.indexOf(id)>=0?'★ Shortlisted':'☆ Shortlist';
+  });}
+  document.querySelectorAll('[data-short]').forEach(function(b){ b.addEventListener('click',function(){
+    var id=b.getAttribute('data-short'), i=sl.indexOf(id);
+    if(i>=0)sl.splice(i,1); else sl.push(id); set(KEY,sl); paintShort();
+  });});
+  paintShort();
+  // pick
+  var pick=get(PICK,'—');
+  var label=document.getElementById('picklabel');
+  function paintPick(){ label.textContent='Pilihan: '+pick+(sl.length?' · Shortlist: '+sl.join(', '):''); }
+  document.querySelectorAll('[data-pick]').forEach(function(b){ b.addEventListener('click',function(){
+    pick=b.getAttribute('data-pick'); set(PICK,pick); paintPick();
+  });});
+  paintPick();
+  document.getElementById('copypick').addEventListener('click',function(){
+    var t='Pilih Opsi '+pick+' (board v10 register-google)';
+    if(navigator.clipboard)navigator.clipboard.writeText(t);
+  });
+})();
+</script>
+</body>
+</html>

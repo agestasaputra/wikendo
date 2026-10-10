@@ -17,6 +17,8 @@
 
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Opsi A tombol Google DONE ✅ 11 Okt: lock Agesta "A" (board v10) — tombol Google register+login jadi outline abu #DADCE0 + logo G 4-warna resmi + divider ATAU, shadow dihapus, CTA hitam tetap satu-satunya solid — TDD: google-button-a RED 6 gagal → GREEN 9/9 ✅ full 192/192 (19 files) ✅ lint 0 error (5 warning awal) ✅ build 9.46s ✅ SCAN-CLEAN ✅ Addendum `docs/20` ✅ — next: push + deploy + E2E email pribadi
+- [ ] Pilih opsi bedain tombol Google /register (board v10 + PNG, gate A/B/C — rekom A) ⏳ 11 Okt: Agesta minta insight + referensi (Google mirip form) → board `design/revamp-options-v10.html` + `revamp-options-v10-compare.png` PASS QA, app/ untouched — next: Agesta balas A/B/C → Addendum kecil → TDD slice → push + deploy
 - [x] Toggle mata SVG + meter bawah DONE ✅ 11 Okt: toggle intip password login+register (ikon Heroicons eye/eye-slash SVG stroke currentColor, dot • dihapus, type=button + aria-label, input type dinamis) + meter register di bawah field (bar + label Lemah/Sedang/Kuat/Sangat kuat + warna merah→hijau, v-if password.length), login tanpa meter — TDD: password-toggle 15/15 (termasuk 4 assert SVG+no-dot+no-emoji) ✅ revamp+login+button+toggle 51/51 ✅ full 183/183 (18 files) ✅ lint 0 error ✅ build 9.24s ✅ SCAN-CLEAN ✅ — next: E2E email pribadi
 - [x] Spinner + disable semua tombol API DONE ✅ 10 Okt: anti double-klik (register Daftar+Google, login Masuk+Google+Lupa?, check-email Kirim ulang spinner SVG animate-spin + :disabled + early-return guard, result/result-makan/mall Coba lagi + chip filter :disabled="pending") — TDD: button-loading RED 8 gagal → GREEN 8/8 ✅ full 168/168 (17 files) ✅ lint 0 error (5 warning kosmetik) ✅ build 9.83s ✅ SCAN-CLEAN ✅ — next: push + deploy + E2E email pribadi
 - [x] Opsi B magic-link DONE ✅ 10 Okt (`7d8a8fa`): signUp + `emailRedirectTo → /` + sukses → `/check-email?email=` (bukan langsung HOME) + halaman `check-email.vue` 1:1 register (banner HAMPIR SELESAI + kartu Cek email + Kirim ulang via resend signup + pesan inline + fallback daftar-ulang) + Google OAuth tetap langsung — TDD: verify RED 6 gagal → GREEN 7/7 ✅ revamp selaras 14/14 ✅ full 160/160 (16 files) ✅ lint 0 error ✅ build 9.94s ✅ prod `/ /register /check-email /login` 200 ✅ marker check-email 7/7 ✅ wiring bundle JS prod (check-email + emailRedirectTo nyangkut) ✅
@@ -96,6 +98,12 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-11 — Opsi A tombol Google DONE ✅ (lock Agesta "A", board v10)
+- **Kenapa:** tombol Google token-identik dengan pill form (putih+rounded+shadow) → kebaca field pertama + logo G imitasi langgar brand guideline Google + tanpa pemisah grup kecampur → lift social login (−45% abandonment, 2–3x konversi) hilang.
+- **Dikerjain:** `app/tests/google-button-a.test.ts` BARU 9 assert (outline #DADCE0 + divider ATAU + G 4-warna #FBBC05 + no-`>G</span>` + wiring OAuth di register+login, CTA hitam tetap) + `app/pages/register.vue` + `app/pages/login.vue` (border outline + logo SVG G resmi + divider ATAU `aria-hidden` + shadow dihapus) + selarasin `register-revamp.test.ts` + Addendum `docs/20-PRD-Addendum-Opsi-A-Google-Button.md`.
+- **Verifikasi:** google-button-a RED 6 gagal by design → GREEN 9/9 ✅ 5-file 60/60 ✅ full 192/192 (19 files) ✅ lint 0 error (5 warning awal, 4 divider baru difix) ✅ build 9.46s ✅ SCAN-CLEAN ✅.
+- **Next:** push + deploy Vercel + E2E email pribadi (`/register → /check-email?email= → klik link → HOME`).
 
 ## 2026-10-11 — Toggle mata SVG profesional + hapus dot (feedback Agesta, pre-E2E UX)
 - **Kenapa:** emoji 👁️/🙈 kelihatan tidak profesional + dot `•` sebelah tombol mata bikin sesak → ganti ikon garis profesional + hapus dot.
