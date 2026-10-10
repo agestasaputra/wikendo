@@ -99,11 +99,11 @@ describe('register revamp — banner 1:1 R1 (token lock v9)', () => {
 })
 
 describe('register revamp — wiring fitur app (bukan mock)', () => {
-  it('daftar email+password via Supabase signUp + nama + redirect home', () => {
+  it('daftar email+password via Supabase signUp + redirect cek-email (Opsi B, bukan langsung /)', () => {
     const s = readRegister()
     expect(s).toContain('signUp')
     expect(s).toContain('supabaseBrowser')
-    expect(s).toContain("router.push('/')")
+    expect(s).toContain('/check-email')
   })
 
   it('tombol Google via Supabase signInWithOAuth provider google', () => {

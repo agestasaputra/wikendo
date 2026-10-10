@@ -72,7 +72,8 @@ const strength = computed(() => {
   return Math.min(5, s)
 })
 
-// Daftar email+password via Supabase signUp → home.
+// Daftar email+password via Supabase signUp → /check-email (Opsi B magic-link, lock 10 Okt 2026).
+// Link verifikasi di inbox balik ke HOME (/). Google OAuth tetap langsung (tanpa cek-email).
 async function handleRegister() {
   errorMsg.value = ''
   loading.value = true
@@ -80,13 +81,16 @@ async function handleRegister() {
     const sb = supabaseBrowser()
     const { error } = await sb.auth.signUp({
       email: email.value,
-      password: password.value
+      password: password.value,
+      options: {
+        emailRedirectTo: typeof window !== 'undefined' ? `${window.location.origin}/` : '/'
+      }
     })
     if (error) {
       errorMsg.value = error.message
       return
     }
-    router.push('/')
+    router.push({ path: '/check-email', query: { email: email.value } })
   } finally {
     loading.value = false
   }
