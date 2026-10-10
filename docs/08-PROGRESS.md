@@ -17,7 +17,7 @@
 
 
 ### 🔥 NOW (lagi dikerjain)
-- [x] Toggle 👁️ + meter bawah DONE ✅ 11 Okt: toggle intip password login+register (👁️/🙈 type=button + aria-label, input type dinamis) + meter register pindah bawah field (bar full-width + label Lemah/Sedang/Kuat/Sangat kuat + warna merah→hijau, v-if password.length), login tanpa meter (recall ≠ create) — TDD: password-toggle RED 7 gagal → GREEN 11/11 ✅ revamp+login+button 47/47 ✅ full 179/179 (18 files) ✅ lint 0 error ✅ build 9.38s ✅ SCAN-CLEAN ✅ — next: push + deploy + E2E email pribadi
+- [x] Toggle mata SVG + meter bawah DONE ✅ 11 Okt: toggle intip password login+register (ikon Heroicons eye/eye-slash SVG stroke currentColor, dot • dihapus, type=button + aria-label, input type dinamis) + meter register di bawah field (bar + label Lemah/Sedang/Kuat/Sangat kuat + warna merah→hijau, v-if password.length), login tanpa meter — TDD: password-toggle 15/15 (termasuk 4 assert SVG+no-dot+no-emoji) ✅ revamp+login+button+toggle 51/51 ✅ full 183/183 (18 files) ✅ lint 0 error ✅ build 9.24s ✅ SCAN-CLEAN ✅ — next: E2E email pribadi
 - [x] Spinner + disable semua tombol API DONE ✅ 10 Okt: anti double-klik (register Daftar+Google, login Masuk+Google+Lupa?, check-email Kirim ulang spinner SVG animate-spin + :disabled + early-return guard, result/result-makan/mall Coba lagi + chip filter :disabled="pending") — TDD: button-loading RED 8 gagal → GREEN 8/8 ✅ full 168/168 (17 files) ✅ lint 0 error (5 warning kosmetik) ✅ build 9.83s ✅ SCAN-CLEAN ✅ — next: push + deploy + E2E email pribadi
 - [x] Opsi B magic-link DONE ✅ 10 Okt (`7d8a8fa`): signUp + `emailRedirectTo → /` + sukses → `/check-email?email=` (bukan langsung HOME) + halaman `check-email.vue` 1:1 register (banner HAMPIR SELESAI + kartu Cek email + Kirim ulang via resend signup + pesan inline + fallback daftar-ulang) + Google OAuth tetap langsung — TDD: verify RED 6 gagal → GREEN 7/7 ✅ revamp selaras 14/14 ✅ full 160/160 (16 files) ✅ lint 0 error ✅ build 9.94s ✅ prod `/ /register /check-email /login` 200 ✅ marker check-email 7/7 ✅ wiring bundle JS prod (check-email + emailRedirectTo nyangkut) ✅
 - [x] Takeout field Nama /register DONE ✅ 10 Okt (`25de1d2`): form tinggal Email + Password (input 👤 dihapus, `nama` ref + user_metadata dibersihin) — test takeout RED 1 gagal → GREEN 14/14 ✅ full 153/153 ✅ lint 0 error ✅ build ~9.6s ✅ prod `/register /login /` 200 ✅ audit prod: Nama 0, Email 1, Password 1, Google 1, kuat? 1, Daftar→ 1 ✅
@@ -96,6 +96,13 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-11 — Toggle mata SVG profesional + hapus dot (feedback Agesta, pre-E2E UX)
+- **Kenapa:** emoji 👁️/🙈 kelihatan tidak profesional + dot `•` sebelah tombol mata bikin sesak → ganti ikon garis profesional + hapus dot.
+- **Keputusan expert:** Heroicons outline eye / eye-slash (stroke `currentColor` 1.5, `w-5 h-5`, `v-if/v-else` ikut `showPassword`, warna abu `text-gray-400` + hover gelap) — ikon yang sama dipakai Stripe/Linear/Vercel, user langsung paham tanpa mikir. Dot dihapus dua-duanya (yang dekat mata di register + yang sebelum `Lupa?` di login) — jarak antar elemen cukup dari `gap-2` flex.
+- **Dikerjain:** `app/pages/register.vue` + `app/pages/login.vue` (emoji → 2 SVG Heroicons + hapus `<span>•</span>` + rapihin komen header) + `app/tests/password-toggle.test.ts` (+4 assert: no-emoji, marker path SVG eye/eye-slash, no-dot).
+- **Verifikasi:** password-toggle RED 4 gagal by design → GREEN 15/15 ✅ revamp+login+button+toggle 51/51 ✅ full 183/183 (18 files) ✅ lint 0 error (5 warning kosmetik) ✅ build 9.24s ✅ SCAN-CLEAN ✅.
+- **Next:** push + deploy Vercel + E2E email pribadi (`/register → /check-email?email= → klik link → HOME`).
 
 ## 2026-10-11 — Toggle 👁️ + meter bawah DONE ✅ (request Agesta, pre-E2E UX)
 - **Kenapa:** user harus bisa cek typo password sebelum submit (turunin gagal login → beban reset email turun) + meter inline 5 kotak di dalem pill sesak & nggak informatif (tanpa label) → pindah bawah field jadi bar + label kata.

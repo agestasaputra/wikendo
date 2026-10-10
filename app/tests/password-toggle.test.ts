@@ -18,7 +18,7 @@ function read(p: string): string {
   return fs.readFileSync(path.join(PAGES, p), 'utf-8')
 }
 
-describe('password toggle — login + register', () => {
+describe('password toggle — login + register (SVG profesional, tanpa emoji/dot)', () => {
   for (const f of ['login.vue', 'register.vue']) {
     it(`${f}: ada state showPassword + input type dinamis`, () => {
       const s = read(f)
@@ -31,6 +31,20 @@ describe('password toggle — login + register', () => {
       expect(s).toContain('Tampilkan password')
       expect(s).toContain('Sembunyikan password')
       expect(s).toContain('showPassword = !showPassword')
+    })
+
+    it(`${f}: ikon SVG eye/eye-slash profesional (tanpa emoji 👁️/🙈)`, () => {
+      const s = read(f)
+      expect(s).not.toContain('👁')
+      expect(s).not.toContain('🙈')
+      // Heroicons outline eye + eye-slash (stroke currentColor) — marker path unik
+      expect(s).toContain('M2.036 12.322')
+      expect(s).toContain('M3.98 8.223')
+    })
+
+    it(`${f}: dot pemisah • di sebelah tombol mata dihapus`, () => {
+      const s = read(f)
+      expect(s).not.toContain('<span class="text-gray-300 text-sm">•</span>')
     })
 
     it(`${f}: Lupa?/CTA tidak kehapus oleh toggle`, () => {
