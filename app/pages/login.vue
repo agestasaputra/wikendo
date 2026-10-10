@@ -3,7 +3,7 @@
   KENAPA: user anon quota habis klik Login di topbar global → harus lihat angka real + bisa masuk via Supabase.
   Banner 1:1 L1 lock v9 (ink #0C0A09 + strip ember #EA580C + angka #D9F99D 17px + radius 12px + font 10px)
   + referensi hero index.vue (getHomeHeroMeta — 1 sumber token, bukan hardcode beda).
-  Contoh: anon habis lihat 0 • 0 → Lanjut dengan Google / isi Email+Password → Masuk → balik ke ?redirect=. -->
+  Contoh: anon habis lihat 0 • 0 → Lanjutkan dengan Google / isi Email+Password → Masuk → balik ke ?redirect=. -->
 <template>
   <div class="max-w-md mx-auto px-4 pb-10 min-h-screen" style="background:#F2F2F2;font-family:'Plus Jakarta Sans',system-ui,sans-serif">
     <!-- 1. Banner hitam quota — 1:1 L1 EMBER HERO (strip ember + radius 12 + angka lime-muda) -->
@@ -21,7 +21,7 @@
     <button type="button" :disabled="loading || googleLoading || forgotLoading" class="w-full bg-white rounded-full mt-3 py-3.5 px-4 font-extrabold text-sm text-black flex items-center justify-center gap-2 disabled:opacity-60" style="border:1.5px solid #DADCE0" @click="handleGoogle">
       <svg v-if="googleLoading" class="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="#4285F4" stroke-opacity=".25" stroke-width="4"/><path d="M22 12a10 10 0 0 0-10-10" stroke="#4285F4" stroke-width="4" stroke-linecap="round"/></svg>
       <svg v-else class="w-5 h-5" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-      {{ googleLoading ? 'Menghubungkan…' : 'Lanjut dengan Google' }}
+      {{ googleLoading ? 'Menghubungkan…' : 'Lanjutkan dengan Google' }}
     </button>
 
     <!-- Divider ATAU: pemisah grup login-sosial vs form-email (Opsi A board v10). -->
@@ -61,7 +61,7 @@
 
     <!-- 7. Footer tanpa kotak -->
     <p class="text-center text-sm font-bold text-black mt-4">
-      Belum punya akun? <NuxtLink to="/register" class="font-extrabold underline">Daftar</NuxtLink>
+      Belum punya akun? <NuxtLink :to="redirect === '/' ? '/register' : { path: '/register', query: { redirect } }" class="font-extrabold underline">Daftar</NuxtLink>
     </p>
   </div>
 </template>

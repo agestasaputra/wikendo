@@ -35,7 +35,7 @@ describe('auth buttons — spinner + disabled (anti double-submit)', () => {
     const s = read('register.vue')
     expect(s).toContain('googleLoading')
     expect(s).toContain(':disabled="loading || googleLoading"')
-    expect(s).toContain('Daftar via Google')
+    expect(s).toContain('Lanjutkan dengan Google')
   })
 
   it('register: handler jaga double-submit via early-return guard', () => {
@@ -57,7 +57,7 @@ describe('auth buttons — spinner + disabled (anti double-submit)', () => {
     expect(s).toContain('googleLoading')
     expect(s).toContain('forgotLoading')
     expect(s).toContain('Lupa?')
-    expect(s).toContain('Lanjut dengan Google')
+    expect(s).toContain('Lanjutkan dengan Google')
   })
 
   it('check-email: Kirim ulang punya spinner + disabled saat mengirim', () => {

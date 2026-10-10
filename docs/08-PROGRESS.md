@@ -17,6 +17,7 @@
 
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Google Auth satu pintu DONE ✅ 11 Okt: approved "Gas fix!" — label netral SAMA "Lanjutkan dengan Google" (register+login) + redirect SAMA hormati ?redirect= (register baca useRoute, footer login preservasi ke /register) + kunci checkbox Syarat di handleGoogle register — TDD: best-practice RED 6 gagal → GREEN 8/8 ✅ 6-file 68/68 ✅ full 200/200 (20 files) ✅ lint 0 error ✅ build 9.35s ✅ SCAN-CLEAN ✅ Addendum `docs/21` ✅ — next: push + deploy + E2E email pribadi
 - [x] Opsi A tombol Google DONE ✅ 11 Okt: lock Agesta "A" (board v10) — tombol Google register+login jadi outline abu #DADCE0 + logo G 4-warna resmi + divider ATAU, shadow dihapus, CTA hitam tetap satu-satunya solid — TDD: google-button-a RED 6 gagal → GREEN 9/9 ✅ full 192/192 (19 files) ✅ lint 0 error (5 warning awal) ✅ build 9.46s ✅ SCAN-CLEAN ✅ Addendum `docs/20` ✅ — next: push + deploy + E2E email pribadi
 - [ ] Pilih opsi bedain tombol Google /register (board v10 + PNG, gate A/B/C — rekom A) ⏳ 11 Okt: Agesta minta insight + referensi (Google mirip form) → board `design/revamp-options-v10.html` + `revamp-options-v10-compare.png` PASS QA, app/ untouched — next: Agesta balas A/B/C → Addendum kecil → TDD slice → push + deploy
 - [x] Toggle mata SVG + meter bawah DONE ✅ 11 Okt: toggle intip password login+register (ikon Heroicons eye/eye-slash SVG stroke currentColor, dot • dihapus, type=button + aria-label, input type dinamis) + meter register di bawah field (bar + label Lemah/Sedang/Kuat/Sangat kuat + warna merah→hijau, v-if password.length), login tanpa meter — TDD: password-toggle 15/15 (termasuk 4 assert SVG+no-dot+no-emoji) ✅ revamp+login+button+toggle 51/51 ✅ full 183/183 (18 files) ✅ lint 0 error ✅ build 9.24s ✅ SCAN-CLEAN ✅ — next: E2E email pribadi
@@ -98,6 +99,12 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-11 — Google Auth satu pintu DONE ✅ (approved "Gas fix!", best practice)
+- **Kenapa:** signInWithOAuth login+register SAMA (Supabase auto create-vs-login by email) → label beda = beban pikir + redirect beda = konteks quiz hilang + checkbox bypass = bolong legal.
+- **Dikerjain:** label netral SAMA "Lanjutkan dengan Google" (2 vue + 3 test lama selaras: login-revamp, register-revamp, button-loading 2 assert) + register baca `route.query.redirect` (useRoute SSR-safe) + `redirectTo: origin+redirect` + footer login preservasi `?redirect=` ke /register + `handleGoogle` register kunci `!agree.value` → error inline + Addendum `docs/21`.
+- **Verifikasi:** best-practice RED 6 gagal by design → GREEN 8/8 ✅ 6-file 68/68 ✅ full 200/200 (20 files) ✅ lint 0 error (5 warning awal) ✅ build 9.35s ✅ SCAN-CLEAN ✅.
+- **Next:** push + deploy Vercel + E2E email pribadi (`/register → /check-email?email= → klik link → HOME`).
 
 ## 2026-10-11 — Opsi A tombol Google DONE ✅ (lock Agesta "A", board v10)
 - **Kenapa:** tombol Google token-identik dengan pill form (putih+rounded+shadow) → kebaca field pertama + logo G imitasi langgar brand guideline Google + tanpa pemisah grup kecampur → lift social login (−45% abandonment, 2–3x konversi) hilang.

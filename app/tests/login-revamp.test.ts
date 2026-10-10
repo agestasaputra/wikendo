@@ -39,9 +39,9 @@ describe('login revamp 100% image — struktur + teks persis', () => {
     expect(s).toContain('0 • 0')
   })
 
-  it('tombol Lanjut dengan Google (putih, rounded pill)', () => {
+  it('tombol Lanjutkan dengan Google (putih, rounded pill)', () => {
     const s = readLogin()
-    expect(s).toContain('Lanjut dengan Google')
+    expect(s).toContain('Lanjutkan dengan Google')
     expect(s).toContain('rounded-full')
   })
 
@@ -65,11 +65,11 @@ describe('login revamp 100% image — struktur + teks persis', () => {
     expect(s).toContain('gratis')
   })
 
-  it('footer: Belum punya akun? Daftar (link ke /register)', () => {
+  it('footer: Belum punya akun? Daftar (link ke /register, preservasi ?redirect=)', () => {
     const s = readLogin()
     expect(s).toContain('Belum punya akun?')
     expect(s).toContain('Daftar')
-    expect(s).toContain('to="/register"')
+    expect(s).toContain('/register')
   })
 })
 

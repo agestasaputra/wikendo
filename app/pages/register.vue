@@ -1,9 +1,9 @@
 <!-- pages/register.vue → GET /register (Auth page, Addendum 09 v1.3 APPROVED).
-  APA: slicing 100% image img_19a0ea1cfdcf — banner hitam DAFTAR GRATIS 2•5 + Daftar via Google + Email + Password (toggle intip SVG + meter bar di bawah field) + checkbox + Daftar →.
+  APA: slicing 100% image img_19a0ea1cfdcf — banner hitam DAFTAR GRATIS 2•5 + Lanjutkan dengan Google + Email + Password (toggle intip SVG + meter bar di bawah field) + checkbox + Daftar →.
   KENAPA: user klik Register di topbar global → lihat benefit quota full + bisa daftar via Supabase (email atau Google 1-klik).
   Banner 1:1 R1 lock v9 (ink #0C0A09 + strip ember #EA580C + angka #D9F99D 17px + radius 12px + font 10px kiri).
   TAKEOUT 10 Okt 2026 (request Agesta): field Nama dihapus — user hanya isi Email + Password.
-  Contoh: anon lihat 2 • 5 → Daftar via Google / isi Email+Password → Daftar → home. -->
+  Contoh: anon lihat 2 • 5 → Lanjutkan dengan Google / isi Email+Password → Daftar → home. -->
 <template>
   <div class="max-w-md mx-auto px-4 pb-10 min-h-screen" style="background:#F5F5F4;font-family:'Plus Jakarta Sans',system-ui,sans-serif">
     <!-- 1. Banner hitam promo — 1:1 image (strip ember + radius 12 + angka lime-muda) -->
@@ -20,7 +20,7 @@
     <button type="button" :disabled="loading || googleLoading" class="w-full bg-white rounded-full mt-3 py-3.5 px-4 font-extrabold text-sm text-black flex items-center justify-center gap-2 disabled:opacity-60" style="border:1.5px solid #DADCE0" @click="handleGoogle">
       <svg v-if="googleLoading" class="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="#4285F4" stroke-opacity=".25" stroke-width="4"/><path d="M22 12a10 10 0 0 0-10-10" stroke="#4285F4" stroke-width="4" stroke-linecap="round"/></svg>
       <svg v-else class="w-5 h-5" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-      {{ googleLoading ? 'Menghubungkan…' : 'Daftar via Google' }}
+      {{ googleLoading ? 'Menghubungkan…' : 'Lanjutkan dengan Google' }}
     </button>
 
     <!-- Divider ATAU: pemisah grup login-sosial vs form-email (Opsi A board v10).
@@ -72,6 +72,11 @@
 import { supabaseBrowser } from '~/utils/supabase'
 
 const router = useRouter()
+const route = useRoute()
+// SSR-safe: useRoute, bukan router.currentRoute (pitfall 500 Vercel).
+// Google Auth satu pintu (11 Okt 2026): hormati ?redirect= kayak login —
+// user dari quota wall yang kepencet Daftar tetap balik ke konteks quiz-nya.
+const redirect = (route.query.redirect as string) || '/'
 
 const email = ref('')
 const password = ref('')
@@ -135,16 +140,23 @@ async function handleRegister() {
   }
 }
 
-// Daftar 1-klik via Google OAuth.
+// Google 1-klik via OAuth — SATU PINTU kayak login (best practice 11 Okt 2026).
+// APA: signInWithOAuth SAMA (Supabase auto create-vs-login by email), label netral SAMA,
+// redirect SAMA hormati ?redirect=, + kunci checkbox Syarat (form email wajib, Google jangan bolong).
+// KENAPA: label beda = beban pikir "gue yang mana?" + redirect beda = konteks quiz hilang.
 async function handleGoogle() {
   if (loading.value || googleLoading.value) return
   errorMsg.value = ''
+  if (!agree.value) {
+    errorMsg.value = 'Centang dulu Setuju Syarat & Privasi biar bisa lanjut.'
+    return
+  }
   googleLoading.value = true
   try {
     const sb = supabaseBrowser()
     const { error } = await sb.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: typeof window !== 'undefined' ? `${window.location.origin}/` : '/' }
+      options: { redirectTo: typeof window !== 'undefined' ? `${window.location.origin}${redirect}` : redirect }
     })
     if (error) errorMsg.value = error.message
   } finally {

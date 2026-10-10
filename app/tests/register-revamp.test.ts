@@ -37,9 +37,9 @@ describe('register revamp 100% image — struktur + teks persis', () => {
     expect(s).toContain('quota full + voucher')
   })
 
-  it('tombol Daftar via Google (outline abu resmi + divider ATAU, Opsi A board v10)', () => {
+  it('tombol Lanjutkan dengan Google (outline abu resmi + divider ATAU, Opsi A board v10)', () => {
     const s = readRegister()
-    expect(s).toContain('Daftar via Google')
+    expect(s).toContain('Lanjutkan dengan Google')
     expect(s).toContain('rounded-full')
     expect(s).toContain('#DADCE0')
     expect(s).toContain('ATAU')
