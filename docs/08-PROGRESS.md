@@ -17,6 +17,7 @@
 
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Opsi B magic-link DONE ✅ 10 Okt (`7d8a8fa`): signUp + `emailRedirectTo → /` + sukses → `/check-email?email=` (bukan langsung HOME) + halaman `check-email.vue` 1:1 register (banner HAMPIR SELESAI + kartu Cek email + Kirim ulang via resend signup + pesan inline + fallback daftar-ulang) + Google OAuth tetap langsung — TDD: verify RED 6 gagal → GREEN 7/7 ✅ revamp selaras 14/14 ✅ full 160/160 (16 files) ✅ lint 0 error ✅ build 9.94s ✅ prod `/ /register /check-email /login` 200 ✅ marker check-email 7/7 ✅ wiring bundle JS prod (check-email + emailRedirectTo nyangkut) ✅
 - [x] Takeout field Nama /register DONE ✅ 10 Okt (`25de1d2`): form tinggal Email + Password (input 👤 dihapus, `nama` ref + user_metadata dibersihin) — test takeout RED 1 gagal → GREEN 14/14 ✅ full 153/153 ✅ lint 0 error ✅ build ~9.6s ✅ prod `/register /login /` 200 ✅ audit prod: Nama 0, Email 1, Password 1, Google 1, kuat? 1, Daftar→ 1 ✅
 - [x] Revamp /register 100% image DONE ✅ 10 Okt (`85450b2`): slicing 1:1 `img_19a0ea1cfdcf` (banner ink #0C0A09 + strip ember #EA580C + angka #D9F99D 17px + radius 12px kiri + Daftar via Google pill putih + Nama/Email/Password pill ikon 👤✉️🔒 + meter kuat? 5 kotak + checkbox checked + CTA ink Daftar →, bg #F5F5F4, tanpa header/footer lokal) + fitur real (signUp nama + Google OAuth + error inline + strength computed) — TDD: register-revamp RED 10 gagal → GREEN 14/14 ✅ full 153/153 (15 files) ✅ lint 0 error ✅ build 9.59s ✅ prod `/ /register /login` 200 + marker 8/8 ✅
 - [x] Claude Startup Program SUBMITTED ✅ 9 Okt: apply dari Console Organization `Wikendo` pakai `founder@wikendo.id` (Company `Wikendo`, web `https://www.wikendo.id`, Founder, Indonesia, founded Oct 2026, Bootstrapped, AI spend kecil-jujur, 2 esai pendek live+quota+direct-API-next) — status "Thanks for submitting", keputusan ≤72 jam — next: pantau email + siapin pilot direct API + traction 50-100 quiz
@@ -100,11 +101,11 @@
 - **Verifikasi:** vision_analyze QA: judul/sub terbaca, 10 kotak/diamond urut benar, nol teks overlap, panah atas→bawah + loop YA + TIDAK→Sukses benar ✅ file 136K ✅.
 - **Next:** slice session infra (GAP `/api/quota` masih `isLoggedIn:false`) biar wallet HOME jadi 2•5 setelah daftar.
 
-## 2026-10-10 — Opsi verifikasi email pasca-daftar (advisory + gambar, belum eksekusi)
-- **Kenapa:** Agesta nanya best/common practice kode verifikasi setelah registrasi — kondisi kita signUp langsung masuk tanpa cek email.
-- **Dikerjain:** `design/register-verify-options-2026-10-10.png` (tabel 3 opsi A langsung / B magic-link RECOMMENDED / C OTP 6-digit × 6 baris alur+friksi+bot+reset+cost+code) + rekomendasi tegas OPSI B.
-- **Verifikasi:** vision_analyze QA 2x (fix footer kepotong → 4 baris full terbaca, nol overlap) ✅ file 108K ✅.
-- **Next:** tunggu lock Agesta (`gas opsi B`) → eksekusi TDD + slice halaman cek-email + resend.
+## 2026-10-10 — Opsi B magic-link DONE ✅ (`7d8a8fa`, lock Agesta "Gas B")
+- **Kenapa:** best practice verifikasi — signUp langsung masuk = bot sedot quota 2•5 + typo email = reset gagal.
+- **Dikerjain:** `app/pages/register.vue` (signUp + `emailRedirectTo → /`, sukses → `/check-email?email=`) + `app/pages/check-email.vue` BARU (banner HAMPIR SELESAI 1:1 + kartu Cek email + Kirim ulang via resend signup + pesan inline + balik login) + `app/tests/register-verify.test.ts` BARU 7 assert + selarasin `register-revamp.test.ts` + gambar opsi `design/register-verify-options-2026-10-10.png`.
+- **Verifikasi:** verify RED 6 gagal → GREEN 7/7 ✅ revamp 14/14 ✅ full 160/160 (16 files) ✅ lint 0 error ✅ build 9.94s ✅ prod `/ /register /check-email /login` 200 ✅ marker check-email 7/7 ✅ bundle JS prod nyangkut check-email + emailRedirectTo ✅ re-verify 10 Okt malam: prod 4/4 200 + verify+revamp 21/21 ✅.
+- **Next:** setting server 1x — Supabase Dashboard → Authentication → Sign In/Up → ON Confirm email + SMTP Brevo (`smtp-relay.brevo.com:587`) biar link beneran kekirim; test daftar 1 email asli.
 
 ## 2026-10-10 — Takeout field Nama /register DONE ✅ (`25de1d2`, user isi Email+Password saja)
 - **Kenapa:** request Agesta — form Nama dihapus biar registrasi lebih pendek, user hanya isi Email + Password.
