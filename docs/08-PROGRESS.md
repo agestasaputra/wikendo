@@ -17,6 +17,7 @@
 
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Takeout field Nama /register DONE ✅ 10 Okt (`25de1d2`): form tinggal Email + Password (input 👤 dihapus, `nama` ref + user_metadata dibersihin) — test takeout RED 1 gagal → GREEN 14/14 ✅ full 153/153 ✅ lint 0 error ✅ build ~9.6s ✅ prod `/register /login /` 200 ✅ audit prod: Nama 0, Email 1, Password 1, Google 1, kuat? 1, Daftar→ 1 ✅
 - [x] Revamp /register 100% image DONE ✅ 10 Okt (`85450b2`): slicing 1:1 `img_19a0ea1cfdcf` (banner ink #0C0A09 + strip ember #EA580C + angka #D9F99D 17px + radius 12px kiri + Daftar via Google pill putih + Nama/Email/Password pill ikon 👤✉️🔒 + meter kuat? 5 kotak + checkbox checked + CTA ink Daftar →, bg #F5F5F4, tanpa header/footer lokal) + fitur real (signUp nama + Google OAuth + error inline + strength computed) — TDD: register-revamp RED 10 gagal → GREEN 14/14 ✅ full 153/153 (15 files) ✅ lint 0 error ✅ build 9.59s ✅ prod `/ /register /login` 200 + marker 8/8 ✅
 - [x] Claude Startup Program SUBMITTED ✅ 9 Okt: apply dari Console Organization `Wikendo` pakai `founder@wikendo.id` (Company `Wikendo`, web `https://www.wikendo.id`, Founder, Indonesia, founded Oct 2026, Bootstrapped, AI spend kecil-jujur, 2 esai pendek live+quota+direct-API-next) — status "Thanks for submitting", keputusan ≤72 jam — next: pantau email + siapin pilot direct API + traction 50-100 quiz
 - [x] Email domain wikendo.id DONE ✅ 9 Okt: NS pindah Domainesia → Cloudflare (`ali` + `leonard`) + DNS `@ A 216.198.79.1` + `www CNAME Vercel` tetap live 200 + inbound Cloudflare Routing (`founder@` + `contact@` → Gmail, Active, test masuk ✅) + DMARC `p=none` ✅ MX route1/2/3 ✅ SPF Cloudflare ✅ + outbound Brevo (`wikendo.id` Authenticated, SMTP `smtp-relay.brevo.com:587` key `gmail-send-as` 1yr, Gmail Send-As `founder@` + `contact@` verified, test kirim ✅) — next: Console account + draft esai Claude Startup Program
@@ -92,6 +93,12 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-10 — Takeout field Nama /register DONE ✅ (`25de1d2`, user isi Email+Password saja)
+- **Kenapa:** request Agesta — form Nama dihapus biar registrasi lebih pendek, user hanya isi Email + Password.
+- **Dikerjain:** `app/pages/register.vue` (hapus input 👤 + `nama` ref + `options.data`, update komen APA/CONTOH) + `app/tests/register-revamp.test.ts` (assert Nama 0 + Email/Password 1 + ikon, catat TAKEOUT).
+- **Verifikasi:** test takeout RED 1 gagal → GREEN 14/14 ✅ full 153/153 (15 files) ✅ lint 0 error ✅ build ~9.6s ✅ `25de1d2` push ✅ prod `/register /login /` 200 ✅ audit prod: `Nama 0, Email 1, Password 1, Google 1, kuat? 1, Daftar→ 1` ✅.
+- **Next:** pantau email keputusan Claude Startup (≤12 Okt) + pilot direct API.
 
 ## 2026-10-10 — Revamp /register 100% image DONE ✅ (`85450b2`, slicing 1:1 + fitur real)
 - **Kenapa:** audit akurat nemu 8 DIFF vs R1 lock (hero rose harusnya ink, Google hilang, meter hilang, CTA orange harusnya ink, double header) — vonis BELUM 1:1, Agesta perintahkan revamp 100% ikut gambar.
