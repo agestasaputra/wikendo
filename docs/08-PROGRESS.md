@@ -100,6 +100,12 @@
 - **Verifikasi:** vision_analyze QA: judul/sub terbaca, 10 kotak/diamond urut benar, nol teks overlap, panah atas→bawah + loop YA + TIDAK→Sukses benar ✅ file 136K ✅.
 - **Next:** slice session infra (GAP `/api/quota` masih `isLoggedIn:false`) biar wallet HOME jadi 2•5 setelah daftar.
 
+## 2026-10-10 — Opsi verifikasi email pasca-daftar (advisory + gambar, belum eksekusi)
+- **Kenapa:** Agesta nanya best/common practice kode verifikasi setelah registrasi — kondisi kita signUp langsung masuk tanpa cek email.
+- **Dikerjain:** `design/register-verify-options-2026-10-10.png` (tabel 3 opsi A langsung / B magic-link RECOMMENDED / C OTP 6-digit × 6 baris alur+friksi+bot+reset+cost+code) + rekomendasi tegas OPSI B.
+- **Verifikasi:** vision_analyze QA 2x (fix footer kepotong → 4 baris full terbaca, nol overlap) ✅ file 108K ✅.
+- **Next:** tunggu lock Agesta (`gas opsi B`) → eksekusi TDD + slice halaman cek-email + resend.
+
 ## 2026-10-10 — Takeout field Nama /register DONE ✅ (`25de1d2`, user isi Email+Password saja)
 - **Kenapa:** request Agesta — form Nama dihapus biar registrasi lebih pendek, user hanya isi Email + Password.
 - **Dikerjain:** `app/pages/register.vue` (hapus input 👤 + `nama` ref + `options.data`, update komen APA/CONTOH) + `app/tests/register-revamp.test.ts` (assert Nama 0 + Email/Password 1 + ikon, catat TAKEOUT).
