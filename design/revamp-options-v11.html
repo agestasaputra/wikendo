@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wikendo auth-state-home — 20 opsi pembeda login (v11)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; background: #fafaf9; color: #1c1917; padding: 20px 16px 140px; }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  .approve { background: #0C0A09; color: #fff; border-radius: 16px; padding: 16px 18px; margin-bottom: 18px; border-left: 4px solid #EA580C; }
+  .approve b { color: #D9F99D; }
+  h1 { font-size: 22px; margin-bottom: 6px; }
+  .sub { color: #78716c; font-size: 13px; margin-bottom: 14px; }
+  .diag { background: #fff; border: 1px solid #e7e5e4; border-radius: 16px; padding: 16px 18px; margin-bottom: 14px; }
+  .diag h2, .sec h2 { font-size: 15px; margin-bottom: 8px; }
+  .diag p, .diag li { font-size: 13px; line-height: 1.65; color: #44403c; }
+  .diag ul { padding-left: 18px; }
+  .tokens { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .tok { font-size: 11px; font-weight: 700; background: #f5f5f4; border: 1px solid #e7e5e4; border-radius: 999px; padding: 4px 10px; }
+  .tok i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: baseline; }
+  .filters { display: flex; gap: 8px; margin: 14px 0; flex-wrap: wrap; }
+  .filters button { border: 1.5px solid #d6d3d1; background: #fff; border-radius: 999px; padding: 7px 14px; font-size: 12px; font-weight: 800; cursor: pointer; }
+  .filters button.on { background: #0C0A09; color: #fff; border-color: #0C0A09; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+  .card { background: #fff; border: 1px solid #e7e5e4; border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; }
+  .card.rec { border: 2px solid #16A34A; }
+  .cardhead { padding: 14px 16px 10px; }
+  .cardhead .id { font-size: 11px; font-weight: 800; letter-spacing: .06em; color: #fff; background: #0C0A09; display: inline-block; padding: 3px 10px; border-radius: 999px; }
+  .card.rec .cardhead .id { background: #16A34A; }
+  .cardhead h3 { font-size: 15px; margin: 8px 0 2px; }
+  .cardhead p { font-size: 12px; color: #78716c; }
+  .phonewrap { background: #f5f5f4; padding: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .phone { background: #F5F5F4; border: 1px solid #e7e5e4; border-radius: 22px; padding: 10px 10px 14px; min-width: 0; }
+  .phone .tag { font-size: 9px; font-weight: 800; letter-spacing: .06em; color: #78716c; margin-bottom: 6px; }
+  .p-head { background: #fff; border-radius: 12px; padding: 8px 10px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 2px rgba(0,0,0,.05); }
+  .p-logo { width: 24px; height: 24px; border-radius: 7px; background: #0C0A09; color: #fff; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .p-links { font-size: 10px; font-weight: 800; }
+  .p-links span { margin-left: 8px; }
+  .p-cluster { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 800; }
+  .p-ava { width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex: none; }
+  .p-greet { display: flex; align-items: center; gap: 7px; font-size: 11.5px; font-weight: 800; margin: 10px 2px 0; }
+  .p-gsub { font-size: 10px; font-weight: 700; color: #78716c; margin: 2px 2px 0 33px; }
+  .p-chip { display: inline-block; font-size: 9px; font-weight: 800; background: #ECFDF5; color: #047857; border-radius: 999px; padding: 2px 8px; margin: 4px 2px 0 33px; }
+  .p-hero { background: #0C0A09; border-left: 4px solid #EA580C; border-radius: 12px; color: #fff; padding: 9px 10px; margin-top: 8px; position: relative; overflow: hidden; }
+  .p-hero .lbl { font-size: 8px; font-weight: 800; letter-spacing: .06em; opacity: .75; }
+  .p-hero .num { font-size: 17px; font-weight: 800; color: #D9F99D; margin: 2px 0; }
+  .p-hero .s { font-size: 9.5px; font-weight: 700; opacity: .85; }
+  .p-hero .pill { display: inline-block; margin-top: 7px; background: #A3E635; color: #0C0A09; font-size: 9.5px; font-weight: 800; border-radius: 999px; padding: 5px 10px; }
+  .p-cta { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
+  .p-cta div { background: #0C0A09; color: #fff; border-radius: 10px; font-size: 9px; font-weight: 800; text-align: center; padding: 8px 4px; line-height: 1.5; }
+  .p-drop { background: #fff; border: 1px solid #e7e5e4; border-radius: 12px; margin-top: 8px; padding: 8px 10px; font-size: 10px; font-weight: 700; }
+  .p-drop .em { color: #78716c; font-size: 9px; font-weight: 700; }
+  .p-drop .row { display: flex; justify-content: space-between; padding: 5px 0; border-top: 1px solid #f5f5f4; font-weight: 800; font-size: 10px; }
+  .p-drop .out { color: #DC2626; }
+  .p-drop.sheet { border-radius: 16px 16px 12px 12px; border-top: 3px solid #0C0A09; }
+  .p-note { font-size: 9px; color: #78716c; font-weight: 700; margin-top: 6px; }
+  .meta { padding: 12px 16px 16px; font-size: 12px; }
+  .meta .sw { display: flex; gap: 6px; margin: 8px 0; }
+  .meta .sw i { width: 16px; height: 16px; border-radius: 50%; border: 1px solid #e7e5e4; display: inline-block; }
+  .pillrow { display: flex; gap: 6px; flex-wrap: wrap; margin: 6px 0; }
+  .pillrow span { font-size: 10px; font-weight: 800; background: #f5f5f4; border: 1px solid #e7e5e4; border-radius: 999px; padding: 3px 9px; }
+  .procon { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .procon div { font-size: 11px; line-height: 1.55; }
+  .procon b { display: block; font-size: 10px; letter-spacing: .05em; }
+  .pick { margin-top: 10px; display: flex; gap: 8px; }
+  .pick button { flex: 1; border-radius: 999px; padding: 9px; font-size: 12px; font-weight: 800; cursor: pointer; border: 1.5px solid #0C0A09; background: #fff; }
+  .pick button.saved { background: #0C0A09; color: #fff; }
+  table.h2h { width: 100%; border-collapse: collapse; font-size: 11px; margin-top: 8px; }
+  table.h2h th, table.h2h td { border: 1px solid #e7e5e4; padding: 6px 7px; text-align: center; }
+  table.h2h th { background: #0C0A09; color: #fff; font-size: 10px; }
+  table.h2h td:first-child, table.h2h th:first-child { text-align: left; }
+  .recbox { background: #f0fdf4; border: 2px solid #16A34A; border-radius: 16px; padding: 16px 18px; margin-top: 14px; }
+  .pickbar { position: fixed; left: 12px; right: 12px; bottom: 12px; max-width: 1160px; margin: 0 auto; background: #0C0A09; color: #fff; border-radius: 16px; padding: 12px 16px; display: flex; gap: 10px; align-items: center; font-size: 12px; font-weight: 700; box-shadow: 0 8px 30px rgba(0,0,0,.25); z-index: 50; }
+  .pickbar code { background: #1c1917; padding: 6px 10px; border-radius: 8px; color: #D9F99D; font-size: 12px; }
+  .pickbar button { margin-left: auto; background: #A3E635; border: none; border-radius: 999px; padding: 9px 16px; font-weight: 800; cursor: pointer; }
+  .sec { background: #fff; border: 1px solid #e7e5e4; border-radius: 16px; padding: 16px 18px; margin-top: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="approve">GATE: pilih 1 dari 20 opsi di bawah. Balas <b>Gua suka [ID]</b> (contoh: <b>Gua suka AS6</b>). Dengan feedback: <b>Gua suka [ID], tapi ada beberapa feedback: - ...</b> — tanpa ID = belum lock, belum coding. Board ini mock di <b>design/</b>, <b>app/ NOL disentuh</b>.</div>
+  <h1>Auth-state-home — 20 opsi pembeda before/after login (v11)</h1>
+  <p class="sub">Scope mini $0: greeting nama + avatar + dropdown profile + logout real. Anon wajib 1:1 live. Tiap kartu = 2 phone: BEFORE (anon, sama semua) vs AFTER (login + dropdown). Token lock ikut home live.</p>
+
+  <div class="diag">
+    <h2>Diagnosis — kenapa login nol rasanya (audit live 11 Okt)</h2>
+    <ul>
+      <li><b>Header hantu:</b> <span style="font-family:monospace">app.vue v-if="!isLoggedIn"</span> tapi NOL script/composable → undefined terus → selalu render Login/Register walau sudah login.</li>
+      <li><b>Sapaan hardcode:</b> index selalu <b>Halo, teman Wikendo</b> + hero sub <b>login buka 2 + 5</b> walau sudah login → user bayar effort daftar tapi pulang ke home yang sama persis.</li>
+      <li><b>Quota anon terus:</b> <span style="font-family:monospace">GET /api/quota isLoggedIn:false</span> hardcode → wallet tidak pernah 2+5 → reward psikologis tidak kelihatan.</li>
+      <li><b>NOL logout/menu:</b> tidak ada avatar, dropdown, signOut, onAuthStateChange → reload = state ilang, user tidak bisa keluar.</li>
+    </ul>
+    <p style="margin-top:8px"><b>Slop verdict:</b> bukan selera — ini hierarchy failure: session tidak ada sumber kebenarannya. Fix = useAuth.ts + header 2-state + greeting + dropdown + logout. Tanpa itu aktivasi bocor di titik paling mahal.</p>
+    <div class="tokens">
+      <span class="tok"><i style="background:#F5F5F4"></i>page #F5F5F4</span>
+      <span class="tok"><i style="background:#0C0A09"></i>ink #0C0A09</span>
+      <span class="tok"><i style="background:#EA580C"></i>ember #EA580C</span>
+      <span class="tok"><i style="background:#D9F99D"></i>angka #D9F99D</span>
+      <span class="tok"><i style="background:#A3E635"></i>lime #A3E635</span>
+      <span class="tok"><i style="background:#ECFDF5"></i>mint #ECFDF5</span>
+      <span class="tok">max-w-md</span><span class="tok">anon 1:1</span><span class="tok">$0</span>
+    </div>
+  </div>
+
+  <div class="filters" id="filters">
+    <button data-f="all" class="on">Semua (20)</button>
+    <button data-f="minimal">Minimal</button>
+    <button data-f="wallet">Wallet</button>
+    <button data-f="warm">Warm</button>
+    <button data-f="power">Power</button>
+    <button data-f="convert">Convert</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="sec">
+    <h2>Head-to-head — Top 5 vs North Star (aktivasi + quiz start + repeat)</h2>
+    <table class="h2h">
+      <tr><th>Opsi</th><th>Aktivasi (merasa login)</th><th>Clarity</th><th>Effort</th><th>Risiko</th><th>Monetisasi</th></tr>
+      <tr><td style="text-align:left"><b>AS6</b> wallet-card (REC)</td><td>5</td><td>5</td><td>S 1-2h</td><td>Rendah</td><td>Voucher wajib-login terkunci</td></tr>
+      <tr><td style="text-align:left"><b>AS1</b> minimal ink</td><td>4</td><td>5</td><td>S 1h</td><td>Rendah</td><td>Sama, minus quota nudge</td></tr>
+      <tr><td style="text-align:left"><b>AS7</b> quota-bar</td><td>5</td><td>4</td><td>S 2h</td><td>Sedang</td><td>Nudge quiz ke-2 kuat</td></tr>
+      <tr><td style="text-align:left"><b>AS14</b> grouped power</td><td>4</td><td>4</td><td>S 2h</td><td>Sedang</td><td>Riwayat menaikkan repeat</td></tr>
+      <tr><td style="text-align:left"><b>AS19</b> confirm-safe</td><td>3</td><td>5</td><td>M 2-3h</td><td>Rendah</td><td>Aman, tapi tambah gesekan</td></tr>
+    </table>
+  </div>
+
+  <div class="recbox">
+    <h2 style="font-size:15px;margin-bottom:6px">Rekomendasi tunggal: AS6 — wallet-card ink</h2>
+    <p style="font-size:13px;line-height:1.65;color:#14532d">Avatar initial <b>S</b> ink + Bell (SOP header 2-state diperpanjang, max-w-md tetap) + greeting <b>Halo, Siska</b> + sub <b>Sisa kamu: 2 tempat • 5 makan</b> + dropdown card (email grey / Riwayat / Wishlist Segera / Keluar merah) + logout real ke /. Menang di bisnis bukan selera: satu-satunya opsi yang bikin reward login (nama + quota 2+5) kelihatan dalam 1 layar → quiz ke-2 naik → voucher wajib-login terkunci anti-farming. Effort S, risiko rendah, anon 1:1, $0, tanpa foto Google, tanpa /profile full, tanpa quota-server (ikut Addendum 22).</p>
+  </div>
+
+  <div class="sec">
+    <h2>Next step setelah pick</h2>
+    <p style="font-size:13px;color:#44403c">Agesta balas <b>Gua suka [ID]</b> → AI tulis Addendum final + TDD slice (useAuth.ts + app.vue + index.vue, test → lint → build → commit + push + deploy, verifikasi prod 200 + marker).</p>
+  </div>
+</div>
+
+<div class="pickbar">
+  <span>Shortlist: <b id="count">0</b> • Balas:</span>
+  <code id="picktext">Gua suka ...</code>
+  <button id="copybtn">Copy pick</button>
+</div>
+
+<script>
+var STORE = 'wikendo-authstate20-pick';
+var OPTIONS = [
+  {id:'AS1',fam:'minimal',name:'Minimal ink',desc:'Avatar S ink + Bell. Greeting nama polos. Dropdown email + Keluar.',avBg:'#0C0A09',avFg:'#fff',avTxt:'S',cluster:'ava-bell',greet:'Halo, Siska',gsub:'siskadptr@gmail.com',chip:'',heroSub:'Sisa kamu: 2 tempat \u2022 5 makan',drop:'card-mini',effort:'S \u00B7 1h',risk:'Rendah',pros:'Paling bersih, 1:1 token, familiar kayak Linear.',cons:'Quota nudge tipis, user bisa miss 2+5.'},
+  {id:'AS2',fam:'minimal',name:'Minimal lime',desc:'Avatar S lime (teks ink) + Bell. Dropdown + Riwayat.',avBg:'#A3E635',avFg:'#0C0A09',avTxt:'S',cluster:'ava-bell',greet:'Halo, Siska',gsub:'',chip:'',heroSub:'Sisa kamu: 2 tempat \u2022 5 makan',drop:'card-riwayat',effort:'S \u00B7 1h',risk:'Rendah',pros:'Avatar paling menonjol di header putih.',cons:'Lime di lingkaran kecil bisa terasa neon.'},
+  {id:'AS3',fam:'minimal',name:'Outline kalem',desc:'Avatar outline (hemat tinta) + Bell. Sub email grey di greeting.',avBg:'#fff',avFg:'#0C0A09',avTxt:'S',cluster:'ava-bell',greet:'Halo, Siska',gsub:'siskadptr@gmail.com',chip:'',heroSub:'Sisa kamu: 2 tempat \u2022 5 makan',drop:'card-mini',effort:'S \u00B7 1h',risk:'Rendah',pros:'Paling ringan, cocok mode hemat.',cons:'Initial kurang nendang di matahari.'},
+  {id:'AS4',fam:'minimal',name:'Bell dulu',desc:'Urutan dibalik: Bell + avatar (notif diprioritaskan).',avBg:'#0C0A09',avFg:'#fff',avTxt:'S',cluster:'bell-ava',greet:'Halo, Siska',gsub:'',chip:'',heroSub:'Sisa kamu: 2 tempat \u2022 5 makan',drop:'card-mini',effort:'S \u00B7 1h',risk:'Rendah',pros:'Bell tidak ketutup jempol kanan.',cons:'Langgar kebiasaan avatar-paling-kanan.'},
+  {id:'AS5',fam:'wallet',name:'Chip sisa',desc:'Greeting + chip hijau Sisa 2+5. Dropdown ada baris quota.',avBg:'#0C0A09',avFg:'#fff',avTxt:'S',cluster:'ava-bell',greet:'Halo, Siska',gsub:'',chip:'Sisa 2 tempat \u2022 5 makan',heroSub:'Sisa kamu: 2 tempat \u2022 5 makan',drop:'card-quota',effort:'S \u00B7 1-2h',risk:'Rendah',pros:'Reward login kelihatan 2x (greet + hero).',cons:'Chip + hero sub sedikit redundan.'},
+  {id:'AS6',fam:'wallet',name:'Wallet-card (REC)',desc:'Greeting + sub Sisa kamu. Dropdown card penuh. Paling seimbang.',avBg:'#0C0A09',avFg:'#fff',avTxt:'S',cluster:'ava-bell',greet:'Halo, Siska',gsub:'Sisa kamu: 2 tempat \u2022 5 makan',chip:'',heroSub:'Sisa kamu: 2 tempat \u2022 5 makan',drop:'card-full',effort:'S \u00B7 1-2h',risk:'Rendah',pros:'Nama + quota 1 layar. Dropdown standar Tokped/Shopee.',cons:'Hampir tidak ada — opsi paling aman.'},
+  {id:'AS7',fam:'wallet',name:'Quota-bar',desc:'Greeting + bar sisa 2/5. Bell ada dot. Dropdown ada progress.',avBg:'#0C0A09',avFg:'#fff',avTxt:'S',cluster:'ava-bell-dot',greet:'Halo, Siska',gsub:'2 tempat \u2022 5 makan tersisa',chip:'',heroSub:'Sisa kamu: 2 tempat \u2022 5 makan',drop:'card-progress',effort:'S \u00B7 2h',risk:'Sedang',pros:'Nudge quiz ke-2 paling kuat.',cons:'Bar = komponen baru, tambah logic.'},
+  {id:'AS8',fam:'wallet',name:'Hero-first',desc:'Headline hero jadi angka login (2 \u2022 5). Greeting dikecilkan.',avBg:'#0C0A09',avFg:'#fff',avTxt:'S',cluster:'ava-bell',greet:'Halo, Siska',gsub:'',chip:'',heroSub:'Sisa kamu: 2 tempat \u2022 5 makan',drop:'card-full',effort:'S \u00B7 1-2h',risk:'Sedang',pros:'Angka besar = scarcity jujur.',cons:'Headline berubah total, redupkan brand.'},
+  {id:'AS9',fam:'warm',name:'Ember hangat',desc:'Avatar ember + sapaan hangat + sub mood.',avBg:'#EA580C',avFg:'#fff',avTxt:'S',cluster:'ava-bell',greet:'Halo, Siska!',gsub:'Weekend ini mau ke mana?',chip:'',heroSub:'Sisa kamu: 2 tempat \u2022 5 makan',drop:'card-full',effort:'S \u00B7 1h',risk:'Rendah',pros:'Paling manusiawi, cocok brand weekend.',cons:'Tanda seru + ember terasa promo.'},
+  {id:'AS10',fam:'warm',name:'Nama di header',desc:'Header tampil avatar + Siska. Greeting tetap.',avBg:'#0C0A09',avFg:'#fff',avTxt:'S',cluster:'ava-name-bell',greet:'Halo, Siska',gsub:'Senang kamu kembali',chip:'',heroSub:'Sisa kamu: 2 tempat \u2022 5 makan',drop:'card-full',effort:'S \u00B7 1h',risk:'Rendah',pros:'Nama double-exposure, jelas milik siapa.',cons:'Header sempit di 320px.'},
+  {id:'AS11',fam:'warm',name:'Salam waktu',desc:'Greeting ikut jam: Pagi/Siang/Sore/Malam, Siska.',avBg:'#0C0A09',avFg:'#fff',avTxt:'S',cluster:'ava-bell',greet:'Pagi, Siska',gsub:'Curi start sebelum jam 10',chip:'',heroSub:'Sisa kamu: 2 tempat \u2022 5 makan',drop:'card-full',effort:'S \u00B7 1-2h',risk:'Sedang',pros:'Terasa personal kayak daily app.',cons:'Logic jam + testing ekstra.'},
+  {id:'AS12',fam:'warm',name:'Streak',desc:'Avatar lime + chip 3 weekend aktif. Dropdown Riwayat highlight.',avBg:'#A3E635',avFg:'#0C0A09',avTxt:'S',cluster:'ava-bell',greet:'Halo, Siska',gsub:'',chip:'3 weekend aktif',heroSub:'Sisa kamu: 2 tempat \u2022 5 makan',drop:'card-riwayat-hot',effort:'S \u00B7 2h',risk:'Sedang',pros:'Repeat mechanic kelihatan.',cons:'Butuh field streak (belum ada) = overclaim.'},
+  {id:'AS13',fam:'power',name:'Cluster penuh',desc:'Header avatar + nama + bell. Dropdown ikon lengkap.',avBg:'#0C0A09',avFg:'#fff',avTxt:'S',cluster:'ava-name-bell',greet:'Halo, Siska',gsub:'Sisa kamu: 2 tempat \u2022 5 makan',chip:'',heroSub:'Sisa kamu: 2 tempat \u2022 5 makan',drop:'card-icons',effort:'S \u00B7 2h',risk:'Sedang',pros:'Power-user: semua 1 tap.',cons:'Paling padat, risiko sempit.'},
+  {id:'AS14',fam:'power',name:'Grouped + chevron',desc:'Avatar + chevron + bell. Dropdown 2 grup + Keluar section.',avBg:'#0C0A09',avFg:'#fff',avTxt:'S',cluster:'ava-chev-bell',greet:'Halo, Siska',gsub:'Sisa kamu: 2 tempat \u2022 5 makan',chip:'',heroSub:'Sisa kamu: 2 tempat \u2022 5 makan',drop:'card-grouped',effort:'S \u00B7 2h',risk:'Sedang',pros:'Rapi kayak Linear/Vercel.',cons:'Chevron affordance perlu dipelajari.'},
+  {id:'AS15',fam:'power',name:'Bottom-sheet',desc:'Menu dibuka sebagai sheet bawah + handle (mobile-native).',avBg:'#0C0A09',avFg:'#fff',avTxt:'S',cluster:'ava-bell',greet:'Halo, Siska',gsub:'Sisa kamu: 2 tempat \u2022 5 makan',chip:'',heroSub:'Sisa kamu: 2 tempat \u2022 5 makan',drop:'sheet',effort:'M \u00B7 3h',risk:'Sedang',pros:'Thumb-zone terbaik di Android.',cons:'Effort terbesar, animasi sheet.'},
+  {id:'AS16',fam:'power',name:'Badge notif',desc:'Avatar online-dot + bell badge 3. Dropdown ada count.',avBg:'#0C0A09',avFg:'#fff',avTxt:'S',cluster:'ava-dot-bell3',greet:'Halo, Siska',gsub:'Sisa kamu: 2 tempat \u2022 5 makan',chip:'',heroSub:'Sisa kamu: 2 tempat \u2022 5 makan',drop:'card-badge',effort:'S \u00B7 2h',risk:'Sedang',pros:'Bell akhirnya punya alasan diklik.',cons:'Badge palsu sebelum ada sistem notif.'},
+  {id:'AS17',fam:'convert',name:'Voucher nudge',desc:'Login = hero + baris voucher menunggu. Dropdown standar.',avBg:'#0C0A09',avFg:'#fff',avTxt:'S',cluster:'ava-bell',greet:'Halo, Siska',gsub:'Ada voucher menunggumu',chip:'',heroSub:'Sisa kamu: 2 tempat \u2022 5 makan',drop:'card-full',effort:'S \u00B7 1-2h',risk:'Rendah',pros:'Jembatan ke klaim voucher wajib-login.',cons:'Nudge ekstra di bawah hero.'},
+  {id:'AS18',fam:'convert',name:'Keluar kalem',desc:'Keluar abu-abu (bukan merah) biar tidak takut.',avBg:'#0C0A09',avFg:'#fff',avTxt:'S',cluster:'ava-bell',greet:'Halo, Siska',gsub:'Sisa kamu: 2 tempat \u2022 5 makan',chip:'',heroSub:'Sisa kamu: 2 tempat \u2022 5 makan',drop:'card-grey-out',effort:'S \u00B7 1h',risk:'Rendah',pros:'Aman dari tap nyasar.',cons:'Langgar konvensi merah = destructive.'},
+  {id:'AS19',fam:'convert',name:'Confirm-inline',desc:'Keluar minta konfirmasi inline Ya/Batal (tanpa modal).',avBg:'#0C0A09',avFg:'#fff',avTxt:'S',cluster:'ava-bell',greet:'Halo, Siska',gsub:'Sisa kamu: 2 tempat \u2022 5 makan',chip:'',heroSub:'Sisa kamu: 2 tempat \u2022 5 makan',drop:'card-confirm',effort:'M \u00B7 2-3h',risk:'Rendah',pros:'Anti logout nyasar, tetap $0.',cons:'Satu tap ekstra tiap logout.'},
+  {id:'AS20',fam:'convert',name:'Avatar-only',desc:'Header cuma avatar (bell pindah ke dalam menu).',avBg:'#0C0A09',avFg:'#fff',avTxt:'S',cluster:'ava-only',greet:'Halo, Siska',gsub:'Sisa kamu: 2 tempat \u2022 5 makan',chip:'',heroSub:'Sisa kamu: 2 tempat \u2022 5 makan',drop:'card-bell-inside',effort:'S \u00B7 1-2h',risk:'Sedang',pros:'Header paling lega.',cons:'Bell disembunyikan = langgar SOP 2-state.'}
+];
+
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+function clusterHTML(o){
+  var av = '<span class="p-ava" style="background:'+o.avBg+';color:'+o.avFg+';'+(o.avBg==='#fff'?'border:1.5px solid #0C0A09;':'')+'">'+o.avTxt+'</span>';
+  if(o.cluster==='ava-bell') return av+'<span>\uD83D\uDD14</span>';
+  if(o.cluster==='bell-ava') return '<span>\uD83D\uDD14</span>'+av;
+  if(o.cluster==='ava-bell-dot') return av+'<span>\uD83D\uDD14\u2022</span>';
+  if(o.cluster==='ava-name-bell') return av+'<span style="font-size:10px">Siska</span><span>\uD83D\uDD14</span>';
+  if(o.cluster==='ava-chev-bell') return av+'<span style="font-size:9px">\u25BE</span><span>\uD83D\uDD14</span>';
+  if(o.cluster==='ava-dot-bell3') return '<span style="position:relative">'+av+'<i style="position:absolute;right:-1px;bottom:-1px;width:8px;height:8px;border-radius:50%;background:#16A34A;border:2px solid #fff;display:block"></i></span><span>\uD83D\uDD14<sup style="font-size:8px;color:#DC2626">3</sup></span>';
+  if(o.cluster==='ava-only') return av;
+  return av+'<span>\uD83D\uDD14</span>';
+}
+function phoneBefore(){
+  return '<div class="phone"><div class="tag">BEFORE \u00B7 ANON (1:1 live)</div>'
+  +'<div class="p-head"><div class="p-logo">W</div><div class="p-links"><span style="color:#DC2626">Login</span><span style="color:#EA580C">Register</span></div></div>'
+  +'<div class="p-greet"><span class="p-ava" style="background:#0C0A09;color:#fff">T</span><span>Halo, teman Wikendo</span></div>'
+  +'<div class="p-hero"><div class="lbl">QUOTA HARI INI \u00B7 reset 00.00</div><div class="num">1 \u2022 2</div><div class="s">Gratis hari ini \u2014 login buka 2 + 5</div><div class="pill">Mulai Quiz \u2192</div></div>'
+  +'<div class="p-cta"><div>Cari Tempat<br>quiz 30 dtk</div><div>Cari Makan<br>quiz 20 dtk</div></div>'
+  +'<div class="p-note">Header + greeting + hero = live sekarang.</div></div>';
+}
+function dropHTML(o){
+  var em = '<div class="em">siskadptr@gmail.com</div>';
+  if(o.drop==='card-mini') return '<div class="p-drop">'+em+'<div class="row"><span>Keluar</span><span class="out">\u2192</span></div></div>';
+  if(o.drop==='card-riwayat') return '<div class="p-drop">'+em+'<div class="row"><span>Riwayat</span><span>\u2192</span></div><div class="row"><span class="out">Keluar</span><span class="out">\u2192</span></div></div>';
+  if(o.drop==='card-full') return '<div class="p-drop">'+em+'<div class="row"><span>Riwayat</span><span>\u2192</span></div><div class="row"><span>Wishlist (Segera)</span><span>\u00B7</span></div><div class="row"><span class="out">Keluar</span><span class="out">\u2192</span></div></div>';
+  if(o.drop==='card-quota') return '<div class="p-drop">'+em+'<div class="row"><span>Sisa 2 \u2022 5</span><span>quota</span></div><div class="row"><span>Riwayat</span><span>\u2192</span></div><div class="row"><span class="out">Keluar</span><span class="out">\u2192</span></div></div>';
+  if(o.drop==='card-progress') return '<div class="p-drop">'+em+'<div class="row"><span>Tempat 2 tersisa</span><span>\u2587</span></div><div class="row"><span>Makan 5 tersisa</span><span>\u2587</span></div><div class="row"><span class="out">Keluar</span><span class="out">\u2192</span></div></div>';
+  if(o.drop==='card-riwayat-hot') return '<div class="p-drop">'+em+'<div class="row"><span>Riwayat \u2022 3 weekend</span><span>\u2192</span></div><div class="row"><span>Wishlist (Segera)</span><span>\u00B7</span></div><div class="row"><span class="out">Keluar</span><span class="out">\u2192</span></div></div>';
+  if(o.drop==='card-icons') return '<div class="p-drop">'+em+'<div class="row"><span>\u25CB Riwayat</span><span>\u2192</span></div><div class="row"><span>\u2661 Wishlist</span><span>\u00B7</span></div><div class="row"><span class="out">\u2715 Keluar</span><span class="out">\u2192</span></div></div>';
+  if(o.drop==='card-grouped') return '<div class="p-drop">'+em+'<div class="row"><span>Riwayat</span><span>\u2192</span></div><div class="row"><span>Wishlist (Segera)</span><span>\u00B7</span></div><div class="row"><span class="out">Keluar</span><span class="out">\u2192</span></div></div>';
+  if(o.drop==='sheet') return '<div class="p-drop sheet"><div style="text-align:center;color:#a8a29e">\u2014 handle \u2014</div>'+em+'<div class="row"><span>Riwayat</span><span>\u2192</span></div><div class="row"><span>Wishlist (Segera)</span><span>\u00B7</span></div><div class="row"><span class="out">Keluar</span><span class="out">\u2192</span></div></div>';
+  if(o.drop==='card-badge') return '<div class="p-drop">'+em+'<div class="row"><span>Notifikasi (3)</span><span>\u2192</span></div><div class="row"><span>Riwayat</span><span>\u2192</span></div><div class="row"><span class="out">Keluar</span><span class="out">\u2192</span></div></div>';
+  if(o.drop==='card-grey-out') return '<div class="p-drop">'+em+'<div class="row"><span>Riwayat</span><span>\u2192</span></div><div class="row"><span>Wishlist (Segera)</span><span>\u00B7</span></div><div class="row"><span>Keluar</span><span>\u2192</span></div></div>';
+  if(o.drop==='card-confirm') return '<div class="p-drop">'+em+'<div class="row"><span>Riwayat</span><span>\u2192</span></div><div class="row"><span>Yakin keluar? <b>Ya</b> / Batal</span><span></span></div></div>';
+  if(o.drop==='card-bell-inside') return '<div class="p-drop">'+em+'<div class="row"><span>Notifikasi</span><span>\uD83D\uDD14</span></div><div class="row"><span>Riwayat</span><span>\u2192</span></div><div class="row"><span class="out">Keluar</span><span class="out">\u2192</span></div></div>';
+  return '<div class="p-drop">'+em+'<div class="row"><span class="out">Keluar</span><span class="out">\u2192</span></div></div>';
+}
+function phoneAfter(o){
+  var chip = o.chip ? '<div><span class="p-chip">'+esc(o.chip)+'</span></div>' : '';
+  var gsub = o.gsub ? '<div class="p-gsub">'+esc(o.gsub)+'</div>' : '';
+  return '<div class="phone"><div class="tag">AFTER \u00B7 LOGIN ('+o.id+')</div>'
+  +'<div class="p-head"><div class="p-logo">W</div><div class="p-cluster">'+clusterHTML(o)+'</div></div>'
+  +'<div class="p-greet"><span class="p-ava" style="background:'+o.avBg+';color:'+o.avFg+';'+(o.avBg==='#fff'?'border:1.5px solid #0C0A09;':'')+'">'+o.avTxt+'</span><span>'+esc(o.greet)+'</span></div>'
+  +gsub+chip
+  +'<div class="p-hero"><div class="lbl">QUOTA HARI INI \u00B7 reset 00.00</div><div class="num">2 \u2022 5</div><div class="s">'+esc(o.heroSub)+'</div><div class="pill">Mulai Quiz \u2192</div></div>'
+  +'<div class="p-cta"><div>Cari Tempat<br>quiz 30 dtk</div><div>Cari Makan<br>quiz 20 dtk</div></div>'
+  +dropHTML(o)
+  +'<div class="p-note">Dropdown TERBUKA digambar di bawah CTA agar bisa dinilai.</div></div>';
+}
+function getSaved(){ try { return JSON.parse(localStorage.getItem(STORE)||'[]'); } catch(e){ return []; } }
+function setSaved(a){ localStorage.setItem(STORE, JSON.stringify(a)); }
+function render(){
+  var grid = document.getElementById('grid');
+  var html = '';
+  OPTIONS.forEach(function(o){
+    var rec = o.id==='AS6' ? ' rec' : '';
+    html += '<div class="card'+rec+'" data-fam="'+o.fam+'" data-id="'+o.id+'">'
+    +'<div class="cardhead"><span class="id">'+o.id+(o.id==='AS6'?' \u2022 REKOMENDASI':'')+'</span><h3>'+esc(o.name)+'</h3><p>'+esc(o.desc)+'</p></div>'
+    +'<div class="phonewrap">'+phoneBefore()+phoneAfter(o)+'</div>'
+    +'<div class="meta"><div class="sw"><i style="background:#F5F5F4"></i><i style="background:#0C0A09"></i><i style="background:#EA580C"></i><i style="background:#D9F99D"></i><i style="background:#A3E635"></i><span style="font-size:10px;font-weight:700;color:#78716c">token lock home</span></div>'
+    +'<div class="pillrow"><span>Effort '+esc(o.effort)+'</span><span>Risiko '+esc(o.risk)+'</span><span>'+o.fam+'</span></div>'
+    +'<div class="procon"><div><b>+ PRO</b>'+esc(o.pros)+'</div><div><b>\u2212 KONTRA</b>'+esc(o.cons)+'</div></div>'
+    +'<div class="pick"><button data-pick="'+o.id+'">☆ Shortlist '+o.id+'</button></div></div></div>';
+  });
+  grid.innerHTML = html;
+  bind();
+  refresh();
+}
+function bind(){
+  document.querySelectorAll('#filters button').forEach(function(b){
+    b.onclick = function(){
+      document.querySelectorAll('#filters button').forEach(function(x){x.classList.remove('on')});
+      b.classList.add('on');
+      var f = b.getAttribute('data-f');
+      document.querySelectorAll('.card').forEach(function(c){
+        c.style.display = (f==='all'||c.getAttribute('data-fam')===f) ? '' : 'none';
+      });
+    };
+  });
+  document.querySelectorAll('[data-pick]').forEach(function(b){
+    b.onclick = function(){
+      var id = b.getAttribute('data-pick');
+      var s = getSaved();
+      if(s.indexOf(id)>=0) s = s.filter(function(x){return x!==id});
+      else s.push(id);
+      setSaved(s); refresh();
+    };
+  });
+  document.getElementById('copybtn').onclick = function(){
+    var s = getSaved();
+    var t = s.length ? ('Gua suka '+s.join(', ')) : 'Gua suka ...';
+    if(navigator.clipboard) navigator.clipboard.writeText(t);
+    document.getElementById('picktext').textContent = t;
+  };
+}
+function refresh(){
+  var s = getSaved();
+  document.getElementById('count').textContent = s.length;
+  document.getElementById('picktext').textContent = s.length ? ('Gua suka '+s.join(', ')) : 'Gua suka ...';
+  document.querySelectorAll('[data-pick]').forEach(function(b){
+    var id = b.getAttribute('data-pick');
+    if(s.indexOf(id)>=0){ b.classList.add('saved'); b.textContent = '\u2605 '+id+' dipilih'; }
+    else { b.classList.remove('saved'); b.textContent = '\u2606 Shortlist '+id; }
+  });
+}
+render();
+</script>
+</body>
+</html>

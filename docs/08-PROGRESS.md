@@ -17,7 +17,8 @@
 
 
 ### 🔥 NOW (lagi dikerjain)
-- [ ] Pembeda before/after login di index (Addendum `docs/22` DRAFT ⏳ 11 Okt: request Agesta — greeting nama + avatar + dropdown + logout; AI siapkan Addendum + test `auth-state-home` 11 assert SKIP by design, Agesta slicing SENDIRI) — next: Agesta bilang "Gas slicing" → hapus `.skip` (RED) → slice `useAuth.ts` + `app.vue` + `index.vue` → GREEN → push + deploy
+- [ ] Pembeda before/after login di index — BOARD 20 OPSI DONE ✅ 11 Okt (`design/revamp-options-v11.html` + PNG 1400x3480, 20 ID AS1-AS20, rekom AS6 wallet-card, app/ NOL sentuh): nunggu Agesta balas `Gua suka [ID]` → AI slicing (revisi 11 Okt: "lu yang eksekusi") → Addendum 22 final → TDD hapus `.skip` RED → GREEN → push + deploy
+- [ ] Pembeda before/after login — Addendum `docs/22` DRAFT + test `auth-state-home` 11 assert SKIP by design (siap dibuka pas slicing) ⏳
 - [x] Google Auth satu pintu DONE ✅ 11 Okt: approved "Gas fix!" — label netral SAMA "Lanjutkan dengan Google" (register+login) + redirect SAMA hormati ?redirect= (register baca useRoute, footer login preservasi ke /register) + kunci checkbox Syarat di handleGoogle register — TDD: best-practice RED 6 gagal → GREEN 8/8 ✅ 6-file 68/68 ✅ full 200/200 (20 files) ✅ lint 0 error ✅ build 9.35s ✅ SCAN-CLEAN ✅ Addendum `docs/21` ✅ — next: push + deploy + E2E email pribadi
 - [x] Opsi A tombol Google DONE ✅ 11 Okt: lock Agesta "A" (board v10) — tombol Google register+login jadi outline abu #DADCE0 + logo G 4-warna resmi + divider ATAU, shadow dihapus, CTA hitam tetap satu-satunya solid — TDD: google-button-a RED 6 gagal → GREEN 9/9 ✅ full 192/192 (19 files) ✅ lint 0 error (5 warning awal) ✅ build 9.46s ✅ SCAN-CLEAN ✅ Addendum `docs/20` ✅ — next: push + deploy + E2E email pribadi
 - [ ] Pilih opsi bedain tombol Google /register (board v10 + PNG, gate A/B/C — rekom A) ⏳ 11 Okt: Agesta minta insight + referensi (Google mirip form) → board `design/revamp-options-v10.html` + `revamp-options-v10-compare.png` PASS QA, app/ untouched — next: Agesta balas A/B/C → Addendum kecil → TDD slice → push + deploy
@@ -100,6 +101,12 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-11 — Board v11 20 opsi auth-state-home DONE ✅ (AI eksekusi, nunggu pick)
+- **Kenapa:** revisi user "lu yang eksekusi, kasih gambar 20 opsi lalu gua memilih" (balik SOP lama "Agesta slicing sendiri"). Login nol rasanya → aktivasi bocor → butuh pembeda before/after (greeting nama + avatar + dropdown + logout).
+- **Dikerjain (AI, design/ SAJA, app/ NOL sentuh):** `design/revamp-options-v11.html` (20 ID AS1-AS20, 5 keluarga minimal/wallet/warm/power/convert, filter + shortlist `wikendo-authstate20-pick` + copy-pick bar, h2h Top5, rekom AS6) + `design/revamp-options-v11-compare.py` + PNG `revamp-options-v11-compare.png` 1400x3480 334KB + board NOW. BEFORE (anon 1:1 live) di judul biar 20 panel fokus AFTER.
+- **Verifikasi:** 20 ID unik ✅ PNG lolos vision QA (20/20 panel, NOL tofu, tiap panel header+greeting+hero+CTA+dropdown) ✅ `git status` app/ bersih (cuma design/ + PROGRESS) ✅.
+- **Next:** Agesta balas `Gua suka [ID]` → Addendum 22 final → TDD hapus `.skip` RED → slice useAuth+app.vue+index.vue GREEN → lint → build → push + deploy.
 
 ## 2026-10-11 — Addendum 22 + test auth-state-home SIAP (Agesta slicing sendiri ⏳)
 - **Kenapa:** login nol rasanya (header `isLoggedIn` hantu + sapaan hardcode + quota anon terus) → user nggak dapat reward psikologis → aktivasi bocor. Request Agesta: greeting nama + logout + menu profile.
