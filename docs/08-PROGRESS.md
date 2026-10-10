@@ -17,6 +17,7 @@
 
 
 ### 🔥 NOW (lagi dikerjain)
+- [ ] Pembeda before/after login di index (Addendum `docs/22` DRAFT ⏳ 11 Okt: request Agesta — greeting nama + avatar + dropdown + logout; AI siapkan Addendum + test `auth-state-home` 11 assert SKIP by design, Agesta slicing SENDIRI) — next: Agesta bilang "Gas slicing" → hapus `.skip` (RED) → slice `useAuth.ts` + `app.vue` + `index.vue` → GREEN → push + deploy
 - [x] Google Auth satu pintu DONE ✅ 11 Okt: approved "Gas fix!" — label netral SAMA "Lanjutkan dengan Google" (register+login) + redirect SAMA hormati ?redirect= (register baca useRoute, footer login preservasi ke /register) + kunci checkbox Syarat di handleGoogle register — TDD: best-practice RED 6 gagal → GREEN 8/8 ✅ 6-file 68/68 ✅ full 200/200 (20 files) ✅ lint 0 error ✅ build 9.35s ✅ SCAN-CLEAN ✅ Addendum `docs/21` ✅ — next: push + deploy + E2E email pribadi
 - [x] Opsi A tombol Google DONE ✅ 11 Okt: lock Agesta "A" (board v10) — tombol Google register+login jadi outline abu #DADCE0 + logo G 4-warna resmi + divider ATAU, shadow dihapus, CTA hitam tetap satu-satunya solid — TDD: google-button-a RED 6 gagal → GREEN 9/9 ✅ full 192/192 (19 files) ✅ lint 0 error (5 warning awal) ✅ build 9.46s ✅ SCAN-CLEAN ✅ Addendum `docs/20` ✅ — next: push + deploy + E2E email pribadi
 - [ ] Pilih opsi bedain tombol Google /register (board v10 + PNG, gate A/B/C — rekom A) ⏳ 11 Okt: Agesta minta insight + referensi (Google mirip form) → board `design/revamp-options-v10.html` + `revamp-options-v10-compare.png` PASS QA, app/ untouched — next: Agesta balas A/B/C → Addendum kecil → TDD slice → push + deploy
@@ -99,6 +100,12 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-11 — Addendum 22 + test auth-state-home SIAP (Agesta slicing sendiri ⏳)
+- **Kenapa:** login nol rasanya (header `isLoggedIn` hantu + sapaan hardcode + quota anon terus) → user nggak dapat reward psikologis → aktivasi bocor. Request Agesta: greeting nama + logout + menu profile.
+- **Dikerjain (AI, tanpa sentuh slicing):** Addendum `docs/22-PRD-Addendum-Auth-State-Home.md` DRAFT (WHAT mini: `useAuth.ts` + greeting first-name + avatar+dropdown+Keluar + logout real; guard: NO /profile full, NO foto Google, NO quota server) + test BARU `app/tests/auth-state-home.test.ts` 11 assert (composable 4 + header 4 + home 3) dalam `describe.skip` by design + board NOW.
+- **Verifikasi:** file test SKIP 11/11 ✅ full 200 passed + 11 skipped (21 files) ✅ main tetap hijau ✅ (hapus `.skip` pas slicing → RED → GREEN).
+- **Next:** Agesta "Gas slicing" → hapus `.skip` → slice 3 file ikut kriteria DONE Addendum → GREEN → push + deploy.
 
 ## 2026-10-11 — Google Auth satu pintu DONE ✅ (approved "Gas fix!", best practice)
 - **Kenapa:** signInWithOAuth login+register SAMA (Supabase auto create-vs-login by email) → label beda = beban pikir + redirect beda = konteks quiz hilang + checkbox bypass = bolong legal.
