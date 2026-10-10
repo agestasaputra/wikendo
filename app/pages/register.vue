@@ -1,8 +1,9 @@
 <!-- pages/register.vue → GET /register (Auth page, Addendum 09 v1.3 APPROVED).
-  APA: slicing 100% image img_19a0ea1cfdcf — banner hitam DAFTAR GRATIS 2•5 + Daftar via Google + Nama + Email + Password•kuat? + checkbox + Daftar →.
+  APA: slicing 100% image img_19a0ea1cfdcf — banner hitam DAFTAR GRATIS 2•5 + Daftar via Google + Email + Password•kuat? + checkbox + Daftar →.
   KENAPA: user klik Register di topbar global → lihat benefit quota full + bisa daftar via Supabase (email atau Google 1-klik).
   Banner 1:1 R1 lock v9 (ink #0C0A09 + strip ember #EA580C + angka #D9F99D 17px + radius 12px + font 10px kiri).
-  Contoh: anon lihat 2 • 5 → Daftar via Google / isi Nama+Email+Password → Daftar → home. -->
+  TAKEOUT 10 Okt 2026 (request Agesta): field Nama dihapus — user hanya isi Email + Password.
+  Contoh: anon lihat 2 • 5 → Daftar via Google / isi Email+Password → Daftar → home. -->
 <template>
   <div class="max-w-md mx-auto px-4 pb-10 min-h-screen" style="background:#F5F5F4;font-family:'Plus Jakarta Sans',system-ui,sans-serif">
     <!-- 1. Banner hitam promo — 1:1 image (strip ember + radius 12 + angka lime-muda) -->
@@ -18,12 +19,8 @@
       Daftar via Google
     </button>
 
-    <!-- 3+4+5. Form Nama + Email + Password + meter kuat? -->
+    <!-- 3+4. Form Email + Password + meter kuat? (Nama di-takeout 10 Okt 2026) -->
     <form class="space-y-3 mt-3" @submit.prevent="handleRegister">
-      <div class="bg-white rounded-full flex items-center gap-2 px-4 py-3.5 shadow-sm">
-        <span class="text-gray-400 text-base">👤</span>
-        <input v-model="nama" type="text" required placeholder="Nama" class="flex-1 bg-transparent outline-none text-sm font-bold text-black placeholder:text-gray-400">
-      </div>
       <div class="bg-white rounded-full flex items-center gap-2 px-4 py-3.5 shadow-sm">
         <span class="text-gray-400 text-base">✉️</span>
         <input v-model="email" type="email" required placeholder="Email" class="flex-1 bg-transparent outline-none text-sm font-bold text-black placeholder:text-gray-400">
@@ -57,7 +54,6 @@ import { supabaseBrowser } from '~/utils/supabase'
 
 const router = useRouter()
 
-const nama = ref('')
 const email = ref('')
 const password = ref('')
 const agree = ref(true)
@@ -76,7 +72,7 @@ const strength = computed(() => {
   return Math.min(5, s)
 })
 
-// Daftar email+password via Supabase signUp (nama ikut user_metadata) → home.
+// Daftar email+password via Supabase signUp → home.
 async function handleRegister() {
   errorMsg.value = ''
   loading.value = true
@@ -84,8 +80,7 @@ async function handleRegister() {
     const sb = supabaseBrowser()
     const { error } = await sb.auth.signUp({
       email: email.value,
-      password: password.value,
-      options: { data: { nama: nama.value } }
+      password: password.value
     })
     if (error) {
       errorMsg.value = error.message

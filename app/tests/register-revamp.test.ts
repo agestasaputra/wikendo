@@ -9,6 +9,7 @@ import path from 'node:path'
  * lalu GREEN pas register.vue di-slice persis + disesuaikan fitur (Supabase signUp, Google OAuth, meter kuat?).
  * Image ref: /home/ubuntu/.hermes/cache/images/img_19a0ea1cfdcf.jpg
  * Urutan image: banner hitam DAFTAR GRATIS 2•5 → Daftar via Google → Nama → Email → Password•kuat? → checkbox → Daftar →
+ * TAKEOUT 10 Okt 2026 (request Agesta): field Nama dihapus — user hanya isi Email + Password.
  */
 
 const REGISTER = path.resolve(__dirname, '../pages/register.vue')
@@ -42,12 +43,14 @@ describe('register revamp 100% image — struktur + teks persis', () => {
     expect(s).toContain('rounded-full')
   })
 
-  it('field Nama + Email + Password (placeholder persis + ikon kiri)', () => {
+  it('field Email + Password SAJA (Nama di-takeout): placeholder persis + ikon kiri', () => {
     const s = readRegister()
-    expect(s).toContain('placeholder="Nama"')
+    expect(s).not.toContain('placeholder="Nama"')
+    expect(s).not.toContain('👤')
+    expect(s).not.toContain("nama = ref('')")
+    expect(s).not.toContain('nama:')
     expect(s).toContain('placeholder="Email"')
     expect(s).toContain('placeholder="Password"')
-    expect(s).toContain('👤')
     expect(s).toContain('✉️')
     expect(s).toContain('🔒')
   })
