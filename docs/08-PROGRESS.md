@@ -94,6 +94,12 @@
 
 ## 🧾 LOG (newest first)
 
+## 2026-10-10 — Flowchart after-click Register (docs, tanpa ubah app/)
+- **Kenapa:** request Agesta — minta gambar flowchart khusus proses SETELAH klik `Daftar →` (bukan alur umum).
+- **Dikerjain:** `design/register-after-click-flow-2026-10-10.png` (render PIL 1200x1780: gate browser → loading → signUp → diamond error YA/TIDAK → HOME + GAP quota) — sumber `app/pages/register.vue:76-93` + `utils/supabase.ts` + `server/api/quota.get.ts` + `app.vue:10-14` + `quiz-logic.ts:72-89`.
+- **Verifikasi:** vision_analyze QA: judul/sub terbaca, 10 kotak/diamond urut benar, nol teks overlap, panah atas→bawah + loop YA + TIDAK→Sukses benar ✅ file 136K ✅.
+- **Next:** slice session infra (GAP `/api/quota` masih `isLoggedIn:false`) biar wallet HOME jadi 2•5 setelah daftar.
+
 ## 2026-10-10 — Takeout field Nama /register DONE ✅ (`25de1d2`, user isi Email+Password saja)
 - **Kenapa:** request Agesta — form Nama dihapus biar registrasi lebih pendek, user hanya isi Email + Password.
 - **Dikerjain:** `app/pages/register.vue` (hapus input 👤 + `nama` ref + `options.data`, update komen APA/CONTOH) + `app/tests/register-revamp.test.ts` (assert Nama 0 + Email/Password 1 + ikon, catat TAKEOUT).
