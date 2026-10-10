@@ -1,8 +1,8 @@
 # 22-PRD-Addendum-Auth-State-Home — Pembeda Before/After Login di Index (Greeting + Avatar + Logout)
 
-- Status: DRAFT → nunggu "Gas slicing" dari Agesta (request 11 Okt 2026: "Iyaaa boleh, gas!").
+- Status: APPROVED AS6 wallet-card (lock Agesta "Gua suka AS6" 11 Okt 2026) → AI slicing sampai deploy.
 - Scope: `app/composables/useAuth.ts` (BARU) + `app/app.vue` + `app/pages/index.vue` SAJA. PRD Final tidak diutak-atik.
-- Yang EKSEKUSI slicing: Agesta sendiri (AI cuma siapkan Addendum + test TDD RED).
+- Yang EKSEKUSI slicing: AI (revisi 11 Okt: "lu yang eksekusi"). Board `design/revamp-options-v11.html` + PNG AS1-AS20, rekom AS6 = lock final.
 
 ## Kenapa (WHY)
 - Login sekarang = sukses teknis tapi nol rasanya. User bayar effort (daftar + verifikasi + klik Google)

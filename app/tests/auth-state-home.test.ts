@@ -19,7 +19,7 @@ function readSafe(p: string): string {
   return fs.existsSync(p) ? fs.readFileSync(p, 'utf-8') : ''
 }
 
-describe.skip('auth-state-home — composable useAuth.ts (session sumber kebenaran)', () => {
+describe('auth-state-home — composable useAuth.ts (session sumber kebenaran)', () => {
   it('file app/composables/useAuth.ts ADA', () => {
     expect(fs.existsSync(USE_AUTH)).toBe(true)
   })
@@ -44,7 +44,7 @@ describe.skip('auth-state-home — composable useAuth.ts (session sumber kebenar
   })
 })
 
-describe.skip('auth-state-home — header 2-state (avatar + dropdown, max-w-md tetap)', () => {
+describe('auth-state-home — header 2-state (avatar + dropdown, max-w-md tetap)', () => {
   it('app.vue pakai useAuth (bukan isLoggedIn hantu)', () => {
     expect(readSafe(APP_VUE)).toContain('useAuth')
   })
@@ -69,7 +69,7 @@ describe.skip('auth-state-home — header 2-state (avatar + dropdown, max-w-md t
   })
 })
 
-describe.skip('auth-state-home — greeting + hero index login-aware', () => {
+describe('auth-state-home — greeting + hero index login-aware', () => {
   it('index.vue pakai useAuth', () => {
     expect(readSafe(HOME)).toContain('useAuth')
   })

@@ -17,8 +17,8 @@
 
 
 ### 🔥 NOW (lagi dikerjain)
-- [ ] Pembeda before/after login di index — BOARD 20 OPSI DONE ✅ 11 Okt (`design/revamp-options-v11.html` + PNG 1400x3480, 20 ID AS1-AS20, rekom AS6 wallet-card, app/ NOL sentuh): nunggu Agesta balas `Gua suka [ID]` → AI slicing (revisi 11 Okt: "lu yang eksekusi") → Addendum 22 final → TDD hapus `.skip` RED → GREEN → push + deploy
-- [ ] Pembeda before/after login — Addendum `docs/22` DRAFT + test `auth-state-home` 11 assert SKIP by design (siap dibuka pas slicing) ⏳
+- [x] Pembeda before/after login di index — AS6 wallet-card DONE ✅ 11 Okt (lock Agesta "Gua suka AS6"): `useAuth.ts` BARU (getSession+onAuthStateChange, displayName full_name>name>prefix email) + `app.vue` header 2-state (anon Login/Register vs login avatar initial S + Bell + dropdown email grey + Riwayat + Wishlist Segera + Keluar merah + logout real → /) + `index.vue` greeting login-aware (Halo Siska + sub Sisa kamu, anon 1:1 teman Wikendo) — TDD: hapus `.skip` RED → GREEN 11/11 ✅ full 211/211 (21 files) ✅ lint 0 error (5 warning kosmetik) ✅ build 9.56s ✅ — next: push + deploy + E2E siskadptr@gmail.com
+- [x] Board 20 opsi auth-state-home DONE ✅ 11 Okt (`design/revamp-options-v11.html` + PNG 1400x3480, 20 ID AS1-AS20, rekom AS6 = lock final Agesta "Gua suka AS6") — next: DONE (lanjut slicing AS6 di atas)
 - [x] Google Auth satu pintu DONE ✅ 11 Okt: approved "Gas fix!" — label netral SAMA "Lanjutkan dengan Google" (register+login) + redirect SAMA hormati ?redirect= (register baca useRoute, footer login preservasi ke /register) + kunci checkbox Syarat di handleGoogle register — TDD: best-practice RED 6 gagal → GREEN 8/8 ✅ 6-file 68/68 ✅ full 200/200 (20 files) ✅ lint 0 error ✅ build 9.35s ✅ SCAN-CLEAN ✅ Addendum `docs/21` ✅ — next: push + deploy + E2E email pribadi
 - [x] Opsi A tombol Google DONE ✅ 11 Okt: lock Agesta "A" (board v10) — tombol Google register+login jadi outline abu #DADCE0 + logo G 4-warna resmi + divider ATAU, shadow dihapus, CTA hitam tetap satu-satunya solid — TDD: google-button-a RED 6 gagal → GREEN 9/9 ✅ full 192/192 (19 files) ✅ lint 0 error (5 warning awal) ✅ build 9.46s ✅ SCAN-CLEAN ✅ Addendum `docs/20` ✅ — next: push + deploy + E2E email pribadi
 - [ ] Pilih opsi bedain tombol Google /register (board v10 + PNG, gate A/B/C — rekom A) ⏳ 11 Okt: Agesta minta insight + referensi (Google mirip form) → board `design/revamp-options-v10.html` + `revamp-options-v10-compare.png` PASS QA, app/ untouched — next: Agesta balas A/B/C → Addendum kecil → TDD slice → push + deploy
@@ -101,6 +101,12 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-11 — AS6 wallet-card SLICING DONE ✅ (lock "Gua suka AS6", AI eksekusi sampai deploy)
+- **Kenapa:** login nol rasanya (header `isLoggedIn` hantu undefined + sapaan hardcode `teman Wikendo` + quota anon terus) → user nggak dapat reward psikologis. AS6 menang bisnis: nama + quota 2+5 kelihatan 1 layar → quiz ke-2 naik → voucher wajib-login anti-farming.
+- **Dikerjain:** `app/composables/useAuth.ts` BARU 83 lines (getSession + onAuthStateChange, isLoggedIn/email/displayName/initial/signOut, full_name>name>prefix email e.g. siskadptr→Siskadptr) + `app/app.vue` header 2-state (anon Login/Register vs login avatar initial + Bell + dropdown: email grey + Riwayat + Wishlist Segera + Keluar merah spinner+guard → `push('/')`) + `app/pages/index.vue` greeting login-aware (`Halo, Siska` + sub `Sisa kamu:`, anon 1:1 `Halo, teman Wikendo` + `login buka 2 + 5`) + Addendum `docs/22` DRAFT→APPROVED AS6 + board NOW DONE.
+- **Verifikasi:** hapus `.skip` RED by design → GREEN auth-state-home 11/11 ✅ full 211/211 (21 files) ✅ lint 0 error (5 warning kosmetik) ✅ build 9.56s ✅ — next: push + deploy + E2E siskadptr@gmail.com + pantau Claude ≤12 Okt.
+- **File:** `app/composables/useAuth.ts` + `app/app.vue` + `app/pages/index.vue` + `app/tests/auth-state-home.test.ts` (skip→aktif) + `docs/22-PRD-Addendum-Auth-State-Home.md` + `docs/08-PROGRESS.md`.
 
 ## 2026-10-11 — Board v11 20 opsi auth-state-home DONE ✅ (AI eksekusi, nunggu pick)
 - **Kenapa:** revisi user "lu yang eksekusi, kasih gambar 20 opsi lalu gua memilih" (balik SOP lama "Agesta slicing sendiri"). Login nol rasanya → aktivasi bocor → butuh pembeda before/after (greeting nama + avatar + dropdown + logout).

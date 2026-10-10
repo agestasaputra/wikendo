@@ -5,19 +5,20 @@ Contoh: quota real di-wire ke GET /api/quota (endpoint server/api/quota.get.ts);
 Token via getHomeHeroMeta(): ink #0C0A09 + strip ember #EA580C + angka #D9F99D + pill lime #A3E635. -->
 <template>
 <div class="max-w-md mx-auto px-4 pb-10" :style="{ background: hero.pageBg }">
-  <!-- Header sapaan -->
+  <!-- Header sapaan — AS6 wallet-card: anon 1:1 (👦 + teman Wikendo), login avatar initial + Halo {displayName} + sub Sisa kamu -->
   <div class="flex justify-between items-center font-bold text-sm py-3">
     <span class="flex items-center gap-2">
-      <span class="w-6 h-6 rounded-full flex items-center justify-center text-[13px] text-white" :style="{ background: hero.headBg }">👦</span>
-      <span>Halo, teman Wikendo</span>
+      <span class="w-6 h-6 rounded-full flex items-center justify-center text-[13px] text-white" :style="{ background: hero.headBg }">{{ isLoggedIn ? initial : '👦' }}</span>
+      <span>Halo, {{ isLoggedIn && displayName ? displayName : 'teman Wikendo' }}</span>
     </span>
   </div>
+  <p v-if="isLoggedIn" class="text-[11px] font-bold opacity-60 -mt-1.5 mb-2">Sisa kamu: {{ quotaPending ? '…' : wallet.headline }}</p>
 
   <!-- Hero QUOTA HARI INI — ink + strip ember V2 + watermark dadu -->
   <div class="rounded-2xl p-3 text-white relative overflow-hidden" :style="{ background: hero.headBg, borderLeft: '5px solid ' + hero.strip }">
     <p class="text-[10px] font-extrabold tracking-wide opacity-75">QUOTA HARI INI • reset 00.00</p>
     <p class="text-2xl font-extrabold leading-tight mt-0.5" :style="{ color: hero.numColor }">{{ quotaPending ? '…' : wallet.headline }}</p>
-    <p class="text-[11px] font-bold opacity-80 mt-0.5">Gratis hari ini — login buka 2 + 5</p>
+    <p class="text-[11px] font-bold opacity-80 mt-0.5">{{ isLoggedIn ? 'Sisa kamu hari ini — reset 00.00' : 'Gratis hari ini — login buka 2 + 5' }}</p>
     <div class="flex gap-1.5 mt-2">
       <span class="flex-1 rounded-lg px-1 py-1.5 text-center text-[10px] font-extrabold bg-white/10">👥 {{ quotaPending ? '…' : wallet.tempatChip }}</span>
       <span class="flex-1 rounded-lg px-1 py-1.5 text-center text-[10px] font-extrabold bg-white/10">🍜 {{ quotaPending ? '…' : wallet.makanChip }}</span>
@@ -87,6 +88,9 @@ Token via getHomeHeroMeta(): ink #0C0A09 + strip ember #EA580C + angka #D9F99D +
 <script setup lang="ts">
 import type { QuotaStatus } from '~/types'
 import { buildQuotaStatus, buildWalletLabel, getHomeHeroMeta } from '~/utils/quiz-logic'
+import { useAuth } from '~/composables/useAuth'
+// Auth-state AS6 wallet-card: anon 1:1, login greeting Halo {displayName} + sub Sisa kamu.
+const { isLoggedIn, displayName, initial } = useAuth()
 // SEO Home: GEO-friendly (og + description ID). Direktori /mall/:slug nyusul slice-4.
 useHead({
   title: 'Wikendo — Bingung Weekend Mau Kemana?',
