@@ -1,84 +1,110 @@
 <!-- pages/register.vue → GET /register (Auth page, Addendum 09 v1.3 APPROVED).
-  Design R1 PENUH dari revamp-options-v9.html: hero rose #E11D48 + ink #0C0A09 border,
-  field 3 (Nama/Email/Password), checkbox Syarat & Privasi,
-  CTA ink, footer mini 10 detik, font Plus Jakarta Sans,
-  mobile max-w-md, base #fffdf9, KENAPA: User klik button Register di header → harus bisa akses /register tanpa 404. -->
+  APA: slicing 100% image img_19a0ea1cfdcf — banner hitam DAFTAR GRATIS 2•5 + Daftar via Google + Nama + Email + Password•kuat? + checkbox + Daftar →.
+  KENAPA: user klik Register di topbar global → lihat benefit quota full + bisa daftar via Supabase (email atau Google 1-klik).
+  Banner 1:1 R1 lock v9 (ink #0C0A09 + strip ember #EA580C + angka #D9F99D 17px + radius 12px + font 10px kiri).
+  Contoh: anon lihat 2 • 5 → Daftar via Google / isi Nama+Email+Password → Daftar → home. -->
 <template>
-<div class="max-w-md mx-auto px-4 pb-10" style="background:#fffdf9;">
-  <header class="bg-white sticky top-0 z-40 shadow-sm max-w-md mx-auto px-4 py-3 flex justify-between items-center">
-    <a href="/" class="flex items-center" aria-label="Wikendo — beranda">
-      <img src="/brand-icon-day.png" alt="Wikendo" width="32" height="32" class="rounded-lg">
-    </a>
-    <div class="flex gap-3 items-center">
-      <!-- Mutual-exclusive: show bell when logged in, Register button when not -->
-      <button type="button" aria-label="Notifikasi" class="text-sm font-bold leading-none text-ink hover:text-orange-600">🔔</button>
-      <button type="button" aria-label="Register" class="text-sm font-bold leading-none text-orange-600 hover:text-red-500">Register</button>
+  <div class="max-w-md mx-auto px-4 pb-10 min-h-screen" style="background:#F5F5F4;font-family:'Plus Jakarta Sans',system-ui,sans-serif">
+    <!-- 1. Banner hitam promo — 1:1 image (strip ember + radius 12 + angka lime-muda) -->
+    <div class="p-2 text-white mt-4" style="background:#0C0A09;border-left:4px solid #EA580C;border-radius:12px;font-size:10px;font-weight:800">
+      DAFTAR GRATIS
+      <div style="color:#D9F99D;font-size:17px;font-weight:800;margin:2px 0">2 • 5</div>
+      quota full + voucher 🎟️
     </div>
-  </header>
 
-  <!-- Hero strip R1: rose #E11D48 + ink #0C0A09 border -->
-  <div class="hero" style="background:#E11D48;border-left:4px solid #0C0A09;border-radius:12px;color:#fff;padding:10px;font-size:10px;font-weight:800;margin-bottom:16px;text-align:center">
-    DAFTAR GRATIS<div class="big" style="font-size:24px;font-weight:800;margin:4px 0">2 • 5</div>quota full + voucher 🎟️
-  </div>
+    <!-- 2. Tombol Google — putih rounded pill -->
+    <button type="button" class="w-full bg-white rounded-full mt-3 py-3.5 px-4 font-extrabold text-sm text-black flex items-center justify-center gap-2 shadow-sm" @click="handleGoogle">
+      <span class="w-5 h-5 rounded-full flex items-center justify-center text-white text-xs font-extrabold" style="background:#4285F4">G</span>
+      Daftar via Google
+    </button>
 
-  <main class="px-6 py-8">
-    <form class="space-y-4" @submit="handleSubmit">
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">Nama</label>
-        <input type="text" required class="w-full rounded-[20px] p-[14px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors" placeholder="Nama lengkap" />
+    <!-- 3+4+5. Form Nama + Email + Password + meter kuat? -->
+    <form class="space-y-3 mt-3" @submit.prevent="handleRegister">
+      <div class="bg-white rounded-full flex items-center gap-2 px-4 py-3.5 shadow-sm">
+        <span class="text-gray-400 text-base">👤</span>
+        <input v-model="nama" type="text" required placeholder="Nama" class="flex-1 bg-transparent outline-none text-sm font-bold text-black placeholder:text-gray-400">
       </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-        <input type="email" required class="w-full rounded-[20px] p-[14px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors" placeholder="contoh@email.com" />
+      <div class="bg-white rounded-full flex items-center gap-2 px-4 py-3.5 shadow-sm">
+        <span class="text-gray-400 text-base">✉️</span>
+        <input v-model="email" type="email" required placeholder="Email" class="flex-1 bg-transparent outline-none text-sm font-bold text-black placeholder:text-gray-400">
       </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-        <input type="password" required class="w-full rounded-[20px] p-[14px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors" placeholder="•••••••••••••••" />
+      <div class="bg-white rounded-full flex items-center gap-2 px-4 py-3.5 shadow-sm">
+        <span class="text-gray-400 text-base">🔒</span>
+        <input v-model="password" type="password" required placeholder="Password" class="flex-1 bg-transparent outline-none text-sm font-bold text-black placeholder:text-gray-400">
+        <span class="text-gray-300 text-sm">•</span>
+        <span class="flex gap-0.5" aria-hidden="true">
+          <span v-for="i in 5" :key="i" class="inline-block w-2 h-2 rounded-[2px]" :style="{ background: i <= strength ? '#4B5563' : '#E5E7EB' }"></span>
+        </span>
+        <span class="text-[11px] font-bold text-gray-400">kuat?</span>
       </div>
-      <div class="flex items-start">
-        <input type="checkbox" id="terms" required class="w-4 h-4 rounded border-gray-300 focus:ring-orange-500 transform hover:scale-125 transition duration-150 ms-4" />
-        <label for="terms" class="ml-2 text-sm font-medium text-gray-700">
+      <div class="flex items-center gap-2 px-1">
+        <input v-model="agree" type="checkbox" id="terms" required checked class="w-4 h-4 rounded border-gray-300">
+        <label for="terms" class="text-xs font-bold text-black">
           Setuju Syarat & Privasi
         </label>
       </div>
-      <button type="submit" class="w-full bg-orange-600 text-white rounded-[20px] p-[14px] font-bold text-sm py-3 transition-colors hover:bg-orange-500">
-        Daftar →
+      <p v-if="errorMsg" class="text-center text-xs font-bold text-red-600">{{ errorMsg }}</p>
+      <!-- 6. CTA utama hitam -->
+      <button type="submit" :disabled="loading" class="w-full rounded-full py-3.5 px-4 text-white text-sm font-extrabold disabled:opacity-60" style="background:#0C0A09">
+        {{ loading ? 'Tunggu…' : 'Daftar →' }}
       </button>
-      <p class="text-center text-xs text-gray-500">
-        Sudah punya akun? <NuxtLink to="/login" class="font-medium text-red-600 hover:text-orange-500">Masuk sekarang</NuxtLink>
-      </p>
     </form>
-  </main>
-
-  <footer class="mt-6 text-center text-xs text-gray-400">
-    10 detik • quota reset tiap hari • gratis
-  </footer>
-</div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
 import { supabaseBrowser } from '~/utils/supabase'
 
 const router = useRouter()
 
-// Register via Supabase signUp — redirect ke home setelah submit.
-// KENAPA querySelector (bukan v-model): form ini belum di-revamp; wiring minimal
-// biar build hijau + submit jalan. Revamp register 100% nyusul slice berikutnya.
-async function handleSubmit(e: Event) {
-  e.preventDefault()
-  const email = (document.querySelector('input[type="email"]') as HTMLInputElement)?.value ?? ''
-  const password = (document.querySelector('input[type="password"]') as HTMLInputElement)?.value ?? ''
-  const nama = (document.querySelector('input[type="text"]') as HTMLInputElement)?.value ?? ''
-  const sb = supabaseBrowser()
-  const { error } = await sb.auth.signUp({
-    email, password,
-    options: { data: { nama } }
-  })
-  if (error) {
-    alert(error.message)
-    return
+const nama = ref('')
+const email = ref('')
+const password = ref('')
+const agree = ref(true)
+const errorMsg = ref('')
+const loading = ref(false)
+
+// Meter kuat? 0-5 ikut panjang + variasi huruf/angka — visual ikut image (4/5 solid contoh).
+const strength = computed(() => {
+  const p = password.value
+  let s = 0
+  if (p.length >= 4) s += 1
+  if (p.length >= 6) s += 1
+  if (p.length >= 8) s += 1
+  if (/[A-Z]/.test(p) && /[a-z]/.test(p)) s += 1
+  if (/\d/.test(p) && /[^A-Za-z0-9]/.test(p)) s += 1
+  return Math.min(5, s)
+})
+
+// Daftar email+password via Supabase signUp (nama ikut user_metadata) → home.
+async function handleRegister() {
+  errorMsg.value = ''
+  loading.value = true
+  try {
+    const sb = supabaseBrowser()
+    const { error } = await sb.auth.signUp({
+      email: email.value,
+      password: password.value,
+      options: { data: { nama: nama.value } }
+    })
+    if (error) {
+      errorMsg.value = error.message
+      return
+    }
+    router.push('/')
+  } finally {
+    loading.value = false
   }
-  router.push('/')
+}
+
+// Daftar 1-klik via Google OAuth.
+async function handleGoogle() {
+  errorMsg.value = ''
+  const sb = supabaseBrowser()
+  const { error } = await sb.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: typeof window !== 'undefined' ? `${window.location.origin}/` : '/' }
+  })
+  if (error) errorMsg.value = error.message
 }
 </script>
