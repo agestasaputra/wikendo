@@ -23,7 +23,8 @@
       </p>
       <p v-if="successMsg" class="text-center text-xs font-bold text-green-700 mt-2">{{ successMsg }}</p>
       <p v-if="errorMsg" class="text-center text-xs font-bold text-red-600 mt-2">{{ errorMsg }}</p>
-      <button type="button" :disabled="loading" @click="handleResend" class="w-full rounded-full py-3.5 px-4 text-white text-sm font-extrabold mt-3 disabled:opacity-60" style="background:#0C0A09">
+      <button type="button" :disabled="loading" @click="handleResend" class="w-full rounded-full py-3.5 px-4 text-white text-sm font-extrabold mt-3 disabled:opacity-60 flex items-center justify-center gap-2" style="background:#0C0A09">
+        <svg v-if="loading" class="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="#fff" stroke-opacity=".25" stroke-width="4"/><path d="M22 12a10 10 0 0 0-10-10" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg>
         {{ loading ? 'Mengirim…' : 'Kirim ulang' }}
       </button>
       <NuxtLink to="/login" class="inline-block text-xs font-bold text-gray-500 mt-3 underline">
@@ -46,6 +47,7 @@ const loading = ref(false)
 
 // Kirim ulang link verifikasi via Supabase resend type signup → balik ke HOME (/).
 async function handleResend() {
+  if (loading.value) return
   errorMsg.value = ''
   successMsg.value = ''
   const email = route.query.email as string

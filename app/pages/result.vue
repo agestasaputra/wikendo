@@ -13,7 +13,7 @@ Contoh: hero Rooftop Senayan — Senayan 4.8 sunset+live music → Navigasi → 
     <AppLoader v-if="pending" variant="tempat" />
     <div v-else-if="error" class="rounded-2xl p-4 text-sm font-bold" :style="isWall ? 'background:#fff7ed;border:2px solid #f97316;color:#9a3412' : 'background:#fef2f2;border:1px solid #fecaca;color:#991b1b'">
       <template v-if="isWall">🔒 Quota anon habis (1x/hari). Login 10 detik → quota jadi 2x/hari, gratis.<br><NuxtLink to="/" class="underline">Login / balik Home →</NuxtLink></template>
-      <template v-else>{{ errorMessage }}<br><button class="underline mt-1" @click="refresh()">Coba lagi → (quota nggak kepotong)</button></template>
+      <template v-else>{{ errorMessage }}<br><button class="underline mt-1 disabled:opacity-60" :disabled="pending" @click="refresh()">Coba lagi → (quota nggak kepotong)</button></template>
     </div>
     <div v-else-if="list.length" class="flex flex-col">
       <!-- R3b hero deck: strip ember kiri + foto + badge BEST lime -->

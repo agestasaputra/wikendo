@@ -16,9 +16,10 @@
     </div>
 
     <!-- 2. Tombol Google — putih rounded pill -->
-    <button type="button" class="w-full bg-white rounded-full mt-3 py-3.5 px-4 font-extrabold text-sm text-black flex items-center justify-center gap-2 shadow-sm" @click="handleGoogle">
-      <span class="w-5 h-5 rounded-full flex items-center justify-center text-white text-xs font-extrabold" style="background:#4285F4">G</span>
-      Lanjut dengan Google
+    <button type="button" :disabled="loading || googleLoading || forgotLoading" class="w-full bg-white rounded-full mt-3 py-3.5 px-4 font-extrabold text-sm text-black flex items-center justify-center gap-2 shadow-sm disabled:opacity-60" @click="handleGoogle">
+      <svg v-if="googleLoading" class="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="#4285F4" stroke-opacity=".25" stroke-width="4"/><path d="M22 12a10 10 0 0 0-10-10" stroke="#4285F4" stroke-width="4" stroke-linecap="round"/></svg>
+      <span v-else class="w-5 h-5 rounded-full flex items-center justify-center text-white text-xs font-extrabold" style="background:#4285F4">G</span>
+      {{ googleLoading ? 'Menghubungkan…' : 'Lanjut dengan Google' }}
     </button>
 
     <!-- 3+4. Form Email + Password • Lupa? -->
@@ -31,11 +32,12 @@
         <span class="text-gray-400 text-base">🔒</span>
         <input v-model="password" type="password" required placeholder="Password" class="flex-1 bg-transparent outline-none text-sm font-bold text-black placeholder:text-gray-400">
         <span class="text-gray-300 text-sm">•</span>
-        <button type="button" class="text-sm font-bold text-black underline" @click="handleForgot">Lupa?</button>
+        <button type="button" :disabled="loading || googleLoading || forgotLoading" class="text-sm font-bold text-black underline disabled:opacity-60 inline-flex items-center gap-1" @click="handleForgot"><svg v-if="forgotLoading" class="animate-spin w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="#0C0A09" stroke-opacity=".25" stroke-width="4"/><path d="M22 12a10 10 0 0 0-10-10" stroke="#0C0A09" stroke-width="4" stroke-linecap="round"/></svg>{{ forgotLoading ? 'Mengirim…' : 'Lupa?' }}</button>
       </div>
       <p v-if="errorMsg" class="text-center text-xs font-bold text-red-600">{{ errorMsg }}</p>
       <!-- 5. CTA utama hitam -->
-      <button type="submit" :disabled="loading" class="w-full rounded-full py-3.5 px-4 text-white text-sm font-extrabold disabled:opacity-60" style="background:#0C0A09">
+      <button type="submit" :disabled="loading || googleLoading || forgotLoading" class="w-full rounded-full py-3.5 px-4 text-white text-sm font-extrabold disabled:opacity-60 flex items-center justify-center gap-2" style="background:#0C0A09">
+        <svg v-if="loading" class="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="#fff" stroke-opacity=".25" stroke-width="4"/><path d="M22 12a10 10 0 0 0-10-10" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg>
         {{ loading ? 'Tunggu…' : 'Masuk →' }}
       </button>
     </form>
@@ -74,9 +76,12 @@ const email = ref('')
 const password = ref('')
 const errorMsg = ref('')
 const loading = ref(false)
+const googleLoading = ref(false)
+const forgotLoading = ref(false)
 
 // Login email+password via Supabase → hormati ?redirect= (balik ke quiz/result yang dikunci).
 async function handleLogin() {
+  if (loading.value) return
   errorMsg.value = ''
   loading.value = true
   try {
@@ -94,24 +99,36 @@ async function handleLogin() {
 
 // Login sekali klik via Google OAuth.
 async function handleGoogle() {
+  if (loading.value || googleLoading.value || forgotLoading.value) return
   errorMsg.value = ''
-  const sb = supabaseBrowser()
-  const { error } = await sb.auth.signInWithOAuth({
-    provider: 'google',
-    options: { redirectTo: typeof window !== 'undefined' ? `${window.location.origin}${redirect}` : redirect }
-  })
-  if (error) errorMsg.value = error.message
+  googleLoading.value = true
+  try {
+    const sb = supabaseBrowser()
+    const { error } = await sb.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: typeof window !== 'undefined' ? `${window.location.origin}${redirect}` : redirect }
+    })
+    if (error) errorMsg.value = error.message
+  } finally {
+    googleLoading.value = false
+  }
 }
 
 // Link Lupa? → email reset password Supabase. Butuh Email terisi dulu.
 async function handleForgot() {
+  if (loading.value || googleLoading.value || forgotLoading.value) return
   errorMsg.value = ''
   if (!email.value) {
     errorMsg.value = 'Isi Email dulu biar link reset bisa dikirim.'
     return
   }
-  const sb = supabaseBrowser()
-  const { error } = await sb.auth.resetPasswordForEmail(email.value)
-  errorMsg.value = error ? error.message : 'Link reset terkirim — cek inbox Email kamu.'
+  forgotLoading.value = true
+  try {
+    const sb = supabaseBrowser()
+    const { error } = await sb.auth.resetPasswordForEmail(email.value)
+    errorMsg.value = error ? error.message : 'Link reset terkirim — cek inbox Email kamu.'
+  } finally {
+    forgotLoading.value = false
+  }
 }
 </script>

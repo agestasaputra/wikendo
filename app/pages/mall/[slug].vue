@@ -20,9 +20,9 @@ Token lock: ink tetap #0C0A09, rose tetap #E11D48, paper tetap #F5F5F4. -->
 
     <!-- Filter chip (S2c 1:1 = 3 chip): halal + budget + nongkrong. Server-side via query, ganti filter = reset page. -->
     <div class="flex gap-1.5 flex-wrap my-2.5">
-      <button class="text-[11.5px] font-bold rounded-full px-3 py-1.5 bg-white border-[1.5px]" :style="fHalal ? 'background:#18181b;color:#fff;border-color:#18181b' : 'border-color:#e4e4e7'" @click="fHalal = !fHalal; reload()">✅ Halal</button>
-      <button class="text-[11.5px] font-bold rounded-full px-3 py-1.5 bg-white border-[1.5px]" :style="fBudget ? 'background:#18181b;color:#fff;border-color:#18181b' : 'border-color:#e4e4e7'" @click="fBudget = !fBudget; reload()">💰 50-100rb</button>
-      <button class="text-[11.5px] font-bold rounded-full px-3 py-1.5 bg-white border-[1.5px]" :style="fMission ? 'background:#18181b;color:#fff;border-color:#18181b' : 'border-color:#e4e4e7'" @click="fMission = !fMission; reload()">☕ Nongkrong</button>
+      <button :disabled="pending" class="text-[11.5px] font-bold rounded-full px-3 py-1.5 bg-white border-[1.5px] disabled:opacity-60" :style="fHalal ? 'background:#18181b;color:#fff;border-color:#18181b' : 'border-color:#e4e4e7'" @click="fHalal = !fHalal; reload()">✅ Halal</button>
+      <button :disabled="pending" class="text-[11.5px] font-bold rounded-full px-3 py-1.5 bg-white border-[1.5px] disabled:opacity-60" :style="fBudget ? 'background:#18181b;color:#fff;border-color:#18181b' : 'border-color:#e4e4e7'" @click="fBudget = !fBudget; reload()">💰 50-100rb</button>
+      <button :disabled="pending" class="text-[11.5px] font-bold rounded-full px-3 py-1.5 bg-white border-[1.5px] disabled:opacity-60" :style="fMission ? 'background:#18181b;color:#fff;border-color:#18181b' : 'border-color:#e4e4e7'" @click="fMission = !fMission; reload()">☕ Nongkrong</button>
     </div>
 
     <!-- CTA jembatan direktori → quiz (S2c KARTU ASISTEN: strip lime + avatar ink-lime + 2 baris + panah) -->
@@ -44,7 +44,7 @@ Token lock: ink tetap #0C0A09, rose tetap #E11D48, paper tetap #F5F5F4. -->
   <!-- Kartu tenant (mockup S2c Foto Tenant): thumb foto 46px + badge promo overlay -->
   <AppLoader v-if="pending" variant="mall" />
   <div v-else-if="error" class="rounded-2xl p-4 text-sm font-bold mt-3" style="background:#fef2f2;border:1px solid #fecaca;color:#991b1b">
-    Gagal muat tenant.<br><button class="underline mt-1" @click="reload()">Coba lagi →</button>
+    Gagal muat tenant.<br><button class="underline mt-1 disabled:opacity-60" :disabled="pending" @click="reload()">Coba lagi →</button>
   </div>
   <div v-else class="flex flex-col gap-2.5 mt-3">
     <div v-for="t in filtered" :key="t.name" class="border border-gray-100 rounded-2xl p-2.5 bg-white flex gap-2.5 items-center">

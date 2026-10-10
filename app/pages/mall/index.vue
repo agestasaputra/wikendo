@@ -14,7 +14,7 @@ Token lock: ink tetap #0C0A09, rose tetap #E11D48, paper tetap #F5F5F4. -->
 
   <AppLoader v-if="pending" variant="mall" />
   <div v-else-if="error" class="rounded-2xl p-4 text-sm font-bold mt-3" style="background:#fef2f2;border:1px solid #fecaca;color:#991b1b">
-    Gagal muat mall.<br><button class="underline mt-1" @click="refresh()">Coba lagi →</button>
+    Gagal muat mall.<br><button class="underline mt-1 disabled:opacity-60" :disabled="pending" @click="refresh()">Coba lagi →</button>
   </div>
   <div v-else class="flex flex-col gap-2.5 mt-3">
     <div v-for="m in malls" :key="m.slug" class="bg-white rounded-2xl border border-gray-100 p-4">

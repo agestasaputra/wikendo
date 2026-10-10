@@ -17,6 +17,7 @@
 
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Spinner + disable semua tombol API DONE ✅ 10 Okt: anti double-klik (register Daftar+Google, login Masuk+Google+Lupa?, check-email Kirim ulang spinner SVG animate-spin + :disabled + early-return guard, result/result-makan/mall Coba lagi + chip filter :disabled="pending") — TDD: button-loading RED 8 gagal → GREEN 8/8 ✅ full 168/168 (17 files) ✅ lint 0 error (5 warning kosmetik) ✅ build 9.83s ✅ SCAN-CLEAN ✅ — next: push + deploy + E2E email pribadi
 - [x] Opsi B magic-link DONE ✅ 10 Okt (`7d8a8fa`): signUp + `emailRedirectTo → /` + sukses → `/check-email?email=` (bukan langsung HOME) + halaman `check-email.vue` 1:1 register (banner HAMPIR SELESAI + kartu Cek email + Kirim ulang via resend signup + pesan inline + fallback daftar-ulang) + Google OAuth tetap langsung — TDD: verify RED 6 gagal → GREEN 7/7 ✅ revamp selaras 14/14 ✅ full 160/160 (16 files) ✅ lint 0 error ✅ build 9.94s ✅ prod `/ /register /check-email /login` 200 ✅ marker check-email 7/7 ✅ wiring bundle JS prod (check-email + emailRedirectTo nyangkut) ✅
 - [x] Takeout field Nama /register DONE ✅ 10 Okt (`25de1d2`): form tinggal Email + Password (input 👤 dihapus, `nama` ref + user_metadata dibersihin) — test takeout RED 1 gagal → GREEN 14/14 ✅ full 153/153 ✅ lint 0 error ✅ build ~9.6s ✅ prod `/register /login /` 200 ✅ audit prod: Nama 0, Email 1, Password 1, Google 1, kuat? 1, Daftar→ 1 ✅
 - [x] Revamp /register 100% image DONE ✅ 10 Okt (`85450b2`): slicing 1:1 `img_19a0ea1cfdcf` (banner ink #0C0A09 + strip ember #EA580C + angka #D9F99D 17px + radius 12px kiri + Daftar via Google pill putih + Nama/Email/Password pill ikon 👤✉️🔒 + meter kuat? 5 kotak + checkbox checked + CTA ink Daftar →, bg #F5F5F4, tanpa header/footer lokal) + fitur real (signUp nama + Google OAuth + error inline + strength computed) — TDD: register-revamp RED 10 gagal → GREEN 14/14 ✅ full 153/153 (15 files) ✅ lint 0 error ✅ build 9.59s ✅ prod `/ /register /login` 200 + marker 8/8 ✅
@@ -94,6 +95,12 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-10 — Spinner + disable semua tombol API DONE ✅ (pre-E2E UX, anti double-klik)
+- **Kenapa:** request Agesta pre-E2E — semua tombol yang request API wajib ada indikator spinner + disabled saat loading agar UX bagus + cegah double-submit (double signUp = user ganda, double OAuth = popup ganda, double resend = spam, double chip = race reset list).
+- **Dikerjain:** `app/tests/button-loading.test.ts` BARU 8 assert (register Daftar spinner+disabled+guard, Google loading sendiri, login Masuk+Google+Lupa?, check-email Kirim ulang, result/result-makan Coba lagi pending, mall chip+Coba lagi pending) + `app/pages/register.vue` (CTA `Tunggu…` + spinner SVG putih + Google `Menghubungkan…` spinner biru + `googleLoading` ref + guard + `:disabled="loading || googleLoading"`) + `app/pages/login.vue` (Masuk spinner + Google `Menghubungkan…` + Lupa? `Mengirim…` spinner mini + `googleLoading`/`forgotLoading` + guard 3-arah) + `app/pages/check-email.vue` (Kirim ulang spinner + guard) + `result.vue`/`result-makan.vue`/`mall/index.vue`/`mall/[slug].vue` (Coba lagi + 3 chip filter `:disabled="pending"`, idle state tetap 1:1 slicing karena spinner via `v-if`).
+- **Verifikasi:** button-loading RED 8 gagal by design → GREEN 8/8 ✅ full 168/168 (17 files) ✅ lint 0 error (5 warning attribute-order kosmetik) ✅ build 9.83s ✅ SCAN-CLEAN (grep secrets 0) ✅.
+- **Next:** push + deploy Vercel + E2E email pribadi (`/register → /check-email?email= → klik link → HOME`).
 
 ## 2026-10-10 — Flowchart after-click Register (docs, tanpa ubah app/)
 - **Kenapa:** request Agesta — minta gambar flowchart khusus proses SETELAH klik `Daftar →` (bukan alur umum).
