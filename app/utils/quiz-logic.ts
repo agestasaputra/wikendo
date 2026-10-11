@@ -520,7 +520,7 @@ export function pickLLMProvider(input: { cfAccountId: string, cfToken: string, h
   const acc = (input.cfAccountId || '').trim()
   const tok = (input.cfToken || '').trim()
   if (acc && tok) {
-    return { kind: 'cf', url: buildCfChatUrl(acc), model: '@cf/meta/llama-3.1-8b-instruct' }
+    return { kind: 'cf', url: buildCfChatUrl(acc), model: '@cf/meta/llama-3.1-8b-instruct-fast' }
   }
   const base = (input.hermesUrl || 'http://127.0.0.1:20128').replace(/\/$/, '')
   return { kind: 'hermes', url: base + '/v1/chat/completions', model: 'hermes-combo' }

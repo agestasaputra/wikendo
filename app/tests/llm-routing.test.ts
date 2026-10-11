@@ -21,11 +21,11 @@ describe('buildCfChatUrl (endpoint OpenAI-compatible CF)', () => {
 })
 
 describe('pickLLMProvider (dev/prod split)', () => {
-  it('CF kalau accountId + token ada → kind cf + model llama-3.1-8b', () => {
+  it('CF kalau accountId + token ada → kind cf + model llama-3.1-8b-instruct-fast', () => {
     const p = pickLLMProvider({ cfAccountId: 'acc123', cfToken: 'tok456', hermesUrl: 'http://127.0.0.1:20128' })
     expect(p.kind).toBe('cf')
     expect(p.url).toBe('https://api.cloudflare.com/client/v4/accounts/acc123/ai/v1/chat/completions')
-    expect(p.model).toBe('@cf/meta/llama-3.1-8b-instruct')
+    expect(p.model).toBe('@cf/meta/llama-3.1-8b-instruct-fast')
   })
 
   it('hermes fallback kalau CF kosong (dev lokal)', () => {
