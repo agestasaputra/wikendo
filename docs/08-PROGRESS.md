@@ -17,7 +17,7 @@
 
 
 ### 🔥 NOW (lagi dikerjain)
-- [x] Pembeda before/after login di index — AS6 wallet-card DONE ✅ 11 Okt (lock Agesta "Gua suka AS6"): `useAuth.ts` BARU (getSession+onAuthStateChange, displayName full_name>name>prefix email) + `app.vue` header 2-state (anon Login/Register vs login avatar initial S + Bell + dropdown email grey + Riwayat + Wishlist Segera + Keluar merah + logout real → /) + `index.vue` greeting login-aware (Halo Siska + sub Sisa kamu, anon 1:1 teman Wikendo) — TDD: hapus `.skip` RED → GREEN 11/11 ✅ full 211/211 (21 files) ✅ lint 0 error (5 warning kosmetik) ✅ build 9.56s ✅ — next: push + deploy + E2E siskadptr@gmail.com
+- [x] Pembeda before/after login di index — AS6 wallet-card DONE ✅ 11 Okt (lock Agesta "Gua suka AS6"): `useAuth.ts` BARU (getSession+onAuthStateChange, displayName full_name>name>prefix email) + `app.vue` header 2-state (anon Login/Register vs login avatar initial S + Bell + dropdown email grey + Riwayat + Wishlist Segera + Keluar merah + logout real → /) + `index.vue` greeting login-aware (`Halo, Siska` + sub `Sisa kamu:`, anon 1:1 `Halo, teman Wikendo` + `login buka 2 + 5`) — TDD: hapus `.skip` RED → GREEN 11/11 ✅ full 211/211 (21 files) ✅ lint 0 error (5 warning kosmetik) ✅ build 9.56s ✅ push `0658c9f` ✅ prod 3/3 200 ✅ E2E siskadptr@gmail.com 4/4 ✅ (Greeting Hello + Avatar S + Dropdown + Logout, konfirm Agesta 11 Okt) — next: pantau Claude Startup ≤12 Okt
 - [x] Board 20 opsi auth-state-home DONE ✅ 11 Okt (`design/revamp-options-v11.html` + PNG 1400x3480, 20 ID AS1-AS20, rekom AS6 = lock final Agesta "Gua suka AS6") — next: DONE (lanjut slicing AS6 di atas)
 - [x] Google Auth satu pintu DONE ✅ 11 Okt: approved "Gas fix!" — label netral SAMA "Lanjutkan dengan Google" (register+login) + redirect SAMA hormati ?redirect= (register baca useRoute, footer login preservasi ke /register) + kunci checkbox Syarat di handleGoogle register — TDD: best-practice RED 6 gagal → GREEN 8/8 ✅ 6-file 68/68 ✅ full 200/200 (20 files) ✅ lint 0 error ✅ build 9.35s ✅ SCAN-CLEAN ✅ Addendum `docs/21` ✅ — next: push + deploy + E2E email pribadi
 - [x] Opsi A tombol Google DONE ✅ 11 Okt: lock Agesta "A" (board v10) — tombol Google register+login jadi outline abu #DADCE0 + logo G 4-warna resmi + divider ATAU, shadow dihapus, CTA hitam tetap satu-satunya solid — TDD: google-button-a RED 6 gagal → GREEN 9/9 ✅ full 192/192 (19 files) ✅ lint 0 error (5 warning awal) ✅ build 9.46s ✅ SCAN-CLEAN ✅ Addendum `docs/20` ✅ — next: push + deploy + E2E email pribadi
@@ -101,6 +101,11 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-11 — E2E AS6 4/4 PASS ✅ (konfirm Agesta, akun siskadptr@gmail.com)
+- **Hasil user:** login berhasil ✅ greeting Hello (Halo, Siskadptr) ✅ avatar S ✅ dropdown ✅ logout ✅ — auth-state-home dinyatakan DONE penuh (TDD 211/211 + prod 200 + E2E manusia).
+- **Verifikasi:** laporan langsung Agesta 11 Okt (manual E2E di prod). NOL bug ditemukan di 4 checkpoint.
+- **Next:** pantau Claude for Startups ≤12 Okt + kumpulin traction quiz (target 50-100) + pilot direct API.
 
 ## 2026-10-11 — AS6 wallet-card SLICING DONE ✅ (lock "Gua suka AS6", AI eksekusi sampai deploy)
 - **Kenapa:** login nol rasanya (header `isLoggedIn` hantu undefined + sapaan hardcode `teman Wikendo` + quota anon terus) → user nggak dapat reward psikologis. AS6 menang bisnis: nama + quota 2+5 kelihatan 1 layar → quiz ke-2 naik → voucher wajib-login anti-farming.
