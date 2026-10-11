@@ -494,3 +494,44 @@ export function buildDirCountLabel(loaded: number, total: number): string {
 export function getTenantCardMeta(category: string): TenantCardMeta {
   return { emoji: categoryEmoji(category), bg: tenantAvatarBg(category) }
 }
+
+/* ── LLM routing Opsi 2 CF direct (Addendum Opsi 2, 11 Okt 2026) ──
+ * KENAPA di sini (pure): prod Vercel tak bisa ke localhost:20128 → 500.
+ * Solusi: server Vercel tembak CF Workers AI langsung kalau env CF ada,
+ * dev lokal tetap hermes-combo localhost. Pure biar unit-testable.
+ * Endpoint OpenAI-compatible: .../ai/v1/chat/completions (ganti baseURL doang).
+ * Contoh: buildCfChatUrl('abc123') → 'https://api.cloudflare.com/.../ai/v1/chat/completions'.
+ */
+
+/** Account ID → URL chat completions CF (OpenAI-compatible). */
+export function buildCfChatUrl(accountId: string): string {
+  const id = (accountId || '').trim()
+  return `https://api.cloudflare.com/client/v4/accounts/${id}/ai/v1/chat/completions`
+}
+
+export interface LLMProvider {
+  kind: 'cf' | 'hermes'
+  url: string
+  model: string
+}
+
+/** Pilih provider: CF kalau accountId+token lengkap, hermes fallback (dev lokal). */
+export function pickLLMProvider(input: { cfAccountId: string, cfToken: string, hermesUrl: string }): LLMProvider {
+  const acc = (input.cfAccountId || '').trim()
+  const tok = (input.cfToken || '').trim()
+  if (acc && tok) {
+    return { kind: 'cf', url: buildCfChatUrl(acc), model: '@cf/meta/llama-3.1-8b-instruct' }
+  }
+  const base = (input.hermesUrl || 'http://127.0.0.1:20128').replace(/\/$/, '')
+  return { kind: 'hermes', url: base + '/v1/chat/completions', model: 'hermes-combo' }
+}
+
+/** Strip markdown fence + teks prefix dari output LLM → JSON murni (anti-500 JSON.parse). */
+export function cleanJSON(raw: string): string {
+  let s = (raw || '').trim()
+  const fence = s.match(/```(?:json)?\s*([\s\S]*?)```/i)
+  if (fence) s = fence[1].trim()
+  const start = s.search(/[{[]/)
+  if (start > 0) s = s.slice(start).trim()
+  return s
+}

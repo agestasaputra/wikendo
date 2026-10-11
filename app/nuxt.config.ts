@@ -9,6 +9,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     hermesApiUrl: process.env.HERMES_API_URL || 'http://127.0.0.1:20128',
     hermesApiKey: process.env.HERMES_API_KEY || '',
+    cfAccountId: process.env.CLOUDFLARE_ACCOUNT_ID || '',
+    cfApiToken: process.env.CLOUDFLARE_API_TOKEN || '',
     supabaseServiceKey: process.env.SUPABASE_SERVICE_KEY || '',
     public: {
       supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL || '',
