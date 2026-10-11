@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildCfChatUrl, pickLLMProvider, cleanJSON } from '../utils/quiz-logic'
+import { buildCfChatUrl, pickLLMProvider, cleanJSON, coerceBool, parseRankResults, parseTempatResults, buildRankFallback } from '../utils/quiz-logic'
 
 /**
  * llm-routing.test.ts — Opsi 2 CF direct (TDD RED dulu).
@@ -49,5 +49,88 @@ describe('cleanJSON (strip markdown fence LLM)', () => {
 
   it('JSON polos tetap utuh', () => {
     expect(cleanJSON('{"a":1}')).toBe('{"a":1}')
+  })
+
+  it('buang teks trailing setelah JSON (penyebab 500 flaky)', () => {
+    expect(cleanJSON('{"ranking":[]} semoga membantu ya!')).toBe('{"ranking":[]}')
+  })
+})
+
+describe('coerceBool (string "false" dari query frontend)', () => {
+  it('boolean asli lolos apa adanya', () => {
+    expect(coerceBool(true)).toBe(true)
+    expect(coerceBool(false)).toBe(false)
+  })
+
+  it('string "false" → false (BUG result-makan: truthy bikin filter halal nyala)', () => {
+    expect(coerceBool('false')).toBe(false)
+    expect(coerceBool('False')).toBe(false)
+    expect(coerceBool(' FALSE ')).toBe(false)
+  })
+
+  it('string "true"/"1" → true, "0"/"" → false', () => {
+    expect(coerceBool('true')).toBe(true)
+    expect(coerceBool('1')).toBe(true)
+    expect(coerceBool('0')).toBe(false)
+    expect(coerceBool('')).toBe(false)
+  })
+
+  it('undefined/null/angka → aman (default false)', () => {
+    expect(coerceBool(undefined)).toBe(false)
+    expect(coerceBool(null)).toBe(false)
+    expect(coerceBool(0)).toBe(false)
+    expect(coerceBool(1)).toBe(true)
+  })
+})
+
+describe('parseRankResults (validasi ranking LLM anti-500)', () => {
+  const cands = ['HokBen', 'Marugame Udon', 'Bakmi GM', 'Dapur Solo', 'Solaria', 'J.CO']
+  it('JSON valid dengan nama pas kandidat → lolos 5', () => {
+    const raw = JSON.stringify({ ranking: cands.slice(0, 5).map(n => ({ name: n, reason: n + ' cocok' })) })
+    const out = parseRankResults(raw, cands)
+    expect(out.length).toBe(5)
+    expect(out[0].name).toBe('HokBen')
+  })
+
+  it('key salah (recommendations bukan ranking) → throw (picu retry/fallback)', () => {
+    const raw = JSON.stringify({ recommendations: [{ name: 'HokBen', reason: 'x' }] })
+    expect(() => parseRankResults(raw, cands)).toThrow()
+  })
+
+  it('nama halu di luar kandidat → throw', () => {
+    const raw = JSON.stringify({ ranking: [{ name: 'Sushi Hantu', reason: 'x' }] })
+    expect(() => parseRankResults(raw, cands)).toThrow()
+  })
+
+  it('JSON rusak/truncated → throw', () => {
+    expect(() => parseRankResults('{"ranking":[', cands)).toThrow()
+  })
+})
+
+describe('parseTempatResults (validasi tempat anti-500)', () => {
+  it('JSON valid 5 tempat → lolos', () => {
+    const recs = Array.from({ length: 5 }, (_, i) => ({
+      name: 'T' + i, category: 'c', reason: 'r', estimated_cost: 'Rp 0', location_area: 'Jaksel', best_time: 'pagi', confidence: 'high'
+    }))
+    const raw = JSON.stringify({ recommendations: recs })
+    expect(parseTempatResults(raw).length).toBe(5)
+  })
+
+  it('shape salah → throw', () => {
+    expect(() => parseTempatResults('{"ranking":[]}')).toThrow()
+    expect(() => parseTempatResults('bukan json')).toThrow()
+  })
+})
+
+describe('buildRankFallback (deterministik, nol LLM, anti-500)', () => {
+  it('ambil 5 pertama kandidat + reason generik', () => {
+    const cands = [
+      { name: 'HokBen' }, { name: 'Marugame Udon' }, { name: 'Bakmi GM' },
+      { name: 'Dapur Solo' }, { name: 'Solaria' }, { name: 'J.CO' }
+    ]
+    const out = buildRankFallback(cands as never[], 'hemat di Central Park')
+    expect(out.length).toBe(5)
+    expect(out[0].name).toBe('HokBen')
+    expect(out[0].reason.length).toBeGreaterThan(5)
   })
 })

@@ -23,8 +23,8 @@ export interface QuizMakanInput {
   mission: string
   budget_tier: string
   companion: string
-  halal_only?: boolean
-  kids_friendly?: boolean
+  halal_only?: boolean | string
+  kids_friendly?: boolean | string
 }
 
 export interface TempatRecommendation {

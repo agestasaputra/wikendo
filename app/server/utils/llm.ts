@@ -12,7 +12,7 @@
  * localhost kalau CF kosong (dev lokal). Endpoint CF OpenAI-compatible → ganti baseURL doang.
  */
 import type { QuizTempatInput, TempatRecommendation, QuizMakanInput, TenantRow, RankResult, LLMChatResponse } from '~/types'
-import { pickLLMProvider, cleanJSON } from '../../utils/quiz-logic'
+import { pickLLMProvider, parseRankResults, parseTempatResults, buildRankFallback, coerceBool } from '../../utils/quiz-logic'
 
 const TEMPAT_SYSTEM = `Kamu asisten rekomendasi weekend Jabodetabek. Balas HANYA JSON valid: {"recommendations":[{"name":"...","category":"...","reason":"... (1 kalimat)","estimated_cost":"Rp ...","location_area":"...","best_time":"...","confidence":"high"}]}. Tepat 5 item, realistis, tanpa disclaimer.`
 
@@ -37,12 +37,32 @@ export async function callLLM(system: string, user: string): Promise<string> {
 
 export async function generateTempat(input: QuizTempatInput): Promise<TempatRecommendation[]> {
   const user = `Mood:${input.mood} Teman:${input.companion} Budget:${input.budget} Area:${input.location} Waktu:${input.time || 'fleksibel'}`
-  const raw = await callLLM(TEMPAT_SYSTEM, user)
-  return JSON.parse(cleanJSON(raw)).recommendations.slice(0, 5)
+  // Retry 1x: LLM non-deterministik, sesekali JSON ngaco → parse throw → coba sekali lagi.
+  try {
+    const raw = await callLLM(TEMPAT_SYSTEM, user)
+    return parseTempatResults(raw)
+  } catch {
+    const raw2 = await callLLM(TEMPAT_SYSTEM, user)
+    return parseTempatResults(raw2)
+  }
 }
 
 export async function rankTenants(input: QuizMakanInput, candidates: TenantRow[]): Promise<RankResult[]> {
-  const user = `Preferensi: mall=${input.mall_slug} misi=${input.mission} budget=${input.budget_tier} rombongan=${input.companion} halal_only=${!!input.halal_only} kids=${!!input.kids_friendly}\nKandidat:\n${JSON.stringify(candidates.slice(0, 30))}`
-  const raw = await callLLM(MAKAN_SYSTEM, user)
-  return JSON.parse(cleanJSON(raw)).ranking.slice(0, 5)
+  const halal = coerceBool(input.halal_only)
+  const kids = coerceBool(input.kids_friendly)
+  const names = candidates.map(c => c.name)
+  const ctx = `${input.budget_tier} di ${input.mall_slug}`
+  const user = `Preferensi: mall=${input.mall_slug} misi=${input.mission} budget=${input.budget_tier} rombongan=${input.companion} halal_only=${halal} kids=${kids}\nKandidat:\n${JSON.stringify(candidates.slice(0, 30))}`
+  // Retry 1x lalu fallback deterministik (jaminan: makan TIDAK PERNAH 500 lagi).
+  try {
+    const raw = await callLLM(MAKAN_SYSTEM, user)
+    return parseRankResults(raw, names)
+  } catch {
+    try {
+      const raw2 = await callLLM(MAKAN_SYSTEM, user)
+      return parseRankResults(raw2, names)
+    } catch {
+      return buildRankFallback(candidates, ctx)
+    }
+  }
 }

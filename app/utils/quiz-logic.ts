@@ -11,7 +11,7 @@
  * ATURAN: fungsi di sini harus PURE (input → output, tanpa side effect,
  * tanpa baca route/cookie/DB). Side effect tetap di pages/server.
  */
-import type { QuotaStatus, QuotaStatusInput, LoaderMeta, LoaderVariant, WalletLabel, QuizFlow, QuizHeaderMeta, VoucherStyle, VoucherCardMeta, HomeHeroMeta, ResultTempatMeta, ResultMakanMeta, TenantCardMeta } from '../types'
+import type { QuotaStatus, QuotaStatusInput, LoaderMeta, LoaderVariant, WalletLabel, QuizFlow, QuizHeaderMeta, VoucherStyle, VoucherCardMeta, HomeHeroMeta, ResultTempatMeta, ResultMakanMeta, TenantCardMeta, RankResult as RankResultType, TempatRecommendation as TempatRecType } from '../types'
 
 export function progressPercent(step: number, total: number): number {
   return ((step + 1) / total) * 100
@@ -526,12 +526,78 @@ export function pickLLMProvider(input: { cfAccountId: string, cfToken: string, h
   return { kind: 'hermes', url: base + '/v1/chat/completions', model: 'hermes-combo' }
 }
 
-/** Strip markdown fence + teks prefix dari output LLM → JSON murni (anti-500 JSON.parse). */
+/** Strip markdown fence + teks prefix/suffix dari output LLM → JSON murni (anti-500 JSON.parse). */
 export function cleanJSON(raw: string): string {
   let s = (raw || '').trim()
   const fence = s.match(/```(?:json)?\s*([\s\S]*?)```/i)
   if (fence) s = fence[1].trim()
   const start = s.search(/[{[]/)
   if (start > 0) s = s.slice(start).trim()
+  // Buang teks trailing setelah JSON (LLM kadang nambah "semoga membantu ya!").
+  // KENAPA lastIndexOf: JSON valid berakhir di } / ], sisanya pasti sampah.
+  s = s.trim()
+  if (s.startsWith('{')) {
+    const last = s.lastIndexOf('}')
+    if (last > 0) s = s.slice(0, last + 1).trim()
+  } else if (s.startsWith('[')) {
+    const last = s.lastIndexOf(']')
+    if (last > 0) s = s.slice(0, last + 1).trim()
+  }
   return s
+}
+
+/* ── Anti-flaky makan (11 Okt 2026, malam) ──
+ * KENAPA di sini (pure): loop prod 8x → 7×200 + 1×500 generik.
+ * Biang: (1) LLM sesekali balas JSON ngaco (key salah / nama halu /
+ * truncated) → JSON.parse / mapping meledak → 500; (2) frontend kirim
+ * halal_only:"false" (string) → `if (body.halal_only)` truthy → filter
+ * halal nyala padahal user tak minta. Pure biar unit-testable.
+ * Contoh: coerceBool("false") → false; parseRankResults(raw, cands) throw
+ * kalau nama halu → picu retry/fallback di server.
+ */
+
+/** Normalisasi boolean dari query string frontend ("false" string → false). */
+export function coerceBool(v: unknown): boolean {
+  if (typeof v === 'boolean') return v
+  if (typeof v === 'number') return v !== 0
+  if (typeof v === 'string') {
+    const s = v.trim().toLowerCase()
+    return s === 'true' || s === '1' || s === 'yes' || s === 'y'
+  }
+  return false
+}
+
+/** Validasi ranking LLM → RankResult[5]. Throw kalau key salah / nama halu / JSON rusak (picu retry/fallback). */
+export function parseRankResults(raw: string, candidates: string[]): RankResultType[] {
+  const obj = JSON.parse(cleanJSON(raw)) as { ranking?: unknown }
+  if (!obj || !Array.isArray(obj.ranking)) throw new Error('RANK_SHAPE_INVALID')
+  const set = new Set(candidates)
+  const out = (obj.ranking as Array<{ name?: unknown, reason?: unknown }>)
+    .map(r => ({ name: String(r?.name || ''), reason: String(r?.reason || '') }))
+  if (!out.length) throw new Error('RANK_EMPTY')
+  for (const r of out) {
+    if (!r.name || !set.has(r.name)) throw new Error('RANK_NAME_HALU:' + r.name)
+    if (!r.reason) throw new Error('RANK_REASON_EMPTY')
+  }
+  return out.slice(0, 5)
+}
+
+/** Validasi rekomendasi tempat LLM → TempatRecommendation[5]. Throw kalau shape salah. */
+export function parseTempatResults(raw: string): TempatRecType[] {
+  const obj = JSON.parse(cleanJSON(raw)) as { recommendations?: unknown }
+  if (!obj || !Array.isArray(obj.recommendations)) throw new Error('TEMPAT_SHAPE_INVALID')
+  const out = obj.recommendations as Array<Record<string, unknown>>
+  if (!out.length) throw new Error('TEMPAT_EMPTY')
+  for (const r of out) {
+    if (typeof r?.name !== 'string' || !r.name) throw new Error('TEMPAT_NAME_INVALID')
+  }
+  return (out as unknown as TempatRecType[]).slice(0, 5)
+}
+
+/** Fallback deterministik nol-LLM: 5 kandidat pertama + reason generik (jaminan anti-500). */
+export function buildRankFallback(candidates: Array<{ name: string }>, context: string): RankResultType[] {
+  return candidates.slice(0, 5).map(c => ({
+    name: c.name,
+    reason: `${c.name} cocok untuk ${context} — kandidat teratas yang buka dan sesuai filter.`
+  }))
 }

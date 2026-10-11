@@ -10,7 +10,7 @@
  * Kosong → 404 ("Tidak ada tenant cocok. Coba ubah filter.").
  */
 import { supabaseAdmin } from '../../utils/db'
-import { buildMapsUrl } from '../../../utils/quiz-logic'
+import { buildMapsUrl, coerceBool } from '../../../utils/quiz-logic'
 import type { QuizMakanInput, TenantRow, RankResult } from '~/types'
 
 export default defineEventHandler(async (event) => {
@@ -27,8 +27,9 @@ export default defineEventHandler(async (event) => {
 
   let q = db.from('tenants').select('*').eq('mall_id', mall.id).eq('is_open', true)
   if (body.budget_tier) q = q.eq('budget_tier', body.budget_tier)
-  if (body.halal_only) q = q.eq('halal', true)
-  if (body.kids_friendly) q = q.eq('kids_friendly', true)
+  // coerceBool: frontend kirim "false" (string) via query → truthy bug bikin filter halal nyala.
+  if (coerceBool(body.halal_only)) q = q.eq('halal', true)
+  if (coerceBool(body.kids_friendly)) q = q.eq('kids_friendly', true)
   const { data } = await q.limit(30)
   const candidates = (data || []) as TenantRow[]
   if (!candidates.length) throw createError({ statusCode: 404, statusMessage: 'Tidak ada tenant cocok. Coba ubah filter.' })
