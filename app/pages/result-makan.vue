@@ -1,7 +1,7 @@
-<!-- pages/result-makan.vue → GET /result-makan (Result TENANT + voucher, F1b Tiket 1:1 screenshot).
-APA: header Hasil + 5 rekomendasi + deck BEST MATCH (badge BEST lime + Halal mint) + tiket dashed (-20% VOUCHER + Klaim rose) + Maps tenant + chips + rank #1-3 + quota makan.
-KENAPA F1b 1:1: tiket dashed = benda fisik (instruksi spec), klaim WAJIB login (anti-farming), benefit −20% gede + pill Klaim kecil, token lock paper #F5F5F4 + ink #0C0A09 + lime/rose/mint via getResultMakanMeta (1 sumber, tested).
-Contoh: hero Kopi Kekinian — GI L2 Halal 50-100rb kids → tiket Klaim → Maps tenant. Lock: TENANT saja, 0 tempat wisata. -->
+<!-- pages/result-makan.vue → GET /result-makan (Result TENANT + gift di hero).
+APA: header Hasil + 5 rekomendasi + deck BEST MATCH (badge BEST lime + Halal mint) + gift di hero (Ada -20% + Buka) + Maps tenant + chips + rank #1-3 + quota makan.
+KENAPA gift di hero 1:1 request Agesta 11 Okt: 1 CTA saja di atas, bawah bersih tanpa dobel, klaim WAJIB login (anti-farming), token lock paper #F5F5F4 + ink #0C0A09 + lime/rose/mint via getResultMakanMeta (1 sumber, tested).
+Contoh: hero Kopi Kekinian — GI L2 Halal 50-100rb kids → gift Buka lalu Maps tenant. Lock: TENANT saja, 0 tempat wisata. -->
 <template>
 <div class="max-w-md mx-auto px-4 pb-10" :style="{ background: meta.pageBg }">
   <div class="flex justify-between items-center font-bold text-[13px] py-3">
@@ -29,17 +29,11 @@ Contoh: hero Kopi Kekinian — GI L2 Halal 50-100rb kids → tiket Klaim → Map
         <p class="text-[12.5px] text-gray-600 my-1.5">Kenapa: {{ hero.reason }}</p>
         <p class="text-[12.5px]">💰 {{ hero.price }} · {{ hero.kids }} · 📍 L{{ hero.floor }}</p>
 
-        <!-- F1b tiket dashed: kiri tiket ink + diskon lime, tengah info, kanan Klaim rose -->
-        <div class="mt-3 flex gap-2 items-center p-3 bg-white" :style="{ border: '2px dashed ' + meta.ticketBorder, borderRadius: '14px' }">
-          <div class="flex-none text-center rounded-xl px-3 py-2" :style="{ background: meta.ticketBg }">
-            <div class="font-extrabold text-[16px] leading-none" :style="{ color: meta.discountColor }">-20%</div>
-            <div class="text-[9px] font-extrabold tracking-widest text-white">VOUCHER</div>
-          </div>
-          <div class="flex-1 text-[12px] leading-tight">
-            <b>{{ hero.name }} · {{ mallLabel }} L{{ hero.floor }}</b><br>
-            <small class="text-gray-500">Sisa hari ini · tunjukin ke kasir</small>
-          </div>
-          <button class="flex-none font-extrabold text-[13px] rounded-xl px-[14px] py-2.5" :style="{ background: meta.claimBg, color: meta.claimColor }" @click="claim()">Klaim →</button>
+        <!-- Voucher gift di dalam hero (pindahan dari bawah, 11 Okt 2026): banner Ada -20% + Buka, model lama atas dihapus -->
+        <div class="rounded-[14px] p-3 flex gap-2 items-center mt-3" :style="{ background: vGift.bg, border: '1px solid ' + vGift.border }">
+          <div class="text-[26px]">🎁</div>
+          <div class="flex-1 text-[13px] font-bold">Ada <b>-20%</b> buat lu<br><small class="font-normal text-gray-500">{{ hero.name }} · {{ mallLabel }} L{{ hero.floor }} · hari ini</small></div>
+          <button class="font-extrabold text-[13px] rounded-full px-[14px] py-2 cursor-pointer" :style="{ background: vGift.goBg, color: vGift.goColor }" @click="claim()">Buka →</button>
         </div>
         <p v-if="claimed" class="text-xs text-center mt-2" style="color:#047857">🎟️ Voucher: {{ claimed }}</p>
         <p v-else-if="claimNote" class="text-xs text-center mt-2" style="color:#c2410c">{{ claimNote }}</p>
@@ -63,17 +57,12 @@ Contoh: hero Kopi Kekinian — GI L2 Halal 50-100rb kids → tiket Klaim → Map
             <span class="text-gray-500">{{ r.tags }}</span>
           </div>
         </div>
-        <p class="text-[11px] text-gray-400 text-center mt-2">Tiket dashed = benda fisik · klaim WAJIB login</p>
+        <p class="text-[11px] text-gray-400 text-center mt-2">Gift di hero · klaim WAJIB login</p>
       </div>
     </div>
     <!-- end F1b -->
 
-    <!-- V12 gift surprise -->
-    <div class="rounded-[14px] p-3 flex gap-2 items-center mt-2.5" :style="{ background: vGift.bg, border: '1px solid ' + vGift.border }">
-      <div class="text-[26px]">🎁</div>
-      <div class="flex-1 text-[13px] font-bold">Ada <b>-20%</b> buat lu<br><small class="font-normal text-gray-500">{{ hero.name }} · {{ mallLabel }} L{{ hero.floor }} · hari ini</small></div>
-      <button class="font-extrabold text-[13px] rounded-full px-[14px] py-2 cursor-pointer" :style="{ background: vGift.goBg, color: vGift.goColor }" @click="claim()">Buka →</button>
-    </div>
+    <!-- end F1b (voucher bawah dihapus 11 Okt 2026: gift sudah pindah ke dalam hero di atas) -->
 
     <p class="text-[11.5px] text-gray-500 mt-2 text-center"><u>Lapor tutup/buka</u> · <u>Share ke temen</u> · Quota makan {{ quotaLabel }} tersisa</p>
   </div>
