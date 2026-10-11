@@ -17,6 +17,8 @@
 
 
 ### 🔥 NOW (lagi dikerjain)
+- [x] Voucher gift pindah ke hero DONE ✅ 11 Okt: request Agesta — tiket dashed + Klaim di atas dihapus, diganti model banner bawah (Ada -20% buat lu + Buka →) pindah ke dalam hero; voucher bawah dihapus (anti dobel CTA, bawah bersih) — TDD result-makan-voucher 4/4 ✅ full 234/234 (23 files) ✅ lint 0 ✅ build 9.59s ✅ push `f9c2490` ✅ prod `/result-makan` 200 + marker (buat lu:1 Buka:1 Lainnya:1 Maps tenant:1) ✅
+- [x] Anti-flaky makan 500 DONE ✅ 11 Okt malam: loop CP 8x → 7×200+1×500 generik (LLM trailing teks + `"false"` string truthy) → fix `coerceBool()` + `parseRankResults/parseTempatResults` validasi nama halu + `cleanJSON` buang trailing + retry 1x + `buildRankFallback` deterministik (makan TIDAK PERNAH 500) — TDD llm-routing 19/19 ✅ full 230/230 ✅ lint 0 ✅ build 9.70s ✅ push `aa3f7b6` ✅ prod loop CP 12x → 12/12 200 NOL 500 ✅ — next: Agesta re-tap /result-makan di HP
 - [x] Opsi 2 CF direct quiz fix DONE ✅ 11 Okt: E2E prod HIJAU dua-duanya — `/api/tempat/recommend` 200 (5 rekomendasi: Taman Bungkul/Angke Kapuk/Museum/Pasar Senen/Ragunan, quota 0) + `/api/makan/recommend` 200 (5 tenant GI: HokBen/Marugame/Bakmi GM/Dapur Solo/J.CO + maps_url + halal/budget, quota 1) — ROOT CAUSE: model lama deprecated 30 Mei 2026 (410) → `-fast` — TDD 7/7 ✅ full 218/218 ✅ lint 0 ✅ build 9.99s ✅ push `39d8041` ✅ — next: traction 50-100 quiz + pantau Claude ≤12 Okt
 - [x] Pembeda before/after login di index — AS6 wallet-card DONE ✅ 11 Okt (lock Agesta "Gua suka AS6"): `useAuth.ts` BARU (getSession+onAuthStateChange, displayName full_name>name>prefix email) + `app.vue` header 2-state (anon Login/Register vs login avatar initial S + Bell + dropdown email grey + Riwayat + Wishlist Segera + Keluar merah + logout real → /) + `index.vue` greeting login-aware (`Halo, Siska` + sub `Sisa kamu:`, anon 1:1 `Halo, teman Wikendo` + `login buka 2 + 5`) — TDD: hapus `.skip` RED → GREEN 11/11 ✅ full 211/211 (21 files) ✅ lint 0 error (5 warning kosmetik) ✅ build 9.56s ✅ push `0658c9f` ✅ prod 3/3 200 ✅ E2E siskadptr@gmail.com 4/4 ✅ (Greeting Hello + Avatar S + Dropdown + Logout, konfirm Agesta 11 Okt) — next: pantau Claude Startup ≤12 Okt
 - [x] Board 20 opsi auth-state-home DONE ✅ 11 Okt (`design/revamp-options-v11.html` + PNG 1400x3480, 20 ID AS1-AS20, rekom AS6 = lock final Agesta "Gua suka AS6") — next: DONE (lanjut slicing AS6 di atas)
@@ -102,6 +104,12 @@
 ---
 
 ## 🧾 LOG (newest first)
+
+## 2026-10-11 — Voucher gift pindah ke hero DONE ✅ (request Agesta, tiket atas → banner bawah)
+- **Kenapa:** di prod ada 2 voucher dobel (tiket dashed + Klaim di hero + banner Ada -20% + Buka di bawah) → Agesta: hapus voucher atas, replace pakai model bawah, bawah bersih tanpa voucher.
+- **Dikerjain:** `app/pages/result-makan.vue` — tiket dashed (VOUCHER + Klaim + tunjukin ke kasir) dihapus dari hero, banner gift (Ada -20% + Buka → via `vGift`) pindah ke dalam hero; banner bawah dihapus; komen + note rank diselaraskan (Gift di hero · klaim WAJIB login).
+- **Verifikasi:** TDD result-makan-voucher RED 1/4 by design → GREEN 4/4 ✅ full 234/234 (23 files) ✅ lint 0 ✅ build 9.59s ✅ SCAN bersih ✅ push `f9c2490` ✅ prod `/result-makan` 200 ✅ marker (buat lu:1 Buka:1 Lainnya:1 Maps tenant:1) ✅ API makan CP 200 (Bakmi GM dkk) ✅.
+- **File:** `app/pages/result-makan.vue` + `app/tests/result-makan-voucher.test.ts` + `docs/08-PROGRESS.md`.
 
 ## 2026-10-11 — E2E AS6 4/4 PASS ✅ (konfirm Agesta, akun siskadptr@gmail.com)
 - **Hasil user:** login berhasil ✅ greeting Hello (Halo, Siskadptr) ✅ avatar S ✅ dropdown ✅ logout ✅ — auth-state-home dinyatakan DONE penuh (TDD 211/211 + prod 200 + E2E manusia).
